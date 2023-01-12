@@ -2,9 +2,12 @@
 <html class="no-js" lang="en">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
-    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="#" />
+    <meta name="color-scheme" content="light dark"><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Lesson 1 - Create Rooms" href="lesson_1.html" /><link rel="prev" title="Introduction for teachers" href="introduction.html" />
 
-    <link rel="shortcut icon" href="_static/logo.ico"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 --><title>Search - Deepest Dungeon - Python OOP</title><link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="shortcut icon" href="_static/logo.ico"/><!-- Generated with Sphinx 5.3.0 and Furo 2022.12.07 -->
+        <title>OOP Primer - Deepest Dungeon - Python OOP</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
@@ -133,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -150,16 +153,16 @@
   
   <span class="sidebar-brand-text">Deepest Dungeon - Python OOP</span>
   
-</a><form class="sidebar-search-container" method="get" action="#" role="search">
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
   <input type="hidden" name="check_keywords" value="yes">
   <input type="hidden" name="area" value="default">
 </form>
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson_1.html">Lesson 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson_2.html">Lesson 2 - Movement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lesson_3.html">Lesson 3 - Character Creation</a></li>
@@ -189,7 +192,8 @@
           <span>Back to top</span>
         </a>
         <div class="content-icon-container">
-          <div class="theme-toggle-container theme-toggle-content">
+          
+<div class="theme-toggle-container theme-toggle-content">
             <button class="theme-toggle">
               <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
               <svg class="theme-icon-when-auto"><use href="#svg-sun-half"></use></svg>
@@ -197,31 +201,88 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          
-<noscript>
-<div class="admonition error">
-  <p class="admonition-title">Error</p>
-  <p>
-    Please activate JavaScript to enable the search functionality.
-  </p>
+          <section id="oop-primer">
+<h1>OOP Primer<a class="headerlink" href="#oop-primer" title="Permalink to this heading">#</a></h1>
+<p>This course will teach you about using Object orientated programming (OOP) in Python. Before we explore using OOP in Python, we need to cover some of the basic concepts you will encounter during the course.</p>
+<section id="what-is-oop">
+<h2>What is OOP?<a class="headerlink" href="#what-is-oop" title="Permalink to this heading">#</a></h2>
+<p>OOP is a style of programming which organises software design around representations of data called objects. You can imagine an object as a digital model of some ‘thing’.</p>
+<p>OOP involves various models interacting with each other. The best way to get your head around this concept is to use a real world example we all understand. Let’s say we want to represent students and the subjects they’re enrolled in.</p>
+<section id="what-is-an-object">
+<h3>What is an object?<a class="headerlink" href="#what-is-an-object" title="Permalink to this heading">#</a></h3>
+<p>The first ‘thing’ in our example is a student. ‘Things’ in OOP are called <strong>classes</strong>. So your program would have a <em>student class</em>, and each student in your program will be represented using this class.</p>
+<p>Let’s use this image to represent our student class:</p>
+<p><img alt="student" src="_images/oop_intro_1.png" /></p>
+<p>All students have some ‘things’ in common, a shared list of qualities. In OOP these qualities are called <strong>attributes</strong>.</p>
+<p>In addition, all students will do similar ‘things’, a shared list of actions. In OOP these actions are called <strong>methods</strong>.</p>
+<p>So below is our student <strong>class</strong> with their respective <strong>attributes</strong> (blue) and <strong>methods</strong> (yellow). Think of it as a blueprint for all the examples of students that we will have in our program. <em>Every</em> student will have <em>all</em> the attributes and can access <em>all</em> the methods.</p>
+<p><img alt="student class with attributes and methods" src="_images/oop_intro_4.png" /></p>
+<p>Now that the program has a blueprint for students (the student class), different <strong>instances</strong> of students can be created. Below is an example of six instances of the <em>student class</em>. An instance of a class is called an <strong>object</strong>. You can see that each <strong>object</strong> gets their <strong>attributes</strong> and <strong>methods</strong> from the <strong>class</strong>.</p>
+<p><img alt="student objects" src="_images/oop_intro_5.png" /></p>
+</section>
+<section id="how-does-an-object-orientated-program-work">
+<h3>How does an Object Orientated Program work?<a class="headerlink" href="#how-does-an-object-orientated-program-work" title="Permalink to this heading">#</a></h3>
+<p>An Object orientated program works through manipulating the <strong>objects</strong> via their <strong>methods</strong>. For example, using the <em>Change name</em> method to change the value stores in the student’s name attribute.</p>
+<p>Objects can also interact with each other. To explain this let’s introduce some subject objects to our example.</p>
+<p><img alt="subject objects" src="_images/oop_intro_10.png" /></p>
+<p>So to enrol a student in a subject we need to use the subject’s <em>Enrol student</em> method. Below is an example of enrolling Peter in English.</p>
+<p><img alt="subject objects" src="_images/oop_intro_11.png" /></p>
+</section>
+<section id="encapsulation-and-abstraction">
+<h3>Encapsulation and Abstraction<a class="headerlink" href="#encapsulation-and-abstraction" title="Permalink to this heading">#</a></h3>
+<p>Notice the code written under the last diagram? This is how the code would look in Python. Does is look familiar? Does is remind of code like <code class="docutils literal notranslate"><span class="pre">my_ttl.forward(10)</span></code>? That’s because Python is a object orientated language.</p>
+<p>Consider the code below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span> <span class="nn">turtle</span>
+<span class="linenos">2</span>
+<span class="hll"><span class="linenos">3</span><span class="n">my_ttl</span> <span class="o">=</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">()</span>
+</span><span class="linenos">4</span>
+<span class="hll"><span class="linenos">5</span><span class="n">my_ttl</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</span></pre></div>
 </div>
-</noscript>
-
-<div id="search-results"></div>
+<p><code class="docutils literal notranslate"><span class="pre">my_ttl</span> <span class="pre">=</span> <span class="pre">turtle.Turtle()</span></code> creates a new object called <code class="docutils literal notranslate"><span class="pre">my_ttl</span></code> by using the <code class="docutils literal notranslate"><span class="pre">Turtle</span></code> class from the <code class="docutils literal notranslate"><span class="pre">turtle</span></code> library.</p>
+<p><code class="docutils literal notranslate"><span class="pre">my_ttl.forward(100)</span></code> uses the <code class="docutils literal notranslate"><span class="pre">forward</span></code> method the <code class="docutils literal notranslate"><span class="pre">my_ttl</span></code> object got from the <code class="docutils literal notranslate"><span class="pre">Turtle</span></code> class, to make <code class="docutils literal notranslate"><span class="pre">my_ttl</span></code> move forward.</p>
+<p>All the time you have been programming in Python you have been using an object orientated language, you just didn’t know it. This is a perfect example of two main principles of OOP, <strong>encapsulation</strong> and <strong>abstraction</strong>.</p>
+<p><strong>Encapsulation</strong> means that important information is contained within the object. Anything outside of the object can only access its information through call its methods. For example, the <code class="docutils literal notranslate"><span class="pre">my_ttl</span></code> has both and <code class="docutils literal notranslate"><span class="pre">x</span></code> coordinate value, but you can only access it through the <code class="docutils literal notranslate"><span class="pre">xcor()</span></code> method.</p>
+<p><strong>Abstraction</strong> means that the internal code of the object is also hidden from the outside and is also accessed through calling methods. For example, you don’t not see the internal workings that changes <code class="docutils literal notranslate"><span class="pre">my_ttl</span></code> coordinates when you call the <code class="docutils literal notranslate"><span class="pre">forward()</span></code> method.</p>
+</section>
+<section id="other-oop-principles">
+<h3>Other OOP Principles<a class="headerlink" href="#other-oop-principles" title="Permalink to this heading">#</a></h3>
+<p>OOP has two more principles, <strong>Inheritance</strong> and <strong>Polymorphism</strong>. We will learn about these later in the course.</p>
+</section>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="lesson_1.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Lesson 1 - Create Rooms</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="introduction.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Introduction for teachers</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -247,8 +308,33 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">OOP Primer</a><ul>
+<li><a class="reference internal" href="#what-is-oop">What is OOP?</a><ul>
+<li><a class="reference internal" href="#what-is-an-object">What is an object?</a></li>
+<li><a class="reference internal" href="#how-does-an-object-orientated-program-work">How does an Object Orientated Program work?</a></li>
+<li><a class="reference internal" href="#encapsulation-and-abstraction">Encapsulation and Abstraction</a></li>
+<li><a class="reference internal" href="#other-oop-principles">Other OOP Principles</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -260,8 +346,5 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
-    
-<script src="_static/searchtools.js"></script>
-<script src="_static/language_data.js"></script>
-<script src="searchindex.js"></script></body>
+    </body>
 </html>

@@ -1,12 +1,13 @@
 # Deepest Dungeon - Python OOP
 
-This website provides tutorials to introduce Object Orientated Programming in Python.
+This website provides tutorials that introduce Object Orientated Programming through creating a text based adventure game in Python.
 
 ```{toctree}
 :maxdepth: 2
 :caption: "Contents:"
 
 introduction
+oop_introduction
 lesson_1
 lesson_2
 lesson_3
