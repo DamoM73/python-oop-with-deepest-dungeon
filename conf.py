@@ -36,7 +36,7 @@ exclude_patterns = ['_build',
 
 html_theme = 'furo'
 html_static_path = ['_static']
-html_logo = 'logo.png'
+html_logo = 'oop_logo.png'
 html_title = "Deepest Dungeon - Python OOP"
 html_favicon = "logo.ico"
 
