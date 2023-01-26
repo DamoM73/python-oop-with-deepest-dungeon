@@ -136,7 +136,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -201,7 +201,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -218,6 +218,137 @@
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GeSTPYPPEfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>In this lesson we will create three rooms and link those rooms together. Below is a rough map of our dungeon.</p>
+<p><img alt="map" src="_images/dungeon_map.png" /></p>
+<p>To achieve this we will need to create two files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">main.py</span></code> → runs the program</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">room.py</span></code> → stores information about the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class</p></li>
+</ul>
+<p>In those two files we will complete the following steps:</p>
+<ol class="arabic simple">
+<li><p>Define the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class</p></li>
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</p></li>
+<li><p>Describe <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</p></li>
+<li><p>Link the <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</p></li>
+<li><p>Included the linked <code class="docutils literal notranslate"><span class="pre">Rooms</span></code> in the description of each <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+</ol>
+</section>
+<section id="class-diagrams">
+<h2>Class diagrams<a class="headerlink" href="#class-diagrams" title="Permalink to this heading">#</a></h2>
+<p>We will be using Universal Modelling Language (UML) class diagrams to show the different classes of our program and how they work together.</p>
+<p>In UML, classes are represented by the three row table.</p>
+<p><img alt="class diagram" src="_images/class_diagrams.png" /></p>
+<ul class="simple">
+<li><p>The class name goes in row 1</p></li>
+<li><p>All the class attributes go in row 2, along with their datatype</p></li>
+<li><p>The class methods are shown in row 3, along with the arguments and datatype of any returned value</p></li>
+</ul>
+<p>The case diagram for the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class is as follows:</p>
+<p><img alt="lesson 1 class diagram" src="_images/lesson_1_class_diagram.png" /></p>
+<p>From the diagram we can tell:</p>
+<ul class="simple">
+<li><p>The class name is <code class="docutils literal notranslate"><span class="pre">Room</span></code></p></li>
+<li><p>The attributes are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> which is a string datatype</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> which is a string datatype</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> which is a dictionary</p></li>
+</ul>
+</li>
+<li><p>The methods are:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">describe</span></code> which takes no arguments and returns no values</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">link_room</span></code> which returns nothing and takes two arguments:</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">room</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">direction</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="step-1-define-the-room-class">
+<h2>Step 1: Define the Room class<a class="headerlink" href="#step-1-define-the-room-class" title="Permalink to this heading">#</a></h2>
+<p>Open up Thonny and, if needed, create a new file.</p>
+<p>Then type the code below into the new file</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="c1"># room.py</span>
+</span><span class="linenos">2</span>
+<span class="hll"><span class="linenos">3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+</span></pre></div>
+</div>
+<p>Lets unpack the code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">room.py</span></code> - is a simple comment containing the file name. Since this program involves multiple files, this is a simple way to keep track of which file you are currently working on.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Room():</span></code> - defined the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class object</p></li>
+</ul>
+<div class="admonition-naming-conventions admonition">
+<p class="admonition-title">Naming conventions</p>
+<p>In most cases, Pythons naming conventions call for names to be written in <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>, but class names are an exception to this rule. Class names should be capitalised, like <code class="docutils literal notranslate"><span class="pre">Room</span></code> in our code.</p>
+<p>Since this is a convention, and won’t raise an error if not follow it. This is about maintainabilty and ensuring your code is easy to follow.</p>
+<p>Also note that our file name is not capitalised. This is import for when we import our class.</p>
+</div>
+<section id="dunder-init-method">
+<h3>Dunder init method<a class="headerlink" href="#dunder-init-method" title="Permalink to this heading">#</a></h3>
+<p>All Python classes have a special method called the dunder init. The actual method name is <code class="docutils literal notranslate"><span class="pre">__init__</span></code>, which is double-underscore init double underscore, hence the name dunder init.</p>
+<p>The dunder init is a method that is automatically called whenever an object of the class is created. It is used to initialize the attributes of the object. It can also be used to perform any other setup that the object needs before it is used, including calling other methods.</p>
+<p>Let’s create our dunder init for our <code class="docutils literal notranslate"><span class="pre">Room</span></code> class by adding the highlighted code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># room.py</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+<span class="linenos">4</span>
+<span class="hll"><span class="linenos">5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_name</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">6</span>        <span class="c1"># intialise the room object</span>
+</span><span class="linenos">7</span>
+<span class="hll"><span class="linenos">8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+</span></pre></div>
+</div>
+<p>Breaking that code down:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">room_name):</span></code> - defines the dunder init method</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">self</span></code> is always the first argument in class methods.</p>
+<ul>
+<li><p>Since classes can be used to create many instances of the object, <code class="docutils literal notranslate"><span class="pre">self</span></code> tells Python that you are referring to this instance of the object.</p></li>
+<li><p>For example, when we create the cavern room object, <code class="docutils literal notranslate"><span class="pre">self</span></code> will be referring to the cavern room.</p></li>
+<li><p>When narrating the code, I find it useful to substitute <code class="docutils literal notranslate"><span class="pre">self</span></code> with <strong>this object</strong>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">room_name</span></code> is a string containing the name of the room, that needs to be passed when the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object is made.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">intialise</span> <span class="pre">the</span> <span class="pre">room</span> <span class="pre">object</span></code> - is a comment that explains what the method does. Explaining your methods is another way of increasing the readability of your code and enhances it’s maintainability.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.name</span> <span class="pre">=</span> <span class="pre">room_name.lower()</span></code> - assigns the value passed in the <code class="docutils literal notranslate"><span class="pre">room_name</span></code> argument to the object’s attribute room_name</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.name</span></code> - using my substitution trick, this means “This object’s name”, or “This room’s name”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">room_name.lower()</span></code> coverts the string passed in the argument to all lower case before assigning it to <code class="docutils literal notranslate"><span class="pre">self.name</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.description</span> <span class="pre">=</span> <span class="pre">None</span></code> creates the objects description attribute and assigns <code class="docutils literal notranslate"><span class="pre">None</span></code> to it.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.description</span></code> - using my substitution trick, this means “This object’s description” or “This room’s description”</p></li>
+<li><p>it is best practice to define all the class attributes in <code class="docutils literal notranslate"><span class="pre">__init__</span></code></p></li>
+<li><p>when the attribute value is added after the object has been created, assign the value of <code class="docutils literal notranslate"><span class="pre">None</span></code> to the attribute in the <code class="docutils literal notranslate"><span class="pre">__init__</span></code></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="save-room-py">
+<h3>Save room.py<a class="headerlink" href="#save-room-py" title="Permalink to this heading">#</a></h3>
+<div class="warning admonition">
+<p class="admonition-title">Saving files</p>
+<p>Since this program will be using multiple files, the location they are saved is important.</p>
+<p>The <strong>main.py</strong> file will be importing classes from the your other files. The first place it will look is within the local directory (ie. the folder it is saved in).</p>
+<p>To minimise potential problems, you need to create a new folder for these tutorials.</p>
+<p>It is also important to ensure you file names are correct, inlcuding the capilatisation and the <strong>.py</strong> extension.</p>
+</div>
+<p>Make a folder called <strong>deepest_dungeon</strong>. Calling your <strong>room.py</strong> save it in your <strong>deepest_dungeon</strong> folder.</p>
+</section>
+</section>
 </section>
 
         </article>
@@ -270,8 +401,33 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Lesson 1 - Create Rooms</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#class-diagrams">Class diagrams</a></li>
+<li><a class="reference internal" href="#step-1-define-the-room-class">Step 1: Define the Room class</a><ul>
+<li><a class="reference internal" href="#dunder-init-method">Dunder init method</a></li>
+<li><a class="reference internal" href="#save-room-py">Save room.py</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
