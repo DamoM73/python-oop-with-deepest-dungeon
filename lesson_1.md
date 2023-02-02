@@ -138,3 +138,48 @@ It is also important to ensure you file names are correct, inlcuding the capilat
 
 Make a folder called **deepest_dungeon**. Calling your **room.py** save it in your **deepest_dungeon** folder.
 
+## 2. Create `Room` objects
+
+Create a new file. Save it as **main.py** in your **deepest_dungeon** folder. This file is going to control our game.
+
+Then type to following code into the **main.py*
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 1, 3, 5-6, 8, 10, 12
+# main.py
+
+from room import Room
+
+# create rooms
+cavern = Room("Cavern")
+
+armoury = Room("Armoury")
+
+lab = Room("Laboratory")
+
+print(cavern.name)
+```
+
+We're going to run our program for the first time, but before let's introduce the PRIMM concept.
+
+```{admonition} PRIMM
+Throughout this course we will use the **PRIMM** process to reinforce our learning. **PRIMM** stands for **Predict**, **Run**, **Investigate**, **Modify**, and **Make**. It reflects effective programming practices and encourages curiosity in programming.
+
+**Predict**: Before you run the code you need to predict what you think will happen. Go ahead and have a guess at what you think will happen.
+
+**Run**: Then run the program and see how accurate your prediction was. If your prediction was incorrect, how was the result different?
+
+**Investigate**: Go through the code and work out what each line of code does.
+
+**Modify**: Edit the code. Change it around and see that results your get
+
+**Make**: Use your new understanding of the code to make a different program.
+```
+
+Lets run through the **PRIMM** process now
+
+**Predict** in detail what you think the program will do, then **run** the program.
+
+Let's **investigate** the code, by breaking it down line-by-line.
+

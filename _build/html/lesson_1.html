@@ -349,6 +349,38 @@
 <p>Make a folder called <strong>deepest_dungeon</strong>. Calling your <strong>room.py</strong> save it in your <strong>deepest_dungeon</strong> folder.</p>
 </section>
 </section>
+<section id="create-room-objects">
+<h2>2. Create <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects<a class="headerlink" href="#create-room-objects" title="Permalink to this heading">#</a></h2>
+<p>Create a new file. Save it as <strong>main.py</strong> in your <strong>deepest_dungeon</strong> folder. This file is going to control our game.</p>
+<p>Then type to following code into the *<em>main.py</em></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="c1"># main.py</span>
+</span><span class="linenos"> 2</span>
+<span class="hll"><span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+</span><span class="linenos"> 4</span>
+<span class="hll"><span class="linenos"> 5</span><span class="c1"># create rooms</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+</span><span class="linenos"> 7</span>
+<span class="hll"><span class="linenos"> 8</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+</span><span class="linenos"> 9</span>
+<span class="hll"><span class="linenos">10</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+</span><span class="linenos">11</span>
+<span class="hll"><span class="linenos">12</span><span class="nb">print</span><span class="p">(</span><span class="n">cavern</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>We’re going to run our program for the first time, but before let’s introduce the PRIMM concept.</p>
+<div class="admonition-primm admonition">
+<p class="admonition-title">PRIMM</p>
+<p>Throughout this course we will use the <strong>PRIMM</strong> process to reinforce our learning. <strong>PRIMM</strong> stands for <strong>Predict</strong>, <strong>Run</strong>, <strong>Investigate</strong>, <strong>Modify</strong>, and <strong>Make</strong>. It reflects effective programming practices and encourages curiosity in programming.</p>
+<p><strong>Predict</strong>: Before you run the code you need to predict what you think will happen. Go ahead and have a guess at what you think will happen.</p>
+<p><strong>Run</strong>: Then run the program and see how accurate your prediction was. If your prediction was incorrect, how was the result different?</p>
+<p><strong>Investigate</strong>: Go through the code and work out what each line of code does.</p>
+<p><strong>Modify</strong>: Edit the code. Change it around and see that results your get</p>
+<p><strong>Make</strong>: Use your new understanding of the code to make a different program.</p>
+</div>
+<p>Lets run through the <strong>PRIMM</strong> process now</p>
+<p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
+<p>Let’s <strong>investigate</strong> the code, by breaking it down line-by-line.</p>
+</section>
 </section>
 
         </article>
@@ -421,6 +453,7 @@
 <li><a class="reference internal" href="#save-room-py">Save room.py</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#create-room-objects">2. Create <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</a></li>
 </ul>
 </li>
 </ul>
