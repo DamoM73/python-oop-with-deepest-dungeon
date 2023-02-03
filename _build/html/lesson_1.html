@@ -233,7 +233,7 @@
 <li><p>Create <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</p></li>
 <li><p>Describe <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</p></li>
 <li><p>Link the <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</p></li>
-<li><p>Included the linked <code class="docutils literal notranslate"><span class="pre">Rooms</span></code> in the description of each <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+<li><p>Include the linked <code class="docutils literal notranslate"><span class="pre">Rooms</span></code> in the description of each <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
 </ol>
 </section>
 <section id="class-diagrams">
@@ -271,8 +271,8 @@
 </li>
 </ul>
 </section>
-<section id="step-1-define-the-room-class">
-<h2>Step 1: Define the Room class<a class="headerlink" href="#step-1-define-the-room-class" title="Permalink to this heading">#</a></h2>
+<section id="define-the-room-class">
+<h2>Define the Room class<a class="headerlink" href="#define-the-room-class" title="Permalink to this heading">#</a></h2>
 <p>Open up Thonny and, if needed, create a new file.</p>
 <p>Then type the code below into the new file</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="c1"># room.py</span>
@@ -287,7 +287,7 @@
 </ul>
 <div class="admonition-naming-conventions admonition">
 <p class="admonition-title">Naming conventions</p>
-<p>In most cases, Pythons naming conventions call for names to be written in <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>, but class names are an exception to this rule. Class names should be capitalised, like <code class="docutils literal notranslate"><span class="pre">Room</span></code> in our code.</p>
+<p>In most cases, Pythons naming conventions call for names to be written in <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>, but class names are an exception to this rule. Class names should use <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code>, like <code class="docutils literal notranslate"><span class="pre">Room</span></code> in our code.</p>
 <p>Since this is a convention, and won’t raise an error if not follow it. This is about maintainabilty and ensuring your code is easy to follow.</p>
 <p>Also note that our file name is not capitalised. This is import for when we import our class.</p>
 </div>
@@ -350,7 +350,7 @@
 </section>
 </section>
 <section id="create-room-objects">
-<h2>2. Create <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects<a class="headerlink" href="#create-room-objects" title="Permalink to this heading">#</a></h2>
+<h2>Create Room objects<a class="headerlink" href="#create-room-objects" title="Permalink to this heading">#</a></h2>
 <p>Create a new file. Save it as <strong>main.py</strong> in your <strong>deepest_dungeon</strong> folder. This file is going to control our game.</p>
 <p>Then type to following code into the *<em>main.py</em></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="c1"># main.py</span>
@@ -380,6 +380,347 @@
 <p>Lets run through the <strong>PRIMM</strong> process now</p>
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
 <p>Let’s <strong>investigate</strong> the code, by breaking it down line-by-line.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">main.py</span></code> - a simple comment which helps identify which file you are currently working in.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">room</span> <span class="pre">import</span> <span class="pre">Room</span></code> this is a familiar import statement, but this time we are importing our own module</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Room</span></code> - refers to the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class that we just made</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">room</span></code> - refers to the Python file which contains the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class, in our case <code class="docutils literal notranslate"><span class="pre">room.py</span></code></p></li>
+<li><p>this line effectively says: <strong>from <code class="docutils literal notranslate"><span class="pre">room.py</span></code> import the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class</strong></p></li>
+<li><p>note the capitalisation - by using snake case for our file name and camel case for our class name, we can distinguish between the two.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">create</span> <span class="pre">rooms</span></code> - a comment to help structure the code.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">main.py</span></code> will become quite long. Structuring the code with comments will improve its readability.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cavern</span> <span class="pre">=</span> <span class="pre">Room(&quot;Cavern&quot;)</span></code> - this instantiated (creates) our first <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">Room(&quot;Cavern&quot;)</span></code> - creates a <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p>
+<ul>
+<li><p>when we create a <code class="docutils literal notranslate"><span class="pre">Room</span></code> object the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> automatically runs</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> requires a single argument to be passed, we pass <code class="docutils literal notranslate"><span class="pre">&quot;Cavern&quot;</span></code></p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> then takes the <code class="docutils literal notranslate"><span class="pre">&quot;Cavern&quot;</span></code> string and assigns it to the <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute of this object</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cavern</span> <span class="pre">=</span></code> assigns our newly created <code class="docutils literal notranslate"><span class="pre">Room</span></code> object to the variable <code class="docutils literal notranslate"><span class="pre">cavern</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">armoury</span> <span class="pre">=</span> <span class="pre">Room(&quot;Armoury&quot;)</span></code> - creates a different <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Armoury&quot;</span></code> is passed to the <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute</p></li>
+<li><p>this object is assigned to <code class="docutils literal notranslate"><span class="pre">armoury</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lab</span> <span class="pre">=</span> <span class="pre">Room(&quot;Laboratory&quot;)</span></code> - creates a third <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">&quot;Laboratory&quot;</span></code> is passed to the <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute</p></li>
+<li><p>this object is assigned to <code class="docutils literal notranslate"><span class="pre">lab</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(cavern.name)</span></code> - prints the name of the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">cavern.name</span></code> - get the value stored in the <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print</span></code> - print that value to the terminal</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Modify</strong> the code so that it prints the names of the other two <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects.</p>
+</section>
+<section id="describe-room-objects">
+<h2>Describe Room objects<a class="headerlink" href="#describe-room-objects" title="Permalink to this heading">#</a></h2>
+<p>If we look at the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class we will notice that there is a <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute which currently stores <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># room.py</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_name</span><span class="p">):</span>
+<span class="linenos">6</span>        <span class="c1"># intialise the room object</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="hll"><span class="linenos">9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+</span></pre></div>
+</div>
+<p>We want our <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects to have descriptions, so let’s assign some values to them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="c1"># create rooms</span>
+<span class="linenos"> 6</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 7</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span>
+</span><span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">10</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span>
+</span><span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">13</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span>
+</span><span class="linenos">14</span>
+<span class="linenos">15</span><span class="nb">print</span><span class="p">(</span><span class="n">cavern</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="hll"><span class="linenos">16</span><span class="nb">print</span><span class="p">(</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
+<p>Let’s <strong>investigate</strong> the new code line-by-line.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cavern.description</span> <span class="pre">=</span> <span class="pre">&quot;A</span> <span class="pre">room</span> <span class="pre">so</span> <span class="pre">big</span> <span class="pre">that</span> <span class="pre">the</span> <span class="pre">light</span> <span class="pre">of</span> <span class="pre">your</span> <span class="pre">torch</span> <span class="pre">doesn’t</span> <span class="pre">reach</span> <span class="pre">the</span> <span class="pre">walls.&quot;</span></code></p>
+<ul>
+<li><p>directly accesses the <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute for the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+<li><p>assigns the string to the <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">armoury.description</span> <span class="pre">=</span> <span class="pre">&quot;The</span> <span class="pre">walls</span> <span class="pre">are</span> <span class="pre">lined</span> <span class="pre">with</span> <span class="pre">racks</span> <span class="pre">that</span> <span class="pre">once</span> <span class="pre">held</span> <span class="pre">weapons</span> <span class="pre">and</span> <span class="pre">armour.&quot;</span></code></p>
+<ul>
+<li><p>assigns the string to the <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lab.description</span> <span class="pre">=</span> <span class="pre">&quot;A</span> <span class="pre">strange</span> <span class="pre">odour</span> <span class="pre">hangs</span> <span class="pre">in</span> <span class="pre">a</span> <span class="pre">room</span> <span class="pre">filled</span> <span class="pre">with</span> <span class="pre">unknownable</span> <span class="pre">contraptions.&quot;</span></code></p>
+<ul>
+<li><p>assigns the string to the <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">lab</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(cavern.description)</span></code></p>
+<ul>
+<li><p>accesses the value stored in the <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+<li><p>prints that value to the terminal</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Modify</strong> the code so that it prints the descriptions of the other two <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects.</p>
+<section id="describe-method">
+<h3>Describe method<a class="headerlink" href="#describe-method" title="Permalink to this heading">#</a></h3>
+<p>It is good programming practice to not directly access an object’s attributes. You will notice that in our UML Class Diagram the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class has a <code class="docutils literal notranslate"><span class="pre">describe()</span></code> method.</p>
+<p><img alt="lesson 1 class diagram" src="_images/lesson_1_class_diagram.png" /></p>
+<p>Creating methods is a better way of accessing object’s attributes. So let’s add the <code class="docutils literal notranslate"><span class="pre">describe()</span></code> to our code.</p>
+<p>Go back to the <strong>room.py</strong> file and add the highlighted code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">room_name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the room object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        
+<span class="hll"><span class="linenos">10</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">11</span>        <span class="c1"># displays a description of the room in the UI</span>
+</span><span class="hll"><span class="linenos">12</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Then go back to <strong>main.py</strong> and replace lines 15 and 16 with the highlighted code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="c1"># create rooms</span>
+<span class="linenos"> 6</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span>
+<span class="linenos">14</span>
+<span class="hll"><span class="linenos">15</span><span class="c1"># describe rooms</span>
+</span><span class="hll"><span class="linenos">16</span><span class="n">cavern</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">17</span><span class="n">armoury</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">18</span><span class="n">lab</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
+<p>Let’s <strong>investigate</strong> the <em>new</em> code line-by-line. First the code in <strong>room.py</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">describe(self):</span></code> - defines the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span></code> - methods are functions that exist within a class, therefore the <code class="docutils literal notranslate"><span class="pre">def</span></code> keyword is used to define methods.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">describe</span></code> - this is the name of our method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">(self)</span></code> - <code class="docutils literal notranslate"><span class="pre">self</span></code> is the first argument for all methods. Just like with the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method, <code class="docutils literal notranslate"><span class="pre">self</span></code> can be red as “this object”</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">:</span></code> indicates a following indented code block.</p></li>
+<li><p>take note of the level of indentation. All class methods need to be indented one level (same as the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method)</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">displays</span> <span class="pre">a</span> <span class="pre">description</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">room</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">UI</span></code> - explains what the method does</p>
+<ul>
+<li><p>this is good coding practice and improves the readability of your code</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;\nYou</span> <span class="pre">are</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">{self.name}&quot;)</span></code></p>
+<ul>
+<li><p>takes the <code class="docutils literal notranslate"><span class="pre">name</span></code> attributes and inserts it into an f-string</p></li>
+<li><p>prints the f-string to the terminal</p></li>
+<li><p>again, using the <code class="docutils literal notranslate"><span class="pre">self</span></code> substitution, <code class="docutils literal notranslate"><span class="pre">self.name</span></code> should read as <strong>this room’s name</strong></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(self.description)</span></code> - prints to terminal the value stored in the <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute</p></li>
+</ul>
+<p>Now the code in <strong>main.py</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">describe</span> <span class="pre">rooms</span></code> - another code structure comment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cavern.describe()</span></code> - run the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method for the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">armoury.describe()</span></code> - run the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method for the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lab.describe()</span></code> - run the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method for the <code class="docutils literal notranslate"><span class="pre">lab</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+</ul>
+</section>
+</section>
+<section id="link-rooms">
+<h2>Link rooms<a class="headerlink" href="#link-rooms" title="Permalink to this heading">#</a></h2>
+<p>If you look at our map you will notice that the rooms are linked, so that our adventure can move between them.</p>
+<ul class="simple">
+<li><p>Cavern ↓ Armoury</p></li>
+<li><p>Armoury ↑ Cavern</p></li>
+<li><p>Armoury → Lab</p></li>
+<li><p>Lab ← Armoury</p></li>
+</ul>
+<p><img alt="map" src="_images/dungeon_map.png" /></p>
+<p>Our class diagram shows we use an attribute (<code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code>) and a method (<code class="docutils literal notranslate"><span class="pre">link_room(room,</span> <span class="pre">direction)</span></code>) to model this.</p>
+<p><img alt="lesson 1 class diagram" src="_images/lesson_1_class_diagram.png" /></p>
+<p>How will this work?</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> is a dictionary, so it stores key:value pairs. The key will be the direction (north, south, east or west), and the value will be the <code class="docutils literal notranslate"><span class="pre">Room</span></code> <code class="docutils literal notranslate"><span class="pre">object</span></code> that is in that direction. For example, the <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> dictionary for the Armoury would be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="p">{</span>
+<span class="linenos">2</span>  <span class="s2">&quot;north&quot;</span> <span class="p">:</span> <span class="n">cavern</span><span class="p">,</span>
+<span class="linenos">3</span>  <span class="s2">&quot;east&quot;</span> <span class="p">:</span> <span class="n">lab</span>
+<span class="linenos">4</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">link_room</span></code> method will take two arguments (<code class="docutils literal notranslate"><span class="pre">room</span></code> and <code class="docutils literal notranslate"><span class="pre">direction</span></code>) and add that key value pair to the <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> attribute.</p>
+<p>So lets implement this. First go back to <strong>room.py</strong>, and add the code highlighted below</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">room_name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the room object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="hll"><span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span class="linenos">10</span>        
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># displays a description of the room in the UI</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+<span class="linenos">15</span>    
+<span class="hll"><span class="linenos">16</span>    <span class="k">def</span> <span class="nf">link_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_to_link</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">17</span>        <span class="c1"># links the provided room, in the provided direction</span>
+</span><span class="hll"><span class="linenos">18</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">room_to_link</span>
+</span></pre></div>
+</div>
+<p>Then open the <strong>main.py</strong> and add the code highlighted below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="c1"># create rooms</span>
+<span class="linenos"> 6</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span>
+<span class="linenos">14</span>
+<span class="hll"><span class="linenos">15</span><span class="c1"># link rooms</span>
+</span><span class="hll"><span class="linenos">16</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">17</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">18</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">19</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+</span><span class="linenos">20</span>
+<span class="linenos">21</span><span class="c1"># describe the rooms</span>
+<span class="linenos">22</span><span class="n">cavern</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos">23</span><span class="n">armoury</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos">24</span><span class="n">lab</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
+<p>Did you predict that nothing would change? We’ll fix that later. In the meanwhile, let’s <strong>investigate</strong> the <em>new</em> code line-by-line.</p>
+<p>First the code in <strong>room.py</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">self.linked_rooms</span> <span class="pre">=</span> <span class="pre">{}</span></code> - creates an empty dictionary for the <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> attribute</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">link_rooms(self,</span> <span class="pre">room_to_link,</span> <span class="pre">direction):</span></code> - defines the <code class="docutils literal notranslate"><span class="pre">link_rooms</span></code> method with three arguments</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">self</span></code> - the first argument for all class methods is always <code class="docutils literal notranslate"><span class="pre">self</span></code>, which refers to <em>this object</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">room_to_link</span></code> the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object that you will be linking to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">direction</span></code> the values of <code class="docutils literal notranslate"><span class="pre">north</span></code>, <code class="docutils literal notranslate"><span class="pre">south</span></code>, <code class="docutils literal notranslate"><span class="pre">east</span></code> or <code class="docutils literal notranslate"><span class="pre">west</span></code> which will be the key for in the dictionary</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">links</span> <span class="pre">the</span> <span class="pre">provided</span> <span class="pre">room,</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">provided</span> <span class="pre">direction</span></code> - comment explaining what the method does</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.linked_rooms[direction.lower()]</span> <span class="pre">=</span> <span class="pre">room_to_link</span></code> - adds a new value to the <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> attribute</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">direction.lower()</span></code> - takes the <code class="docutils literal notranslate"><span class="pre">direction</span></code> argument and makes it all lower case</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.linked_rooms[direction.lower()]</span></code> - checks the <code class="docutils literal notranslate"><span class="pre">linked_room</span></code> dictionary for the <code class="docutils literal notranslate"><span class="pre">direction</span></code> key</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">=</span> <span class="pre">room_to_link</span></code></p>
+<ul>
+<li><p>if the <code class="docutils literal notranslate"><span class="pre">direction</span></code> key doesn’t exists, adds a key:value pair of <code class="docutils literal notranslate"><span class="pre">direction</span></code>:<code class="docutils literal notranslate"><span class="pre">room_to_link</span></code></p></li>
+<li><p>if the <code class="docutils literal notranslate"><span class="pre">direction</span></code> key exists, changes the current value to <code class="docutils literal notranslate"><span class="pre">room_to_link</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>Then in <strong>main.py</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">link</span> <span class="pre">rooms</span></code> - code structuring comment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cavern.link_rooms(armoury,&quot;south&quot;)</span></code> - links the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> and the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> to the <code class="docutils literal notranslate"><span class="pre">&quot;south&quot;</span></code> of it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">armoury.link_rooms(cavern,&quot;north&quot;)</span></code> - links the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> and the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> to the <code class="docutils literal notranslate"><span class="pre">&quot;north&quot;</span></code> of it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">armoury.link_rooms(lab,&quot;east&quot;)</span></code> - links the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> and the <code class="docutils literal notranslate"><span class="pre">lab</span></code> to the <code class="docutils literal notranslate"><span class="pre">&quot;east&quot;</span></code> of it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lab.link_rooms(armoury,&quot;west&quot;)</span></code> - links the <code class="docutils literal notranslate"><span class="pre">lab</span></code> and the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> to the <code class="docutils literal notranslate"><span class="pre">&quot;west&quot;</span></code> of it.</p></li>
+</ul>
+<p>Notice that each connection needs two calls to the <code class="docutils literal notranslate"><span class="pre">link_rooms</span></code> method.</p>
+</section>
+<section id="include-linked-rooms-in-description">
+<h2>Include linked Rooms in description<a class="headerlink" href="#include-linked-rooms-in-description" title="Permalink to this heading">#</a></h2>
+<p>Remember how running the last lot of code didn’t change anything? Well, it did actually change things. All the rooms were linked together. We just didn’t display that information. So let’s address that by adding these connections to our description.</p>
+<p>Go to your <strong>room.py</strong> file and include the highlighted code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">room_name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the room object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">10</span>        
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># displays a description of the room in the UI</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+<span class="hll"><span class="linenos">15</span>        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">16</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;To the </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2"> is the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span class="linenos">17</span>    
+<span class="linenos">18</span>    <span class="k">def</span> <span class="nf">link_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_to_link</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="linenos">19</span>        <span class="c1"># links the provided room, in the provided direction</span>
+<span class="linenos">20</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">room_to_link</span>
+</pre></div>
+</div>
+<p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
+<p>Let’s <strong>investigate</strong> the <em>new</em> code line-by-line.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">direction</span> <span class="pre">in</span> <span class="pre">self.linked_rooms:</span></code> - iterates over each key:value pair in the <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> attribute</p>
+<ul>
+<li><p>in Python, dictionaries are iterable collections (like lists), so you can use <code class="docutils literal notranslate"><span class="pre">for</span></code> loops to iterate over them</p></li>
+<li><p>in this example <code class="docutils literal notranslate"><span class="pre">direction</span></code> will be each key value in the dictionary</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;To</span> <span class="pre">the</span> <span class="pre">{direction}</span> <span class="pre">is</span> <span class="pre">the</span> <span class="pre">{self.linked_rooms[direction].name}&quot;)</span></code> prints the linked rooms to the terminal</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">direction</span></code> is the current key (<code class="docutils literal notranslate"><span class="pre">&quot;north&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;south&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;east&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;west&quot;</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.linked_rooms[direction].name</span></code> is the name of the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object that is linked in the current direction.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="lesson-1-task">
+<h2>Lesson 1 task<a class="headerlink" href="#lesson-1-task" title="Permalink to this heading">#</a></h2>
+<p>During this lesson we have only been focusing on the first four stages of the PRIMM model. Now it is time for your to implement the <strong>Make</strong> phase.</p>
+<p>Taking the knowledge your have gained through this lesson, you need to:</p>
+<ul class="simple">
+<li><p>create one, or more additional rooms</p></li>
+<li><p>link those additional rooms to one or more of your other rooms.</p></li>
+</ul>
 </section>
 </section>
 
@@ -448,12 +789,19 @@
 <li><a class="reference internal" href="#">Lesson 1 - Create Rooms</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#class-diagrams">Class diagrams</a></li>
-<li><a class="reference internal" href="#step-1-define-the-room-class">Step 1: Define the Room class</a><ul>
+<li><a class="reference internal" href="#define-the-room-class">Define the Room class</a><ul>
 <li><a class="reference internal" href="#dunder-init-method">Dunder init method</a></li>
 <li><a class="reference internal" href="#save-room-py">Save room.py</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#create-room-objects">2. Create <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</a></li>
+<li><a class="reference internal" href="#create-room-objects">Create Room objects</a></li>
+<li><a class="reference internal" href="#describe-room-objects">Describe Room objects</a><ul>
+<li><a class="reference internal" href="#describe-method">Describe method</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#link-rooms">Link rooms</a></li>
+<li><a class="reference internal" href="#include-linked-rooms-in-description">Include linked Rooms in description</a></li>
+<li><a class="reference internal" href="#lesson-1-task">Lesson 1 task</a></li>
 </ul>
 </li>
 </ul>
