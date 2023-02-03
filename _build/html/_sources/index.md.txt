@@ -8,14 +8,14 @@ This website provides tutorials that introduce Object Orientated Programming thr
 
 introduction
 oop_introduction
-lesson_1
-lesson_2
-lesson_3
-lesson_4
-lesson_5
-lesson_6
-lesson_7
-lesson_8
+stage_1
+stage_2
+stage_3
+stage_4
+stage_5
+stage_6
+stage_7
+stage_8
 debugging
 licencing
 ```
