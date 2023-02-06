@@ -2,8 +2,11 @@
 
 ```{topic} In this lesson you will:
 
-- Move between rooms
-- Create the main loop
+- learn to define methods with arguments and return values
+- how event driven programming works
+- how to create main loops for event driven programs
+- how to create event handlers for event driven programs
+- how to test branching code
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hZd1FcDApCI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -12,7 +15,7 @@
 
 In Stage 1 we created three rooms, link them together, and got the program to describe them. While that was necessary, it doesn't make for a very good adventure game. So, in Stage 2 we will add code that allows the user to move between rooms, and we will create the **main loop**.
 
-The main loop is an essential aspect of **event-driven programming**. Our **main.py** will initialize the game, creating all the necessary objects. It will then enter in **main loop** where it will wait for the user to provide input, and then respond to this imput.
+The main loop is an essential aspect of **event-driven programming**. Our **main.py** will initialize the game, creating all the necessary objects. It will then enter in **main loop** where it will wait for the user to provide input, and then respond to this input.
 
 ```{admonition} Event driven programming
 Event-driven programming is a type of computer programming where the order of tasks is determined by events, like a user clicking a button or receiving information from a sensor. 

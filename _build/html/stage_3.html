@@ -219,6 +219,106 @@
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ufsmJYdUg1Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Now that the user has a dungeon that they can move around, we need to make it interesting. At this stage we will populate our dungeon with characters that the user can interact with.</p>
+<p>To achieve this we will:</p>
+<ol class="arabic simple">
+<li><p>Define a character class</p></li>
+<li><p>Create characters</p></li>
+<li><p>Add characters to the rooms</p></li>
+<li><p>Include characters in the room descriptions</p></li>
+<li><p>Create character interactions</p>
+<ul class="simple">
+<li><p>talk method</p></li>
+<li><p>hug method</p></li>
+<li><p>fight method</p></li>
+</ul>
+</li>
+<li><p>Add interactions to the main loop</p></li>
+</ol>
+<section id="class-diagram">
+<h3>Class Diagram<a class="headerlink" href="#class-diagram" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">Character</span></code> class is a new class, so it will require a second class diagram.</p>
+<p>We also need to add a <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute to the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class so we can record who is in each room.</p>
+<p><img alt="lesson 3 class diagram" src="_images/lesson_3_class_diagram.png" /></p>
+</section>
+</section>
+<section id="define-the-character-class">
+<h2>Define the Character class<a class="headerlink" href="#define-the-character-class" title="Permalink to this heading">#</a></h2>
+<p>In Thonny create a new file and enter the code below. Then save it as <strong>character.py</strong> in the same folder as <strong>main.py</strong> and <strong>room.py</strong> (remember capitalisation).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="c1"># character.py</span>
+</span><span class="linenos">2</span>
+<span class="hll"><span class="linenos">3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+</span><span class="linenos">4</span>    
+<span class="hll"><span class="linenos">5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">6</span>        <span class="c1"># initialises the character object</span>
+</span><span class="hll"><span class="linenos">7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+</span><span class="hll"><span class="linenos">8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span class="hll"><span class="linenos">9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+</span></pre></div>
+</div>
+<p>Let’s investigate this code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">character.py</span></code> → comment to identify the file we are working in</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Character():</span></code> → defining our new class called <code class="docutils literal notranslate"><span class="pre">Character</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">name):</span></code> → the dunder init method that is run whenever a <code class="docutils literal notranslate"><span class="pre">Character</span></code> object is created.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialises</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">object</span></code> → explains the purpose of the method</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.name</span> <span class="pre">=</span> <span class="pre">name</span></code> → assigned the value passed in the <code class="docutils literal notranslate"><span class="pre">name</span></code> argument to this <code class="docutils literal notranslate"><span class="pre">Character</span></code> object’s <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.description</span> <span class="pre">=</span> <span class="pre">None</span></code> → creates a <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute for the <code class="docutils literal notranslate"><span class="pre">Character</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.conversation</span> <span class="pre">=</span> <span class="pre">None</span></code> → creates a <code class="docutils literal notranslate"><span class="pre">converstaion</span></code> attribute for the <code class="docutils literal notranslate"><span class="pre">Character</span></code> object</p></li>
+</ul>
+</section>
+<section id="create-characters">
+<h2>Create characters<a class="headerlink" href="#create-characters" title="Permalink to this heading">#</a></h2>
+<p>Now that we have a <code class="docutils literal notranslate"><span class="pre">Character</span></code> class, we can go to <strong>main.py</strong> and create <code class="docutils literal notranslate"><span class="pre">Character</span></code> objects.</p>
+<p>Open <strong>main.py</strong> and add the highlighted code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="hll"><span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Character</span>
+</span><span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># create rooms</span>
+<span class="linenos"> 7</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># link rooms</span>
+<span class="linenos">17</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos">19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="hll"><span class="linenos">22</span><span class="c1"># create characters</span>
+</span><span class="hll"><span class="linenos">23</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Character</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">24</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+</span><span class="linenos">25</span>
+<span class="hll"><span class="linenos">26</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Character</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">27</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+</span><span class="hll"><span class="linenos">28</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+</span><span class="linenos">29</span>
+<span class="linenos">30</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">31</span><span class="sd"># describe the rooms</span>
+<span class="linenos">32</span><span class="sd">cavern.describe()</span>
+<span class="linenos">33</span><span class="sd">armoury.describe()</span>
+<span class="linenos">34</span><span class="sd">lab.describe()</span>
+<span class="linenos">35</span><span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<p>Investigating that code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">character</span> <span class="pre">import</span> <span class="pre">Character</span></code> → get our <code class="docutils literal notranslate"><span class="pre">Character</span></code> class from the <strong>character.py</strong> file</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">create</span> <span class="pre">characters</span></code> → code structure comment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ugine</span> <span class="pre">=</span> <span class="pre">Character(&quot;Ugine&quot;)</span></code> → creates a <code class="docutils literal notranslate"><span class="pre">Character</span></code> object with the name <code class="docutils literal notranslate"><span class="pre">Ugine</span></code> and assigns it to <code class="docutils literal notranslate"><span class="pre">ugine</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ugine.description</span> <span class="pre">=</span> <span class="pre">&quot;a</span> <span class="pre">huge</span> <span class="pre">troll</span> <span class="pre">with</span> <span class="pre">rotting</span> <span class="pre">teeth.&quot;</span></code> → changes the <code class="docutils literal notranslate"><span class="pre">ugine</span></code> <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">&quot;a</span> <span class="pre">huge</span> <span class="pre">troll</span> <span class="pre">with</span> <span class="pre">rotting</span> <span class="pre">teeth.&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nigel</span> <span class="pre">=</span> <span class="pre">Character(&quot;Nigel&quot;)</span></code> → creates a <code class="docutils literal notranslate"><span class="pre">Character</span></code> object with the name <code class="docutils literal notranslate"><span class="pre">Nigel</span></code> and assigns it to <code class="docutils literal notranslate"><span class="pre">nigel</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nigel.description</span> <span class="pre">=</span> <span class="pre">&quot;a</span> <span class="pre">burly</span> <span class="pre">dwarf</span> <span class="pre">with</span> <span class="pre">golden</span> <span class="pre">bead</span> <span class="pre">in</span> <span class="pre">woven</span> <span class="pre">through</span> <span class="pre">his</span> <span class="pre">beard.&quot;</span></code> → changes the <code class="docutils literal notranslate"><span class="pre">nigel</span></code> <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">&quot;a</span> <span class="pre">burly</span> <span class="pre">dwarf</span> <span class="pre">with</span> <span class="pre">golden</span> <span class="pre">bead</span> <span class="pre">in</span> <span class="pre">woven</span> <span class="pre">through</span> <span class="pre">his</span> <span class="pre">beard.&quot;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nigel.conversation</span> <span class="pre">=</span> <span class="pre">&quot;Well</span> <span class="pre">youngan,</span> <span class="pre">what</span> <span class="pre">are</span> <span class="pre">you</span> <span class="pre">doing</span> <span class="pre">here?&quot;</span></code> → changes the <code class="docutils literal notranslate"><span class="pre">nigel</span></code> <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">&quot;Well</span> <span class="pre">youngan,</span> <span class="pre">what</span> <span class="pre">are</span> <span class="pre">you</span> <span class="pre">doing</span> <span class="pre">here?&quot;</span></code></p></li>
+<li><p>Note that we didn’t change the <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attribute for <code class="docutils literal notranslate"><span class="pre">ugine</span></code>. This means it will reamin with the default value of <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
 </section>
 </section>
 
@@ -285,7 +385,12 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Stage 3 - Character Creation</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#class-diagram">Class Diagram</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#define-the-character-class">Define the Character class</a></li>
+<li><a class="reference internal" href="#create-characters">Create characters</a></li>
 </ul>
 </li>
 </ul>
