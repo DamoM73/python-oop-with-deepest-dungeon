@@ -317,8 +317,116 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">nigel</span> <span class="pre">=</span> <span class="pre">Character(&quot;Nigel&quot;)</span></code> → creates a <code class="docutils literal notranslate"><span class="pre">Character</span></code> object with the name <code class="docutils literal notranslate"><span class="pre">Nigel</span></code> and assigns it to <code class="docutils literal notranslate"><span class="pre">nigel</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">nigel.description</span> <span class="pre">=</span> <span class="pre">&quot;a</span> <span class="pre">burly</span> <span class="pre">dwarf</span> <span class="pre">with</span> <span class="pre">golden</span> <span class="pre">bead</span> <span class="pre">in</span> <span class="pre">woven</span> <span class="pre">through</span> <span class="pre">his</span> <span class="pre">beard.&quot;</span></code> → changes the <code class="docutils literal notranslate"><span class="pre">nigel</span></code> <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">&quot;a</span> <span class="pre">burly</span> <span class="pre">dwarf</span> <span class="pre">with</span> <span class="pre">golden</span> <span class="pre">bead</span> <span class="pre">in</span> <span class="pre">woven</span> <span class="pre">through</span> <span class="pre">his</span> <span class="pre">beard.&quot;</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">nigel.conversation</span> <span class="pre">=</span> <span class="pre">&quot;Well</span> <span class="pre">youngan,</span> <span class="pre">what</span> <span class="pre">are</span> <span class="pre">you</span> <span class="pre">doing</span> <span class="pre">here?&quot;</span></code> → changes the <code class="docutils literal notranslate"><span class="pre">nigel</span></code> <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">&quot;Well</span> <span class="pre">youngan,</span> <span class="pre">what</span> <span class="pre">are</span> <span class="pre">you</span> <span class="pre">doing</span> <span class="pre">here?&quot;</span></code></p></li>
-<li><p>Note that we didn’t change the <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attribute for <code class="docutils literal notranslate"><span class="pre">ugine</span></code>. This means it will reamin with the default value of <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p>Note that we didn’t change the <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attribute for <code class="docutils literal notranslate"><span class="pre">ugine</span></code>. This means it will remain with the default value of <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
 </ul>
+</section>
+<section id="add-characters-to-the-rooms">
+<h2>Add Characters to the Rooms<a class="headerlink" href="#add-characters-to-the-rooms" title="Permalink to this heading">#</a></h2>
+<p>So now we have two classes that interact with each other, <code class="docutils literal notranslate"><span class="pre">Room</span></code> and <code class="docutils literal notranslate"><span class="pre">Character</span></code>. Now we need to work out how we represent that interaction in our class structures. Checking our class diagram you will notice that we have added a new <code class="docutils literal notranslate"><span class="pre">charcetr</span></code> attribute to the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class. This is how we show which <code class="docutils literal notranslate"><span class="pre">Character</span></code> is in the each <code class="docutils literal notranslate"><span class="pre">Room</span></code>.</p>
+<p><img alt="lesson 3 class diagram" src="_images/lesson_3_class_diagram.png" /></p>
+<p>This is an arbitrary decision. We could easily had added the new attributer to the <code class="docutils literal notranslate"><span class="pre">Charcter</span></code> class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That’s why the class diagram is so important.</p>
+<p>Return to <strong>room.py</strong> and add the highlighted line below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">room_name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the room object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="hll"><span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">10</span>        <span class="bp">self</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">11</span>        
+<span class="linenos">12</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">13</span>        <span class="c1"># sends a description of the room to the terminal</span>
+<span class="linenos">14</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="linenos">17</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;To the </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2"> is the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">18</span>    
+<span class="linenos">19</span>    <span class="k">def</span> <span class="nf">link_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_to_link</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="linenos">20</span>        <span class="c1"># links the provided room, in the provided direction</span>
+<span class="linenos">21</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">room_to_link</span>
+<span class="linenos">22</span>        
+<span class="linenos">23</span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="linenos">24</span>        <span class="c1"># returns the room linked in the given direction</span>
+<span class="linenos">25</span>        <span class="k">if</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="linenos">26</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span>
+<span class="linenos">27</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">28</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can&#39;t go that way&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>            <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+</div>
+<p>Investigating that code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">self.character</span> <span class="pre">=</span> <span class="pre">None</span></code> → creates a new attribute called <code class="docutils literal notranslate"><span class="pre">character</span></code> and assigns <code class="docutils literal notranslate"><span class="pre">None</span></code> to it.</p></li>
+</ul>
+<p>The return to <strong>main.py</strong> and add characters to our rooms using the highlighted code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Character</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># create rooms</span>
+<span class="linenos"> 7</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># link rooms</span>
+<span class="linenos">17</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos">19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># create characters</span>
+<span class="linenos">24</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Character</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+<span class="linenos">25</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+<span class="linenos">26</span>
+<span class="linenos">27</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Character</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+<span class="linenos">28</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+<span class="linenos">29</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span><span class="c1"># add characters to rooms</span>
+<span class="hll"><span class="linenos">32</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+</span><span class="hll"><span class="linenos">33</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
+</span><span class="linenos">34</span>
+<span class="linenos">35</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">36</span><span class="sd"># describe the rooms</span>
+<span class="linenos">37</span><span class="sd">cavern.describe()</span>
+<span class="linenos">38</span><span class="sd">armoury.describe()</span>
+<span class="linenos">39</span><span class="sd">lab.describe()</span>
+<span class="linenos">40</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span><span class="c1"># initialise variables</span>
+<span class="linenos">43</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">44</span><span class="n">current_room</span> <span class="o">=</span> <span class="n">cavern</span>
+<span class="linenos">45</span>
+<span class="linenos">46</span><span class="c1"># ----- MAIN LOOP -----</span>
+<span class="linenos">47</span><span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+<span class="linenos">48</span>    <span class="n">current_room</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos">49</span>    
+<span class="linenos">50</span>    <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos">51</span>    
+<span class="linenos">52</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
+<span class="linenos">53</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="linenos">54</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
+<span class="linenos">55</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">56</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">57</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t understand.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Investigating the code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">armoury.character</span> <span class="pre">=</span> <span class="pre">ugine</span></code> → assigns the <code class="docutils literal notranslate"><span class="pre">ugine</span></code> <code class="docutils literal notranslate"><span class="pre">Character</span></code> object to the <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lab.character</span> <span class="pre">=</span> <span class="pre">nigel</span></code> → assigns the <code class="docutils literal notranslate"><span class="pre">nigel</span></code> <code class="docutils literal notranslate"><span class="pre">Character</span></code> object to the <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">lab</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object.</p></li>
+</ul>
+<p>Let’s do some testing. <strong>Predict</strong> what you think will happen and then <strong>Run</strong> the program. It should do nothing new, unless there is an error. That’s because we haven’t adjusted the room descriptions to include the characters. Let’s do that now.</p>
 </section>
 </section>
 
@@ -391,6 +499,7 @@
 </li>
 <li><a class="reference internal" href="#define-the-character-class">Define the Character class</a></li>
 <li><a class="reference internal" href="#create-characters">Create characters</a></li>
+<li><a class="reference internal" href="#add-characters-to-the-rooms">Add Characters to the Rooms</a></li>
 </ul>
 </li>
 </ul>

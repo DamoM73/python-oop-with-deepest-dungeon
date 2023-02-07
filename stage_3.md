@@ -115,5 +115,123 @@ Investigating that code:
 - `nigel = Character("Nigel")` &rarr; creates a `Character` object with the name `Nigel` and assigns it to `nigel`
 - `nigel.description = "a burly dwarf with golden bead in woven through his beard."` &rarr; changes the `nigel` `description` attribute to `"a burly dwarf with golden bead in woven through his beard."`
 - `nigel.conversation = "Well youngan, what are you doing here?"` &rarr; changes the `nigel` `conversation` attribute to `"Well youngan, what are you doing here?"`
-- Note that we didn't change the `conversation` attribute for `ugine`. This means it will reamin with the default value of `None`
+- Note that we didn't change the `conversation` attribute for `ugine`. This means it will remain with the default value of `None`
 
+## Add Characters to the Rooms
+
+So now we have two classes that interact with each other, `Room` and `Character`. Now we need to work out how we represent that interaction in our class structures. Checking our class diagram you will notice that we have added a new `charcetr` attribute to the `Room` class. This is how we show which `Character` is in the each `Room`.
+
+![lesson 3 class diagram](./assets/lesson_3_class_diagram.png)
+
+This is an arbitrary decision. We could easily had added the new attributer to the `Charcter` class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That's why the class diagram is so important.
+
+Return to **room.py** and add the highlighted line below.
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 8
+# room.py
+
+class Room():
+    
+    def __init__(self,room_name):
+        # initialises the room object
+        self.name = room_name.lower()
+        self.description = None
+        self.linked_rooms = {}
+        self.character = None
+        
+    def describe(self):
+        # sends a description of the room to the terminal
+        print(f"\nYou are in the {self.name}")
+        print(self.description)
+        for direction in self.linked_rooms.keys():
+            print(f"To the {direction} is the {self.linked_rooms[direction].name}")
+    
+    def link_rooms(self, room_to_link, direction):
+        # links the provided room, in the provided direction
+        self.linked_rooms[direction.lower()] = room_to_link
+        
+    def move(self, direction):
+        # returns the room linked in the given direction
+        if direction in self.linked_rooms.keys():
+            return self.linked_rooms[direction]
+        else:
+            print("You can't go that way")
+            return self
+```
+
+Investigating that code:
+
+- `self.character = None` &rarr; creates a new attribute called `character` and assigns `None` to it.
+
+The return to **main.py** and add characters to our rooms using the highlighted code below.
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 32-33
+# main.py
+
+from room import Room
+from character import Character
+
+# create rooms
+cavern = Room("Cavern")
+cavern.description = ("A room so big that the light of your torch doesn’t reach the walls.")
+
+armoury = Room("Armoury")
+armoury.description = ("The walls are lined with racks that once held weapons and armour.")
+
+lab = Room("Laboratory")
+lab.description = ("A strange odour hangs in a room filled with unknownable contraptions.")
+
+# link rooms
+cavern.link_rooms(armoury,"south")
+armoury.link_rooms(cavern,"north")
+armoury.link_rooms(lab,"east")
+lab.link_rooms(armoury,"west")
+
+
+# create characters
+ugine = Character("Ugine")
+ugine.description = "a huge troll with rotting teeth."
+
+nigel = Character("Nigel")
+nigel.description = "a burly dwarf with golden bead in woven through his beard."
+nigel.conversation = "Well youngan, what are you doing here?"
+
+# add characters to rooms
+armoury.character = ugine
+lab.character = nigel
+
+'''
+# describe the rooms
+cavern.describe()
+armoury.describe()
+lab.describe()
+'''
+
+# initialise variables
+running = True
+current_room = cavern
+
+# ----- MAIN LOOP -----
+while running:
+    current_room.describe()
+    
+    command = input("> ").lower()
+    
+    if command in ["north", "south", "east", "west"]:
+        current_room = current_room.move(command)
+    elif command == "quit":
+        running = False
+    else:
+        print("I don't understand.")
+```
+
+Investigating the code:
+
+- `armoury.character = ugine` &rarr; assigns the `ugine` `Character` object to the `character` attribute of the `armoury` `Room` object.
+- `lab.character = nigel` &rarr; assigns the `nigel` `Character` object to the `character` attribute of the `lab` `Room` object.
+
+Let's do some testing. **Predict** what you think will happen and then **Run** the program. It should do nothing new, unless there is an error. That's because we haven't adjusted the room descriptions to include the characters. Let's do that now.
