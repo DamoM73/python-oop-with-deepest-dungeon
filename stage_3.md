@@ -235,3 +235,107 @@ Investigating the code:
 - `lab.character = nigel` &rarr; assigns the `nigel` `Character` object to the `character` attribute of the `lab` `Room` object.
 
 Let's do some testing. **Predict** what you think will happen and then **Run** the program. It should do nothing new, unless there is an error. That's because we haven't adjusted the room descriptions to include the characters. Let's do that now.
+
+## Include characters in room description
+
+To add the characters to the room description is a two step method:
+
+1. Create a `describe` method in the `Character` class
+2. modify the `describe` method in the `Room` class so it calls the `character.describe` method
+
+### Add describe method to character class
+
+Go to **character.py** and add the highlighted code below to create the `describe` method
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 11-13
+# character.py
+
+class Character():
+    
+    def __init__(self, name):
+        # initialises the character object
+        self.name = name
+        self.description = None
+        self.conversation = None
+
+    def describe(self):
+        # sends a description of the character to the terminal
+        print(f"{self.name} is here, {self.description}")
+```
+
+Investigating the new code:
+
+- `def describe(self):` &rarr; defines the `describe` method for the `Character` class
+  - although our program already has a `describe` method, this will work because the other `describe` method belongs to the `Room` class.
+  - in coding we say they have a different **name space**. The name space is all the parts of the name that are separated by  `.`.
+  - so `character.describe()` is not the same as `room.describe()`
+- `# sends a description of the character to the terminal` &rarr; the method description
+- `print(f"{self.name} is here, {self.description}")` &rarr; a f-string which prints details of this character.
+
+```{admonition} Name Spaces
+A closet has multiple shelves, drawers, and hangers, each designated for different types of clothes. When you want to get dressed for a specific occasion, you go to the corresponding section of the closet and pick out the clothes you need.
+
+In the same way, in programming, we have namespaces which are like sections in a closet. Each namespace has a set of variables and functions that are related to a specific topic, just like the different sections in a closet designated for different types of clothes. When you want to use a specific variable or function, you go to the corresponding namespace and use what you need.
+
+For example, we might have a namespace called "math" that contains all the variables and functions related to math problems, just like a section in a closet designated for work clothes. Another namespace might be called "game" that has variables and functions for playing games, like a section designated for casual clothes.
+
+By using namespaces, we can keep our code organized, just like the clothes in a closet. This way, we can easily find the right variable or function for each task.
+```
+
+### Modify the Room describe method
+
+Before we modify the `describe` method, we have to deal with a little problem. We have three rooms, but we only have two characters, so there is one room (the cavern) with no character. We only want to room description to mention the character, when there is one present. 
+
+Fortunately, we initially assigned `None` to the `character` attribute. We haven't added a character to the cavern, so `cavern.character` is still `None`. Therefore we only want to describe the character, when the `character` attribute is not `None`.
+
+To achieve this, add the highlighted code to **room.py**
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 16-17
+# room.py
+
+class Room():
+    
+    def __init__(self,room_name):
+        # initialises the room object
+        self.name = room_name.lower()
+        self.description = None
+        self.linked_rooms = {}
+        self.character = None
+        
+    def describe(self):
+        # sends a description of the room to the terminal
+        print(f"\nYou are in the {self.name}")
+        print(self.description)
+        if self.character is not None:
+            self.character.describe()
+        for direction in self.linked_rooms.keys():
+            print(f"To the {direction} is the {self.linked_rooms[direction].name}")
+    
+    def link_rooms(self, room_to_link, direction):
+        # links the provided room, in the provided direction
+        self.linked_rooms[direction.lower()] = room_to_link
+        
+    def move(self, direction):
+        # returns the room linked in the given direction
+        if direction in self.linked_rooms.keys():
+            return self.linked_rooms[direction]
+        else:
+            print("You can't go that way")
+            return self
+```
+
+Let's investigate that code:
+
+- `if self.character is not None:` &rarr; checks if the *this* room has a character
+  - we use the `is` operator is to check if a variable's value is `None`
+- calls the `describe` method for *this* room
+
+### Testing
+
+**Predict** what you think will happen and the **Run** the code.
+
+Test to make sure that you get character descriptions, but only when you enter a room that has a character.

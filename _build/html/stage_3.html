@@ -428,6 +428,105 @@
 </ul>
 <p>Let’s do some testing. <strong>Predict</strong> what you think will happen and then <strong>Run</strong> the program. It should do nothing new, unless there is an error. That’s because we haven’t adjusted the room descriptions to include the characters. Let’s do that now.</p>
 </section>
+<section id="include-characters-in-room-description">
+<h2>Include characters in room description<a class="headerlink" href="#include-characters-in-room-description" title="Permalink to this heading">#</a></h2>
+<p>To add the characters to the room description is a two step method:</p>
+<ol class="arabic simple">
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">describe</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class</p></li>
+<li><p>modify the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class so it calls the <code class="docutils literal notranslate"><span class="pre">character.describe</span></code> method</p></li>
+</ol>
+<section id="add-describe-method-to-character-class">
+<h3>Add describe method to character class<a class="headerlink" href="#add-describe-method-to-character-class" title="Permalink to this heading">#</a></h3>
+<p>Go to <strong>character.py</strong> and add the highlighted code below to create the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the character object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>
+<span class="hll"><span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">12</span>        <span class="c1"># sends a description of the character to the terminal</span>
+</span><span class="hll"><span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is here, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Investigating the new code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">describe(self):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method for the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class</p>
+<ul>
+<li><p>although our program already has a <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, this will work because the other <code class="docutils literal notranslate"><span class="pre">describe</span></code> method belongs to the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class.</p></li>
+<li><p>in coding we say they have a different <strong>name space</strong>. The name space is all the parts of the name that are separated by  <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p></li>
+<li><p>so <code class="docutils literal notranslate"><span class="pre">character.describe()</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">room.describe()</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">sends</span> <span class="pre">a</span> <span class="pre">description</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">terminal</span></code> → the method description</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">is</span> <span class="pre">here,</span> <span class="pre">{self.description}&quot;)</span></code> → a f-string which prints details of this character.</p></li>
+</ul>
+<div class="admonition-name-spaces admonition">
+<p class="admonition-title">Name Spaces</p>
+<p>A closet has multiple shelves, drawers, and hangers, each designated for different types of clothes. When you want to get dressed for a specific occasion, you go to the corresponding section of the closet and pick out the clothes you need.</p>
+<p>In the same way, in programming, we have namespaces which are like sections in a closet. Each namespace has a set of variables and functions that are related to a specific topic, just like the different sections in a closet designated for different types of clothes. When you want to use a specific variable or function, you go to the corresponding namespace and use what you need.</p>
+<p>For example, we might have a namespace called “math” that contains all the variables and functions related to math problems, just like a section in a closet designated for work clothes. Another namespace might be called “game” that has variables and functions for playing games, like a section designated for casual clothes.</p>
+<p>By using namespaces, we can keep our code organized, just like the clothes in a closet. This way, we can easily find the right variable or function for each task.</p>
+</div>
+</section>
+<section id="modify-the-room-describe-method">
+<h3>Modify the Room describe method<a class="headerlink" href="#modify-the-room-describe-method" title="Permalink to this heading">#</a></h3>
+<p>Before we modify the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, we have to deal with a little problem. We have three rooms, but we only have two characters, so there is one room (the cavern) with no character. We only want to room description to mention the character, when there is one present.</p>
+<p>Fortunately, we initially assigned <code class="docutils literal notranslate"><span class="pre">None</span></code> to the <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute. We haven’t added a character to the cavern, so <code class="docutils literal notranslate"><span class="pre">cavern.character</span></code> is still <code class="docutils literal notranslate"><span class="pre">None</span></code>. Therefore we only want to describe the character, when the <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute is not <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>To achieve this, add the highlighted code to <strong>room.py</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">room_name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the room object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">10</span>        <span class="bp">self</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">11</span>        
+<span class="linenos">12</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">13</span>        <span class="c1"># sends a description of the room to the terminal</span>
+<span class="linenos">14</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+<span class="hll"><span class="linenos">16</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">17</span>            <span class="bp">self</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span><span class="linenos">18</span>        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="linenos">19</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;To the </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2"> is the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">20</span>    
+<span class="linenos">21</span>    <span class="k">def</span> <span class="nf">link_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_to_link</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="linenos">22</span>        <span class="c1"># links the provided room, in the provided direction</span>
+<span class="linenos">23</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">room_to_link</span>
+<span class="linenos">24</span>        
+<span class="linenos">25</span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="linenos">26</span>        <span class="c1"># returns the room linked in the given direction</span>
+<span class="linenos">27</span>        <span class="k">if</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="linenos">28</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span>
+<span class="linenos">29</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">30</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can&#39;t go that way&quot;</span><span class="p">)</span>
+<span class="linenos">31</span>            <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+</div>
+<p>Let’s investigate that code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">self.character</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code> → checks if the <em>this</em> room has a character</p>
+<ul>
+<li><p>we use the <code class="docutils literal notranslate"><span class="pre">is</span></code> operator is to check if a variable’s value is <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+</ul>
+</li>
+<li><p>calls the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method for <em>this</em> room</p></li>
+</ul>
+</section>
+<section id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h3>
+<p><strong>Predict</strong> what you think will happen and the <strong>Run</strong> the code.</p>
+<p>Test to make sure that you get character descriptions, but only when you enter a room that has a character.</p>
+</section>
+</section>
 </section>
 
         </article>
@@ -500,6 +599,12 @@
 <li><a class="reference internal" href="#define-the-character-class">Define the Character class</a></li>
 <li><a class="reference internal" href="#create-characters">Create characters</a></li>
 <li><a class="reference internal" href="#add-characters-to-the-rooms">Add Characters to the Rooms</a></li>
+<li><a class="reference internal" href="#include-characters-in-room-description">Include characters in room description</a><ul>
+<li><a class="reference internal" href="#add-describe-method-to-character-class">Add describe method to character class</a></li>
+<li><a class="reference internal" href="#modify-the-room-describe-method">Modify the Room describe method</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
