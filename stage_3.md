@@ -125,6 +125,8 @@ So now we have two classes that interact with each other, `Room` and `Character`
 
 This is an arbitrary decision. We could easily had added the new attributer to the `Charcter` class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That's why the class diagram is so important.
 
+### Add description to Room class in room.py
+
 Return to **room.py** and add the highlighted line below.
 
 ```{code-block} python
@@ -164,6 +166,8 @@ class Room():
 Investigating that code:
 
 - `self.character = None` &rarr; creates a new attribute called `character` and assigns `None` to it.
+
+### Add characters to the rooms in main.py
 
 The return to **main.py** and add characters to our rooms using the highlighted code below.
 
@@ -243,7 +247,7 @@ To add the characters to the room description is a two step method:
 1. Create a `describe` method in the `Character` class
 2. modify the `describe` method in the `Room` class so it calls the `character.describe` method
 
-### Add describe method to character class
+### Add describe method to Character class
 
 Go to **character.py** and add the highlighted code below to create the `describe` method
 
@@ -284,7 +288,7 @@ For example, we might have a namespace called "math" that contains all the varia
 By using namespaces, we can keep our code organized, just like the clothes in a closet. This way, we can easily find the right variable or function for each task.
 ```
 
-### Modify the Room describe method
+### Modify the Room class describe method
 
 Before we modify the `describe` method, we have to deal with a little problem. We have three rooms, but we only have two characters, so there is one room (the cavern) with no character. We only want to room description to mention the character, when there is one present. 
 
@@ -339,3 +343,197 @@ Let's investigate that code:
 **Predict** what you think will happen and the **Run** the code.
 
 Test to make sure that you get character descriptions, but only when you enter a room that has a character.
+
+## Create character interactions
+
+We want to add three interactions with out characters:
+
+- talk
+- hug
+- fight
+
+If we look once again at our class diagram, we will see that in the character class, there is a method for each of these interactions.
+
+![lesson 3 class diagram](./assets/lesson_3_class_diagram.png)
+
+### Add new methods to Character class
+
+Return to the **character.py** file. First lets add the talk method by adding code highlighted below.
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 15-20
+# character.py
+
+class Character():
+    
+    def __init__(self, name):
+        # initialises the character object
+        self.name = name
+        self.description = None
+        self.conversation = None
+
+    def describe(self):
+        # sends a description of the character to the terminal
+        print(f"{self.name} is here, {self.description}")
+
+    def talk(self):
+        # send converstation to the terminal
+        if self.conversation is not None:
+            print(f"{self.name}: {self.conversation}")
+        else:
+            print(f"{self.name} doesn't want to talk to you")
+```
+
+Let's investigate this code:
+
+- `def talk(self):` &rarr; is defining the talk method for *this* character
+- `# send converstation to the terminal` &rarr; our method description comment
+- `if self.conversation is not None:` &rarr; checks whether the character `conversation` attributer has a value
+  - checking the **main.py** &rarr; Nigel has a `conversation` value but Ugine does not
+  - our `talk` method needs to allow for characters that don't have a conversation
+- `print(f"{self.name}: {self.conversation}")` &rarr; if there is a `conversation` value, then display the character name and what they say
+- `else:` &rarr; when the character doesn't have a `conversation` value
+- `print(f"{self.name} doesn't want to talk to you")` &rarr; display a message that doesn't require a `conversation` attribute
+
+Now let's add both the `hug` and `fight` methods with the highlighted code below:
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 22-24, 26-28
+# character.py
+
+class Character():
+    
+    def __init__(self, name):
+        # initialises the character object
+        self.name = name
+        self.description = None
+        self.conversation = None
+
+    def describe(self):
+        # sends a description of the character to the terminal
+        print(f"{self.name} is here, {self.description}")
+
+    def talk(self):
+        # send converstation to the terminal
+        if self.conversation is not None:
+            print(f"{self.name}: {self.conversation}")
+        else:
+            print(f"{self.name} doesn't want to talk to you")
+
+    def hug(self):
+        # the character responds to a hug
+        print(f"{self.name} doesn't want to hug you")
+
+    def fight(self):
+        # the character response to a threat
+        print(f"{self.name} doesn't want to fight you")
+```
+
+By this stage the code for both methods should look familiar:
+
+- define the method with `self` as the first argument
+- provide a comment describing what the method does
+- display a message that uses one of the character's attributes
+
+## Add the interactions to the main loop
+
+Now that the player can interact with our characters, we need to add the three options (talk, hug, fight) to our event handler in the main loop.
+
+Return to **main.py**, and add the highlighted code:
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 54-68
+# main.py
+
+from room import Room
+from character import Character
+
+# create rooms
+cavern = Room("Cavern")
+cavern.description = ("A room so big that the light of your torch doesn’t reach the walls.")
+
+armoury = Room("Armoury")
+armoury.description = ("The walls are lined with racks that once held weapons and armour.")
+
+lab = Room("Laboratory")
+lab.description = ("A strange odour hangs in a room filled with unknownable contraptions.")
+
+# link rooms
+cavern.link_rooms(armoury,"south")
+armoury.link_rooms(cavern,"north")
+armoury.link_rooms(lab,"east")
+lab.link_rooms(armoury,"west")
+
+
+# create characters
+ugine = Character("Ugine")
+ugine.description = "a huge troll with rotting teeth."
+
+nigel = Character("Nigel")
+nigel.description = "a burly dwarf with golden bead in woven through his beard."
+nigel.conversation = "Well youngan, what are you doing here?"
+
+# add characters to rooms
+armoury.character = ugine
+lab.character = nigel
+
+'''
+# describe the rooms
+cavern.describe()
+armoury.describe()
+lab.describe()
+'''
+
+# initialise variables
+running = True
+current_room = cavern
+
+# ----- MAIN LOOP -----
+while running:
+    current_room.describe()
+    
+    command = input("> ").lower()
+    
+    if command in ["north", "south", "east", "west"]:
+        current_room = current_room.move(command)
+    elif command == "talk":
+        if current_room.character is not None:
+            current_room.character.talk()
+        else:
+            print("There is no one here to talk to")
+    elif command == "hug":
+        if current_room.character is not None:
+            current_room.character.hug()
+        else:
+            print("There is no one here to hug")
+    elif command== "fight":
+        if current_room.character is not None:
+            current_room.character.fight()
+        else:
+            print("There is no one here to fight")
+    elif command == "quit":
+        running = False
+    else:
+        print("I don't understand.")
+```
+
+Since the event handler for all three interactions is virtually the same, we'll just investigate the code for the `talk` method:
+
+- `elif command == "talk":` &rarr; checks if the user's command was `talk`
+- `if current_room.character is not None:` &rarr; checks if there is a character in the room
+  - remember that rooms can not have a character (eg. Cavern) so we need to allow for this.
+- `current_room.character.talk()` &rarr; if there is a character, the call its `talk()` method
+- `else:` &rarr; deals with rooms with no character
+- `print("There is no one here to talk to")` &rarr; message for when there is no character
+
+## Stage 2 task
+
+Once again we have only been focusing on the first four stages of the PRIMM model. Now it is time for your to implement the **Make** phase.
+
+In Stage 1 you created an additional room. So now it is time to populate that room.
+
+- Create an additional character for each extra room you've added
+- Add those characters to your additional rooms
