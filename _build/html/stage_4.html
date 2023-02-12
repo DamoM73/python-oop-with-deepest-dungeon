@@ -212,13 +212,1018 @@
 <aside class="topic">
 <p class="topic-title">In this lesson you will:</p>
 <ul class="simple">
-<li><p>Make different types of characters</p></li>
-<li><p>Adjust interactions to reflect their character types</p></li>
+<li><p>Learn about the OOP concepts of inheritence and polymorphism</p></li>
+<li><p>Learn about the different types of programming errors</p></li>
+<li><p>Refactor code</p></li>
+<li><p>Use testing to identify errors</p></li>
+<li><p>Troubleshoot a logic error</p></li>
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/J8U97_SRx7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>So far we have created a multiple-room dungeon that the user can move between. We have also populated the dungeon with characters that the user can interact with.</p>
+<p>During this stage we will refine our characters by:</p>
+<ul class="simple">
+<li><p>defining two character types:</p>
+<ul>
+<li><p>friend</p></li>
+<li><p>enemy</p></li>
+</ul>
+</li>
+<li><p>change our current characters to one of these types of characters</p></li>
+<li><p>adjust our interactions to allow for different types of characters</p></li>
+</ul>
+<section id="class-diagram">
+<h3>Class Diagram<a class="headerlink" href="#class-diagram" title="Permalink to this heading">#</a></h3>
+<p>Our new class diagram has two new classes <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> and <code class="docutils literal notranslate"><span class="pre">Friend</span></code>.</p>
+<p><img alt="lesson 4 class diagram" src="_images/lesson_4_class_diagram.png" /></p>
+<p>Notice that they both have arrows pointing towards the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class, that’s because they are both child classes of the parent class. A child class <strong>inherits</strong> all the attributes and methods from the parent class. In addition, they may have extra attributes and methods, or they can even overwrite an attribute or method they inherit. Let’s look at our class diagram to see this in action.</p>
+<div class="admonition-inheritance admonition">
+<p class="admonition-title">Inheritance</p>
+<p>Inheritance is a concept in object-oriented programming (OOP) that allows you to create a new class based on an existing class. Think of it like a family tree, where a child class inherits characteristics from its parent class, just like how a child inherits traits from their parents.</p>
+<p>Inheritance makes it easier to reuse code and add new classes without having to rewrite the same information over and over again. It also makes it easier to keep track of different types of animals and what they have in common and what makes them unique.</p>
+</div>
+<section id="enemy-class">
+<h4>Enemy class<a class="headerlink" href="#enemy-class" title="Permalink to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class:</p>
+<ul class="simple">
+<li><p>inherits from the <code class="docutils literal notranslate"><span class="pre">Character</span> <span class="pre">class</span></code> the <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">description</span></code>, and <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attributes as well as the <code class="docutils literal notranslate"><span class="pre">describe</span></code>, <code class="docutils literal notranslate"><span class="pre">talk</span></code>, and <code class="docutils literal notranslate"><span class="pre">hug</span></code> methods.</p></li>
+<li><p>adds the <code class="docutils literal notranslate"><span class="pre">weakness</span></code> attribute</p></li>
+<li><p>overwrites the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method with its own <code class="docutils literal notranslate"><span class="pre">fight</span></code> method</p></li>
+</ul>
+</section>
+<section id="friend-class">
+<h4>Friend class<a class="headerlink" href="#friend-class" title="Permalink to this heading">#</a></h4>
+<ul class="simple">
+<li><p>inherits from the <code class="docutils literal notranslate"><span class="pre">Character</span> <span class="pre">class</span></code> the <code class="docutils literal notranslate"><span class="pre">name</span></code>, <code class="docutils literal notranslate"><span class="pre">description</span></code>, and <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attributes as well as the <code class="docutils literal notranslate"><span class="pre">describe</span></code>, <code class="docutils literal notranslate"><span class="pre">talk</span></code>, and <code class="docutils literal notranslate"><span class="pre">fight</span></code> methods.</p></li>
+<li><p>overwrites the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">hug</span></code> method with its own <code class="docutils literal notranslate"><span class="pre">hug</span></code> method</p></li>
+</ul>
+</section>
+<section id="why-use-inheritance">
+<h4>Why use inheritance?<a class="headerlink" href="#why-use-inheritance" title="Permalink to this heading">#</a></h4>
+<p>In the end our two child classes operate similarly to two classes with the following class diagrams (blue text indicates overwritten methods).</p>
+<p><img alt="lesson 4 child classes" src="_images/lesson_4_child_classes.png" /></p>
+<p>So why don’t we just two separate classes?</p>
+<p>Remember the DRY principle? → <strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself?</p>
+<p>If we have two describe methods that are exactly the same, we want to only write it once. This ensures code that is more accurate and easier to maintain.</p>
+<p>For example, if I want to change the wording of the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, I will only need to change it in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class. The change will flow down to the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> and <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> classes. Similarly, if there is an error in the <code class="docutils literal notranslate"><span class="pre">talk</span></code> method, then I only need to fix it in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class.</p>
+<div class="admonition-oop-terminology admonition">
+<p class="admonition-title">OOP Terminology</p>
+<p>OOP can have several names for the same concept. I will be consistent throughout this course, but if you use other resources, they may use different terminology.</p>
+<ul class="simple">
+<li><p>parent class → superclass or base class</p></li>
+<li><p>child class → subclass or derived class</p></li>
+</ul>
+</div>
+<p>Let’s make these changes to the code.</p>
+</section>
+</section>
+</section>
+<section id="define-different-character-types">
+<h2>Define different character types<a class="headerlink" href="#define-different-character-types" title="Permalink to this heading">#</a></h2>
+<p>Open your <strong>character.py</strong> file and add the highlighted code below to create the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class:</p>
+<section id="create-friend-class">
+<h3>Create Friend class<a class="headerlink" href="#create-friend-class" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the character object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># sends a description of the character to the terminal</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is here, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="c1"># send converstation to the terminal</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to talk to you&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">23</span>        <span class="c1"># the character responds to a hug</span>
+<span class="linenos">24</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to hug you&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">27</span>        <span class="c1"># the character response to a threat</span>
+<span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="hll"><span class="linenos">30</span><span class="k">class</span> <span class="nc">Friend</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+</span><span class="linenos">31</span>    
+<span class="hll"><span class="linenos">32</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">33</span>        <span class="c1"># initialise the Friend object by calling the character initialise</span>
+</span><span class="hll"><span class="linenos">34</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Investigating that code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Friend(Character):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">(Character)</span></code> → tells Python that <code class="docutils literal notranslate"><span class="pre">Character</span></code> is the parent class of <code class="docutils literal notranslate"><span class="pre">Friend</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">name):</span></code> → automatically runs when you create a <code class="docutils literal notranslate"><span class="pre">Friend</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialise</span> <span class="pre">the</span> <span class="pre">Friend</span> <span class="pre">object</span> <span class="pre">by</span> <span class="pre">calling</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">initialise</span></code> → method descriptive comment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">super().__init__(name)</span></code> → this is very new</p>
+<ul>
+<li><p>tells Python to run the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method of the parent class (superclass)</p>
+<ul>
+<li><p>running <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">__init__</span></code> will inherits all the attributes and method from <code class="docutils literal notranslate"><span class="pre">Character</span></code></p></li>
+</ul>
+</li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> of <code class="docutils literal notranslate"><span class="pre">Character</span></code> requires a <code class="docutils literal notranslate"><span class="pre">name</span></code> so we pass the <code class="docutils literal notranslate"><span class="pre">name</span></code> argument</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="create-enemy-class">
+<h3>Create Enemy class<a class="headerlink" href="#create-enemy-class" title="Permalink to this heading">#</a></h3>
+<p>To create the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class, add the highlighted code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the character object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># sends a description of the character to the terminal</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is here, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="c1"># send converstation to the terminal</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to talk to you&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">23</span>        <span class="c1"># the character responds to a hug</span>
+<span class="linenos">24</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to hug you&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">27</span>        <span class="c1"># the character response to a threat</span>
+<span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="k">class</span> <span class="nc">Friend</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">31</span>    
+<span class="linenos">32</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos">33</span>        <span class="c1"># initialise the Friend object by calling the character initialise</span>
+<span class="linenos">34</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">35</span>
+<span class="hll"><span class="linenos">36</span><span class="k">class</span> <span class="nc">Enemy</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+</span><span class="linenos">37</span>    
+<span class="hll"><span class="linenos">38</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">39</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
+</span><span class="hll"><span class="linenos">40</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">41</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
+</span></pre></div>
+</div>
+<p>Now unpack the code that create the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Enemy(Character):</span></code> → define the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class as a child of the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,name):</span></code> → automatically runs when an <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> object is created</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialise</span> <span class="pre">the</span> <span class="pre">Enemy</span> <span class="pre">object</span> <span class="pre">by</span> <span class="pre">calling</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">initialise</span></code> → method descriptive comment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">super().__init__(name)</span></code> → runs the parent class’ <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method which causes inheritance</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.weakness</span> <span class="pre">=</span> <span class="pre">None</span></code> → adds an additional <code class="docutils literal notranslate"><span class="pre">weakness</span></code> attribute to all <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects</p></li>
+</ul>
+<p>Now that we have two character types, we need to change the characters that we have created.</p>
+</section>
+</section>
+<section id="change-character-types">
+<h2>Change character types<a class="headerlink" href="#change-character-types" title="Permalink to this heading">#</a></h2>
+<p>Return to <strong>main.py</strong>, and change the highlighted code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="hll"><span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Friend</span><span class="p">,</span> <span class="n">Enemy</span>
+</span><span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># create rooms</span>
+<span class="linenos"> 7</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># link rooms</span>
+<span class="linenos">17</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos">19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># create characters</span>
+<span class="hll"><span class="linenos">24</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Enemy</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+</span><span class="linenos">25</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+<span class="hll"><span class="linenos">26</span><span class="n">ugine</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="s2">&quot;cheese&quot;</span>
+</span><span class="linenos">27</span>
+<span class="hll"><span class="linenos">28</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Friend</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+</span><span class="linenos">29</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+<span class="linenos">30</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="c1"># add characters to rooms</span>
+<span class="linenos">33</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos">34</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">37</span><span class="sd"># describe the rooms</span>
+<span class="linenos">38</span><span class="sd">cavern.describe()</span>
+<span class="linenos">39</span><span class="sd">armoury.describe()</span>
+<span class="linenos">40</span><span class="sd">lab.describe()</span>
+<span class="linenos">41</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="c1"># initialise variables</span>
+<span class="linenos">44</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">45</span><span class="n">current_room</span> <span class="o">=</span> <span class="n">cavern</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span><span class="c1"># ----- MAIN LOOP -----</span>
+<span class="linenos">48</span><span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+<span class="linenos">49</span>    <span class="n">current_room</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos">50</span>    
+<span class="linenos">51</span>    <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos">52</span>    
+<span class="linenos">53</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
+<span class="linenos">54</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="linenos">55</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
+<span class="linenos">56</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">57</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos">58</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">59</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
+<span class="linenos">60</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
+<span class="linenos">61</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">62</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos">63</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">64</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
+<span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">67</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">()</span>
+<span class="linenos">68</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">69</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+<span class="linenos">70</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
+<span class="linenos">71</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">72</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">73</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t understand.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Investigating that code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">character</span> <span class="pre">import</span> <span class="pre">Friend,</span> <span class="pre">Enemy</span></code> → we will no longer have <code class="docutils literal notranslate"><span class="pre">Character</span></code> objects, but rather <code class="docutils literal notranslate"><span class="pre">Friend</span></code> and <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ugine</span> <span class="pre">=</span> <span class="pre">Enemy(&quot;Ugine&quot;)</span></code> → changes <code class="docutils literal notranslate"><span class="pre">Ugine</span></code> to an <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ugine.weakness</span> <span class="pre">=</span> <span class="pre">&quot;cheese&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> object have a <code class="docutils literal notranslate"><span class="pre">weakness</span></code> attribute, Ugine’s is cheese</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nigel</span> <span class="pre">=</span> <span class="pre">Friend(&quot;Nigel&quot;)</span></code> → changes <code class="docutils literal notranslate"><span class="pre">Nigel</span></code> to a <code class="docutils literal notranslate"><span class="pre">Friend</span></code> object</p></li>
+</ul>
+<section id="refactoring-testing">
+<h3>Refactoring testing<a class="headerlink" href="#refactoring-testing" title="Permalink to this heading">#</a></h3>
+<p>What we have just done is called <strong>refactoring</strong> our code. That is, we have made a change to our code, without changing what it does. Whenever you refactor your code the next step should always be testing, so let’s test.</p>
+<p>What do we need to test. We need to make sure that we can still have all the same interactions with both Ugine and Nigel. Draw up the testing table below and then complete it.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Character</p></th>
+<th class="head text-left"><p>Interaction</p></th>
+<th class="head text-left"><p>Expected Result</p></th>
+<th class="head text-left"><p>Actual Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>talk</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>hug</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Nigel</p></td>
+<td class="text-left"><p>talk</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Nigel</p></td>
+<td class="text-left"><p>hug</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Nigel</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>If all your expected results match your actual results then there is no problems, otherwise, you need to troubleshoot where your mistakes.</p>
+</section>
+</section>
+<section id="adjusting-the-interactions">
+<h2>Adjusting the interactions<a class="headerlink" href="#adjusting-the-interactions" title="Permalink to this heading">#</a></h2>
+<p>We want to change our interactions according to the character’s type. We don’t want to hug our enemies, nor do we want to fight our friends. In OOP this is called <strong>polymorphism</strong>.</p>
+<div class="admonition-polymorphism admonition">
+<p class="admonition-title">Polymorphism</p>
+<p>Polymorphism is a concept in object-oriented programming (OOP) that allows objects of different classes to respond to the same method call in different ways. This is like having multiple people with different jobs, all able to perform the same action, but in their own unique way.</p>
+<p>Polymorphism allows for objects of different classes to be treated as objects of their class or as objects of a parent class, without having to know the exact type of the object. This makes it easier to write generic code that can work with objects of multiple classes, making your code more flexible and adaptable to changes in the future.</p>
+</div>
+<section id="adjusting-the-hug-method">
+<h3>Adjusting the hug method<a class="headerlink" href="#adjusting-the-hug-method" title="Permalink to this heading">#</a></h3>
+<p>Currently, the <code class="docutils literal notranslate"><span class="pre">hug</span></code> method is inherited from the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class, which basically says the character doesn’t want to hug you. This is fine for enemies, so we don’t have to change the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class, but this is not what we want our friends to do, so let’s change the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class.</p>
+<p>Return to the <strong>character.py</strong> file and add the highlighted code:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the character object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># sends a description of the character to the terminal</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is here, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="c1"># send converstation to the terminal</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to talk to you&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">23</span>        <span class="c1"># the character responds to a hug</span>
+<span class="linenos">24</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to hug you&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">27</span>        <span class="c1"># the character response to a threat</span>
+<span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="k">class</span> <span class="nc">Friend</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">31</span>    
+<span class="linenos">32</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos">33</span>        <span class="c1"># initialise the Friend object by calling the character initialise</span>
+<span class="linenos">34</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">35</span>
+<span class="hll"><span class="linenos">36</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">37</span>        <span class="c1"># the friend responds to a hug</span>
+</span><span class="hll"><span class="linenos">38</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> hugs you back.&quot;</span><span class="p">)</span>
+</span><span class="linenos">39</span>
+<span class="linenos">40</span><span class="k">class</span> <span class="nc">Enemy</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">41</span>    
+<span class="linenos">42</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos">43</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
+<span class="linenos">44</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">45</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+<p>Investigating the code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">hug(self):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">hug</span></code> method for the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class</p>
+<ul>
+<li><p>same name as <code class="docutils literal notranslate"><span class="pre">Character</span></code> method → replaces <code class="docutils literal notranslate"><span class="pre">hug</span></code> method for all <code class="docutils literal notranslate"><span class="pre">Friend</span></code> objects</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">the</span> <span class="pre">friend</span> <span class="pre">responds</span> <span class="pre">to</span> <span class="pre">a</span> <span class="pre">hug</span></code> → method’s explanatory comment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">hugs</span> <span class="pre">you</span> <span class="pre">back.&quot;)</span></code> → display message using object’s <code class="docutils literal notranslate"><span class="pre">name</span></code></p></li>
+</ul>
+</section>
+<section id="adjusting-the-fight-method">
+<h3>Adjusting the fight method<a class="headerlink" href="#adjusting-the-fight-method" title="Permalink to this heading">#</a></h3>
+<p>Now it’s time to adjust the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for our <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class. We have a simple fight mechanic. Each <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> has a <code class="docutils literal notranslate"><span class="pre">weakness</span></code>. If you use their <code class="docutils literal notranslate"><span class="pre">weakness</span></code> to fight them, you win, otherwise you loose.</p>
+<p>The highlighted code below enacts this mechanic.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the character object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># sends a description of the character to the terminal</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is here, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="c1"># send converstation to the terminal</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to talk to you&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">23</span>        <span class="c1"># the character responds to a hug</span>
+<span class="linenos">24</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to hug you&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">27</span>        <span class="c1"># the character response to a threat</span>
+<span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="k">class</span> <span class="nc">Friend</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">31</span>    
+<span class="linenos">32</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos">33</span>        <span class="c1"># initialise the Friend object by calling the character initialise</span>
+<span class="linenos">34</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">37</span>        <span class="c1"># the friend responds to a hug</span>
+<span class="linenos">38</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> hugs you back.&quot;</span><span class="p">)</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="k">class</span> <span class="nc">Enemy</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">41</span>    
+<span class="linenos">42</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos">43</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
+<span class="linenos">44</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">45</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">46</span>
+<span class="hll"><span class="linenos">47</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">48</span>        <span class="c1"># fights enemy with provided item and returns if player survives</span>
+</span><span class="hll"><span class="linenos">49</span>        <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">50</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You strike </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> down with </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">51</span>            <span class="k">return</span> <span class="kc">True</span>
+</span><span class="hll"><span class="linenos">52</span>        <span class="k">else</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">53</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> crushes you. Puny adventurer&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">54</span>            <span class="k">return</span> <span class="kc">False</span>
+</span></pre></div>
+</div>
+<p>Investing that code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">fight(self,</span> <span class="pre">item):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class</p>
+<ul>
+<li><p>accepts the <code class="docutils literal notranslate"><span class="pre">item</span></code> argument which is the weapon the player uses</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">fights</span> <span class="pre">enemy</span> <span class="pre">with</span> <span class="pre">provided</span> <span class="pre">item</span> <span class="pre">and</span> <span class="pre">returns</span> <span class="pre">if</span> <span class="pre">player</span> <span class="pre">survives</span></code> → method’s explanatory comment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">item</span> <span class="pre">==</span> <span class="pre">self.weakness:</span></code> → checks if the <code class="docutils literal notranslate"><span class="pre">item</span></code> is this enemy’s weakness</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">strike</span> <span class="pre">{self.name}</span> <span class="pre">down</span> <span class="pre">with</span> <span class="pre">{item}.&quot;)</span></code> → displays success message</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">True</span></code> → informs <strong>main.py</strong> of victory in the fight</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → when the <code class="docutils literal notranslate"><span class="pre">item</span></code> is not this enemy’s weakness</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">crushes</span> <span class="pre">you.</span> <span class="pre">Puny</span> <span class="pre">adventurer&quot;)</span></code> → displays failure message</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">False</span></code> → informs <strong>main.py</strong> of loss in the fight</p></li>
+</ul>
+<p>Now that our <code class="docutils literal notranslate"><span class="pre">fight</span></code> method is ready, we need to change our fight event handler in <strong>main.py</strong>. Use the highlighted code below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos"> 4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Enemy</span><span class="p">,</span> <span class="n">Friend</span>
+<span class="linenos"> 5</span>
+<span class="linenos"> 6</span><span class="c1"># create rooms</span>
+<span class="linenos"> 7</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span>
+<span class="linenos">10</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos">11</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="c1"># link rooms</span>
+<span class="linenos">17</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos">19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="c1"># create characters</span>
+<span class="linenos">24</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Enemy</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+<span class="linenos">25</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+<span class="linenos">26</span><span class="n">ugine</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="s2">&quot;cheese&quot;</span>
+<span class="linenos">27</span>
+<span class="linenos">28</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Friend</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+<span class="linenos">29</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+<span class="linenos">30</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="c1"># add characters to rooms</span>
+<span class="linenos">33</span><span class="n">armoury</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos">34</span><span class="n">lab</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">37</span><span class="sd"># describe the rooms</span>
+<span class="linenos">38</span><span class="sd">cavern.describe()</span>
+<span class="linenos">39</span><span class="sd">armoury.describe()</span>
+<span class="linenos">40</span><span class="sd">lab.describe()</span>
+<span class="linenos">41</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos">42</span>
+<span class="linenos">43</span><span class="c1"># initialise variables</span>
+<span class="linenos">44</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos">45</span><span class="n">current_room</span> <span class="o">=</span> <span class="n">cavern</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span><span class="c1"># ----- MAIN LOOP -----</span>
+<span class="linenos">48</span><span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+<span class="linenos">49</span>    <span class="n">current_room</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos">50</span>    
+<span class="linenos">51</span>    <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos">52</span>    
+<span class="linenos">53</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
+<span class="linenos">54</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="linenos">55</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
+<span class="linenos">56</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">57</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos">58</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">59</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
+<span class="linenos">60</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
+<span class="linenos">61</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">62</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos">63</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">64</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
+<span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="hll"><span class="linenos">67</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span class="hll"><span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">69</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span class="hll"><span class="linenos">70</span>            <span class="k">else</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">71</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span class="linenos">72</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">73</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+<span class="linenos">74</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
+<span class="linenos">75</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">76</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">77</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t understand.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Investigate the code:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">weapon</span> <span class="pre">=</span> <span class="pre">input(&quot;What</span> <span class="pre">will</span> <span class="pre">you</span> <span class="pre">fight</span> <span class="pre">with?</span> <span class="pre">&gt;</span> <span class="pre">&quot;).lower()</span></code> → asks the user to input their weapon</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.inhabitant.fight(weapon):</span></code> → checks to see if user wins the fight</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room.inhabitant.fight(weapon)</span></code> → calls the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method displaying a message</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> → since the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method returns a Boolean indicating the player’s success, we can use this to check the fight result.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room.inhabitant</span> <span class="pre">=</span> <span class="pre">None</span></code> → if the player won the fight, the room now has no character</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → if the player looses the fight</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> → set the main loop flag to <code class="docutils literal notranslate"><span class="pre">False</span></code> so the game will finish</p></li>
+</ul>
+</section>
+<section id="testing">
+<h3>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h3>
+<p>Now we changed both the <code class="docutils literal notranslate"><span class="pre">hug</span></code> and <code class="docutils literal notranslate"><span class="pre">fight</span></code> methods, time to do some testing. Again we will use our testing table, and focus on the code we have changed.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Character</p></th>
+<th class="head text-left"><p>Interaction</p></th>
+<th class="head text-left"><p>Weapon</p></th>
+<th class="head text-left"><p>Expected Result</p></th>
+<th class="head text-left"><p>Actual Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p>cheese</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p>not cheese</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>hug</p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Nigel</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Nigel</p></td>
+<td class="text-left"><p>hug</p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="friend-fight-error">
+<h3>Friend fight error<a class="headerlink" href="#friend-fight-error" title="Permalink to this heading">#</a></h3>
+<p>Did you get the following error?</p>
+<div class="highlight-pseudocode notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nv">Traceback</span> <span class="p">(</span><span class="nv">most</span> <span class="nv">recent</span> <span class="nv">call</span> <span class="nv">last</span><span class="p">):</span>
+<span class="linenos">2</span>  <span class="nv">File</span> <span class="s2">&quot;h:\GIT\python-oop-with-deepest-dungeon\python_files\stage_4\main.py&quot;</span><span class="p">,</span> <span class="nv">line</span> <span class="mi">66</span><span class="p">,</span> <span class="nv">in</span> <span class="o">&lt;mod</span><span class="nv">ule</span><span class="o">&gt;</span>
+<span class="linenos">3</span>    <span class="nv">if</span> <span class="nv">current_room</span><span class="o">.</span><span class="nv">inhabitant</span><span class="o">.</span><span class="nv">fight</span><span class="p">(</span><span class="nv">weapon</span><span class="p">):</span>
+<span class="linenos">4</span>       <span class="o">↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑</span>
+<span class="linenos">5</span><span class="nv">TypeError</span><span class="p">:</span> <span class="nv">Character</span><span class="o">.</span><span class="nv">fight</span><span class="p">()</span> <span class="nv">takes</span> <span class="mi">1</span> <span class="nv">positional</span> <span class="nv">argument</span> <span class="nv">but</span> <span class="mi">2</span> <span class="nv">were</span> <span class="nv">given</span>
+</pre></div>
+</div>
+<p>Why did we get the error? Let’s read the error message:</p>
+<ul class="simple">
+<li><p><strong>line 2</strong> → the error is at line 66 of <strong>main.py</strong></p></li>
+<li><p><strong>line 3</strong> → the error is contained in <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.inhabitant.fight(weapon):</span></code></p></li>
+<li><p><strong>line 4</strong> → the error is specifically in the call to <code class="docutils literal notranslate"><span class="pre">fight</span></code></p></li>
+<li><p><strong>line 5</strong> → <code class="docutils literal notranslate"><span class="pre">fight</span></code> was only expecting one argument (<code class="docutils literal notranslate"><span class="pre">self</span></code>), but we gave two (<code class="docutils literal notranslate"><span class="pre">self</span></code>,<code class="docutils literal notranslate"><span class="pre">weapon</span></code>)</p></li>
+</ul>
+<p>So let’s think about this. We have two <code class="docutils literal notranslate"><span class="pre">fight</span></code> methods, which one was causing the problem? Well, Ugine worked fine, but Nigel didn’t, so it must be the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for friends.</p>
+<p>That method is in our <strong>character.py</strong> file, so let’s look at it.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the character object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># sends a description of the character to the terminal</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is here, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="c1"># send converstation to the terminal</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to talk to you&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">23</span>        <span class="c1"># the character responds to a hug</span>
+<span class="linenos">24</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to hug you&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="hll"><span class="linenos">26</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="linenos">27</span>        <span class="c1"># the character response to a threat</span>
+<span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="hll"><span class="linenos">30</span><span class="k">class</span> <span class="nc">Friend</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">31</span>    
+</span><span class="hll"><span class="linenos">32</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">33</span>        <span class="c1"># initialise the Friend object by calling the character initialise</span>
+</span><span class="hll"><span class="linenos">34</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">35</span>
+</span><span class="hll"><span class="linenos">36</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">37</span>        <span class="c1"># the friend responds to a hug</span>
+</span><span class="hll"><span class="linenos">38</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> hugs you back.&quot;</span><span class="p">)</span>
+</span><span class="linenos">39</span>
+<span class="linenos">40</span><span class="k">class</span> <span class="nc">Enemy</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">41</span>    
+<span class="linenos">42</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos">43</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
+<span class="linenos">44</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">45</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">46</span>
+<span class="hll"><span class="linenos">47</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="linenos">48</span>        <span class="c1"># fights enemy with provided item and returns if player survives</span>
+<span class="linenos">49</span>        <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span><span class="p">:</span>
+<span class="linenos">50</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You strike </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> down with </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="linenos">51</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">52</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">53</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> crushes you. Puny adventurer&quot;</span><span class="p">)</span>
+<span class="linenos">54</span>            <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+<p>Looking closely at the code:</p>
+<ul class="simple">
+<li><p><strong>lines 30 - 38</strong> → the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class does not have a <code class="docutils literal notranslate"><span class="pre">fight</span></code> method, so it is using the inherited <code class="docutils literal notranslate"><span class="pre">fight</span></code> method from the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class</p></li>
+<li><p><strong>line 26</strong> → the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method only accepts one argument <code class="docutils literal notranslate"><span class="pre">(self)</span></code>, but how does this compare to the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method?</p></li>
+<li><p><strong>line 47</strong> → the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method accepts two arguments <code class="docutils literal notranslate"><span class="pre">(self,</span> <span class="pre">item)</span></code></p></li>
+</ul>
+<p>Ok so we’ve found a discrepancy, but which one do we want to change? Remember we changed our <strong>main.py</strong> code to deal with fighting with a weapon, so the easiest way to solve this error is to add another argument to the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method.</p>
+<p>So make the following changes to <strong>character.py</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the character object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># sends a description of the character to the terminal</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is here, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="c1"># send converstation to the terminal</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to talk to you&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">23</span>        <span class="c1"># the character responds to a hug</span>
+<span class="linenos">24</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to hug you&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="hll"><span class="linenos">26</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+</span><span class="linenos">27</span>        <span class="c1"># the character response to a threat</span>
+<span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>
+<span class="linenos">30</span><span class="k">class</span> <span class="nc">Friend</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">31</span>    
+<span class="linenos">32</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos">33</span>        <span class="c1"># initialise the Friend object by calling the character initialise</span>
+<span class="linenos">34</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">35</span>
+<span class="linenos">36</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">37</span>        <span class="c1"># the friend responds to a hug</span>
+<span class="linenos">38</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> hugs you back.&quot;</span><span class="p">)</span>
+<span class="linenos">39</span>
+<span class="linenos">40</span><span class="k">class</span> <span class="nc">Enemy</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">41</span>    
+<span class="linenos">42</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos">43</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
+<span class="linenos">44</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">45</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">46</span>
+<span class="linenos">47</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="linenos">48</span>        <span class="c1"># fights enemy with provided item and returns if player survives</span>
+<span class="linenos">49</span>        <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span><span class="p">:</span>
+<span class="linenos">50</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You strike </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> down with </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="linenos">51</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">52</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">53</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> crushes you. Puny adventurer&quot;</span><span class="p">)</span>
+<span class="linenos">54</span>            <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</section>
+<section id="test-again">
+<h3>Test again<a class="headerlink" href="#test-again" title="Permalink to this heading">#</a></h3>
+<p>Now we changed both the <code class="docutils literal notranslate"><span class="pre">hug</span></code> and <code class="docutils literal notranslate"><span class="pre">fight</span></code> methods, time to do some testing. Again we will use our testing table, and focus on the code we have changed.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Character</p></th>
+<th class="head text-left"><p>Interaction</p></th>
+<th class="head text-left"><p>Weapon</p></th>
+<th class="head text-left"><p>Expected Result</p></th>
+<th class="head text-left"><p>Actual Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p>cheese</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p>not cheese</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>hug</p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Nigel</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Nigel</p></td>
+<td class="text-left"><p>hug</p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Wait, another problem fighting Nigel, but this one is different. There is no error message, the program just ends when you fight him. This is what we call a <strong>logic error</strong>.</p>
+<div class="admonition-types-of-programming-errors admonition">
+<p class="admonition-title">Types of programming errors</p>
+<p>There are three basic categories of programming errors:</p>
+<ul class="simple">
+<li><p><strong>syntax errors</strong></p>
+<ul>
+<li><p>caused by not following the programming language rules</p></li>
+<li><p>Python will not even run the program, and immediately display an error message</p></li>
+</ul>
+</li>
+<li><p><strong>runtime errors</strong></p>
+<ul>
+<li><p>caused when Python tries to execute a command, but something is wrong</p></li>
+<li><p>Python will run the program, but display an error when it comes across a runtime error</p></li>
+<li><p>our <code class="docutils literal notranslate"><span class="pre">fight</span></code> method error was a runtime error</p></li>
+</ul>
+</li>
+<li><p><strong>logic errors</strong></p>
+<ul>
+<li><p>caused when the program does exactly what you tell it to do, but not what you want it to do</p></li>
+<li><p>Python will never display an error, but the program doesn’t do what you want it to do</p></li>
+<li><p>these are the hardest to troubleshoot</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Here is the interaction I got from running the code before it ended:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>You are in the laboratory
+<span class="linenos">2</span>A strange odour hangs in a room filled with unknownable contraptions.
+<span class="linenos">3</span>Nigel is here, a burly dwarf with golden bead in woven through his beard.
+<span class="linenos">4</span>To the west is the armoury
+<span class="linenos">5</span>&gt; fight
+<span class="linenos">6</span>What will you fight with? &gt; dog
+<span class="linenos">7</span>Nigel doesn&#39;t want to fight you
+</pre></div>
+</div>
+</section>
+<section id="troubleshooting-a-logic-error">
+<h3>Troubleshooting a logic error<a class="headerlink" href="#troubleshooting-a-logic-error" title="Permalink to this heading">#</a></h3>
+<p>Troubleshooting logic errors is a bit like detective work. You need to trace the program flow to work out where the error is.</p>
+<p>So we’ll start our investigation in the <strong>main.py</strong>. Looking at the main loop, we can be confident that the problem involves the <code class="docutils literal notranslate"><span class="pre">fight</span></code> event handler, so let’s zoom into that.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">67</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="hll"><span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+</span><span class="linenos">69</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">70</span>            <span class="k">else</span><span class="p">:</span>
+<span class="hll"><span class="linenos">71</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span class="linenos">72</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">73</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the test when the user fought Nigel:</p>
+<ul class="simple">
+<li><p>the user got the message <code class="docutils literal notranslate"><span class="pre">Nigel</span> <span class="pre">doesn't</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">fight</span> <span class="pre">you</span></code></p>
+<ul>
+<li><p>this comes from the call to the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method</p></li>
+<li><p><strong>line 68</strong> must of been executed</p></li>
+</ul>
+</li>
+<li><p>the game ended</p>
+<ul>
+<li><p>therefore <code class="docutils literal notranslate"><span class="pre">running</span></code> needed to be changed to <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p><strong>line 71</strong> must of been executed</p></li>
+</ul>
+</li>
+<li><p>the only way that <strong>line 71</strong> could have been executed would be if the user lost their fight with Nigel</p></li>
+<li><p><strong>line 68</strong> determines if the user won the fight, so lets look closely at this.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.inhabitant.fight(weapon):</span></code> → makes a call to the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method and gets a Boolean response indicating success</p></li>
+<li><p>since Nigel is a friend we need to look at the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method</p></li>
+</ul>
+</li>
+</ul>
+<p>So zooming into the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class in <strong>character.py</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">26</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="linenos">27</span>        <span class="c1"># the character response to a threat</span>
+<span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now I can see the problem. If <strong>main.py</strong> is expecting a Boolean value, it won’t get one because the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method doesn’t return anything.</p>
+<p>Well, that’s not entirely correct. All Python functions (including methods) return a value. If the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement is not used, then the default values of <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned, but why does that stop our game?</p>
+<p>Let’s zoom back in to the fight handler in <strong>main.py</strong> to understand.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">67</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="hll"><span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+</span><span class="linenos">69</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="hll"><span class="linenos">70</span>            <span class="k">else</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">71</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+</span><span class="linenos">72</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">73</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Looking at <strong>line 4</strong>:</p>
+<ul class="simple">
+<li><p>for Nigel <code class="docutils literal notranslate"><span class="pre">current_room.inhabitant.fight(weapon)</span></code> will return <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><strong>line 4</strong> becomes <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">None:</span></code> which equates to <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">False:</span></code></p></li>
+<li><p>jumps to the <code class="docutils literal notranslate"><span class="pre">else</span></code> statement on <strong>line 6</strong></p></li>
+<li><p>which means <strong>line 7</strong> is executed changing <code class="docutils literal notranslate"><span class="pre">running</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+</ul>
+<p>Ok, that all makes sense. Now we have to fix the problem. What we need is for <strong>line 4</strong> to receive a <code class="docutils literal notranslate"><span class="pre">True</span></code> when it calls the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method.</p>
+<p>Jump back to <strong>character.py</strong> and add the highlighted code below to solve our logic error.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the character object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># sends a description of the character to the terminal</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is here, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span>    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="c1"># send converstation to the terminal</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to talk to you&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">23</span>        <span class="c1"># the character responds to a hug</span>
+<span class="linenos">24</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to hug you&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="linenos">27</span>        <span class="c1"># the character response to a threat</span>
+<span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">29</span>        <span class="k">return</span> <span class="kc">True</span>
+</span><span class="linenos">30</span>
+<span class="linenos">31</span><span class="k">class</span> <span class="nc">Friend</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">32</span>    
+<span class="linenos">33</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos">34</span>        <span class="c1"># initialise the Friend object by calling the character initialise</span>
+<span class="linenos">35</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">36</span>
+<span class="linenos">37</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">38</span>        <span class="c1"># the friend responds to a hug</span>
+<span class="linenos">39</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> hugs you back.&quot;</span><span class="p">)</span>
+<span class="linenos">40</span>
+<span class="linenos">41</span><span class="k">class</span> <span class="nc">Enemy</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">42</span>    
+<span class="linenos">43</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos">44</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
+<span class="linenos">45</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">46</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">47</span>
+<span class="linenos">48</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="linenos">49</span>        <span class="c1"># fights enemy with provided item and returns if player survives</span>
+<span class="linenos">50</span>        <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span><span class="p">:</span>
+<span class="linenos">51</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You strike </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> down with </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="linenos">52</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">53</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">54</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> crushes you. Puny adventurer&quot;</span><span class="p">)</span>
+<span class="linenos">55</span>            <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</section>
+<section id="third-test-lucky">
+<h3>Third test lucky<a class="headerlink" href="#third-test-lucky" title="Permalink to this heading">#</a></h3>
+<p>Let’s test and make sure that our logic error has been solved. Again, complete the test table below.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Character</p></th>
+<th class="head text-left"><p>Interaction</p></th>
+<th class="head text-left"><p>Weapon</p></th>
+<th class="head text-left"><p>Expected Result</p></th>
+<th class="head text-left"><p>Actual Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p>cheese</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p>not cheese</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Ugine</p></td>
+<td class="text-left"><p>hug</p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Nigel</p></td>
+<td class="text-left"><p>fight</p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Nigel</p></td>
+<td class="text-left"><p>hug</p></td>
+<td class="text-left"><p>-</p></td>
+<td class="text-left"><p></p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Hopefully all your test have passed.</p>
+</section>
+</section>
+<section id="stage-4-task">
+<h2>Stage 4 task<a class="headerlink" href="#stage-4-task" title="Permalink to this heading">#</a></h2>
+<p>Now it is time for your to implement the <strong>Make</strong> phase.</p>
+<p>Consider the additional character or characters that you have added, and change them into either a Friend, or an Enemy. Don’t forget their weakness if they are an enemy.</p>
 </section>
 </section>
 
@@ -285,7 +1290,35 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Stage 4 - Character Types</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#class-diagram">Class Diagram</a><ul>
+<li><a class="reference internal" href="#enemy-class">Enemy class</a></li>
+<li><a class="reference internal" href="#friend-class">Friend class</a></li>
+<li><a class="reference internal" href="#why-use-inheritance">Why use inheritance?</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#define-different-character-types">Define different character types</a><ul>
+<li><a class="reference internal" href="#create-friend-class">Create Friend class</a></li>
+<li><a class="reference internal" href="#create-enemy-class">Create Enemy class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-character-types">Change character types</a><ul>
+<li><a class="reference internal" href="#refactoring-testing">Refactoring testing</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#adjusting-the-interactions">Adjusting the interactions</a><ul>
+<li><a class="reference internal" href="#adjusting-the-hug-method">Adjusting the hug method</a></li>
+<li><a class="reference internal" href="#adjusting-the-fight-method">Adjusting the fight method</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+<li><a class="reference internal" href="#friend-fight-error">Friend fight error</a></li>
+<li><a class="reference internal" href="#test-again">Test again</a></li>
+<li><a class="reference internal" href="#troubleshooting-a-logic-error">Troubleshooting a logic error</a></li>
+<li><a class="reference internal" href="#third-test-lucky">Third test lucky</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#stage-4-task">Stage 4 task</a></li>
 </ul>
 </li>
 </ul>

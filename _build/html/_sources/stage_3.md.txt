@@ -529,7 +529,7 @@ Since the event handler for all three interactions is virtually the same, we'll 
 - `else:` &rarr; deals with rooms with no character
 - `print("There is no one here to talk to")` &rarr; message for when there is no character
 
-## Stage 2 task
+## Stage 3 task
 
 Once again we have only been focusing on the first four stages of the PRIMM model. Now it is time for your to implement the **Make** phase.
 

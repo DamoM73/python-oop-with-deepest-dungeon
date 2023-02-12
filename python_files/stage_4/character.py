@@ -52,4 +52,3 @@ class Enemy(Character):
             print(f"{self.name} crushes you. Puny adventurer")
             return False
         
-        
