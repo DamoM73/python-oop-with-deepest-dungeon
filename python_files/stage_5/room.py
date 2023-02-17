@@ -5,7 +5,7 @@ class Room():
         self.name = room_name.lower()
         self.description = None
         self.linked_rooms = {}
-        self.inhabitant = None
+        self.character = None
         self.item = None
         
     def describe(self):
