@@ -339,7 +339,9 @@ Now head to **room.py** and add the following code:
 
 ```{code-block} python
 :linenos:
-:emphasize-lines: 17-18
+:emphasize-lines: 19-20
+# room.py
+
 class Room():
     
     def __init__(self,room_name):

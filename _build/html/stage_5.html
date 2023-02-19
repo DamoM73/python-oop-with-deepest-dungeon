@@ -521,38 +521,40 @@
 <li><p>display to terminal using attributes of the object.</p></li>
 </ul>
 <p>Now head to <strong>room.py</strong> and add the following code:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
-<span class="linenos"> 2</span>    
-<span class="linenos"> 3</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">room_name</span><span class="p">):</span>
-<span class="linenos"> 4</span>        <span class="c1"># initialises the room object</span>
-<span class="linenos"> 5</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="linenos"> 6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">10</span>        
-<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="linenos">12</span>        <span class="c1"># sends a description of the room to the terminal</span>
-<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">14</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
-<span class="linenos">15</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">16</span>            <span class="bp">self</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-<span class="hll"><span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span class="hll"><span class="linenos">18</span>            <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
-</span><span class="linenos">19</span>        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-<span class="linenos">20</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;To the </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2"> is the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="linenos">21</span>    
-<span class="linenos">22</span>    <span class="k">def</span> <span class="nf">link_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_to_link</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
-<span class="linenos">23</span>        <span class="c1"># links the provided room, in the provided direction</span>
-<span class="linenos">24</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">room_to_link</span>
-<span class="linenos">25</span>        
-<span class="linenos">26</span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
-<span class="linenos">27</span>        <span class="c1"># returns the room linked in the given direction</span>
-<span class="linenos">28</span>        <span class="k">if</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-<span class="linenos">29</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span>
-<span class="linenos">30</span>        <span class="k">else</span><span class="p">:</span>
-<span class="linenos">31</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can&#39;t go that way&quot;</span><span class="p">)</span>
-<span class="linenos">32</span>            <span class="k">return</span> <span class="bp">self</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">room_name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the room object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">10</span>        <span class="bp">self</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">11</span>        <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">12</span>        
+<span class="linenos">13</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">14</span>        <span class="c1"># sends a description of the room to the terminal</span>
+<span class="linenos">15</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="bp">self</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="hll"><span class="linenos">19</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">20</span>            <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</span><span class="linenos">21</span>        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="linenos">22</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;To the </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2"> is the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">23</span>    
+<span class="linenos">24</span>    <span class="k">def</span> <span class="nf">link_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_to_link</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="linenos">25</span>        <span class="c1"># links the provided room, in the provided direction</span>
+<span class="linenos">26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">room_to_link</span>
+<span class="linenos">27</span>        
+<span class="linenos">28</span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="linenos">29</span>        <span class="c1"># returns the room linked in the given direction</span>
+<span class="linenos">30</span>        <span class="k">if</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="linenos">31</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span>
+<span class="linenos">32</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">33</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can&#39;t go that way&quot;</span><span class="p">)</span>
+<span class="linenos">34</span>            <span class="k">return</span> <span class="bp">self</span>
 </pre></div>
 </div>
 <p><strong>Predict</strong> and <strong>run</strong> the code.</p>
