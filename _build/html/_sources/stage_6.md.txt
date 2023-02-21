@@ -11,7 +11,7 @@
 
 ## Introduction
 
-OU game is progressing nicely. They player can move between multiple rooms, interact with different types of characters. We also have different items in these room.
+Our game is progressing nicely. They player can move between multiple rooms, interact with different types of characters. We also have different items in these room.
 
 The next step is to allow the player to collect the items and use them.
 
