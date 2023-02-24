@@ -482,8 +482,8 @@ nigel.description = "a burly dwarf with golden bead in woven through his beard."
 nigel.conversation = "Well youngan, what are you doing here?"
 
 # add characters to rooms
-armoury.inhabitant = ugine
-lab.inhabitant = nigel
+armoury.character = ugine
+lab.character = nigel
 
 '''
 # describe the rooms
@@ -505,20 +505,20 @@ while running:
     if command in ["north", "south", "east", "west"]:
         current_room = current_room.move(command)
     elif command == "talk":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.talk()
+        if current_room.character is not None:
+            current_room.character.talk()
         else:
             print("There is no one here to talk to")
     elif command == "hug":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.hug()
+        if current_room.character is not None:
+            current_room.character.hug()
         else:
             print("There is no one here to hug")
     elif command== "fight":
-        if current_room.inhabitant is not None:
+        if current_room.character is not None:
             weapon = input("What will you fight with? > ").lower()
-            if current_room.inhabitant.fight(weapon):
-                current_room.inhabitant = None
+            if current_room.character.fight(weapon):
+                current_room.character = None
             else:
                 running = False
         else:
@@ -532,10 +532,10 @@ while running:
 Investigate the code:
 
 - `weapon = input("What will you fight with? > ").lower()` &rarr; asks the user to input their weapon
-- `if current_room.inhabitant.fight(weapon):` &rarr; checks to see if user wins the fight
-  - `current_room.inhabitant.fight(weapon)` &rarr; calls the `fight` method displaying a message
+- `if current_room.character.fight(weapon):` &rarr; checks to see if user wins the fight
+  - `current_room.character.fight(weapon)` &rarr; calls the `fight` method displaying a message
   - `if` &rarr; since the `fight` method returns a Boolean indicating the player's success, we can use this to check the fight result.
-- `current_room.inhabitant = None` &rarr; if the player won the fight, the room now has no character
+- `current_room.character = None` &rarr; if the player won the fight, the room now has no character
 - `else:` &rarr; if the player looses the fight
 - `running = False` &rarr; set the main loop flag to `False` so the game will finish
 
@@ -559,7 +559,7 @@ Did you get the following error?
 :linenos:
 Traceback (most recent call last):
   File "h:\GIT\python-oop-with-deepest-dungeon\python_files\stage_4\main.py", line 66, in <module>
-    if current_room.inhabitant.fight(weapon):
+    if current_room.character.fight(weapon):
        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: Character.fight() takes 1 positional argument but 2 were given
 ```
@@ -567,7 +567,7 @@ TypeError: Character.fight() takes 1 positional argument but 2 were given
 Why did we get the error? Let's read the error message:
 
 - **line 2** &rarr; the error is at line 66 of **main.py**
-- **line 3** &rarr; the error is contained in `if current_room.inhabitant.fight(weapon):`
+- **line 3** &rarr; the error is contained in `if current_room.character.fight(weapon):`
 - **line 4** &rarr; the error is specifically in the call to `fight`
 - **line 5** &rarr; `fight` was only expecting one argument (`self`), but we gave two (`self`,`weapon`)
 
@@ -757,10 +757,10 @@ So we'll start our investigation in the **main.py**. Looking at the main loop, w
 :lineno-start: 65
 :emphasize-lines: 4, 7
     elif command== "fight":
-        if current_room.inhabitant is not None:
+        if current_room.character is not None:
             weapon = input("What will you fight with? > ").lower()
-            if current_room.inhabitant.fight(weapon):
-                current_room.inhabitant = None
+            if current_room.character.fight(weapon):
+                current_room.character = None
             else:
                 running = False
         else:
@@ -777,7 +777,7 @@ In the test when the user fought Nigel:
   - **line 71** must of been executed
 - the only way that **line 71** could have been executed would be if the user lost their fight with Nigel
 - **line 68** determines if the user won the fight, so lets look closely at this.
-  - `if current_room.inhabitant.fight(weapon):` &rarr; makes a call to the `fight` method and gets a Boolean response indicating success
+  - `if current_room.character.fight(weapon):` &rarr; makes a call to the `fight` method and gets a Boolean response indicating success
   - since Nigel is a friend we need to look at the `Friend` `fight` method
 
 So zooming into the `fight` method in the `Character` class in **character.py**:
@@ -801,10 +801,10 @@ Let's zoom back in to the fight handler in **main.py** to understand.
 :lineno-start: 65
 :emphasize-lines: 4, 6-7
     elif command== "fight":
-        if current_room.inhabitant is not None:
+        if current_room.character is not None:
             weapon = input("What will you fight with? > ").lower()
-            if current_room.inhabitant.fight(weapon):
-                current_room.inhabitant = None
+            if current_room.character.fight(weapon):
+                current_room.character = None
             else:
                 running = False
         else:
@@ -813,7 +813,7 @@ Let's zoom back in to the fight handler in **main.py** to understand.
 
 Looking at **line 4**:
 
-- for Nigel `current_room.inhabitant.fight(weapon)` will return `None`
+- for Nigel `current_room.character.fight(weapon)` will return `None`
 - **line 4** becomes `if None:` which equates to `if False:`
 - jumps to the `else` statement on **line 6**
 - which means **line 7** is executed changing `running` to `False`

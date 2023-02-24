@@ -171,6 +171,7 @@
 <li class="toctree-l1"><a class="reference internal" href="stage_6.html">Stage 6 - Use Items</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_7.html">Stage 7 - Victory Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_8.html">Stage 8 - Useability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="extention.html">Extensions Ideas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debugging.html">Debugging with Thonny</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licencing.html">Licencing</a></li>
 </ul>
@@ -712,8 +713,8 @@
 <span class="linenos">30</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
 <span class="linenos">31</span>
 <span class="linenos">32</span><span class="c1"># add characters to rooms</span>
-<span class="linenos">33</span><span class="n">armoury</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">ugine</span>
-<span class="linenos">34</span><span class="n">lab</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos">33</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos">34</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
 <span class="linenos">35</span>
 <span class="linenos">36</span><span class="sd">&#39;&#39;&#39;</span>
 <span class="linenos">37</span><span class="sd"># describe the rooms</span>
@@ -735,20 +736,20 @@
 <span class="linenos">53</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
 <span class="linenos">54</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
 <span class="linenos">55</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
-<span class="linenos">56</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">57</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos">56</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">57</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
 <span class="linenos">58</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">59</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
 <span class="linenos">60</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
-<span class="linenos">61</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">62</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos">61</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">62</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
 <span class="linenos">63</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">64</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
 <span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
-<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="hll"><span class="linenos">67</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-</span><span class="hll"><span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
-</span><span class="hll"><span class="linenos">69</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span class="hll"><span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">69</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
 </span><span class="hll"><span class="linenos">70</span>            <span class="k">else</span><span class="p">:</span>
 </span><span class="hll"><span class="linenos">71</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 </span><span class="linenos">72</span>        <span class="k">else</span><span class="p">:</span>
@@ -762,13 +763,13 @@
 <p>Investigate the code:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">weapon</span> <span class="pre">=</span> <span class="pre">input(&quot;What</span> <span class="pre">will</span> <span class="pre">you</span> <span class="pre">fight</span> <span class="pre">with?</span> <span class="pre">&gt;</span> <span class="pre">&quot;).lower()</span></code> → asks the user to input their weapon</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.inhabitant.fight(weapon):</span></code> → checks to see if user wins the fight</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon):</span></code> → checks to see if user wins the fight</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">current_room.inhabitant.fight(weapon)</span></code> → calls the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method displaying a message</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room.character.fight(weapon)</span></code> → calls the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method displaying a message</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> → since the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method returns a Boolean indicating the player’s success, we can use this to check the fight result.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">current_room.inhabitant</span> <span class="pre">=</span> <span class="pre">None</span></code> → if the player won the fight, the room now has no character</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room.character</span> <span class="pre">=</span> <span class="pre">None</span></code> → if the player won the fight, the room now has no character</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → if the player looses the fight</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> → set the main loop flag to <code class="docutils literal notranslate"><span class="pre">False</span></code> so the game will finish</p></li>
 </ul>
@@ -824,17 +825,17 @@
 <section id="friend-fight-error">
 <h3>Friend fight error<a class="headerlink" href="#friend-fight-error" title="Permalink to this heading">#</a></h3>
 <p>Did you get the following error?</p>
-<div class="highlight-pseudocode notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nv">Traceback</span> <span class="p">(</span><span class="nv">most</span> <span class="nv">recent</span> <span class="nv">call</span> <span class="nv">last</span><span class="p">):</span>
-<span class="linenos">2</span>  <span class="nv">File</span> <span class="s2">&quot;h:\GIT\python-oop-with-deepest-dungeon\python_files\stage_4\main.py&quot;</span><span class="p">,</span> <span class="nv">line</span> <span class="mi">66</span><span class="p">,</span> <span class="nv">in</span> <span class="o">&lt;mod</span><span class="nv">ule</span><span class="o">&gt;</span>
-<span class="linenos">3</span>    <span class="nv">if</span> <span class="nv">current_room</span><span class="o">.</span><span class="nv">inhabitant</span><span class="o">.</span><span class="nv">fight</span><span class="p">(</span><span class="nv">weapon</span><span class="p">):</span>
-<span class="linenos">4</span>       <span class="o">↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑↑</span>
-<span class="linenos">5</span><span class="nv">TypeError</span><span class="p">:</span> <span class="nv">Character</span><span class="o">.</span><span class="nv">fight</span><span class="p">()</span> <span class="nv">takes</span> <span class="mi">1</span> <span class="nv">positional</span> <span class="nv">argument</span> <span class="nv">but</span> <span class="mi">2</span> <span class="nv">were</span> <span class="nv">given</span>
+<div class="highlight-pseudocode notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>Traceback (most recent call last):
+<span class="linenos">2</span>  File &quot;h:\GIT\python-oop-with-deepest-dungeon\python_files\stage_4\main.py&quot;, line 66, in &lt;module&gt;
+<span class="linenos">3</span>    if current_room.character.fight(weapon):
+<span class="linenos">4</span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<span class="linenos">5</span>TypeError: Character.fight() takes 1 positional argument but 2 were given
 </pre></div>
 </div>
 <p>Why did we get the error? Let’s read the error message:</p>
 <ul class="simple">
 <li><p><strong>line 2</strong> → the error is at line 66 of <strong>main.py</strong></p></li>
-<li><p><strong>line 3</strong> → the error is contained in <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.inhabitant.fight(weapon):</span></code></p></li>
+<li><p><strong>line 3</strong> → the error is contained in <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon):</span></code></p></li>
 <li><p><strong>line 4</strong> → the error is specifically in the call to <code class="docutils literal notranslate"><span class="pre">fight</span></code></p></li>
 <li><p><strong>line 5</strong> → <code class="docutils literal notranslate"><span class="pre">fight</span></code> was only expecting one argument (<code class="docutils literal notranslate"><span class="pre">self</span></code>), but we gave two (<code class="docutils literal notranslate"><span class="pre">self</span></code>,<code class="docutils literal notranslate"><span class="pre">weapon</span></code>)</p></li>
 </ul>
@@ -1051,10 +1052,10 @@
 <p>Troubleshooting logic errors is a bit like detective work. You need to trace the program flow to work out where the error is.</p>
 <p>So we’ll start our investigation in the <strong>main.py</strong>. Looking at the main loop, we can be confident that the problem involves the <code class="docutils literal notranslate"><span class="pre">fight</span></code> event handler, so let’s zoom into that.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
-<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos">67</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="hll"><span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
-</span><span class="linenos">69</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="hll"><span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+</span><span class="linenos">69</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="linenos">70</span>            <span class="k">else</span><span class="p">:</span>
 <span class="hll"><span class="linenos">71</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 </span><span class="linenos">72</span>        <span class="k">else</span><span class="p">:</span>
@@ -1078,7 +1079,7 @@
 <li><p>the only way that <strong>line 71</strong> could have been executed would be if the user lost their fight with Nigel</p></li>
 <li><p><strong>line 68</strong> determines if the user won the fight, so lets look closely at this.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.inhabitant.fight(weapon):</span></code> → makes a call to the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method and gets a Boolean response indicating success</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon):</span></code> → makes a call to the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method and gets a Boolean response indicating success</p></li>
 <li><p>since Nigel is a friend we need to look at the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method</p></li>
 </ul>
 </li>
@@ -1093,10 +1094,10 @@
 <p>Well, that’s not entirely correct. All Python functions (including methods) return a value. If the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement is not used, then the default values of <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned, but why does that stop our game?</p>
 <p>Let’s zoom back in to the fight handler in <strong>main.py</strong> to understand.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
-<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos">67</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="hll"><span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
-</span><span class="linenos">69</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="hll"><span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+</span><span class="linenos">69</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="hll"><span class="linenos">70</span>            <span class="k">else</span><span class="p">:</span>
 </span><span class="hll"><span class="linenos">71</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 </span><span class="linenos">72</span>        <span class="k">else</span><span class="p">:</span>
@@ -1105,7 +1106,7 @@
 </div>
 <p>Looking at <strong>line 4</strong>:</p>
 <ul class="simple">
-<li><p>for Nigel <code class="docutils literal notranslate"><span class="pre">current_room.inhabitant.fight(weapon)</span></code> will return <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p>for Nigel <code class="docutils literal notranslate"><span class="pre">current_room.character.fight(weapon)</span></code> will return <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
 <li><p><strong>line 4</strong> becomes <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">None:</span></code> which equates to <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">False:</span></code></p></li>
 <li><p>jumps to the <code class="docutils literal notranslate"><span class="pre">else</span></code> statement on <strong>line 6</strong></p></li>
 <li><p>which means <strong>line 7</strong> is executed changing <code class="docutils literal notranslate"><span class="pre">running</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
