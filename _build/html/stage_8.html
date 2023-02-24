@@ -219,6 +219,1003 @@
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lHSCfn0U45k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Our dungeon is complete. We have a fully functioning game, but before we sign-off we need to improve the useability of our program and tidy up our code.</p>
+<p>To do this we will:</p>
+<ul class="simple">
+<li><p>Create a <strong>help</strong> command</p></li>
+<li><p>Improve the user experience and user interface</p></li>
+<li><p>Add a farewell message</p></li>
+<li><p>Add some in-code comments</p></li>
+<li><p>Remove unused code</p></li>
+<li><p>Standardise our white-space</p></li>
+</ul>
+</section>
+<section id="help-command">
+<h2>Help command<a class="headerlink" href="#help-command" title="Permalink to this heading">#</a></h2>
+<p>We know all the commands we can use because we wrote the code. Someone else might not know what they can say. In addition, if they don’t enter one of the commands, the program only says <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">don't</span> <span class="pre">understand.</span></code>, which is far from helpful.</p>
+<p>To make life easier for new players, we should create a <strong>help</strong> command which lists all the commands. But how will the player know about the <strong>help</strong> command, without using the <strong>help</strong> command? Simple, we change the catch-all event handler (under the <code class="docutils literal notranslate"><span class="pre">else:</span></code>) to inform the user about the help command.</p>
+<p>To implement this, add the highlighted code below to <strong>main.py</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos">  4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Enemy</span><span class="p">,</span> <span class="n">Friend</span>
+<span class="linenos">  5</span><span class="kn">from</span> <span class="nn">item</span> <span class="kn">import</span> <span class="n">Item</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="c1"># create rooms</span>
+<span class="linenos">  8</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos">  9</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos"> 12</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos"> 15</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="c1"># link rooms</span>
+<span class="linenos"> 18</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos"> 19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos"> 20</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos"> 21</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span>
+<span class="linenos"> 24</span><span class="c1"># create characters</span>
+<span class="linenos"> 25</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Enemy</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+<span class="linenos"> 26</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+<span class="linenos"> 27</span><span class="n">ugine</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="s2">&quot;cheese&quot;</span>
+<span class="linenos"> 28</span>
+<span class="linenos"> 29</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Friend</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+<span class="linenos"> 30</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+<span class="linenos"> 31</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span><span class="c1"># add characters to rooms</span>
+<span class="linenos"> 34</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos"> 35</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span><span class="c1"># create items</span>
+<span class="linenos"> 38</span><span class="n">cheese</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Cheese&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span><span class="n">cheese</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;super smelly&quot;</span>
+<span class="linenos"> 40</span>
+<span class="linenos"> 41</span><span class="n">chair</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Chair&quot;</span><span class="p">)</span>
+<span class="linenos"> 42</span><span class="n">chair</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;designed to be sat on&quot;</span>
+<span class="linenos"> 43</span>
+<span class="linenos"> 44</span><span class="n">elmo</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Elmo&quot;</span><span class="p">)</span>
+<span class="linenos"> 45</span><span class="n">elmo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;wanting to be tickled&quot;</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="c1"># add items to rooms</span>
+<span class="linenos"> 48</span><span class="n">cavern</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">chair</span>
+<span class="linenos"> 49</span><span class="n">armoury</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">elmo</span>
+<span class="linenos"> 50</span><span class="n">lab</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">cheese</span>
+<span class="linenos"> 51</span>
+<span class="linenos"> 52</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 53</span><span class="sd"># describe the rooms</span>
+<span class="linenos"> 54</span><span class="sd">cavern.describe()</span>
+<span class="linenos"> 55</span><span class="sd">armoury.describe()</span>
+<span class="linenos"> 56</span><span class="sd">lab.describe()</span>
+<span class="linenos"> 57</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span><span class="c1"># initialise variables</span>
+<span class="linenos"> 60</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 61</span><span class="n">current_room</span> <span class="o">=</span> <span class="n">cavern</span>
+<span class="linenos"> 62</span><span class="n">backpack</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span><span class="c1"># ----- MAIN LOOP -----</span>
+<span class="linenos"> 65</span><span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+<span class="linenos"> 66</span>    <span class="n">current_room</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos"> 67</span>    
+<span class="linenos"> 68</span>    <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 69</span>    
+<span class="linenos"> 70</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
+<span class="linenos"> 71</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="linenos"> 72</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
+<span class="linenos"> 73</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 74</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos"> 75</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 76</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
+<span class="linenos"> 77</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
+<span class="linenos"> 78</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 79</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos"> 80</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 81</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
+<span class="linenos"> 82</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos"> 83</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 84</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 85</span>            <span class="n">available_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 86</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos"> 87</span>                <span class="n">available_weapons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos"> 88</span>            <span class="k">if</span> <span class="n">weapon</span> <span class="ow">in</span> <span class="n">available_weapons</span><span class="p">:</span>
+<span class="linenos"> 89</span>                <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+<span class="linenos"> 90</span>                    <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 91</span>                    <span class="k">if</span> <span class="n">Enemy</span><span class="o">.</span><span class="n">get_num_of_enemy</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 92</span>                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have slain all the enemies. You are victorious!&quot;</span><span class="p">)</span>
+<span class="linenos"> 93</span>                        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 94</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 95</span>                    <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 96</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 97</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You don&#39;t have </span><span class="si">{</span><span class="n">weapon</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 98</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> strikes you down.&quot;</span><span class="p">)</span>
+<span class="linenos"> 99</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">100</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">101</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+<span class="linenos">102</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
+<span class="linenos">103</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">104</span>            <span class="n">backpack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="p">)</span>
+<span class="linenos">105</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put </span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> into your backpack&quot;</span><span class="p">)</span>
+<span class="linenos">106</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">107</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">108</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is nothing here to take&quot;</span><span class="p">)</span>
+<span class="linenos">109</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;backpack&quot;</span><span class="p">:</span>
+<span class="linenos">110</span>        <span class="k">if</span> <span class="n">backpack</span> <span class="o">==</span> <span class="p">[]:</span>
+<span class="linenos">111</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is empty&quot;</span><span class="p">)</span>
+<span class="linenos">112</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">113</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have:&quot;</span><span class="p">)</span>
+<span class="linenos">114</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos">115</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">116</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span>
+</span><span class="hll"><span class="linenos">117</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type which direction you wish to move,&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">118</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;or use one of these commands:&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">119</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Talk&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">120</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Fight&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">121</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Hug&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">122</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Take&quot;</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">123</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Backpack&quot;</span><span class="p">)</span>
+</span><span class="linenos">124</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
+<span class="linenos">125</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">126</span>    <span class="k">else</span><span class="p">:</span>
+<span class="hll"><span class="linenos">127</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>By now this code should be familiar and makes sense to you.</p>
+</section>
+<section id="improving-the-ui-and-ux">
+<h2>Improving the UI and UX<a class="headerlink" href="#improving-the-ui-and-ux" title="Permalink to this heading">#</a></h2>
+<p>Although our program is visually very simple, the user stills interacts with it, which means we need to consider the UI and the UX.</p>
+<div class="admonition-ui-and-ux admonition">
+<p class="admonition-title">UI and UX</p>
+<p>UI stands for User Interface, which is basically what you see on your screen when you use an app or a website. This includes things like buttons, menus, icons, and colors. UI design focuses on making things look good and easy to use.</p>
+<p>UX stands for User Experience, which is how you feel when you use an app or a website. It’s about how easy it is to use, how it makes you feel, and whether it helps you achieve what you’re trying to do. UX design focuses on making things easy and enjoyable to use.</p>
+</div>
+<p>We have already addressed some UI and UX problems by adding the <strong>help</strong> command. Play the game and see if you can identify anything else.</p>
+<p>Did you notice that after entering a command, the game responds and then quickly describes the room again. It’s really easy to loose the command response in this quick action. Let’s change that by writing the response and then asking the user to press a key to proceed.</p>
+<p>I implement this, add the highlighted code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos">  4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Enemy</span><span class="p">,</span> <span class="n">Friend</span>
+<span class="linenos">  5</span><span class="kn">from</span> <span class="nn">item</span> <span class="kn">import</span> <span class="n">Item</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="c1"># create rooms</span>
+<span class="linenos">  8</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos">  9</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos"> 12</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos"> 15</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="c1"># link rooms</span>
+<span class="linenos"> 18</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos"> 19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos"> 20</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos"> 21</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span>
+<span class="linenos"> 24</span><span class="c1"># create characters</span>
+<span class="linenos"> 25</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Enemy</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+<span class="linenos"> 26</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+<span class="linenos"> 27</span><span class="n">ugine</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="s2">&quot;cheese&quot;</span>
+<span class="linenos"> 28</span>
+<span class="linenos"> 29</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Friend</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+<span class="linenos"> 30</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+<span class="linenos"> 31</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span><span class="c1"># add characters to rooms</span>
+<span class="linenos"> 34</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos"> 35</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span><span class="c1"># create items</span>
+<span class="linenos"> 38</span><span class="n">cheese</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Cheese&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span><span class="n">cheese</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;super smelly&quot;</span>
+<span class="linenos"> 40</span>
+<span class="linenos"> 41</span><span class="n">chair</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Chair&quot;</span><span class="p">)</span>
+<span class="linenos"> 42</span><span class="n">chair</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;designed to be sat on&quot;</span>
+<span class="linenos"> 43</span>
+<span class="linenos"> 44</span><span class="n">elmo</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Elmo&quot;</span><span class="p">)</span>
+<span class="linenos"> 45</span><span class="n">elmo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;wanting to be tickled&quot;</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="c1"># add items to rooms</span>
+<span class="linenos"> 48</span><span class="n">cavern</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">chair</span>
+<span class="linenos"> 49</span><span class="n">armoury</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">elmo</span>
+<span class="linenos"> 50</span><span class="n">lab</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">cheese</span>
+<span class="linenos"> 51</span>
+<span class="linenos"> 52</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 53</span><span class="sd"># describe the rooms</span>
+<span class="linenos"> 54</span><span class="sd">cavern.describe()</span>
+<span class="linenos"> 55</span><span class="sd">armoury.describe()</span>
+<span class="linenos"> 56</span><span class="sd">lab.describe()</span>
+<span class="linenos"> 57</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span><span class="c1"># initialise variables</span>
+<span class="linenos"> 60</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 61</span><span class="n">current_room</span> <span class="o">=</span> <span class="n">cavern</span>
+<span class="linenos"> 62</span><span class="n">backpack</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span><span class="c1"># ----- MAIN LOOP -----</span>
+<span class="linenos"> 65</span><span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+<span class="linenos"> 66</span>    <span class="n">current_room</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos"> 67</span>    
+<span class="linenos"> 68</span>    <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 69</span>    
+<span class="linenos"> 70</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
+<span class="linenos"> 71</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="linenos"> 72</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
+<span class="linenos"> 73</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 74</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos"> 75</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 76</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
+<span class="linenos"> 77</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
+<span class="linenos"> 78</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 79</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos"> 80</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 81</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
+<span class="linenos"> 82</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos"> 83</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 84</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 85</span>            <span class="n">available_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 86</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos"> 87</span>                <span class="n">available_weapons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos"> 88</span>            <span class="k">if</span> <span class="n">weapon</span> <span class="ow">in</span> <span class="n">available_weapons</span><span class="p">:</span>
+<span class="linenos"> 89</span>                <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+<span class="linenos"> 90</span>                    <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 91</span>                    <span class="k">if</span> <span class="n">Enemy</span><span class="o">.</span><span class="n">get_num_of_enemy</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 92</span>                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have slain all the enemies. You are victorious!&quot;</span><span class="p">)</span>
+<span class="linenos"> 93</span>                        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 94</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 95</span>                    <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 96</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 97</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You don&#39;t have </span><span class="si">{</span><span class="n">weapon</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 98</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> strikes you down.&quot;</span><span class="p">)</span>
+<span class="linenos"> 99</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">100</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">101</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+<span class="linenos">102</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
+<span class="linenos">103</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">104</span>            <span class="n">backpack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="p">)</span>
+<span class="linenos">105</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put </span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> into your backpack&quot;</span><span class="p">)</span>
+<span class="linenos">106</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">107</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">108</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is nothing here to take&quot;</span><span class="p">)</span>
+<span class="linenos">109</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;backpack&quot;</span><span class="p">:</span>
+<span class="linenos">110</span>        <span class="k">if</span> <span class="n">backpack</span> <span class="o">==</span> <span class="p">[]:</span>
+<span class="linenos">111</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is empty&quot;</span><span class="p">)</span>
+<span class="linenos">112</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">113</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have:&quot;</span><span class="p">)</span>
+<span class="linenos">114</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos">115</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">116</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span>
+<span class="linenos">117</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type which direction you wish to move,&quot;</span><span class="p">)</span>
+<span class="linenos">118</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;or use one of these commands:&quot;</span><span class="p">)</span>
+<span class="linenos">119</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Talk&quot;</span><span class="p">)</span>
+<span class="linenos">120</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Fight&quot;</span><span class="p">)</span>
+<span class="linenos">121</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Hug&quot;</span><span class="p">)</span>
+<span class="linenos">122</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Take&quot;</span><span class="p">)</span>
+<span class="linenos">123</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Backpack&quot;</span><span class="p">)</span>
+<span class="linenos">124</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
+<span class="linenos">125</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">126</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">127</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">128</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Press &lt;Enter&gt; key to continue&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Save the file, <strong>predict</strong> and then <strong>run</strong> the code.</p>
+<p>How does that work? Let’s <strong>investigate</strong>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">input(&quot;\nPress</span> <span class="pre">&lt;Enter&gt;</span> <span class="pre">key</span> <span class="pre">to</span> <span class="pre">continue&quot;)</span></code> → this is a hack. That is we are using <code class="docutils literal notranslate"><span class="pre">input</span></code> in an unconventional way to achieve our desired outcome.</p>
+<ul>
+<li><p>the normal operation of <code class="docutils literal notranslate"><span class="pre">input</span></code> is to wait for the user response → addresses the pausing of the game</p></li>
+<li><p>normally the user enters their response by pressing the Enter key → stops the pausing</p></li>
+<li><p>the value the user enters is <strong>not</strong> assigned to a variable, so it just disappears</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="farewell-message">
+<h2>Farewell message<a class="headerlink" href="#farewell-message" title="Permalink to this heading">#</a></h2>
+<p>When the game ends, it just stops. Whether the player won or lost it just exits the the Shell prompt. To make things a little more polite, we should add an farewell message.</p>
+<p>To include a farewell message add the highlighted code below</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos">  4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Enemy</span><span class="p">,</span> <span class="n">Friend</span>
+<span class="linenos">  5</span><span class="kn">from</span> <span class="nn">item</span> <span class="kn">import</span> <span class="n">Item</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="c1"># create rooms</span>
+<span class="linenos">  8</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos">  9</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos"> 12</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos"> 15</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="c1"># link rooms</span>
+<span class="linenos"> 18</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos"> 19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos"> 20</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos"> 21</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span>
+<span class="linenos"> 24</span><span class="c1"># create characters</span>
+<span class="linenos"> 25</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Enemy</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+<span class="linenos"> 26</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+<span class="linenos"> 27</span><span class="n">ugine</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="s2">&quot;cheese&quot;</span>
+<span class="linenos"> 28</span>
+<span class="linenos"> 29</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Friend</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+<span class="linenos"> 30</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+<span class="linenos"> 31</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span><span class="c1"># add characters to rooms</span>
+<span class="linenos"> 34</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos"> 35</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span><span class="c1"># create items</span>
+<span class="linenos"> 38</span><span class="n">cheese</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Cheese&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span><span class="n">cheese</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;super smelly&quot;</span>
+<span class="linenos"> 40</span>
+<span class="linenos"> 41</span><span class="n">chair</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Chair&quot;</span><span class="p">)</span>
+<span class="linenos"> 42</span><span class="n">chair</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;designed to be sat on&quot;</span>
+<span class="linenos"> 43</span>
+<span class="linenos"> 44</span><span class="n">elmo</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Elmo&quot;</span><span class="p">)</span>
+<span class="linenos"> 45</span><span class="n">elmo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;wanting to be tickled&quot;</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="c1"># add items to rooms</span>
+<span class="linenos"> 48</span><span class="n">cavern</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">chair</span>
+<span class="linenos"> 49</span><span class="n">armoury</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">elmo</span>
+<span class="linenos"> 50</span><span class="n">lab</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">cheese</span>
+<span class="linenos"> 51</span>
+<span class="linenos"> 52</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 53</span><span class="sd"># describe the rooms</span>
+<span class="linenos"> 54</span><span class="sd">cavern.describe()</span>
+<span class="linenos"> 55</span><span class="sd">armoury.describe()</span>
+<span class="linenos"> 56</span><span class="sd">lab.describe()</span>
+<span class="linenos"> 57</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span><span class="c1"># initialise variables</span>
+<span class="linenos"> 60</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 61</span><span class="n">current_room</span> <span class="o">=</span> <span class="n">cavern</span>
+<span class="linenos"> 62</span><span class="n">backpack</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span><span class="c1"># ----- MAIN LOOP -----</span>
+<span class="linenos"> 65</span><span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+<span class="linenos"> 66</span>    <span class="n">current_room</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos"> 67</span>    
+<span class="linenos"> 68</span>    <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 69</span>    
+<span class="linenos"> 70</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
+<span class="linenos"> 71</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="linenos"> 72</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
+<span class="linenos"> 73</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 74</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos"> 75</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 76</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
+<span class="linenos"> 77</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
+<span class="linenos"> 78</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 79</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos"> 80</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 81</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
+<span class="linenos"> 82</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos"> 83</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 84</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 85</span>            <span class="n">available_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 86</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos"> 87</span>                <span class="n">available_weapons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos"> 88</span>            <span class="k">if</span> <span class="n">weapon</span> <span class="ow">in</span> <span class="n">available_weapons</span><span class="p">:</span>
+<span class="linenos"> 89</span>                <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+<span class="linenos"> 90</span>                    <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 91</span>                    <span class="k">if</span> <span class="n">Enemy</span><span class="o">.</span><span class="n">get_num_of_enemy</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 92</span>                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have slain all the enemies. You are victorious!&quot;</span><span class="p">)</span>
+<span class="linenos"> 93</span>                        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 94</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 95</span>                    <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 96</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 97</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You don&#39;t have </span><span class="si">{</span><span class="n">weapon</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 98</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> strikes you down.&quot;</span><span class="p">)</span>
+<span class="linenos"> 99</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">100</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">101</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+<span class="linenos">102</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
+<span class="linenos">103</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">104</span>            <span class="n">backpack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="p">)</span>
+<span class="linenos">105</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put </span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> into your backpack&quot;</span><span class="p">)</span>
+<span class="linenos">106</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">107</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">108</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is nothing here to take&quot;</span><span class="p">)</span>
+<span class="linenos">109</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;backpack&quot;</span><span class="p">:</span>
+<span class="linenos">110</span>        <span class="k">if</span> <span class="n">backpack</span> <span class="o">==</span> <span class="p">[]:</span>
+<span class="linenos">111</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is empty&quot;</span><span class="p">)</span>
+<span class="linenos">112</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">113</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have:&quot;</span><span class="p">)</span>
+<span class="linenos">114</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos">115</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">116</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span>
+<span class="linenos">117</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type which direction you wish to move,&quot;</span><span class="p">)</span>
+<span class="linenos">118</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;or use one of these commands:&quot;</span><span class="p">)</span>
+<span class="linenos">119</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Talk&quot;</span><span class="p">)</span>
+<span class="linenos">120</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Fight&quot;</span><span class="p">)</span>
+<span class="linenos">121</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Hug&quot;</span><span class="p">)</span>
+<span class="linenos">122</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Take&quot;</span><span class="p">)</span>
+<span class="linenos">123</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Backpack&quot;</span><span class="p">)</span>
+<span class="linenos">124</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
+<span class="linenos">125</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">126</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">127</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+<span class="linenos">128</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Press &lt;Enter&gt; key to continue&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">129</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Deepest Dungeon&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</section>
+<section id="in-code-comments">
+<h2>In-code comments<a class="headerlink" href="#in-code-comments" title="Permalink to this heading">#</a></h2>
+<p>We already have some in-code comment that helps structure our code, but we have missed much of the main loop. We should add some comment to the main loop to make our code more readable and therefore maintainable.</p>
+<p>Let’s first start with <strong>main.py</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos">  4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Enemy</span><span class="p">,</span> <span class="n">Friend</span>
+<span class="linenos">  5</span><span class="kn">from</span> <span class="nn">item</span> <span class="kn">import</span> <span class="n">Item</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="c1"># create rooms</span>
+<span class="linenos">  8</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos">  9</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos"> 12</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos"> 15</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="c1"># link rooms</span>
+<span class="linenos"> 18</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos"> 19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos"> 20</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos"> 21</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span>
+<span class="linenos"> 24</span><span class="c1"># create characters</span>
+<span class="linenos"> 25</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Enemy</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+<span class="linenos"> 26</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+<span class="linenos"> 27</span><span class="n">ugine</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="s2">&quot;cheese&quot;</span>
+<span class="linenos"> 28</span>
+<span class="linenos"> 29</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Friend</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+<span class="linenos"> 30</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+<span class="linenos"> 31</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span><span class="c1"># add characters to rooms</span>
+<span class="linenos"> 34</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos"> 35</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span><span class="c1"># create items</span>
+<span class="linenos"> 38</span><span class="n">cheese</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Cheese&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span><span class="n">cheese</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;super smelly&quot;</span>
+<span class="linenos"> 40</span>
+<span class="linenos"> 41</span><span class="n">chair</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Chair&quot;</span><span class="p">)</span>
+<span class="linenos"> 42</span><span class="n">chair</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;designed to be sat on&quot;</span>
+<span class="linenos"> 43</span>
+<span class="linenos"> 44</span><span class="n">elmo</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Elmo&quot;</span><span class="p">)</span>
+<span class="linenos"> 45</span><span class="n">elmo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;wanting to be tickled&quot;</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="c1"># add items to rooms</span>
+<span class="linenos"> 48</span><span class="n">cavern</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">chair</span>
+<span class="linenos"> 49</span><span class="n">armoury</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">elmo</span>
+<span class="linenos"> 50</span><span class="n">lab</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">cheese</span>
+<span class="linenos"> 51</span>
+<span class="linenos"> 52</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 53</span><span class="sd"># describe the rooms</span>
+<span class="linenos"> 54</span><span class="sd">cavern.describe()</span>
+<span class="linenos"> 55</span><span class="sd">armoury.describe()</span>
+<span class="linenos"> 56</span><span class="sd">lab.describe()</span>
+<span class="linenos"> 57</span><span class="sd">&#39;&#39;&#39;</span>
+<span class="linenos"> 58</span>
+<span class="linenos"> 59</span><span class="c1"># initialise variables</span>
+<span class="linenos"> 60</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 61</span><span class="n">current_room</span> <span class="o">=</span> <span class="n">cavern</span>
+<span class="linenos"> 62</span><span class="n">backpack</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span><span class="c1"># ----- MAIN LOOP -----</span>
+<span class="linenos"> 65</span><span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+<span class="linenos"> 66</span>    <span class="n">current_room</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos"> 67</span>    
+<span class="linenos"> 68</span>    <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 69</span>    
+<span class="hll"><span class="linenos"> 70</span>    <span class="c1"># move</span>
+</span><span class="linenos"> 71</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
+<span class="linenos"> 72</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 73</span>    <span class="c1"># talk    </span>
+</span><span class="linenos"> 74</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
+<span class="linenos"> 75</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 76</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos"> 77</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 78</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 79</span>    <span class="c1"># hug</span>
+</span><span class="linenos"> 80</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
+<span class="linenos"> 81</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 82</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos"> 83</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 84</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos"> 85</span>    <span class="c1"># fight</span>
+</span><span class="linenos"> 86</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos"> 87</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 88</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 89</span>            <span class="n">available_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 90</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos"> 91</span>                <span class="n">available_weapons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos"> 92</span>            <span class="k">if</span> <span class="n">weapon</span> <span class="ow">in</span> <span class="n">available_weapons</span><span class="p">:</span>
+<span class="linenos"> 93</span>                <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+<span class="linenos"> 94</span>                    <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 95</span>                    <span class="k">if</span> <span class="n">Enemy</span><span class="o">.</span><span class="n">get_num_of_enemy</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 96</span>                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have slain all the enemies. You are victorious!&quot;</span><span class="p">)</span>
+<span class="linenos"> 97</span>                        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 98</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 99</span>                    <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">100</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">101</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You don&#39;t have </span><span class="si">{</span><span class="n">weapon</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">102</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> strikes you down.&quot;</span><span class="p">)</span>
+<span class="linenos">103</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">104</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">105</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">106</span>    <span class="c1"># take</span>
+</span><span class="linenos">107</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
+<span class="linenos">108</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">109</span>            <span class="n">backpack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="p">)</span>
+<span class="linenos">110</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put </span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> into your backpack&quot;</span><span class="p">)</span>
+<span class="linenos">111</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">112</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">113</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is nothing here to take&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">114</span>    <span class="c1"># backpack</span>
+</span><span class="linenos">115</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;backpack&quot;</span><span class="p">:</span>
+<span class="linenos">116</span>        <span class="k">if</span> <span class="n">backpack</span> <span class="o">==</span> <span class="p">[]:</span>
+<span class="linenos">117</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is empty&quot;</span><span class="p">)</span>
+<span class="linenos">118</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">119</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have:&quot;</span><span class="p">)</span>
+<span class="linenos">120</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos">121</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">122</span>    <span class="c1"># help</span>
+</span><span class="linenos">123</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span>
+<span class="linenos">124</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type which direction you wish to move,&quot;</span><span class="p">)</span>
+<span class="linenos">125</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;or use one of these commands:&quot;</span><span class="p">)</span>
+<span class="linenos">126</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Talk&quot;</span><span class="p">)</span>
+<span class="linenos">127</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Fight&quot;</span><span class="p">)</span>
+<span class="linenos">128</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Hug&quot;</span><span class="p">)</span>
+<span class="linenos">129</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Take&quot;</span><span class="p">)</span>
+<span class="linenos">130</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Backpack&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">131</span>    <span class="c1"># quit</span>
+</span><span class="linenos">132</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
+<span class="linenos">133</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="hll"><span class="linenos">134</span>    <span class="c1"># incorrect command</span>
+</span><span class="linenos">135</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">136</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+<span class="linenos">137</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Press &lt;Enter&gt; key to continue&quot;</span><span class="p">)</span>
+<span class="linenos">138</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Deepest Dungeon&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When you create classes your should really have a comment that explains what each method does. If you look at the classes in our <strong>room.py</strong>, <strong>item.py</strong> and <strong>character.py</strong> files you will see that we have already done this.</p>
+</section>
+<section id="remove-unused-code">
+<h2>Remove unused code<a class="headerlink" href="#remove-unused-code" title="Permalink to this heading">#</a></h2>
+<p>Remember the code in <strong>main.py</strong> that we commented out. Well we no longer need it. Go ahead and <strong>delete</strong> the code highlighted below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos">  4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Enemy</span><span class="p">,</span> <span class="n">Friend</span>
+<span class="linenos">  5</span><span class="kn">from</span> <span class="nn">item</span> <span class="kn">import</span> <span class="n">Item</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="c1"># create rooms</span>
+<span class="linenos">  8</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos">  9</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos"> 12</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos"> 15</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="c1"># link rooms</span>
+<span class="linenos"> 18</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos"> 19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos"> 20</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos"> 21</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span>
+<span class="linenos"> 24</span><span class="c1"># create characters</span>
+<span class="linenos"> 25</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Enemy</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+<span class="linenos"> 26</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+<span class="linenos"> 27</span><span class="n">ugine</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="s2">&quot;cheese&quot;</span>
+<span class="linenos"> 28</span>
+<span class="linenos"> 29</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Friend</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+<span class="linenos"> 30</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+<span class="linenos"> 31</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+<span class="linenos"> 32</span>
+<span class="linenos"> 33</span><span class="c1"># add characters to rooms</span>
+<span class="linenos"> 34</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos"> 35</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos"> 36</span>
+<span class="linenos"> 37</span><span class="c1"># create items</span>
+<span class="linenos"> 38</span><span class="n">cheese</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Cheese&quot;</span><span class="p">)</span>
+<span class="linenos"> 39</span><span class="n">cheese</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;super smelly&quot;</span>
+<span class="linenos"> 40</span>
+<span class="linenos"> 41</span><span class="n">chair</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Chair&quot;</span><span class="p">)</span>
+<span class="linenos"> 42</span><span class="n">chair</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;designed to be sat on&quot;</span>
+<span class="linenos"> 43</span>
+<span class="linenos"> 44</span><span class="n">elmo</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Elmo&quot;</span><span class="p">)</span>
+<span class="linenos"> 45</span><span class="n">elmo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;wanting to be tickled&quot;</span>
+<span class="linenos"> 46</span>
+<span class="linenos"> 47</span><span class="c1"># add items to rooms</span>
+<span class="linenos"> 48</span><span class="n">cavern</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">chair</span>
+<span class="linenos"> 49</span><span class="n">armoury</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">elmo</span>
+<span class="linenos"> 50</span><span class="n">lab</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">cheese</span>
+<span class="linenos"> 51</span>
+<span class="hll"><span class="linenos"> 52</span><span class="sd">&#39;&#39;&#39;</span>
+</span><span class="hll"><span class="linenos"> 53</span><span class="sd"># describe the rooms</span>
+</span><span class="hll"><span class="linenos"> 54</span><span class="sd">cavern.describe()</span>
+</span><span class="hll"><span class="linenos"> 55</span><span class="sd">armoury.describe()</span>
+</span><span class="hll"><span class="linenos"> 56</span><span class="sd">lab.describe()</span>
+</span><span class="hll"><span class="linenos"> 57</span><span class="sd">&#39;&#39;&#39;</span>
+</span><span class="linenos"> 58</span>
+<span class="linenos"> 59</span><span class="c1"># initialise variables</span>
+<span class="linenos"> 60</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 61</span><span class="n">current_room</span> <span class="o">=</span> <span class="n">cavern</span>
+<span class="linenos"> 62</span><span class="n">backpack</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 63</span>
+<span class="linenos"> 64</span><span class="c1"># ----- MAIN LOOP -----</span>
+<span class="linenos"> 65</span><span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+<span class="linenos"> 66</span>    <span class="n">current_room</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos"> 67</span>    
+<span class="linenos"> 68</span>    <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 69</span>    
+<span class="linenos"> 70</span>    <span class="c1"># move</span>
+<span class="linenos"> 71</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
+<span class="linenos"> 72</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="linenos"> 73</span>    <span class="c1"># talk    </span>
+<span class="linenos"> 74</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
+<span class="linenos"> 75</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 76</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos"> 77</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 78</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
+<span class="linenos"> 79</span>    <span class="c1"># hug</span>
+<span class="linenos"> 80</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
+<span class="linenos"> 81</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 82</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos"> 83</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 84</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
+<span class="linenos"> 85</span>    <span class="c1"># fight</span>
+<span class="linenos"> 86</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos"> 87</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 88</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 89</span>            <span class="n">available_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 90</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos"> 91</span>                <span class="n">available_weapons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos"> 92</span>            <span class="k">if</span> <span class="n">weapon</span> <span class="ow">in</span> <span class="n">available_weapons</span><span class="p">:</span>
+<span class="linenos"> 93</span>                <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+<span class="linenos"> 94</span>                    <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 95</span>                    <span class="k">if</span> <span class="n">Enemy</span><span class="o">.</span><span class="n">get_num_of_enemy</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 96</span>                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have slain all the enemies. You are victorious!&quot;</span><span class="p">)</span>
+<span class="linenos"> 97</span>                        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 98</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 99</span>                    <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">100</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">101</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You don&#39;t have </span><span class="si">{</span><span class="n">weapon</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">102</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> strikes you down.&quot;</span><span class="p">)</span>
+<span class="linenos">103</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">104</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">105</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+<span class="linenos">106</span>    <span class="c1"># take</span>
+<span class="linenos">107</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
+<span class="linenos">108</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">109</span>            <span class="n">backpack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="p">)</span>
+<span class="linenos">110</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put </span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> into your backpack&quot;</span><span class="p">)</span>
+<span class="linenos">111</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">112</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">113</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is nothing here to take&quot;</span><span class="p">)</span>
+<span class="linenos">114</span>    <span class="c1"># backpack</span>
+<span class="linenos">115</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;backpack&quot;</span><span class="p">:</span>
+<span class="linenos">116</span>        <span class="k">if</span> <span class="n">backpack</span> <span class="o">==</span> <span class="p">[]:</span>
+<span class="linenos">117</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is empty&quot;</span><span class="p">)</span>
+<span class="linenos">118</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">119</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have:&quot;</span><span class="p">)</span>
+<span class="linenos">120</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos">121</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">122</span>    <span class="c1"># help</span>
+<span class="linenos">123</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span>
+<span class="linenos">124</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type which direction you wish to move,&quot;</span><span class="p">)</span>
+<span class="linenos">125</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;or use one of these commands:&quot;</span><span class="p">)</span>
+<span class="linenos">126</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Talk&quot;</span><span class="p">)</span>
+<span class="linenos">127</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Fight&quot;</span><span class="p">)</span>
+<span class="linenos">128</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Hug&quot;</span><span class="p">)</span>
+<span class="linenos">129</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Take&quot;</span><span class="p">)</span>
+<span class="linenos">130</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Backpack&quot;</span><span class="p">)</span>
+<span class="linenos">131</span>    <span class="c1"># quit</span>
+<span class="linenos">132</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
+<span class="linenos">133</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">134</span>    <span class="c1"># incorrect command</span>
+<span class="linenos">135</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">136</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+<span class="linenos">137</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Press &lt;Enter&gt; key to continue&quot;</span><span class="p">)</span>
+<span class="linenos">138</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Deepest Dungeon&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="final-code">
+<h2>Final code<a class="headerlink" href="#final-code" title="Permalink to this heading">#</a></h2>
+<p>White space is the blank lines between our code. You can use this to help structure your code.</p>
+<p>Finalise your code by adjusting it so to look the same as the following code:</p>
+<section id="main-py">
+<h3>main.py<a class="headerlink" href="#main-py" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
+<span class="linenos">  2</span>
+<span class="linenos">  3</span><span class="kn">from</span> <span class="nn">room</span> <span class="kn">import</span> <span class="n">Room</span>
+<span class="linenos">  4</span><span class="kn">from</span> <span class="nn">character</span> <span class="kn">import</span> <span class="n">Enemy</span><span class="p">,</span> <span class="n">Friend</span>
+<span class="linenos">  5</span><span class="kn">from</span> <span class="nn">item</span> <span class="kn">import</span> <span class="n">Item</span>
+<span class="linenos">  6</span>
+<span class="linenos">  7</span><span class="c1"># create rooms</span>
+<span class="linenos">  8</span><span class="n">cavern</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Cavern&quot;</span><span class="p">)</span>
+<span class="linenos">  9</span><span class="n">cavern</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A room so big that the light of your torch doesn’t reach the walls.&quot;</span><span class="p">)</span>
+<span class="linenos"> 10</span>
+<span class="linenos"> 11</span><span class="n">armoury</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Armoury&quot;</span><span class="p">)</span>
+<span class="linenos"> 12</span><span class="n">armoury</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;The walls are lined with racks that once held weapons and armour.&quot;</span><span class="p">)</span>
+<span class="linenos"> 13</span>
+<span class="linenos"> 14</span><span class="n">lab</span> <span class="o">=</span> <span class="n">Room</span><span class="p">(</span><span class="s2">&quot;Laboratory&quot;</span><span class="p">)</span>
+<span class="linenos"> 15</span><span class="n">lab</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;A strange odour hangs in a room filled with unknownable contraptions.&quot;</span><span class="p">)</span>
+<span class="linenos"> 16</span>
+<span class="linenos"> 17</span><span class="c1"># link rooms</span>
+<span class="linenos"> 18</span><span class="n">cavern</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;south&quot;</span><span class="p">)</span>
+<span class="linenos"> 19</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">cavern</span><span class="p">,</span><span class="s2">&quot;north&quot;</span><span class="p">)</span>
+<span class="linenos"> 20</span><span class="n">armoury</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">lab</span><span class="p">,</span><span class="s2">&quot;east&quot;</span><span class="p">)</span>
+<span class="linenos"> 21</span><span class="n">lab</span><span class="o">.</span><span class="n">link_rooms</span><span class="p">(</span><span class="n">armoury</span><span class="p">,</span><span class="s2">&quot;west&quot;</span><span class="p">)</span>
+<span class="linenos"> 22</span>
+<span class="linenos"> 23</span><span class="c1"># create characters</span>
+<span class="linenos"> 24</span><span class="n">ugine</span> <span class="o">=</span> <span class="n">Enemy</span><span class="p">(</span><span class="s2">&quot;Ugine&quot;</span><span class="p">)</span>
+<span class="linenos"> 25</span><span class="n">ugine</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a huge troll with rotting teeth.&quot;</span>
+<span class="linenos"> 26</span><span class="n">ugine</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="s2">&quot;cheese&quot;</span>
+<span class="linenos"> 27</span>
+<span class="linenos"> 28</span><span class="n">nigel</span> <span class="o">=</span> <span class="n">Friend</span><span class="p">(</span><span class="s2">&quot;Nigel&quot;</span><span class="p">)</span>
+<span class="linenos"> 29</span><span class="n">nigel</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;a burly dwarf with golden bead in woven through his beard.&quot;</span>
+<span class="linenos"> 30</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
+<span class="linenos"> 31</span>
+<span class="linenos"> 32</span><span class="c1"># add characters to rooms</span>
+<span class="linenos"> 33</span><span class="n">armoury</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos"> 34</span><span class="n">lab</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos"> 35</span>
+<span class="linenos"> 36</span><span class="c1"># create items</span>
+<span class="linenos"> 37</span><span class="n">cheese</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Cheese&quot;</span><span class="p">)</span>
+<span class="linenos"> 38</span><span class="n">cheese</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;super smelly&quot;</span>
+<span class="linenos"> 39</span>
+<span class="linenos"> 40</span><span class="n">chair</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Chair&quot;</span><span class="p">)</span>
+<span class="linenos"> 41</span><span class="n">chair</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;designed to be sat on&quot;</span>
+<span class="linenos"> 42</span>
+<span class="linenos"> 43</span><span class="n">elmo</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Elmo&quot;</span><span class="p">)</span>
+<span class="linenos"> 44</span><span class="n">elmo</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;wanting to be tickled&quot;</span>
+<span class="linenos"> 45</span>
+<span class="linenos"> 46</span><span class="c1"># add items to rooms</span>
+<span class="linenos"> 47</span><span class="n">cavern</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">chair</span>
+<span class="linenos"> 48</span><span class="n">armoury</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">elmo</span>
+<span class="linenos"> 49</span><span class="n">lab</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">cheese</span>
+<span class="linenos"> 50</span>
+<span class="linenos"> 51</span><span class="c1"># initialise variables</span>
+<span class="linenos"> 52</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="linenos"> 53</span><span class="n">current_room</span> <span class="o">=</span> <span class="n">cavern</span>
+<span class="linenos"> 54</span><span class="n">backpack</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 55</span>
+<span class="linenos"> 56</span><span class="c1"># ----- MAIN LOOP -----</span>
+<span class="linenos"> 57</span><span class="k">while</span> <span class="n">running</span><span class="p">:</span>
+<span class="linenos"> 58</span>    <span class="n">current_room</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos"> 59</span>    
+<span class="linenos"> 60</span>    <span class="n">command</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;&gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 61</span>    
+<span class="linenos"> 62</span>    <span class="c1"># move</span>
+<span class="linenos"> 63</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
+<span class="linenos"> 64</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
+<span class="linenos"> 65</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You travel </span><span class="si">{</span><span class="n">command</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 66</span>    <span class="c1"># talk</span>
+<span class="linenos"> 67</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
+<span class="linenos"> 68</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 69</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos"> 70</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 71</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
+<span class="linenos"> 72</span>    <span class="c1"># hug</span>
+<span class="linenos"> 73</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
+<span class="linenos"> 74</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 75</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos"> 76</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 77</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
+<span class="linenos"> 78</span>    <span class="c1"># fight</span>
+<span class="linenos"> 79</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos"> 80</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos"> 81</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 82</span>            <span class="n">available_weapons</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="linenos"> 83</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos"> 84</span>                <span class="n">available_weapons</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos"> 85</span>            <span class="k">if</span> <span class="n">weapon</span> <span class="ow">in</span> <span class="n">available_weapons</span><span class="p">:</span>
+<span class="linenos"> 86</span>                <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+<span class="linenos"> 87</span>                    <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 88</span>                    <span class="k">if</span> <span class="n">Enemy</span><span class="o">.</span><span class="n">num_of_enemy</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<span class="linenos"> 89</span>                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have slain the enemy. You are victorious!&quot;</span><span class="p">)</span>
+<span class="linenos"> 90</span>                        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 91</span>                <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 92</span>                    <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 93</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 94</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You don&#39;t have </span><span class="si">{</span><span class="n">weapon</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos"> 95</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> strikes you down.&quot;</span><span class="p">)</span>
+<span class="linenos"> 96</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos"> 97</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos"> 98</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+<span class="linenos"> 99</span>    <span class="c1"># take</span>
+<span class="linenos">100</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
+<span class="linenos">101</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">102</span>            <span class="n">backpack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="p">)</span>
+<span class="linenos">103</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put </span><span class="si">{</span><span class="n">current_room</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> into your backpack&quot;</span><span class="p">)</span>
+<span class="linenos">104</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">105</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">106</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is nothing here to take&quot;</span><span class="p">)</span>
+<span class="linenos">107</span>    <span class="c1"># backpack</span>
+<span class="linenos">108</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;backpack&quot;</span><span class="p">:</span>
+<span class="linenos">109</span>        <span class="k">if</span> <span class="n">backpack</span> <span class="o">==</span> <span class="p">[]:</span>
+<span class="linenos">110</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It is empty&quot;</span><span class="p">)</span>
+<span class="linenos">111</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">112</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You have:&quot;</span><span class="p">)</span>
+<span class="linenos">113</span>            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">backpack</span><span class="p">:</span>
+<span class="linenos">114</span>                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;- </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">115</span>    <span class="c1"># help</span>
+<span class="linenos">116</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;help&quot;</span><span class="p">:</span>
+<span class="linenos">117</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Type which direction you wish to move,&quot;</span><span class="p">)</span>
+<span class="linenos">118</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;or use one of these commands:&quot;</span><span class="p">)</span>
+<span class="linenos">119</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Talk&quot;</span><span class="p">)</span>
+<span class="linenos">120</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Fight&quot;</span><span class="p">)</span>
+<span class="linenos">121</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Hug&quot;</span><span class="p">)</span>
+<span class="linenos">122</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Take&quot;</span><span class="p">)</span>
+<span class="linenos">123</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;- Backpack&quot;</span><span class="p">)</span>
+<span class="linenos">124</span>    <span class="c1"># quit</span>
+<span class="linenos">125</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
+<span class="linenos">126</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">127</span>    <span class="c1"># incorrect command</span>
+<span class="linenos">128</span>    <span class="k">else</span><span class="p">:</span>
+<span class="linenos">129</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; for list of commands&quot;</span><span class="p">)</span>
+<span class="linenos">130</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Press &lt;Enter&gt; to continue&quot;</span><span class="p">)</span>
+<span class="linenos">131</span>    
+<span class="linenos">132</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Darkest Dungeon&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="room-py">
+<h3>room.py<a class="headerlink" href="#room-py" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Room</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">room_name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the room object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="linenos">10</span>        <span class="bp">self</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">11</span>        <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">12</span>        
+<span class="linenos">13</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">14</span>        <span class="c1"># sends a description of the room to the terminal</span>
+<span class="linenos">15</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">16</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="bp">self</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos">19</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos">21</span>        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="linenos">22</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;To the </span><span class="si">{</span><span class="n">direction</span><span class="si">}</span><span class="s2"> is the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">23</span>    
+<span class="linenos">24</span>    <span class="k">def</span> <span class="nf">link_rooms</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="linenos">25</span>        <span class="c1"># links the provided room, in the provided direction</span>
+<span class="linenos">26</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">room</span>
+<span class="linenos">27</span>        
+<span class="linenos">28</span>    <span class="k">def</span> <span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">):</span>
+<span class="linenos">29</span>        <span class="c1"># returns the room linked in the given direction</span>
+<span class="linenos">30</span>        <span class="k">if</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+<span class="linenos">31</span>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="p">]</span>
+<span class="linenos">32</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">33</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You can&#39;t go that way&quot;</span><span class="p">)</span>
+<span class="linenos">34</span>            <span class="k">return</span> <span class="bp">self</span>
+</pre></div>
+</div>
+</section>
+<section id="character-py">
+<h3>character.py<a class="headerlink" href="#character-py" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">Character</span><span class="p">():</span>
+<span class="linenos"> 4</span>    
+<span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 6</span>        <span class="c1"># initialises the character object</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">10</span>        
+<span class="linenos">11</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">12</span>        <span class="c1"># sends a description of the character to the terminal</span>
+<span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is here, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>        
+<span class="linenos">15</span>    <span class="k">def</span> <span class="nf">talk</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">16</span>        <span class="c1"># send converstation to the terminal</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">conversation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">conversation</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">20</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to talk to you&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>    
+<span class="linenos">22</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">23</span>        <span class="c1"># the character responds to a hug</span>
+<span class="linenos">24</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to hug you&quot;</span><span class="p">)</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">item</span><span class="p">):</span>
+<span class="linenos">27</span>        <span class="c1"># the character response to a threat</span>
+<span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
+<span class="linenos">29</span>        <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">30</span>
+<span class="linenos">31</span>
+<span class="linenos">32</span><span class="k">class</span> <span class="nc">Friend</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">33</span>    
+<span class="linenos">34</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="linenos">35</span>        <span class="c1"># initialise the Friend object by calling the character initialise</span>
+<span class="linenos">36</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">37</span>        
+<span class="linenos">38</span>    <span class="k">def</span> <span class="nf">hug</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">39</span>        <span class="c1"># the friend responds to a hug</span>
+<span class="linenos">40</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> hugs you back.&quot;</span><span class="p">)</span>
+<span class="linenos">41</span>
+<span class="linenos">42</span>        
+<span class="linenos">43</span><span class="k">class</span> <span class="nc">Enemy</span><span class="p">(</span><span class="n">Character</span><span class="p">):</span>
+<span class="linenos">44</span>    
+<span class="linenos">45</span>    <span class="n">num_of_enemy</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="linenos">46</span>    
+<span class="linenos">47</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos">48</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
+<span class="linenos">49</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+<span class="linenos">50</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">51</span>        <span class="n">Enemy</span><span class="o">.</span><span class="n">num_of_enemy</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="linenos">52</span>        
+<span class="linenos">53</span>    <span class="k">def</span> <span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+<span class="linenos">54</span>        <span class="c1"># fights enemy with provided item and returns if player survives</span>
+<span class="linenos">55</span>        <span class="k">if</span> <span class="n">item</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span><span class="p">:</span>
+<span class="linenos">56</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You strike </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> down with </span><span class="si">{</span><span class="n">item</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+<span class="linenos">57</span>            <span class="n">Enemy</span><span class="o">.</span><span class="n">num_of_enemy</span> <span class="o">-=</span> <span class="mi">1</span>
+<span class="linenos">58</span>            <span class="k">return</span> <span class="kc">True</span>
+<span class="linenos">59</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">60</span>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> crushes you. Puny adventurer&quot;</span><span class="p">)</span>
+<span class="linenos">61</span>            <span class="k">return</span> <span class="kc">False</span>
+<span class="linenos">62</span>    
+<span class="linenos">63</span>    <span class="k">def</span> <span class="nf">get_num_of_enemy</span><span class="p">():</span>
+<span class="linenos">64</span>        <span class="k">return</span> <span class="n">Enemy</span><span class="o">.</span><span class="n">num_of_enemy</span>
+</pre></div>
+</div>
+</section>
+<section id="item-py">
+<h3>item.py<a class="headerlink" href="#item-py" title="Permalink to this heading">#</a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># item.py</span>
+<span class="linenos"> 2</span><span class="k">class</span> <span class="nc">Item</span><span class="p">():</span>
+<span class="linenos"> 3</span>    
+<span class="linenos"> 4</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos"> 5</span>        <span class="c1"># initialise the Item object</span>
+<span class="linenos"> 6</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 8</span>        
+<span class="linenos"> 9</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="linenos">10</span>        <span class="c1"># prints description of item to the terminal</span>
+<span class="linenos">11</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You see </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> in the room. It is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="final-make">
+<h2>Final Make<a class="headerlink" href="#final-make" title="Permalink to this heading">#</a></h2>
+<p>The tutorials are now over. It is time to make this dungeon yours by adding new features. The Extensions Ideas page has some suggestions.</p>
+<p>The current code does have a couple of logical errors, but you will have to test it to find out what they are and then try and solve them. Don’t forget to use your debugger to help you with this.</p>
+<p>Good luck. May your adventure be long and fruitful.</p>
 </section>
 </section>
 
@@ -286,6 +1283,19 @@
             <ul>
 <li><a class="reference internal" href="#">Stage 8 - Useability</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#help-command">Help command</a></li>
+<li><a class="reference internal" href="#improving-the-ui-and-ux">Improving the UI and UX</a></li>
+<li><a class="reference internal" href="#farewell-message">Farewell message</a></li>
+<li><a class="reference internal" href="#in-code-comments">In-code comments</a></li>
+<li><a class="reference internal" href="#remove-unused-code">Remove unused code</a></li>
+<li><a class="reference internal" href="#final-code">Final code</a><ul>
+<li><a class="reference internal" href="#main-py">main.py</a></li>
+<li><a class="reference internal" href="#room-py">room.py</a></li>
+<li><a class="reference internal" href="#character-py">character.py</a></li>
+<li><a class="reference internal" href="#item-py">item.py</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#final-make">Final Make</a></li>
 </ul>
 </li>
 </ul>
