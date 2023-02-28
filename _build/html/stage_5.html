@@ -291,8 +291,8 @@
 <span class="linenos">30</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
 <span class="linenos">31</span>
 <span class="linenos">32</span><span class="c1"># add characters to rooms</span>
-<span class="linenos">33</span><span class="n">armoury</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">ugine</span>
-<span class="linenos">34</span><span class="n">lab</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos">33</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos">34</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
 <span class="linenos">35</span>
 <span class="hll"><span class="linenos">36</span><span class="c1"># create items</span>
 </span><span class="hll"><span class="linenos">37</span><span class="n">cheese</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Cheese&quot;</span><span class="p">)</span>
@@ -324,20 +324,20 @@
 <span class="linenos">63</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
 <span class="linenos">64</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
 <span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
-<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">67</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">67</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
 <span class="linenos">68</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">69</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
 <span class="linenos">70</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
-<span class="linenos">71</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">72</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos">71</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">72</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
 <span class="linenos">73</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">74</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
 <span class="linenos">75</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
-<span class="linenos">76</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">76</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos">77</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="linenos">78</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
-<span class="linenos">79</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">78</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+<span class="linenos">79</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="linenos">80</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">81</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="linenos">82</span>        <span class="k">else</span><span class="p">:</span>
@@ -427,8 +427,8 @@
 <span class="linenos">30</span><span class="n">nigel</span><span class="o">.</span><span class="n">conversation</span> <span class="o">=</span> <span class="s2">&quot;Well youngan, what are you doing here?&quot;</span>
 <span class="linenos">31</span>
 <span class="linenos">32</span><span class="c1"># add characters to rooms</span>
-<span class="linenos">33</span><span class="n">armoury</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">ugine</span>
-<span class="linenos">34</span><span class="n">lab</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="n">nigel</span>
+<span class="linenos">33</span><span class="n">armoury</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">ugine</span>
+<span class="linenos">34</span><span class="n">lab</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="n">nigel</span>
 <span class="linenos">35</span>
 <span class="linenos">36</span><span class="c1"># create items</span>
 <span class="linenos">37</span><span class="n">cheese</span> <span class="o">=</span> <span class="n">Item</span><span class="p">(</span><span class="s2">&quot;Cheese&quot;</span><span class="p">)</span>
@@ -465,20 +465,20 @@
 <span class="linenos">68</span>    <span class="k">if</span> <span class="n">command</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;north&quot;</span><span class="p">,</span> <span class="s2">&quot;south&quot;</span><span class="p">,</span> <span class="s2">&quot;east&quot;</span><span class="p">,</span> <span class="s2">&quot;west&quot;</span><span class="p">]:</span>
 <span class="linenos">69</span>        <span class="n">current_room</span> <span class="o">=</span> <span class="n">current_room</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">command</span><span class="p">)</span>
 <span class="linenos">70</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;talk&quot;</span><span class="p">:</span>
-<span class="linenos">71</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">72</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
+<span class="linenos">71</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">72</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">talk</span><span class="p">()</span>
 <span class="linenos">73</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">74</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to talk to&quot;</span><span class="p">)</span>
 <span class="linenos">75</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;hug&quot;</span><span class="p">:</span>
-<span class="linenos">76</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">77</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
+<span class="linenos">76</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">77</span>            <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">hug</span><span class="p">()</span>
 <span class="linenos">78</span>        <span class="k">else</span><span class="p">:</span>
 <span class="linenos">79</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to hug&quot;</span><span class="p">)</span>
 <span class="linenos">80</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
-<span class="linenos">81</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">81</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos">82</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="linenos">83</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
-<span class="linenos">84</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">inhabitant</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos">83</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+<span class="linenos">84</span>                <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="linenos">85</span>            <span class="k">else</span><span class="p">:</span>
 <span class="linenos">86</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="linenos">87</span>        <span class="k">else</span><span class="p">:</span>
@@ -538,8 +538,8 @@
 <span class="linenos">14</span>        <span class="c1"># sends a description of the room to the terminal</span>
 <span class="linenos">15</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="linenos">16</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
-<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inhabitant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="linenos">18</span>            <span class="bp">self</span><span class="o">.</span><span class="n">inhabitant</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<span class="linenos">17</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">18</span>            <span class="bp">self</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 <span class="hll"><span class="linenos">19</span>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 </span><span class="hll"><span class="linenos">20</span>            <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </span><span class="linenos">21</span>        <span class="k">for</span> <span class="n">direction</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>

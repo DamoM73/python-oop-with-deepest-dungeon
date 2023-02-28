@@ -90,8 +90,8 @@ nigel.description = "a burly dwarf with golden bead in woven through his beard."
 nigel.conversation = "Well youngan, what are you doing here?"
 
 # add characters to rooms
-armoury.inhabitant = ugine
-lab.inhabitant = nigel
+armoury.character = ugine
+lab.character = nigel
 
 # create items
 cheese = Item("Cheese")
@@ -123,20 +123,20 @@ while running:
     if command in ["north", "south", "east", "west"]:
         current_room = current_room.move(command)
     elif command == "talk":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.talk()
+        if current_room.character is not None:
+            current_room.character.talk()
         else:
             print("There is no one here to talk to")
     elif command == "hug":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.hug()
+        if current_room.character is not None:
+            current_room.character.hug()
         else:
             print("There is no one here to hug")
     elif command== "fight":
-        if current_room.inhabitant is not None:
+        if current_room.character is not None:
             weapon = input("What will you fight with? > ").lower()
-            if current_room.inhabitant.fight(weapon):
-                current_room.inhabitant = None
+            if current_room.character.fight(weapon):
+                current_room.character = None
             else:
                 running = False
         else:
@@ -235,8 +235,8 @@ nigel.description = "a burly dwarf with golden bead in woven through his beard."
 nigel.conversation = "Well youngan, what are you doing here?"
 
 # add characters to rooms
-armoury.inhabitant = ugine
-lab.inhabitant = nigel
+armoury.character = ugine
+lab.character = nigel
 
 # create items
 cheese = Item("Cheese")
@@ -273,20 +273,20 @@ while running:
     if command in ["north", "south", "east", "west"]:
         current_room = current_room.move(command)
     elif command == "talk":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.talk()
+        if current_room.character is not None:
+            current_room.character.talk()
         else:
             print("There is no one here to talk to")
     elif command == "hug":
-        if current_room.inhabitant is not None:
-            current_room.inhabitant.hug()
+        if current_room.character is not None:
+            current_room.character.hug()
         else:
             print("There is no one here to hug")
     elif command== "fight":
-        if current_room.inhabitant is not None:
+        if current_room.character is not None:
             weapon = input("What will you fight with? > ").lower()
-            if current_room.inhabitant.fight(weapon):
-                current_room.inhabitant = None
+            if current_room.character.fight(weapon):
+                current_room.character = None
             else:
                 running = False
         else:
@@ -356,8 +356,8 @@ class Room():
         # sends a description of the room to the terminal
         print(f"\nYou are in the {self.name}")
         print(self.description)
-        if self.inhabitant is not None:
-            self.inhabitant.describe()
+        if self.character is not None:
+            self.character.describe()
         if self.item is not None:
             self.item.describe()
         for direction in self.linked_rooms.keys():

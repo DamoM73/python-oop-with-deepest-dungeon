@@ -31,3 +31,12 @@ The player hasn't got much detail, so you could easily add more to them:
 
 - give the player money so they can by items
 - allow for equipping of weapons or armour
+
+## The UI
+
+Text-based games can look quite plain. There are some tools that you use to make the terminal looks more exciting.
+
+Be warned that these options are challenging.
+
+- [Rich Text Library](https://rich.readthedocs.io/en/stable/introduction.html)
+- [Textualize Text User Interface](https://www.textualize.io/)
