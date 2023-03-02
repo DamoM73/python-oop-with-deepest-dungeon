@@ -24,6 +24,7 @@ At the moment the fight is very swift. You could make it more interesting by:
 
 - have player and enemy health that gets lowered whilst fighting
 - have different items cause different damage
+- each character has different loss messages.
 
 ## The player
 

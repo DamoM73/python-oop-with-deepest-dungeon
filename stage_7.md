@@ -411,3 +411,9 @@ while running:
 - `if Enemy.get_num_of_enemy() == 0:` &rarr; checks if the **class variable** is `0`
 - `print("You have slain all the enemies. You are victorious!")` &rarr; displays a victory message
 - `running = False` &rarr; readies to finish the game by exiting the main loop.
+
+## Testing
+
+Now time to test our code. 
+
+**Predict** what you think will happen, then run your code. Make sure that you test that the player wins when they have defeated all the enemies.
