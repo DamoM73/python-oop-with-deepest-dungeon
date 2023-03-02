@@ -88,7 +88,7 @@ class Enemy(Character):
     
     num_of_enemy = 0
 
-    def __init(self,name):
+    def __init__(self,name):
         # initialise the Enemy object by calling the character initialise
         super().__init__(name)
         self.weakness = None
@@ -167,7 +167,7 @@ class Enemy(Character):
     
     num_of_enemy = 0
 
-    def __init(self,name):
+    def __init__(self,name):
         # initialise the Enemy object by calling the character initialise
         super().__init__(name)
         self.weakness = None
@@ -248,7 +248,7 @@ class Enemy(Character):
     
     num_of_enemy = 0
 
-    def __init(self,name):
+    def __init__(self,name):
         # initialise the Enemy object by calling the character initialise
         super().__init__(name)
         self.weakness = None
