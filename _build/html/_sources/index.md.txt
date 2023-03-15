@@ -3,7 +3,7 @@
 This website provides tutorials that introduce Object Orientated Programming through creating a text based adventure game in Python.
 
 ```{toctree}
-:maxdepth: 2
+:maxdepth: 1
 :caption: "Contents:"
 
 introduction

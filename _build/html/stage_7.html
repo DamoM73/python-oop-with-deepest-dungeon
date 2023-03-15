@@ -9,6 +9,7 @@
         <title>Stage 7 - Victory Conditions - Deepest Dungeon - Python OOP</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
     
     
@@ -161,7 +162,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for teachers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -289,7 +290,7 @@
 <span class="linenos">42</span>    
 <span class="hll"><span class="linenos">43</span>    <span class="n">num_of_enemy</span> <span class="o">=</span> <span class="mi">0</span>
 </span><span class="linenos">44</span>
-<span class="linenos">45</span>    <span class="k">def</span> <span class="nf">__init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos">45</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
 <span class="linenos">46</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
 <span class="linenos">47</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 <span class="linenos">48</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
@@ -371,7 +372,7 @@
 <span class="linenos">42</span>    
 <span class="linenos">43</span>    <span class="n">num_of_enemy</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">44</span>
-<span class="linenos">45</span>    <span class="k">def</span> <span class="nf">__init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos">45</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
 <span class="linenos">46</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
 <span class="linenos">47</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 <span class="linenos">48</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
@@ -453,7 +454,7 @@
 <span class="linenos">42</span>    
 <span class="linenos">43</span>    <span class="n">num_of_enemy</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="linenos">44</span>
-<span class="linenos">45</span>    <span class="k">def</span> <span class="nf">__init</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
+<span class="linenos">45</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="p">):</span>
 <span class="linenos">46</span>        <span class="c1"># initialise the Enemy object by calling the character initialise</span>
 <span class="linenos">47</span>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 <span class="linenos">48</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
@@ -613,6 +614,11 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> → readies to finish the game by exiting the main loop.</p></li>
 </ul>
 </section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h2>
+<p>Now time to test our code.</p>
+<p><strong>Predict</strong> what you think will happen, then run your code. Make sure that you test that the player wins when they have defeated all the enemies.</p>
+</section>
 </section>
 
         </article>
@@ -685,6 +691,7 @@
 <li><a class="reference internal" href="#count-number-of-enemies">Count Number of Enemies</a></li>
 <li><a class="reference internal" href="#reduce-enemy-count">Reduce Enemy Count</a></li>
 <li><a class="reference internal" href="#check-for-victory">Check for Victory</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
 </ul>
 </li>
 </ul>
@@ -703,5 +710,7 @@
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/furo.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
     </body>
 </html>
