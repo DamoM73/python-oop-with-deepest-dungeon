@@ -1,5 +1,7 @@
 # To Do
 
 - Flowcharts
+- Flowcharts Summary
 - Pseudocode
-- Copy codeblocks
+- Pseudocode Summary
+- Class Diagram summary
