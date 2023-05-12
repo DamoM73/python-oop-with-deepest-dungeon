@@ -5,3 +5,4 @@
 - Pseudocode
 - Pseudocode Summary
 - Class Diagram summary
+- Testing Summary
