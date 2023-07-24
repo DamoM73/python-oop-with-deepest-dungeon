@@ -131,7 +131,7 @@ Return to **room.py** and add the highlighted line below.
 
 ```{code-block} python
 :linenos:
-:emphasize-lines: 8
+:emphasize-lines: 10
 # room.py
 
 class Room():
