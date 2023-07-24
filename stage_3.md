@@ -125,7 +125,7 @@ So now we have two classes that interact with each other, `Room` and `Character`
 
 This is an arbitrary decision. We could easily had added the new attributer to the `Charcter` class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That's why the class diagram is so important.
 
-### Add description to Room class in room.py
+### Add character attribute to Room class in room.py
 
 Return to **room.py** and add the highlighted line below.
 
