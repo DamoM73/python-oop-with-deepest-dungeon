@@ -1,8 +1,7 @@
 # Stage 1 - Create Rooms
 
 ```{topic} In this lesson you will:
-
-- Learn about the object orientated programming concepts of objects, classes, attributes and methods.
+- learn about the object orientated programming concepts of objects, classes, attributes and methods.
 - define a class
 - define class methods
 - import classes from a module you have created

@@ -173,8 +173,9 @@
 <li class="toctree-l1"><a class="reference internal" href="stage_7.html">Stage 7 - Victory Conditions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_8.html">Stage 8 - Useability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extention.html">Extensions Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ext_player.html">Extension - Player Class</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debugging.html">Debugging with Thonny</a></li>
-<li class="toctree-l1"><a class="reference internal" href="licencing.html">Licencing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="licencing.html">Licensing</a></li>
 </ul>
 
 </div>
@@ -327,8 +328,8 @@
 <p>So now we have two classes that interact with each other, <code class="docutils literal notranslate"><span class="pre">Room</span></code> and <code class="docutils literal notranslate"><span class="pre">Character</span></code>. Now we need to work out how we represent that interaction in our class structures. Checking our class diagram you will notice that we have added a new <code class="docutils literal notranslate"><span class="pre">charcetr</span></code> attribute to the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class. This is how we show which <code class="docutils literal notranslate"><span class="pre">Character</span></code> is in the each <code class="docutils literal notranslate"><span class="pre">Room</span></code>.</p>
 <p><img alt="lesson 3 class diagram" src="_images/lesson_3_class_diagram.png" /></p>
 <p>This is an arbitrary decision. We could easily had added the new attributer to the <code class="docutils literal notranslate"><span class="pre">Charcter</span></code> class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That’s why the class diagram is so important.</p>
-<section id="add-description-to-room-class-in-room-py">
-<h3>Add description to Room class in room.py<a class="headerlink" href="#add-description-to-room-class-in-room-py" title="Permalink to this heading">#</a></h3>
+<section id="add-character-attribute-to-room-class-in-room-py">
+<h3>Add character attribute to Room class in room.py<a class="headerlink" href="#add-character-attribute-to-room-class-in-room-py" title="Permalink to this heading">#</a></h3>
 <p>Return to <strong>room.py</strong> and add the highlighted line below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
@@ -337,10 +338,10 @@
 <span class="linenos"> 5</span>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">room_name</span><span class="p">):</span>
 <span class="linenos"> 6</span>        <span class="c1"># initialises the room object</span>
 <span class="linenos"> 7</span>        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">room_name</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="linenos">10</span>        <span class="bp">self</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
-<span class="linenos">11</span>        
+<span class="linenos"> 8</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="linenos"> 9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="hll"><span class="linenos">10</span>        <span class="bp">self</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span class="linenos">11</span>        
 <span class="linenos">12</span>    <span class="k">def</span> <span class="nf">describe</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="linenos">13</span>        <span class="c1"># sends a description of the room to the terminal</span>
 <span class="linenos">14</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">You are in the </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -763,7 +764,7 @@
           </div>
           <div class="right-details">
             <div class="icons">
-              <a class="muted-link " href="https://github.com/DamoM73/turtle-introduction-to-python" aria-label="GitHub">
+              <a class="muted-link " href="https://github.com/DamoM73/python-oop-with-deepest-dungeon" aria-label="GitHub">
                 <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
                 </svg>
@@ -795,7 +796,7 @@
 <li><a class="reference internal" href="#define-the-character-class">Define the Character class</a></li>
 <li><a class="reference internal" href="#create-characters">Create characters</a></li>
 <li><a class="reference internal" href="#add-characters-to-the-rooms">Add Characters to the Rooms</a><ul>
-<li><a class="reference internal" href="#add-description-to-room-class-in-room-py">Add description to Room class in room.py</a></li>
+<li><a class="reference internal" href="#add-character-attribute-to-room-class-in-room-py">Add character attribute to Room class in room.py</a></li>
 <li><a class="reference internal" href="#add-characters-to-the-rooms-in-main-py">Add characters to the rooms in main.py</a></li>
 </ul>
 </li>

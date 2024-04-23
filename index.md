@@ -17,6 +17,7 @@ stage_6
 stage_7
 stage_8
 extention
+ext_player
 debugging
 licencing
 ```
