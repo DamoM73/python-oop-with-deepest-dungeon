@@ -1,7 +1,18 @@
-# python-oop-with-deepest-dungeon
- 
-This repo creates a tutorial website to introduce students to Object Orientated Programming in Python by creating a text based adventure game.
+# Python OOP with Deepest Dungeon
 
-It is produced using Sphinx and MyST.
+This repository provides a tutorial to introduce students to Object-Oriented Programming (OOP) in Python through the creation of a text-based adventure game, "Deepest Dungeon."
 
-The build is purposely uploaded under the `_build` folder, and can act as a portable version of the website.
+## Features
+
+- **Interactive lessons** on Python OOP principles.
+- **Text-based game** development to reinforce concepts.
+- **Sphinx and MyST** documentation format.
+- Includes a portable website build under the `_build` folder.
+
+## Website
+
+Access the tutorial: [Deepest Dungeon OOP Tutorial](https://damom73.github.io/python-oop-with-deepest-dungeon/)
+
+## License
+
+This project is licensed under the GPL-3.0 License.
