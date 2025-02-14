@@ -7,3 +7,4 @@
 - Class Diagram summary
 - Testing Summary
 - Add code so far to lessons
+- Fix lesson 4 fight friend problem
