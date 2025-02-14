@@ -882,7 +882,7 @@ class Enemy(Character):
             return False
 ```
 
-### Third test lucky
+### Third test lucky?
 
 Let's test and make sure that our logic error has been solved. Again, complete the test table below.
 
@@ -894,7 +894,31 @@ Let's test and make sure that our logic error has been solved. Again, complete t
 | Nigel | fight | - | | |
 | Nigel | hug | - | | |
 
-Hopefully all your test have passed.
+Did you manage to hug Nigel after fighting him? No. That's because we returned a successful fight, which meant that Nigel was deleted from the room. We need to fix that.
+
+We need to fix it. In **main.py** adjust the highlighted code below.
+
+```{code-block} python
+:linenos:
+:lineno-start: 65
+:emphasize-lines: 5,6
+    elif command== "fight":
+        if current_room.character is not None:
+            weapon = input("What will you fight with? > ").lower()
+            if current_room.character.fight(weapon):
+                if isinstance(current_room.character, Enemy):
+                    current_room.character = None
+            else:
+                running = False
+        else:
+            print("There is no one here to fight")
+```
+
+The new **line 69** checks if `current_room.character` is an **Enemy** subtype. This means that only Enemies will be delete.
+
+### Final test
+
+Finally check that you can attempt to fight Nigel, and then still hug him afterwards.
 
 ## Stage 4 task
 

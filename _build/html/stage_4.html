@@ -1174,7 +1174,7 @@
 </div>
 </section>
 <section id="third-test-lucky">
-<h3>Third test lucky<a class="headerlink" href="#third-test-lucky" title="Permalink to this heading">#</a></h3>
+<h3>Third test lucky?<a class="headerlink" href="#third-test-lucky" title="Permalink to this heading">#</a></h3>
 <p>Let’s test and make sure that our logic error has been solved. Again, complete the test table below.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
@@ -1220,7 +1220,25 @@
 </tbody>
 </table>
 </div>
-<p>Hopefully all your test have passed.</p>
+<p>Did you manage to hug Nigel after fighting him? No. That’s because we returned a successful fight, which meant that Nigel was deleted from the room. We need to fix that.</p>
+<p>We need to fix it. In <strong>main.py</strong> adjust the highlighted code below.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
+<span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="linenos">67</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="linenos">68</span>            <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="o">.</span><span class="n">fight</span><span class="p">(</span><span class="n">weapon</span><span class="p">):</span>
+<span class="hll"><span class="linenos">69</span>                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">current_room</span><span class="o">.</span><span class="n">character</span><span class="p">,</span> <span class="n">Enemy</span><span class="p">):</span>
+</span><span class="hll"><span class="linenos">70</span>                    <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span class="linenos">71</span>            <span class="k">else</span><span class="p">:</span>
+<span class="linenos">72</span>                <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="linenos">73</span>        <span class="k">else</span><span class="p">:</span>
+<span class="linenos">74</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The new <strong>line 69</strong> checks if <code class="docutils literal notranslate"><span class="pre">current_room.character</span></code> is an <strong>Enemy</strong> subtype. This means that only Enemies will be delete.</p>
+</section>
+<section id="final-test">
+<h3>Final test<a class="headerlink" href="#final-test" title="Permalink to this heading">#</a></h3>
+<p>Finally check that you can attempt to fight Nigel, and then still hug him afterwards.</p>
 </section>
 </section>
 <section id="stage-4-task">
@@ -1318,7 +1336,8 @@
 <li><a class="reference internal" href="#friend-fight-error">Friend fight error</a></li>
 <li><a class="reference internal" href="#test-again">Test again</a></li>
 <li><a class="reference internal" href="#troubleshooting-a-logic-error">Troubleshooting a logic error</a></li>
-<li><a class="reference internal" href="#third-test-lucky">Third test lucky</a></li>
+<li><a class="reference internal" href="#third-test-lucky">Third test lucky?</a></li>
+<li><a class="reference internal" href="#final-test">Final test</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#stage-4-task">Stage 4 task</a></li>
