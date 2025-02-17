@@ -505,7 +505,8 @@ while running:
                 available_weapons.append(item.name)
             if weapon in available_weapons:
                 if current_room.character.fight(weapon):
-                    current_room.character = None
+                    if isinstance(current_room.character, Enemy):
+                        current_room.character = None
                 else:
                     running = False
             else:
