@@ -575,5 +575,3 @@ If your code passes all the tests, it's time to **make** some code in the stage 
 ## Stage 6 task
 
 You need to apply the changes we made to your other characters. Especially if you have another enemy. Make sure that the user can collect their weakness and use it against them.
-
-Hello Machlon
