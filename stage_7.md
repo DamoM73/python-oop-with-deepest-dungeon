@@ -373,10 +373,11 @@ while running:
                 available_weapons.append(item.name)
             if weapon in available_weapons:
                 if current_room.character.fight(weapon):
-                    current_room.character = None
-                    if Enemy.get_num_of_enemy() == 0:
-                        print("You have slain all the enemies. You are victorious!")
-                        running = False
+                    if isinstance(current_room.character, Enemy):
+                        current_room.character = None
+                        if Enemy.get_num_of_enemy() == 0:
+                            print("You have slain all the enemies. You are victorious!")
+                            running = False
                 else:
                     running = False
             else:
