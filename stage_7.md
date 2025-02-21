@@ -283,7 +283,7 @@ Add the highlighted code below:
 
 ```{code-block} python
 :linenos:
-:emphasize-lines: 91-93
+:emphasize-lines: 92-94
 # main.py
 
 from room import Room

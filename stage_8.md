@@ -30,7 +30,7 @@ To implement this, add the highlighted code below to **main.py**:
 
 ```{code-block} python
 :linenos:
-:emphasize-lines: 116-123, 127
+:emphasize-lines: 117-124, 128
 # main.py
 
 from room import Room
@@ -120,10 +120,11 @@ while running:
                 available_weapons.append(item.name)
             if weapon in available_weapons:
                 if current_room.character.fight(weapon):
-                    current_room.character = None
-                    if Enemy.get_num_of_enemy() == 0:
-                        print("You have slain all the enemies. You are victorious!")
-                        running = False
+                    cif isinstance(current_room.character, Enemy):
+                        current_room.character = None
+                        if Enemy.get_num_of_enemy() == 0:
+                            print("You have slain all the enemies. You are victorious!")
+                            running = False
                 else:
                     running = False
             else:
@@ -177,154 +178,6 @@ We have already addressed some UI and UX problems by adding the **help** command
 Did you notice that after entering a command, the game responds and then quickly describes the room again. It's really easy to loose the command response in this quick action. Let's change that by writing the response and then asking the user to press a key to proceed.
 
 I implement this, add the highlighted code below.
-
-```{code-block} python
-:linenos:
-:emphasize-lines: 128
-# main.py
-
-from room import Room
-from character import Enemy, Friend
-from item import Item
-
-# create rooms
-cavern = Room("Cavern")
-cavern.description = ("A room so big that the light of your torch doesn’t reach the walls.")
-
-armoury = Room("Armoury")
-armoury.description = ("The walls are lined with racks that once held weapons and armour.")
-
-lab = Room("Laboratory")
-lab.description = ("A strange odour hangs in a room filled with unknownable contraptions.")
-
-# link rooms
-cavern.link_rooms(armoury,"south")
-armoury.link_rooms(cavern,"north")
-armoury.link_rooms(lab,"east")
-lab.link_rooms(armoury,"west")
-
-
-# create characters
-ugine = Enemy("Ugine")
-ugine.description = "a huge troll with rotting teeth."
-ugine.weakness = "cheese"
-
-nigel = Friend("Nigel")
-nigel.description = "a burly dwarf with golden bead in woven through his beard."
-nigel.conversation = "Well youngan, what are you doing here?"
-
-# add characters to rooms
-armoury.character = ugine
-lab.character = nigel
-
-# create items
-cheese = Item("Cheese")
-cheese.description = "super smelly"
-
-chair = Item("Chair")
-chair.description = "designed to be sat on"
-
-elmo = Item("Elmo")
-elmo.description = "wanting to be tickled"
-
-# add items to rooms
-cavern.item = chair
-armoury.item = elmo
-lab.item = cheese
-
-'''
-# describe the rooms
-cavern.describe()
-armoury.describe()
-lab.describe()
-'''
-
-# initialise variables
-running = True
-current_room = cavern
-backpack = []
-
-# ----- MAIN LOOP -----
-while running:
-    current_room.describe()
-    
-    command = input("> ").lower()
-    
-    if command in ["north", "south", "east", "west"]:
-        current_room = current_room.move(command)
-    elif command == "talk":
-        if current_room.character is not None:
-            current_room.character.talk()
-        else:
-            print("There is no one here to talk to")
-    elif command == "hug":
-        if current_room.character is not None:
-            current_room.character.hug()
-        else:
-            print("There is no one here to hug")
-    elif command== "fight":
-        if current_room.character is not None:
-            weapon = input("What will you fight with? > ").lower()
-            available_weapons = []
-            for item in backpack:
-                available_weapons.append(item.name)
-            if weapon in available_weapons:
-                if current_room.character.fight(weapon):
-                    current_room.character = None
-                    if Enemy.get_num_of_enemy() == 0:
-                        print("You have slain all the enemies. You are victorious!")
-                        running = False
-                else:
-                    running = False
-            else:
-                print(f"You don't have {weapon}")
-                print(f"{current_room.character.name} strikes you down.")
-                running = False
-        else:
-            print("There is no one here to fight")
-    elif command == "take":
-        if current_room.item is not None:
-            backpack.append(current_room.item)
-            print(f"You put {current_room.item.name} into your backpack")
-            current_room.item = None
-        else:
-            print("There is nothing here to take")
-    elif command == "backpack":
-        if backpack == []:
-            print("It is empty")
-        else:
-            print("You have:")
-            for item in backpack:
-                print(f"- {item.name.capitalize()}")
-    elif command == "help":
-        print("Type which direction you wish to move,")
-        print("or use one of these commands:")
-        print("- Talk")
-        print("- Fight")
-        print("- Hug")
-        print("- Take")
-        print("- Backpack")
-    elif command == "quit":
-        running = False
-    else:
-        print("Enter 'help' to list the copmmands.")
-    input("\nPress <Enter> key to continue")
-```
-
-Save the file, **predict** and then **run** the code.
-
-How does that work? Let's **investigate**:
-
-- `input("\nPress <Enter> key to continue")` &rarr; this is a hack. That is we are using `input` in an unconventional way to achieve our desired outcome.
-  - the normal operation of `input` is to wait for the user response &rarr; addresses the pausing of the game
-  - normally the user enters their response by pressing the Enter key &rarr; stops the pausing
-  - the value the user enters is **not** assigned to a variable, so it just disappears
-
-## Farewell message
-
-When the game ends, it just stops. Whether the player won or lost it just exits the the Shell prompt. To make things a little more polite, we should add an farewell message.
-
-To include a farewell message add the highlighted code below
 
 ```{code-block} python
 :linenos:
@@ -418,10 +271,160 @@ while running:
                 available_weapons.append(item.name)
             if weapon in available_weapons:
                 if current_room.character.fight(weapon):
-                    current_room.character = None
-                    if Enemy.get_num_of_enemy() == 0:
-                        print("You have slain all the enemies. You are victorious!")
-                        running = False
+                    if isinstance(current_room.character, Enemy):
+                        current_room.character = None
+                        if Enemy.get_num_of_enemy() == 0:
+                            print("You have slain all the enemies. You are victorious!")
+                            running = False
+                else:
+                    running = False
+            else:
+                print(f"You don't have {weapon}")
+                print(f"{current_room.character.name} strikes you down.")
+                running = False
+        else:
+            print("There is no one here to fight")
+    elif command == "take":
+        if current_room.item is not None:
+            backpack.append(current_room.item)
+            print(f"You put {current_room.item.name} into your backpack")
+            current_room.item = None
+        else:
+            print("There is nothing here to take")
+    elif command == "backpack":
+        if backpack == []:
+            print("It is empty")
+        else:
+            print("You have:")
+            for item in backpack:
+                print(f"- {item.name.capitalize()}")
+    elif command == "help":
+        print("Type which direction you wish to move,")
+        print("or use one of these commands:")
+        print("- Talk")
+        print("- Fight")
+        print("- Hug")
+        print("- Take")
+        print("- Backpack")
+    elif command == "quit":
+        running = False
+    else:
+        print("Enter 'help' to list the copmmands.")
+    input("\nPress <Enter> key to continue")
+```
+
+Save the file, **predict** and then **run** the code.
+
+How does that work? Let's **investigate**:
+
+- `input("\nPress <Enter> key to continue")` &rarr; this is a hack. That is we are using `input` in an unconventional way to achieve our desired outcome.
+  - the normal operation of `input` is to wait for the user response &rarr; addresses the pausing of the game
+  - normally the user enters their response by pressing the Enter key &rarr; stops the pausing
+  - the value the user enters is **not** assigned to a variable, so it just disappears
+
+## Farewell message
+
+When the game ends, it just stops. Whether the player won or lost it just exits the the Shell prompt. To make things a little more polite, we should add an farewell message.
+
+To include a farewell message add the highlighted code below
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 130
+# main.py
+
+from room import Room
+from character import Enemy, Friend
+from item import Item
+
+# create rooms
+cavern = Room("Cavern")
+cavern.description = ("A room so big that the light of your torch doesn’t reach the walls.")
+
+armoury = Room("Armoury")
+armoury.description = ("The walls are lined with racks that once held weapons and armour.")
+
+lab = Room("Laboratory")
+lab.description = ("A strange odour hangs in a room filled with unknownable contraptions.")
+
+# link rooms
+cavern.link_rooms(armoury,"south")
+armoury.link_rooms(cavern,"north")
+armoury.link_rooms(lab,"east")
+lab.link_rooms(armoury,"west")
+
+
+# create characters
+ugine = Enemy("Ugine")
+ugine.description = "a huge troll with rotting teeth."
+ugine.weakness = "cheese"
+
+nigel = Friend("Nigel")
+nigel.description = "a burly dwarf with golden bead in woven through his beard."
+nigel.conversation = "Well youngan, what are you doing here?"
+
+# add characters to rooms
+armoury.character = ugine
+lab.character = nigel
+
+# create items
+cheese = Item("Cheese")
+cheese.description = "super smelly"
+
+chair = Item("Chair")
+chair.description = "designed to be sat on"
+
+elmo = Item("Elmo")
+elmo.description = "wanting to be tickled"
+
+# add items to rooms
+cavern.item = chair
+armoury.item = elmo
+lab.item = cheese
+
+'''
+# describe the rooms
+cavern.describe()
+armoury.describe()
+lab.describe()
+'''
+
+# initialise variables
+running = True
+current_room = cavern
+backpack = []
+
+# ----- MAIN LOOP -----
+while running:
+    current_room.describe()
+    
+    command = input("> ").lower()
+    
+    if command in ["north", "south", "east", "west"]:
+        current_room = current_room.move(command)
+    elif command == "talk":
+        if current_room.character is not None:
+            current_room.character.talk()
+        else:
+            print("There is no one here to talk to")
+    elif command == "hug":
+        if current_room.character is not None:
+            current_room.character.hug()
+        else:
+            print("There is no one here to hug")
+    elif command== "fight":
+        if current_room.character is not None:
+            weapon = input("What will you fight with? > ").lower()
+            available_weapons = []
+            for item in backpack:
+                available_weapons.append(item.name)
+            if weapon in available_weapons:
+                if current_room.character.fight(weapon):
+                    if isinstance(current_room.character, Enemy):
+                        current_room.character = None
+                        if Enemy.get_num_of_enemy() == 0:
+                            print("You have slain all the enemies. You are victorious!")
+                            running = False
                 else:
                     running = False
             else:
@@ -468,7 +471,7 @@ Let's first start with **main.py**
 
 ```{code-block} python
 :linenos:
-:emphasize-lines: 70, 73, 79, 85, 106, 114, 122, 131, 134
+:emphasize-lines: 70, 73, 79, 85, 107, 115, 123, 132, 135
 # main.py
 
 from room import Room
@@ -562,10 +565,11 @@ while running:
                 available_weapons.append(item.name)
             if weapon in available_weapons:
                 if current_room.character.fight(weapon):
-                    current_room.character = None
-                    if Enemy.get_num_of_enemy() == 0:
-                        print("You have slain all the enemies. You are victorious!")
-                        running = False
+                    if isinstance(current_room.character, Enemy):
+                        current_room.character = None
+                        if Enemy.get_num_of_enemy() == 0:
+                            print("You have slain all the enemies. You are victorious!")
+                            running = False
                 else:
                     running = False
             else:

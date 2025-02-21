@@ -416,7 +416,7 @@ Still working in **main.py**, add the code below.
 
 ```{code-block} python
 :linenos:
-:emphasize-lines: 84-95
+:emphasize-lines: 84-96
 # main.py
 
 from room import Room
