@@ -17,6 +17,12 @@ You can add extra features to the characters:
 - have more than one conversation script (try randomly choosing from a list of conversations)
 - make extra character types (there are more than just friend and enemies)
 
+## The player
+
+Now that you have a player class you could easily add more attributes. For example:
+
+- give the player money so they can buy items
+- allow for equipping of weapons or armour
 
 ## The fight
 
@@ -25,13 +31,6 @@ At the moment the fight is very swift. You could make it more interesting by:
 - have player and enemy health that gets lowered whilst fighting
 - have different items cause different damage
 - each character has different loss messages.
-
-## The player
-
-The player hasn't got much detail, so you could easily add more to them:
-
-- give the player money so they can by items
-- allow for equipping of weapons or armour
 
 ## The UI
 
