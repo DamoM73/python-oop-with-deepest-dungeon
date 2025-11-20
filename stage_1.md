@@ -1,12 +1,11 @@
 # Stage 1 - Create Rooms
 
 ```{topic} In this lesson you will:
-- learn about the object orientated programming concepts of objects, classes, attributes and methods.
-- define a class
-- define class methods
-- import classes from a module you have created
-- instantiate objects from the class you have defined
-- interact with class attributes
+* understand how classes, attributes, and methods work together in a Python program
+* read simple UML class diagrams and identify the class name, its attributes, and its methods
+* make a basic Python class that uses an `__init__` method and another method you create
+* create objects from a class and give them values for their attributes
+* connect objects to each other and show those connections when the program runs
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GeSTPYPPEfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -28,11 +27,11 @@ In those two files we will complete the following steps:
 2. Create `Room` objects
 3. Describe `Room` objects
 4. Link the `Room` objects
-5. Include the linked `Rooms` in the description of each `Room` object
+5. Include the linked `Rooms` when each `Room` object is described
 
 ### Class diagram
 
-We will be using Universal Modelling Language (UML) class diagrams to show the different classes of our program and how they work together.
+UML **class diagrams** are a simple way to show what a class looks like and how it works with other classes.
 
 In UML, classes are represented by the three row table.
 
@@ -73,26 +72,26 @@ Then type the code below into the new file
 class Room():
 ```
 
-Lets unpack the code:
-
+```{admonition} Code Explaination
 - `# room.py` - is a simple comment containing the file name. Since this program involves multiple files, this is a simple way to keep track of which file you are currently working on.
 - `class Room():` - defined the `Room` class object
+```
 
-```{admonition} Naming conventions
-In most cases, Pythons naming conventions call for names to be written in `snake_case`, but class names are an exception to this rule. Class names should use `CamelCase`, like `Room` in our code.
+```{note} Naming conventions
+Most Python names use `snake_case`, but class names are different. Class names must use `CamelCase`, like `Room`.
 
-Since this is a convention, and won't raise an error if not follow it. This is about maintainabilty and ensuring your code is easy to follow.
+Python won’t give you an error if you break this rule, but following it makes your code easier to read and maintain.
 
-Also note that our file name is not capitalised. This is import for when we import our class.
+File names should stay lowercase. This matters when you import your class from the file.
 ```
 
 ### Dunder init method
 
-All Python classes have a special method called the dunder init. The actual method name is `__init__`, which is double-underscore init double underscore, hence the name dunder init.
+Every Python class has a special method called the *dunder init*. Its real name is `__init__` — the “double underscores” are why we call it *dunder*.
 
-The dunder init is a method that is automatically called whenever an object of the class is created. It is used to initialize the attributes of the object. It can also be used to perform any other setup that the object needs before it is used, including calling other methods.
+The dunder init runs automatically every time you create a new object from a class. It sets up the object’s attributes and gets it ready to use. You can also use it to run any other setup the object needs.
 
-Let's create our dunder init for our `Room` class by adding the highlighted code below.
+Now we’ll make a dunder init for our `Room` class.
 
 ```{code-block} python
 :linenos:
@@ -108,22 +107,18 @@ class Room():
         self.description = None
 ```
 
-Breaking that code down:
-
-- `def __init__(self, room_name):` &rarr; defines the dunder init method
-  - `self` &rarr; always the first argument in class methods.
-    - Since classes can be used to create many instances of the object, `self` tells Python that you are referring to this instance of the object.
-    - For example, when we create the cavern room object, `self` will be referring to the cavern room.
-    - When narrating the code, I find it useful to substitute `self` with **this object**.
-  - `room_name` &rarr; a string containing the name of the room, that needs to be passed when the `Room` object is made.
-- `# intialise the room object` &rarr; a comment that explains what the method does. Explaining your methods is another way of increasing the readability of your code and enhances it's maintainability.
-- `self.name = room_name.lower()` &rarr; assigns the value passed in the `room_name` argument to the object's attribute room_name
-  - `self.name` &rarr; using my substitution trick, this means "This object's name", or "This room's name"
-  - `room_name.lower()` &rarr; coverts the string passed in the argument to all lower case before assigning it to `self.name`
-- `self.description = None` &rarr; creates the objects description attribute and assigns `None` to it.
-  - `self.description` &rarr; using my substitution trick, this means "This object's description" or "This room's description"
-  - it is best practice to define all the class attributes in `__init__`
-  - when the attribute value is assigned after the object has been created initiate the value of `None` to the attribute in the `__init__`
+```{admonition} Code Explaination
+* `def __init__(self, room_name):` this line starts the dunder init method.
+  * `self` is always the first argument in any class method. It means “this object”. If you make a `cavern` room, then inside the code `self` means “this specific cavern room”.
+  * `room_name` is the text you give the room when you create it. It’s the name the object will use.
+* `# initialise the room object` &rarr; this is just a comment explaining what the method does. Comments help keep your code easy to read.
+* `self.name = room_name.lower()` &rarr; this sets the room’s name.
+  * `self.name` means “this room’s name”.
+  * `room_name.lower()` changes the name to lowercase before storing it.
+* `self.description = None` &rarr; this creates a description attribute for the room and sets it to `None` for now.
+  * `self.description` means “this room’s description”.
+  * It’s good practice to create all attributes inside `__init__`, even if they don’t have a value yet. Setting them to `None` keeps things organised.
+```
 
 ### Save room.py
 
@@ -166,6 +161,7 @@ print(cavern.name)
 We're going to run our program for the first time, but before let's introduce the PRIMM concept.
 
 ```{admonition} PRIMM
+:class: note
 Throughout this course we will use the **PRIMM** process to reinforce our learning. **PRIMM** stands for **Predict**, **Run**, **Investigate**, **Modify**, and **Make**. It reflects effective programming practices and encourages curiosity in programming.
 
 **Predict**: Before you run the code you need to predict what you think will happen. Go ahead and have a guess at what you think will happen.
@@ -183,31 +179,27 @@ Lets run through the **PRIMM** process now
 
 **Predict** in detail what you think the program will do, then **run** the program.
 
-Let's **investigate** the code, by breaking it down line-by-line.
+Let's **investigate** the *new* code line-by-line.
 
-- `# main.py` &rarr; a simple comment which helps identify which file you are currently working in.
-- `from room import Room` &rarr; familiar import statement, but this time we are importing our own module
-  - `Room` &rarr; the `Room` class that we just made
-  - `room` &rarr; the Python file which contains the `Room` class, in our case `room.py`
-  - this line effectively says &rarr; **from `room.py` import the `Room` class**
-  - note the capitalisation &rarr; by using snake case for our file name and camel case for our class name, we can distinguish between the two.
-- `# create rooms` &rarr; a comment to help structure the code.
-  - `main.py` will become quite long. Structuring the code with comments will improve its readability.
-- `cavern = Room("Cavern")` &rarr; instantiates (creates) our first `Room` object
-  - `Room("Cavern")` &rarr; creates a `Room` object
-    - when we create a `Room` object the `__init__` automatically runs
-    - the `__init__` requires a single argument to be passed, we pass `"Cavern"`
-    - the `__init__` then takes the `"Cavern"` string and assigns it to the `name` attribute of this object
-  - `cavern =` &rarr; assigns our newly created `Room` object to the variable `cavern`
-- `armoury = Room("Armoury")` &rarr; creates a different `Room` object
-  - `"Armoury"` is passed to the `name` attribute
-  - this object is assigned to `armoury`
-- `lab = Room("Laboratory")` &rarr; creates a third `Room` object
-  - `"Laboratory"` is passed to the `name` attribute
-  - this object is assigned to `lab`
-- `print(cavern.name)` - prints the name of the `cavern` `Room` object
-  - `cavern.name` - get the value stored in the `name` attribute of the `cavern` `Room` object
-  - `print` - print that value to the terminal
+```{admonition} Code Explaination
+* `# main.py` &rarr; this is just a comment so you know which file you’re looking at.
+* `from room import Room` &rarr; this imports your own class.
+  * `Room` is the class you created.
+  * `room` is the file `room.py` where that class lives.
+  * This line basically means: *import the `Room` class from the file `room.py`*.
+  * The class name is CamelCase (`Room`), and the file name is lowercase (`room`).
+* `# create rooms` &rarr; another comment to organise your code. `main.py` will get long, so comments help keep things clear.
+* `cavern = Room("Cavern")` &rarr; this creates your first room.
+  * `Room("Cavern")` makes a new `Room` object.
+    * When you create it, the `__init__` method runs automatically.
+    * `"Cavern"` gets sent into `__init__`, which saves it as the room’s name.
+  * `cavern =` stores the new room object in a variable called `cavern`.
+* `armoury = Room("Armoury")` &rarr; makes another `Room` object using the name `"Armoury"` and stores it in `armoury`.
+* `lab = Room("Laboratory")` &rarr; makes a third room using `"Laboratory"` and stores it in `lab`.
+* `print(cavern.name)` &rarr; prints the name stored inside the `cavern` room object.
+  * `cavern.name` gets the value of that attribute.
+  * `print` shows it on the screen.
+```
 
 **Modify** the code so that it prints the names of the other two `Room` objects.
 
@@ -254,28 +246,24 @@ print(cavern.description)
 
 **Predict** in detail what you think the program will do, then **run** the program.
 
-Let's **investigate** the new code line-by-line.
+Let's **investigate** the *new* code line-by-line.
 
-- `cavern.description = "A room so big that the light of your torch doesn’t reach the walls."`
-  - directly accesses the `description` attribute for the `cavern` `Room` object
-  - assigns the string to the `description` attribute of the `cavern` `Room` object
-- `armoury.description = "The walls are lined with racks that once held weapons and armour."`
-  - assigns the string to the `description` attribute of the `armoury` `Room` object
-- `lab.description = "A strange odour hangs in a room filled with unknownable contraptions."`
-  - assigns the string to the `description` attribute of the `lab` `Room` object
-- `print(cavern.description)`
-  - accesses the value stored in the `description` attribute of the `cavern` `Room` object
-  - prints that value to the terminal
+```{admonition} Code Explaination
+* `cavern.description = "A room so big that the light of your torch doesn’t reach the walls."` &rarr; this sets the `description` of the `cavern` room. You’re giving the room a sentence that describes it.
+* `armoury.description = "The walls are lined with racks that once held weapons and armour."` &rarr; this gives the `armoury` room its description.
+* `lab.description = "A strange odour hangs in a room filled with unknownable contraptions."` &rarr; this gives the `lab` room its description.
+* `print(cavern.description)` &rarr; this looks at the cavern’s description and prints it on the screen.
+```
 
 **Modify** the code so that it prints the descriptions of the other two `Room` objects.
 
 ### Describe method
 
-It is good programming practice to not directly access an object's attributes. You will notice that in our UML Class Diagram the `Room` class has a `describe()` method.
+It’s better programming practice to use methods instead of grabbing an object’s attributes directly. In the class diagram, the `Room` class has a `describe()` method for this purpose.
 
 ![lesson 1 class diagram](./assets/lesson_1_class_diagram.png)
 
-Creating methods is a better way of accessing object's attributes. So let's add the `describe()` to our code.
+Using a method like `describe()` is a cleaner and safer way to show a room’s details, so we’ll add that method to our code.
 
 Go back to the **room.py** file and add the highlighted code below.
 
@@ -326,26 +314,27 @@ lab.describe()
 
 Let's **investigate** the *new* code line-by-line. First the code in **room.py**:
 
-- `def describe(self):` &rarr; defines the `describe` method
-  - `def` &rarr; methods are functions that exist within a class, therefore the `def` keyword is used to define methods.
-  - `describe` &rarr; this is the name of our method
-  - `(self)` &rarr; `self` is the first argument for all methods. Just like with the `__init__` method, `self` can be read as "this object"
-  - `:` indicates a following indented code block.
-  - take note of the level of indentation. All class methods need to be indented one level (same as the `__init__` method)
-- `# displays a description of the room in the UI` &rarr; explains what the method does
-  - this is good coding practice and improves the readability of your code
-- `print(f"\nYou are in the {self.name}")` 
-  - takes the `name` attributes and inserts it into an f-string
-  - prints the f-string to the terminal
-  - again, using the `self` substitution, `self.name` should read as **this room's name**
-- `print(self.description)` &rarr; prints to terminal the value stored in the `description` attribute
+```{admonition} Code Explaination
+* `def describe(self):` &rarr; this line starts the `describe` method.
+  * `def` is how you define a function or method in Python.
+  * `describe` is the method’s name.
+  * `(self)` means “this object”, just like in `__init__`.
+  * The `:` tells Python the indented block below belongs to this method.
+  * Methods inside a class must be indented one level.
+* `# displays a description of the room in the UI` &rarr; this comment explains what the method does. Comments make your code easier to understand.
+* `print(f"\nYou are in the {self.name}")` &rarr; this line takes the room’s name and puts it into a sentence, then prints it to the screen.
+  * `self.name` &rarr; “this room’s name”.
+* `print(self.description)` &rarr; this prints whatever description the room has.
+```
 
 Now the code in **main.py**
 
-- `# describe rooms` &rarr; another code structure comment
-- `cavern.describe()` &rarr; run the `describe` method for the `cavern` `Room` object
-- `armoury.describe()` &rarr; run the `describe` method for the `armoury` `Room` object
-- `lab.describe()` &rarr; run the `describe` method for the `lab` `Room` object
+```{admonition} Code Explaination
+* `# describe rooms` &rarr; this is just a comment to organise the code.
+* `cavern.describe()` &rarr; this runs the `describe` method for the `cavern` room.
+* `armoury.describe()` &rarr; this runs the `describe` method for the `armoury` room.
+* `lab.describe()` &rarr; this runs the `describe` method for the `lab` room.
+```
 
 ## Link rooms
 
@@ -358,13 +347,18 @@ If you look at our map you will notice that the rooms are linked, so that our ad
 
 ![map](./assets/dungeon_map.png)
 
-Our class diagram shows we use an attribute (`linked_rooms`) and a method (`link_room(room, direction)`) to model this.
+The class diagram shows that each room uses an attribute called `linked_rooms` and a method called `link_room(room, direction)` to connect rooms together.
+
 
 ![lesson 1 class diagram](./assets/lesson_1_class_diagram.png)
 
-How will this work?
+`linked_rooms` is a dictionary. A dictionary stores information in **key:value** pairs.
 
-The `linked_rooms` is a dictionary, so it stores key:value pairs. The key will be the direction (north, south, east or west), and the value will be the `Room` `object` that is in that direction. For example, the `linked_rooms` dictionary for the Armoury would be:
+* The **key** will be a direction like north, south, east, or west.
+* The **value** will be the `Room` object that sits in that direction.
+
+For example, the Armoury’s `linked_rooms` dictionary might look like a list of directions that lead to other rooms.
+
 
 ```{code-block} python
 :linenos:
@@ -374,7 +368,16 @@ The `linked_rooms` is a dictionary, so it stores key:value pairs. The key will b
 }
 ```
 
-The `link_room` method will take two arguments (`room` and `direction`) and add that key value pair to the `linked_rooms` attribute.
+```{admonition} Dictionaries
+:class: note
+A Python dictionary is like a real-life dictionary, but for your code.
+
+In a real dictionary, you look up a **word** to find its **meaning**. In a Python dictionary, you look up a **key** to get its **value**.
+
+Dictionaries are useful when you want to group information together and label it clearly so you can find it later.
+```
+
+The `link_room` method takes two pieces of information — the room you want to connect and the direction it’s in. It then adds this information to the `linked_rooms` dictionary so the room knows what’s next to it.
 
 So lets implement this. First go back to **room.py**, and add the code highlighted below
 
@@ -438,32 +441,36 @@ Did you predict that nothing would change? We'll fix that later. In the meanwhil
 
 First the code in **room.py**:
 
-- `self.linked_rooms = {}` &rarr; creates an empty dictionary for the `linked_rooms` attribute
-- `def link_rooms(self, room_to_link, direction):` &rarr; defines the `link_rooms` method with three arguments
-  - `self` &rarr; the first argument for all class methods is always `self`, which refers to *this object*
-  - `room_to_link` &rarr; the `Room` object that you will be linking to
-  - `direction` &rarr; the values of `north`, `south`, `east` or `west` which will be the key for in the dictionary
-- `# links the provided room, in the provided direction` &rarr; comment explaining what the method does
-- `self.linked_rooms[direction.lower()] = room_to_link` &rarr; adds a new value to the `linked_rooms` attribute
-  - `direction.lower()` &rarr; takes the `direction` argument and makes it all lower case
-  - `self.linked_rooms[direction.lower()]` &rarr; checks the `linked_room` dictionary for the `direction` key
-  - `= room_to_link` 
-    - if the `direction` key doesn't exists, adds a key:value pair of `direction`:`room_to_link`
-    - if the `direction` key exists, changes the current value to `room_to_link`
-  
+```{admonition} Code Explaination
+* `self.linked_rooms = {}` &rarr; this line creates the `linked_rooms` attribute.
+* `def link_rooms(self, room_to_link, direction):` &rarr; this defines the `link_rooms` method. It takes three arguments:
+  * `self` &rarr; means “this room”.
+  * `room_to_link` &rarr; the room you want to connect to.
+  * `direction` &rarr; north, south, east, or west.
+* `# links the provided room, in the provided direction` &rarr; a comment explaining what the method does.
+* `self.linked_rooms[direction.lower()] = room_to_link` &rarr; this adds the connection to the dictionary.
+  * `direction.lower()` &rarr; turns the direction into lowercase.
+  * `self.linked_rooms[direction.lower()]` finds the correct spot in the dictionary.
+  * `= room_to_link` &rarr; stores the room in that direction.
+    * If the direction wasn’t there yet, it creates it.
+    * If it was already there, it replaces the old value.
+```
+
 Then in **main.py**:
 
+```{admonition} Code Explaination
 - `# link rooms` &rarr; code structuring comment
 - `cavern.link_rooms(armoury,"south")` &rarr; links the `cavern` and the `armoury` to the `"south"` of it.
 - `armoury.link_rooms(cavern,"north")` &rarr; links the `armoury` and the `cavern` to the `"north"` of it.
 - `armoury.link_rooms(lab,"east")` &rarr; links the `armoury` and the `lab` to the `"east"` of it.
 - `lab.link_rooms(armoury,"west")` &rarr; links the `lab` and the `armoury` to the `"west"` of it.
+```
 
 Notice that each connection needs two calls to the `link_rooms` method.
 
 ## Include linked Rooms in description
 
-Remember how running the last lot of code didn't change anything? Well, it did actually change things. All the rooms were linked together. We just didn't display that information. So let's address that by adding these connections to our description.
+When you ran the code, nothing *looked* different, but the rooms *were* actually linked together. We just weren’t showing those links on the screen. Now we’ll fix that by adding the connected rooms to the room’s description.
 
 Go to your **room.py** file and include the highlighted code below.
 
@@ -496,12 +503,16 @@ class Room():
 
 Let's **investigate** the *new* code line-by-line.
 
-- `for direction in self.linked_rooms:` &rarr; iterates over each key:value pair in the `linked_rooms` attribute
-  - in Python, dictionaries are iterable collections (like lists), so you can use `for` loops to iterate over them
-  - in this example `direction` will be each key value in the dictionary
-- `print(f"To the {direction} is the {self.linked_rooms[direction].name}")` &rarr; prints the linked rooms to the terminal
-  - `direction` &rarr; the current key (`"north"`, `"south"`, `"east"` or `"west"`)
-  - `self.linked_rooms[direction].name` &rarr; the name of the `Room` object that is linked in the current direction.
+```{admonition} Code Explaination
+* `for direction in self.linked_rooms:` &rarr; this loop goes through every entry in the `linked_rooms` dictionary.
+  * Dictionaries can be used in a `for` loop, just like lists.
+  * Here, `direction` will be each key in the dictionary, like `"north"`, `"south"`, `"east"`, or `"west"`.
+* `print(f"To the {direction} is the {self.linked_rooms[direction].name}")` &rarr; this line prints a sentence showing which room is in that direction.
+  * `direction` is the current direction (for example, `"north"`).
+  * `self.linked_rooms[direction].name` gets the name of the room linked in that direction.
+```
+
+---
 
 ## Stage 1 task
 
