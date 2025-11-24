@@ -540,24 +540,27 @@
 </span></pre></div>
 </div>
 <p><strong>Predict</strong> you think the program will do, then <strong>run</strong> the program.</p>
-<p>Let’s <strong>investigate</strong> that code</p>
+<p>Let’s <strong>investigate</strong> that code.</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">command</span> <span class="pre">in</span> <span class="pre">[&quot;north&quot;,</span> <span class="pre">&quot;south&quot;,</span> <span class="pre">&quot;east&quot;,</span> <span class="pre">&quot;west&quot;]:</span></code> → execute code if the command is a direction</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">command</span> <span class="pre">in</span> <span class="pre">[&quot;north&quot;,</span> <span class="pre">&quot;south&quot;,</span> <span class="pre">&quot;east&quot;,</span> <span class="pre">&quot;west&quot;]:</span></code> → runs this block only if the player typed a direction.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">[&quot;north&quot;,</span> <span class="pre">&quot;south&quot;,</span> <span class="pre">&quot;east&quot;,</span> <span class="pre">&quot;west&quot;]</span></code> → a list of all the acceptable directions</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">command</span> <span class="pre">in</span></code> → checks if <code class="docutils literal notranslate"><span class="pre">command</span></code> is one of the acceptable directions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[&quot;north&quot;,</span> <span class="pre">&quot;south&quot;,</span> <span class="pre">&quot;east&quot;,</span> <span class="pre">&quot;west&quot;]</span></code> → the list of directions the game will accept.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">command</span> <span class="pre">in</span></code> → checks whether what the player typed is in that list.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">current_room</span> <span class="pre">=</span> <span class="pre">current_room.move(command)</span></code> → gets the new room</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room</span> <span class="pre">=</span> <span class="pre">current_room.move(command)</span></code> → works out which room to go to next.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">current_room.move(command)</span></code> → calls the <code class="docutils literal notranslate"><span class="pre">move</span></code> method passing the value of command (which is a direction)</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">current_room</span> <span class="pre">=</span></code> assigns the returned <code class="docutils literal notranslate"><span class="pre">Room</span></code> object to the <code class="docutils literal notranslate"><span class="pre">current_room</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room.move(command)</span></code> → calls the <code class="docutils literal notranslate"><span class="pre">move</span></code> function, using the player’s direction to find the next room.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room</span> <span class="pre">=</span></code> → updates <code class="docutils literal notranslate"><span class="pre">current_room</span></code> so the game’s state now matches the new room.</p></li>
 </ul>
 </li>
 </ul>
+</div>
 <section id="testing">
 <h3>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h3>
-<div class="admonition-testing-branching-code admonition">
+<div class="note admonition">
 <p class="admonition-title">Testing branching code</p>
 <p>Whenever you test branching code, it is important to ensure you methodically test <strong>all</strong> possible branches.</p>
 <p>To do this:</p>
@@ -581,63 +584,63 @@
 <tbody>
 <tr class="row-even"><td class="text-left"><p>cavern</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">north</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>cavern</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">south</span></code></p></td>
-<td class="text-left"><p>armoury</p></td>
-<td class="text-left"><p>armoury</p></td>
+<td class="text-left"><p>moved to armoury</p></td>
+<td class="text-left"><p>moved to armoury</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>cavern</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">east</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>cavern</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">west</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>armoury</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">north</span></code></p></td>
-<td class="text-left"><p>cavern</p></td>
-<td class="text-left"><p>cavern</p></td>
+<td class="text-left"><p>moved to cavern</p></td>
+<td class="text-left"><p>moved to cavern</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>armoury</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">south</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>armoury</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">east</span></code></p></td>
-<td class="text-left"><p>lab</p></td>
-<td class="text-left"><p>lab</p></td>
+<td class="text-left"><p>moved to lab</p></td>
+<td class="text-left"><p>moved to lab</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>armoury</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">west</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>lab</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">north</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>lab</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">south</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
 </tr>
 <tr class="row-even"><td class="text-left"><p>lab</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">east</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
-<td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way</span></code></p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
+<td class="text-left"><p>“You can’t go that way”</p></td>
 </tr>
 <tr class="row-odd"><td class="text-left"><p>lab</p></td>
 <td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">west</span></code></p></td>
-<td class="text-left"><p>armoury</p></td>
-<td class="text-left"><p>armoury</p></td>
+<td class="text-left"><p>moved to armoury</p></td>
+<td class="text-left"><p>moved to armoury</p></td>
 </tr>
 </tbody>
 </table>
@@ -693,6 +696,8 @@
 <p><strong>Predict</strong> you think the program will do, then <strong>run</strong> the program.</p>
 <p>Make sure you test the <strong>quit</strong> option</p>
 <p>Let’s <strong>investigate</strong> that code</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">elif</span> <span class="pre">command</span> <span class="pre">==</span> <span class="pre">&quot;quit&quot;:</span></code> → if the command is not an acceptable direction, then check if it is <code class="docutils literal notranslate"><span class="pre">quit</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> change our <strong>flag variable</strong> to <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
@@ -701,11 +706,12 @@
 </ul>
 </li>
 </ul>
+</div>
 </section>
 <section id="capture-incorrect-commands">
 <h3>Capture incorrect commands<a class="headerlink" href="#capture-incorrect-commands" title="Link to this heading">¶</a></h3>
-<p>So the code now works with our directions and allows us to quit, but what happens if the user enters anything else? Well, the loop continues and just redescribes the <code class="docutils literal notranslate"><span class="pre">current_room</span></code>.</p>
-<p>Really, we should be given the user feedback that they command is invalid. Let’s do this.</p>
+<p>The code now understands the movement commands and the quit command, but what if the player types something completely different? The loop just keeps going and shows the same room again. That’s not very helpful.</p>
+<p>We should tell the player when their command doesn’t make sense, so they know they need to try something else. Let’s fix that.</p>
 <p>Change <strong>main.py</strong> to include the highlighted code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
@@ -755,10 +761,41 @@
 <p><strong>Predict</strong> you think the program will do, then <strong>run</strong> the program.</p>
 <p>Make sure you test our error capturing by entering some incorrect commands.</p>
 <p>Let’s <strong>investigate</strong> the new code:</p>
+<div class="info admonition">
+<p class="admonition-title">Information</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → a catch-all option for any input which is not a recognised command.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;I</span> <span class="pre">don't</span> <span class="pre">understand.&quot;)</span></code> → lets the user know their command doesn’t make sense.</p></li>
 </ul>
+</div>
+</section>
+<section id="id1">
+<h3>Testing<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h3>
+<p>Now we need to test those two additional features. Draw up a table to test each option. Below is an example of my table.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Command</p></th>
+<th class="head text-left"><p>Expected Result</p></th>
+<th class="head text-left"><p>Actual Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">south</span></code></p></td>
+<td class="text-left"><p>moved to armoury</p></td>
+<td class="text-left"><p>moved to armoury</p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">dog</span></code></p></td>
+<td class="text-left"><p>“I don’t understand.”</p></td>
+<td class="text-left"><p>“I don’t understand.”</p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p><code class="docutils literal notranslate"><span class="pre">quit</span></code></p></td>
+<td class="text-left"><p>program exits</p></td>
+<td class="text-left"><p>program exits</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 </section>
 </section>
@@ -837,6 +874,7 @@
 <li><a class="reference internal" href="#testing">Testing</a></li>
 <li><a class="reference internal" href="#exiting">Exiting</a></li>
 <li><a class="reference internal" href="#capture-incorrect-commands">Capture incorrect commands</a></li>
+<li><a class="reference internal" href="#id1">Testing</a></li>
 </ul>
 </li>
 </ul>

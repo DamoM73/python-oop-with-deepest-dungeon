@@ -281,18 +281,22 @@ while running:
 
 **Predict** you think the program will do, then **run** the program.
 
-Let's **investigate** that code
+Let's **investigate** that code.
 
-- `if command in ["north", "south", "east", "west"]:` &rarr; execute code if the command is a direction
-  - `["north", "south", "east", "west"]` &rarr; a list of all the acceptable directions
-  - `if command in` &rarr; checks if `command` is one of the acceptable directions
-- `current_room = current_room.move(command)` &rarr; gets the new room
-  - `current_room.move(command)` &rarr; calls the `move` method passing the value of command (which is a direction)
-  - `current_room =` assigns the returned `Room` object to the `current_room`
+```{admonition} Code Explaination
+* `if command in ["north", "south", "east", "west"]:` &rarr; runs this block only if the player typed a direction.
+  * `["north", "south", "east", "west"]` &rarr; the list of directions the game will accept.
+  * `if command in` &rarr; checks whether what the player typed is in that list.
+* `current_room = current_room.move(command)` &rarr; works out which room to go to next.
+  * `current_room.move(command)` &rarr; calls the `move` function, using the player’s direction to find the next room.
+  * `current_room =` &rarr; updates `current_room` so the game’s state now matches the new room.
+
+```
 
 ### Testing
 
 ```{admonition} Testing branching code
+:class: note
 Whenever you test branching code, it is important to ensure you methodically test **all** possible branches.
 
 To do this:
@@ -306,18 +310,18 @@ Now that we can move between all our rooms, we can test that our code is working
 
 | Current Room | Command | Expected Result | Actual Result |
 | :-- | :-- | :-- | :-- |
-| cavern | `north` | `You can't go that way` | `You can't go that way` |
-| cavern | `south` | armoury | armoury |
-| cavern | `east` | `You can't go that way` | `You can't go that way` |
-| cavern | `west` | `You can't go that way` | `You can't go that way` |
-| armoury | `north` | cavern | cavern |
-| armoury | `south` | `You can't go that way` | `You can't go that way` |
-| armoury | `east` | lab | lab |
-| armoury | `west` | `You can't go that way` | `You can't go that way` |
-| lab | `north` | `You can't go that way` | `You can't go that way` |
-| lab | `south` | `You can't go that way` | `You can't go that way` |
-| lab | `east` | `You can't go that way` | `You can't go that way` |
-| lab | `west` | armoury | armoury |
+| cavern | `north` | "You can't go that way" | "You can't go that way" |
+| cavern | `south` | moved to armoury | moved to armoury |
+| cavern | `east` | "You can't go that way" | "You can't go that way" |
+| cavern | `west` | "You can't go that way" | "You can't go that way" |
+| armoury | `north` | moved to cavern | moved to cavern |
+| armoury | `south` | "You can't go that way" | "You can't go that way" |
+| armoury | `east` | moved to lab | moved to lab |
+| armoury | `west` | "You can't go that way" | "You can't go that way" |
+| lab | `north` | "You can't go that way" | "You can't go that way" |
+| lab | `south` | "You can't go that way" | "You can't go that way" |
+| lab | `east` | "You can't go that way" | "You can't go that way" |
+| lab | `west` | moved to armoury | moved to armoury |
 
 Notice that I tested each of the four directions in each of the three rooms in my dungeon.
 
@@ -377,15 +381,17 @@ Make sure you test the **quit** option
 
 Let's **investigate** that code
 
+```{admonition} Code Explaination
 - `elif command == "quit":` &rarr; if the command is not an acceptable direction, then check if it is `quit`
 - `running = False` change our **flag variable** to `False`
   - this means that when the loops returns to the top, `where running` will be `False` and the loop will exit.
+```
 
 ### Capture incorrect commands
 
-So the code now works with our directions and allows us to quit, but what happens if the user enters anything else? Well, the loop continues and just redescribes the `current_room`.
+The code now understands the movement commands and the quit command, but what if the player types something completely different? The loop just keeps going and shows the same room again. That’s not very helpful. 
 
-Really, we should be given the user feedback that they command is invalid. Let's do this.
+We should tell the player when their command doesn’t make sense, so they know they need to try something else. Let’s fix that.
 
 Change **main.py** to include the highlighted code below.
 
@@ -443,5 +449,17 @@ Make sure you test our error capturing by entering some incorrect commands.
 
 Let's **investigate** the new code:
 
+```{admonition} Information
+:class: info
 - `else:` &rarr; a catch-all option for any input which is not a recognised command.
 - `print("I don't understand.")` &rarr; lets the user know their command doesn't make sense.
+```
+
+### Testing
+Now we need to test those two additional features. Draw up a table to test each option. Below is an example of my table.
+
+| Command | Expected Result | Actual Result |
+| :-- | :-- | :-- |
+| `south` | moved to armoury | moved to armoury |
+| `dog` | "I don't understand." | "I don't understand." |
+| `quit` | program exits | program exits |
