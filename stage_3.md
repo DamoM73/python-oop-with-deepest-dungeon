@@ -1,9 +1,14 @@
 # Stage 3 - Character Creation
 
-```{topic} In this lesson you will:
-
-- Create characters
-- Place the characters into their room
+```{topic} Learninng Intentions
+By the end of this lesson you will:
+* Understand how classes, attributes, and methods work together in a program.
+* Recognise how different objects can interact inside a larger system.
+* Identify how user commands trigger events in an event-driven program.
+* Create new classes and objects with relevant attributes.
+* Link objects so they interact in meaningful ways.
+* Write simple methods that control object behaviour.
+* Update a main loop so it responds to user input with different actions.
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ufsmJYdUg1Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -52,13 +57,16 @@ class Character():
 
 Let's investigate this code:
 
-- `# character.py` &rarr; comment to identify the file we are working in
-- `class Character():` &rarr; defining our new class called `Character`
-- `def __init__(self, name):` &rarr; the dunder init method that is run whenever a `Character` object is created.
-- `# initialises the character object` &rarr; explains the purpose of the method
-- `self.name = name` &rarr; assigned the value passed in the `name` argument to this `Character` object's `name` attribute.
-- `self.description = None` &rarr; creates a `description` attribute for the `Character` object
-- `self.conversation = None` &rarr; creates a `converstaion` attribute for the `Character` object
+```{admonition} Code Explaination
+:class: info
+* `# character.py` &rarr; a note to remind us which file this code belongs to
+* `class Character():` &rarr; creates a new type of object called `Character`
+* `def __init__(self, name):` &rarr; this special method runs every time you make a new Character
+* `# initialises the character object` &rarr; a note explaining what the method is for
+* `self.name = name` &rarr; saves the character’s name inside the object
+* `self.description = None` &rarr; sets up a description for the character, but leaves it empty for now
+* `self.conversation = None` &rarr; sets up something the character might say, but also leaves it empty for now
+```
 
 ## Create characters
 
@@ -108,22 +116,25 @@ lab.describe()
 
 Investigating that code:
 
-- `from character import Character` &rarr; get our `Character` class from the **character.py** file
-- `# create characters` &rarr; code structure comment
-- `ugine = Character("Ugine")` &rarr; creates a `Character` object with the name `Ugine` and assigns it to `ugine`
-- `ugine.description = "a huge troll with rotting teeth."` &rarr; changes the `ugine` `description` attribute to `"a huge troll with rotting teeth."`
-- `nigel = Character("Nigel")` &rarr; creates a `Character` object with the name `Nigel` and assigns it to `nigel`
-- `nigel.description = "a burly dwarf with golden bead in woven through his beard."` &rarr; changes the `nigel` `description` attribute to `"a burly dwarf with golden bead in woven through his beard."`
-- `nigel.conversation = "Well youngan, what are you doing here?"` &rarr; changes the `nigel` `conversation` attribute to `"Well youngan, what are you doing here?"`
-- Note that we didn't change the `conversation` attribute for `ugine`. This means it will remain with the default value of `None`
+```{admonition} Code Explaination
+:class: info
+* `from character import Character` &rarr; brings the Character class into this file so we can use it
+* `# create characters` &rarr; a note showing this section is where we make characters
+* `ugine = Character("Ugine")` &rarr; makes a new Character named Ugine and stores it in the variable `ugine`
+* `ugine.description = "a huge troll with rotting teeth."` &rarr; gives Ugine a description
+* `nigel = Character("Nigel")` &rarr; makes a new Character named Nigel and stores it in the variable `nigel`
+* `nigel.description = "a burly dwarf with golden bead in woven through his beard."` &rarr; gives Nigel a description
+* `nigel.conversation = "Well youngan, what are you doing here?"` &rarr; gives Nigel something he can say
+* Ugine has no conversation set, so his conversation stays empty (None)
+```
 
 ## Add Characters to the Rooms
 
-So now we have two classes that interact with each other, `Room` and `Character`. Now we need to work out how we represent that interaction in our class structures. Checking our class diagram you will notice that we have added a new `charcetr` attribute to the `Room` class. This is how we show which `Character` is in the each `Room`.
+Now we have two classes that work together: `Room` and `Character`. We need a way for our code to show which character is in which room. In the Room class diagram, you can see we added a new `character` attribute. This lets each room store the character that’s inside it.
 
 ![lesson 3 class diagram](./assets/lesson_3_class_diagram.png)
 
-This is an arbitrary decision. We could easily had added the new attributer to the `Charcter` class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That's why the class diagram is so important.
+This is an arbitrary decision. We could easily had added the new attribute to the `Character` class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That's why the class diagram is so important.
 
 ### Add character attribute to Room class in room.py
 
@@ -165,7 +176,10 @@ class Room():
 
 Investigating that code:
 
+```{admonition} Code Explaination
+:class: info
 - `self.character = None` &rarr; creates a new attribute called `character` and assigns `None` to it.
+```
 
 ### Add characters to the rooms in main.py
 
@@ -235,8 +249,10 @@ while running:
 
 Investigating the code:
 
-- `armoury.character = ugine` &rarr; assigns the `ugine` `Character` object to the `character` attribute of the `armoury` `Room` object.
-- `lab.character = nigel` &rarr; assigns the `nigel` `Character` object to the `character` attribute of the `lab` `Room` object.
+```{admonition} Code Explaination
+* `armoury.character = ugine` &rarr; puts the character Ugine into the armoury room
+* `lab.character = nigel` &rarr; puts the character Nigel into the lab room
+```
 
 Let's do some testing. **Predict** what you think will happen and then **Run** the program. It should do nothing new, unless there is an error. That's because we haven't adjusted the room descriptions to include the characters. Let's do that now.
 
@@ -271,30 +287,33 @@ class Character():
 
 Investigating the new code:
 
-- `def describe(self):` &rarr; defines the `describe` method for the `Character` class
-  - although our program already has a `describe` method, this will work because the other `describe` method belongs to the `Room` class.
-  - in coding we say they have a different **name space**. The name space is all the parts of the name that are separated by  `.`.
-  - so `character.describe()` is not the same as `room.describe()`
-- `# sends a description of the character to the terminal` &rarr; the method description
-- `print(f"{self.name} is here, {self.description}")` &rarr; a f-string which prints details of this character.
+```{admonition} Code Explaination
+* `def describe(self):` &rarr; creates a describe method for characters
+  * even though we already have a describe method, it’s fine because that one belongs to the Room class
+  * they’re in different “namespaces,” which just means they belong to different objects
+  * so `character.describe()` and `room.describe()` are completely separate
+* `# sends a description of the character to the terminal` &rarr; a note explaining what the method does
+* `print(f"{self.name} is here, {self.description}")` &rarr; prints the character’s name and what they look like
+```
 
-```{admonition} Name Spaces
-A closet has multiple shelves, drawers, and hangers, each designated for different types of clothes. When you want to get dressed for a specific occasion, you go to the corresponding section of the closet and pick out the clothes you need.
+```{admonition} Name spaces
+:class: note
+Imagine your wardrobe at home. You have different spots for different things — shelves for shirts, drawers for socks, hangers for jackets. When you need something, you go to the right spot and grab it.
 
-In the same way, in programming, we have namespaces which are like sections in a closet. Each namespace has a set of variables and functions that are related to a specific topic, just like the different sections in a closet designated for different types of clothes. When you want to use a specific variable or function, you go to the corresponding namespace and use what you need.
+Namespaces in programming work the same way. They’re like labelled sections that keep code organised. Each namespace stores its own variables and functions, just like each part of your wardrobe stores its own type of clothes.
 
-For example, we might have a namespace called "math" that contains all the variables and functions related to math problems, just like a section in a closet designated for work clothes. Another namespace might be called "game" that has variables and functions for playing games, like a section designated for casual clothes.
+For example, a “math” namespace might hold maths-related functions, while a “game” namespace might hold game-related functions. They are kept separate so nothing gets mixed up.
 
-By using namespaces, we can keep our code organized, just like the clothes in a closet. This way, we can easily find the right variable or function for each task.
+Using namespaces keeps your code tidy and makes it easy to find exactly what you need.
 ```
 
 ### Modify the Room class describe method
 
-Before we modify the `describe` method, we have to deal with a little problem. We have three rooms, but we only have two characters, so there is one room (the cavern) with no character. We only want to room description to mention the character, when there is one present. 
+Before we change the `describe` method, we need to fix a small issue. We have three rooms but only two characters, which means one room (the cavern) has no character in it. We don’t want the game to talk about a character unless one is actually there.
 
-Fortunately, we initially assigned `None` to the `character` attribute. We haven't added a character to the cavern, so `cavern.character` is still `None`. Therefore we only want to describe the character, when the `character` attribute is not `None`.
+Because we set `character` to `None` when a room is empty, the cavern still has `cavern.character = None`. So, when we describe a room, we should only show the character's description if the `character` value is not `None`.
 
-To achieve this, add the highlighted code to **room.py**
+Return to **room.py** and modify the `describe` method as highlighted below.
 
 ```{code-block} python
 :linenos:
@@ -334,15 +353,17 @@ class Room():
 
 Let's investigate that code:
 
-- `if self.character is not None:` &rarr; checks if the *this* room has a character
-  - we use the `is` operator is to check if a variable's value is `None`
-- calls the `describe` method for *this* room
+```{admonition} Code Explaination
+* `if self.character is not None:` &rarr; checks if this room actually has a character in it
+  * the `is` keyword is used to check if something is equal to `None`
+* if there *is* a character, the code runs the character’s `describe` method to show their details
+```
 
 ### Testing
 
 **Predict** what you think will happen and the **Run** the code.
 
-Test to make sure that you get character descriptions, but only when you enter a room that has a character.
+Test to make sure that you get character descriptions, but only when you enter a room that has a character in it.
 
 ## Create character interactions
 
@@ -387,14 +408,16 @@ class Character():
 
 Let's investigate this code:
 
-- `def talk(self):` &rarr; is defining the talk method for *this* character
-- `# send converstation to the terminal` &rarr; our method description comment
-- `if self.conversation is not None:` &rarr; checks whether the character `conversation` attributer has a value
-  - checking the **main.py** &rarr; Nigel has a `conversation` value but Ugine does not
-  - our `talk` method needs to allow for characters that don't have a conversation
-- `print(f"{self.name}: {self.conversation}")` &rarr; if there is a `conversation` value, then display the character name and what they say
-- `else:` &rarr; when the character doesn't have a `conversation` value
-- `print(f"{self.name} doesn't want to talk to you")` &rarr; display a message that doesn't require a `conversation` attribute
+```{admonition} Code Explaination
+* `def talk(self):` &rarr; this creates the talk method for this character
+* `# send conversation to the terminal` &rarr; a note explaining what the method does
+* `if self.conversation is not None:` &rarr; checks if the character actually has something to say
+  * in **main.py**, Nigel has a conversation, but Ugine doesn’t
+  * the method needs to handle both situations
+* `print(f"{self.name}: {self.conversation}")` &rarr; if the character has a conversation, print their name and what they say
+* `else:` &rarr; runs when the character has no conversation set
+* `print(f"{self.name} doesn't want to talk to you")` &rarr; shows a message for characters who won’t talk
+```
 
 Now let's add both the `hug` and `fight` methods with the highlighted code below:
 
@@ -522,12 +545,14 @@ while running:
 
 Since the event handler for all three interactions is virtually the same, we'll just investigate the code for the `talk` method:
 
+```{admonition} Code Explaination
 - `elif command == "talk":` &rarr; checks if the user's command was `talk`
 - `if current_room.character is not None:` &rarr; checks if there is a character in the room
   - remember that rooms can not have a character (eg. Cavern) so we need to allow for this.
 - `current_room.character.talk()` &rarr; if there is a character, the call its `talk()` method
 - `else:` &rarr; deals with rooms with no character
 - `print("There is no one here to talk to")` &rarr; message for when there is no character
+```
 
 ## Stage 3 task
 

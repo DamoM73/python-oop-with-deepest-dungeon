@@ -3,9 +3,6 @@
 
 ```{admonition} Concept
 :class: note
-
-```{admonition} Information
-:class: info
 ```
 
 ```{admonition} Code Explaination

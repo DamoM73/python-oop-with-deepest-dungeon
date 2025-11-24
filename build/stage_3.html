@@ -254,10 +254,16 @@
           <section id="stage-3-character-creation">
 <h1>Stage 3 - Character Creation<a class="headerlink" href="#stage-3-character-creation" title="Link to this heading">¶</a></h1>
 <aside class="topic">
-<p class="topic-title">In this lesson you will:</p>
+<p class="topic-title">Learninng Intentions</p>
+<p>By the end of this lesson you will:</p>
 <ul class="simple">
-<li><p>Create characters</p></li>
-<li><p>Place the characters into their room</p></li>
+<li><p>Understand how classes, attributes, and methods work together in a program.</p></li>
+<li><p>Recognise how different objects can interact inside a larger system.</p></li>
+<li><p>Identify how user commands trigger events in an event-driven program.</p></li>
+<li><p>Create new classes and objects with relevant attributes.</p></li>
+<li><p>Link objects so they interact in meaningful ways.</p></li>
+<li><p>Write simple methods that control object behaviour.</p></li>
+<li><p>Update a main loop so it responds to user input with different actions.</p></li>
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ufsmJYdUg1Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -301,15 +307,18 @@
 </span></pre></div>
 </div>
 <p>Let’s investigate this code:</p>
+<div class="info admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">character.py</span></code> → comment to identify the file we are working in</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Character():</span></code> → defining our new class called <code class="docutils literal notranslate"><span class="pre">Character</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">name):</span></code> → the dunder init method that is run whenever a <code class="docutils literal notranslate"><span class="pre">Character</span></code> object is created.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialises</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">object</span></code> → explains the purpose of the method</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">self.name</span> <span class="pre">=</span> <span class="pre">name</span></code> → assigned the value passed in the <code class="docutils literal notranslate"><span class="pre">name</span></code> argument to this <code class="docutils literal notranslate"><span class="pre">Character</span></code> object’s <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">self.description</span> <span class="pre">=</span> <span class="pre">None</span></code> → creates a <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute for the <code class="docutils literal notranslate"><span class="pre">Character</span></code> object</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">self.conversation</span> <span class="pre">=</span> <span class="pre">None</span></code> → creates a <code class="docutils literal notranslate"><span class="pre">converstaion</span></code> attribute for the <code class="docutils literal notranslate"><span class="pre">Character</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">character.py</span></code> → a note to remind us which file this code belongs to</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Character():</span></code> → creates a new type of object called <code class="docutils literal notranslate"><span class="pre">Character</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">name):</span></code> → this special method runs every time you make a new Character</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialises</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">object</span></code> → a note explaining what the method is for</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.name</span> <span class="pre">=</span> <span class="pre">name</span></code> → saves the character’s name inside the object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.description</span> <span class="pre">=</span> <span class="pre">None</span></code> → sets up a description for the character, but leaves it empty for now</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.conversation</span> <span class="pre">=</span> <span class="pre">None</span></code> → sets up something the character might say, but also leaves it empty for now</p></li>
 </ul>
+</div>
 </section>
 <section id="create-characters">
 <h2>Create characters<a class="headerlink" href="#create-characters" title="Link to this heading">¶</a></h2>
@@ -353,22 +362,25 @@
 </pre></div>
 </div>
 <p>Investigating that code:</p>
+<div class="info admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">character</span> <span class="pre">import</span> <span class="pre">Character</span></code> → get our <code class="docutils literal notranslate"><span class="pre">Character</span></code> class from the <strong>character.py</strong> file</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">create</span> <span class="pre">characters</span></code> → code structure comment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ugine</span> <span class="pre">=</span> <span class="pre">Character(&quot;Ugine&quot;)</span></code> → creates a <code class="docutils literal notranslate"><span class="pre">Character</span></code> object with the name <code class="docutils literal notranslate"><span class="pre">Ugine</span></code> and assigns it to <code class="docutils literal notranslate"><span class="pre">ugine</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ugine.description</span> <span class="pre">=</span> <span class="pre">&quot;a</span> <span class="pre">huge</span> <span class="pre">troll</span> <span class="pre">with</span> <span class="pre">rotting</span> <span class="pre">teeth.&quot;</span></code> → changes the <code class="docutils literal notranslate"><span class="pre">ugine</span></code> <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">&quot;a</span> <span class="pre">huge</span> <span class="pre">troll</span> <span class="pre">with</span> <span class="pre">rotting</span> <span class="pre">teeth.&quot;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nigel</span> <span class="pre">=</span> <span class="pre">Character(&quot;Nigel&quot;)</span></code> → creates a <code class="docutils literal notranslate"><span class="pre">Character</span></code> object with the name <code class="docutils literal notranslate"><span class="pre">Nigel</span></code> and assigns it to <code class="docutils literal notranslate"><span class="pre">nigel</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nigel.description</span> <span class="pre">=</span> <span class="pre">&quot;a</span> <span class="pre">burly</span> <span class="pre">dwarf</span> <span class="pre">with</span> <span class="pre">golden</span> <span class="pre">bead</span> <span class="pre">in</span> <span class="pre">woven</span> <span class="pre">through</span> <span class="pre">his</span> <span class="pre">beard.&quot;</span></code> → changes the <code class="docutils literal notranslate"><span class="pre">nigel</span></code> <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">&quot;a</span> <span class="pre">burly</span> <span class="pre">dwarf</span> <span class="pre">with</span> <span class="pre">golden</span> <span class="pre">bead</span> <span class="pre">in</span> <span class="pre">woven</span> <span class="pre">through</span> <span class="pre">his</span> <span class="pre">beard.&quot;</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nigel.conversation</span> <span class="pre">=</span> <span class="pre">&quot;Well</span> <span class="pre">youngan,</span> <span class="pre">what</span> <span class="pre">are</span> <span class="pre">you</span> <span class="pre">doing</span> <span class="pre">here?&quot;</span></code> → changes the <code class="docutils literal notranslate"><span class="pre">nigel</span></code> <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">&quot;Well</span> <span class="pre">youngan,</span> <span class="pre">what</span> <span class="pre">are</span> <span class="pre">you</span> <span class="pre">doing</span> <span class="pre">here?&quot;</span></code></p></li>
-<li><p>Note that we didn’t change the <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attribute for <code class="docutils literal notranslate"><span class="pre">ugine</span></code>. This means it will remain with the default value of <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">character</span> <span class="pre">import</span> <span class="pre">Character</span></code> → brings the Character class into this file so we can use it</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">create</span> <span class="pre">characters</span></code> → a note showing this section is where we make characters</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ugine</span> <span class="pre">=</span> <span class="pre">Character(&quot;Ugine&quot;)</span></code> → makes a new Character named Ugine and stores it in the variable <code class="docutils literal notranslate"><span class="pre">ugine</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ugine.description</span> <span class="pre">=</span> <span class="pre">&quot;a</span> <span class="pre">huge</span> <span class="pre">troll</span> <span class="pre">with</span> <span class="pre">rotting</span> <span class="pre">teeth.&quot;</span></code> → gives Ugine a description</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nigel</span> <span class="pre">=</span> <span class="pre">Character(&quot;Nigel&quot;)</span></code> → makes a new Character named Nigel and stores it in the variable <code class="docutils literal notranslate"><span class="pre">nigel</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nigel.description</span> <span class="pre">=</span> <span class="pre">&quot;a</span> <span class="pre">burly</span> <span class="pre">dwarf</span> <span class="pre">with</span> <span class="pre">golden</span> <span class="pre">bead</span> <span class="pre">in</span> <span class="pre">woven</span> <span class="pre">through</span> <span class="pre">his</span> <span class="pre">beard.&quot;</span></code> → gives Nigel a description</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nigel.conversation</span> <span class="pre">=</span> <span class="pre">&quot;Well</span> <span class="pre">youngan,</span> <span class="pre">what</span> <span class="pre">are</span> <span class="pre">you</span> <span class="pre">doing</span> <span class="pre">here?&quot;</span></code> → gives Nigel something he can say</p></li>
+<li><p>Ugine has no conversation set, so his conversation stays empty (None)</p></li>
 </ul>
+</div>
 </section>
 <section id="add-characters-to-the-rooms">
 <h2>Add Characters to the Rooms<a class="headerlink" href="#add-characters-to-the-rooms" title="Link to this heading">¶</a></h2>
-<p>So now we have two classes that interact with each other, <code class="docutils literal notranslate"><span class="pre">Room</span></code> and <code class="docutils literal notranslate"><span class="pre">Character</span></code>. Now we need to work out how we represent that interaction in our class structures. Checking our class diagram you will notice that we have added a new <code class="docutils literal notranslate"><span class="pre">charcetr</span></code> attribute to the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class. This is how we show which <code class="docutils literal notranslate"><span class="pre">Character</span></code> is in the each <code class="docutils literal notranslate"><span class="pre">Room</span></code>.</p>
+<p>Now we have two classes that work together: <code class="docutils literal notranslate"><span class="pre">Room</span></code> and <code class="docutils literal notranslate"><span class="pre">Character</span></code>. We need a way for our code to show which character is in which room. In the Room class diagram, you can see we added a new <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute. This lets each room store the character that’s inside it.</p>
 <p><img alt="lesson 3 class diagram" src="_images/lesson_3_class_diagram.png" /></p>
-<p>This is an arbitrary decision. We could easily had added the new attributer to the <code class="docutils literal notranslate"><span class="pre">Charcter</span></code> class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That’s why the class diagram is so important.</p>
+<p>This is an arbitrary decision. We could easily had added the new attribute to the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That’s why the class diagram is so important.</p>
 <section id="add-character-attribute-to-room-class-in-room-py">
 <h3>Add character attribute to Room class in room.py<a class="headerlink" href="#add-character-attribute-to-room-class-in-room-py" title="Link to this heading">¶</a></h3>
 <p>Return to <strong>room.py</strong> and add the highlighted line below.</p>
@@ -404,9 +416,12 @@
 </pre></div>
 </div>
 <p>Investigating that code:</p>
+<div class="info admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">self.character</span> <span class="pre">=</span> <span class="pre">None</span></code> → creates a new attribute called <code class="docutils literal notranslate"><span class="pre">character</span></code> and assigns <code class="docutils literal notranslate"><span class="pre">None</span></code> to it.</p></li>
 </ul>
+</div>
 </section>
 <section id="add-characters-to-the-rooms-in-main-py">
 <h3>Add characters to the rooms in main.py<a class="headerlink" href="#add-characters-to-the-rooms-in-main-py" title="Link to this heading">¶</a></h3>
@@ -471,10 +486,13 @@
 </pre></div>
 </div>
 <p>Investigating the code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">armoury.character</span> <span class="pre">=</span> <span class="pre">ugine</span></code> → assigns the <code class="docutils literal notranslate"><span class="pre">ugine</span></code> <code class="docutils literal notranslate"><span class="pre">Character</span></code> object to the <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">lab.character</span> <span class="pre">=</span> <span class="pre">nigel</span></code> → assigns the <code class="docutils literal notranslate"><span class="pre">nigel</span></code> <code class="docutils literal notranslate"><span class="pre">Character</span></code> object to the <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute of the <code class="docutils literal notranslate"><span class="pre">lab</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">armoury.character</span> <span class="pre">=</span> <span class="pre">ugine</span></code> → puts the character Ugine into the armoury room</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lab.character</span> <span class="pre">=</span> <span class="pre">nigel</span></code> → puts the character Nigel into the lab room</p></li>
 </ul>
+</div>
 <p>Let’s do some testing. <strong>Predict</strong> what you think will happen and then <strong>Run</strong> the program. It should do nothing new, unless there is an error. That’s because we haven’t adjusted the room descriptions to include the characters. Let’s do that now.</p>
 </section>
 </section>
@@ -504,30 +522,33 @@
 </span></pre></div>
 </div>
 <p>Investigating the new code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">describe(self):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method for the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">describe(self):</span></code> → creates a describe method for characters</p>
 <ul>
-<li><p>although our program already has a <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, this will work because the other <code class="docutils literal notranslate"><span class="pre">describe</span></code> method belongs to the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class.</p></li>
-<li><p>in coding we say they have a different <strong>name space</strong>. The name space is all the parts of the name that are separated by  <code class="docutils literal notranslate"><span class="pre">.</span></code>.</p></li>
-<li><p>so <code class="docutils literal notranslate"><span class="pre">character.describe()</span></code> is not the same as <code class="docutils literal notranslate"><span class="pre">room.describe()</span></code></p></li>
+<li><p>even though we already have a describe method, it’s fine because that one belongs to the Room class</p></li>
+<li><p>they’re in different “namespaces,” which just means they belong to different objects</p></li>
+<li><p>so <code class="docutils literal notranslate"><span class="pre">character.describe()</span></code> and <code class="docutils literal notranslate"><span class="pre">room.describe()</span></code> are completely separate</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">sends</span> <span class="pre">a</span> <span class="pre">description</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">terminal</span></code> → the method description</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">is</span> <span class="pre">here,</span> <span class="pre">{self.description}&quot;)</span></code> → a f-string which prints details of this character.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">sends</span> <span class="pre">a</span> <span class="pre">description</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">terminal</span></code> → a note explaining what the method does</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">is</span> <span class="pre">here,</span> <span class="pre">{self.description}&quot;)</span></code> → prints the character’s name and what they look like</p></li>
 </ul>
-<div class="admonition-name-spaces admonition">
-<p class="admonition-title">Name Spaces</p>
-<p>A closet has multiple shelves, drawers, and hangers, each designated for different types of clothes. When you want to get dressed for a specific occasion, you go to the corresponding section of the closet and pick out the clothes you need.</p>
-<p>In the same way, in programming, we have namespaces which are like sections in a closet. Each namespace has a set of variables and functions that are related to a specific topic, just like the different sections in a closet designated for different types of clothes. When you want to use a specific variable or function, you go to the corresponding namespace and use what you need.</p>
-<p>For example, we might have a namespace called “math” that contains all the variables and functions related to math problems, just like a section in a closet designated for work clothes. Another namespace might be called “game” that has variables and functions for playing games, like a section designated for casual clothes.</p>
-<p>By using namespaces, we can keep our code organized, just like the clothes in a closet. This way, we can easily find the right variable or function for each task.</p>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Name spaces</p>
+<p>Imagine your wardrobe at home. You have different spots for different things — shelves for shirts, drawers for socks, hangers for jackets. When you need something, you go to the right spot and grab it.</p>
+<p>Namespaces in programming work the same way. They’re like labelled sections that keep code organised. Each namespace stores its own variables and functions, just like each part of your wardrobe stores its own type of clothes.</p>
+<p>For example, a “math” namespace might hold maths-related functions, while a “game” namespace might hold game-related functions. They are kept separate so nothing gets mixed up.</p>
+<p>Using namespaces keeps your code tidy and makes it easy to find exactly what you need.</p>
 </div>
 </section>
 <section id="modify-the-room-class-describe-method">
 <h3>Modify the Room class describe method<a class="headerlink" href="#modify-the-room-class-describe-method" title="Link to this heading">¶</a></h3>
-<p>Before we modify the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, we have to deal with a little problem. We have three rooms, but we only have two characters, so there is one room (the cavern) with no character. We only want to room description to mention the character, when there is one present.</p>
-<p>Fortunately, we initially assigned <code class="docutils literal notranslate"><span class="pre">None</span></code> to the <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute. We haven’t added a character to the cavern, so <code class="docutils literal notranslate"><span class="pre">cavern.character</span></code> is still <code class="docutils literal notranslate"><span class="pre">None</span></code>. Therefore we only want to describe the character, when the <code class="docutils literal notranslate"><span class="pre">character</span></code> attribute is not <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<p>To achieve this, add the highlighted code to <strong>room.py</strong></p>
+<p>Before we change the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, we need to fix a small issue. We have three rooms but only two characters, which means one room (the cavern) has no character in it. We don’t want the game to talk about a character unless one is actually there.</p>
+<p>Because we set <code class="docutils literal notranslate"><span class="pre">character</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> when a room is empty, the cavern still has <code class="docutils literal notranslate"><span class="pre">cavern.character</span> <span class="pre">=</span> <span class="pre">None</span></code>. So, when we describe a room, we should only show the character’s description if the <code class="docutils literal notranslate"><span class="pre">character</span></code> value is not <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>Return to <strong>room.py</strong> and modify the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method as highlighted below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -562,19 +583,22 @@
 </pre></div>
 </div>
 <p>Let’s investigate that code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">self.character</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code> → checks if the <em>this</em> room has a character</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">self.character</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code> → checks if this room actually has a character in it</p>
 <ul>
-<li><p>we use the <code class="docutils literal notranslate"><span class="pre">is</span></code> operator is to check if a variable’s value is <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">is</span></code> keyword is used to check if something is equal to <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
 </ul>
 </li>
-<li><p>calls the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method for <em>this</em> room</p></li>
+<li><p>if there <em>is</em> a character, the code runs the character’s <code class="docutils literal notranslate"><span class="pre">describe</span></code> method to show their details</p></li>
 </ul>
+</div>
 </section>
 <section id="testing">
 <h3>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h3>
 <p><strong>Predict</strong> what you think will happen and the <strong>Run</strong> the code.</p>
-<p>Test to make sure that you get character descriptions, but only when you enter a room that has a character.</p>
+<p>Test to make sure that you get character descriptions, but only when you enter a room that has a character in it.</p>
 </section>
 </section>
 <section id="create-character-interactions">
@@ -613,19 +637,22 @@
 </span></pre></div>
 </div>
 <p>Let’s investigate this code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">talk(self):</span></code> → is defining the talk method for <em>this</em> character</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">send</span> <span class="pre">converstation</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">terminal</span></code> → our method description comment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">self.conversation</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code> → checks whether the character <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attributer has a value</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">talk(self):</span></code> → this creates the talk method for this character</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">send</span> <span class="pre">conversation</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">terminal</span></code> → a note explaining what the method does</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">self.conversation</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code> → checks if the character actually has something to say</p>
 <ul>
-<li><p>checking the <strong>main.py</strong> → Nigel has a <code class="docutils literal notranslate"><span class="pre">conversation</span></code> value but Ugine does not</p></li>
-<li><p>our <code class="docutils literal notranslate"><span class="pre">talk</span></code> method needs to allow for characters that don’t have a conversation</p></li>
+<li><p>in <strong>main.py</strong>, Nigel has a conversation, but Ugine doesn’t</p></li>
+<li><p>the method needs to handle both situations</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}:</span> <span class="pre">{self.conversation}&quot;)</span></code> → if there is a <code class="docutils literal notranslate"><span class="pre">conversation</span></code> value, then display the character name and what they say</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → when the character doesn’t have a <code class="docutils literal notranslate"><span class="pre">conversation</span></code> value</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">doesn't</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">talk</span> <span class="pre">to</span> <span class="pre">you&quot;)</span></code> → display a message that doesn’t require a <code class="docutils literal notranslate"><span class="pre">conversation</span></code> attribute</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}:</span> <span class="pre">{self.conversation}&quot;)</span></code> → if the character has a conversation, print their name and what they say</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → runs when the character has no conversation set</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">doesn't</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">talk</span> <span class="pre">to</span> <span class="pre">you&quot;)</span></code> → shows a message for characters who won’t talk</p></li>
 </ul>
+</div>
 <p>Now let’s add both the <code class="docutils literal notranslate"><span class="pre">hug</span></code> and <code class="docutils literal notranslate"><span class="pre">fight</span></code> methods with the highlighted code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
@@ -744,6 +771,8 @@
 </pre></div>
 </div>
 <p>Since the event handler for all three interactions is virtually the same, we’ll just investigate the code for the <code class="docutils literal notranslate"><span class="pre">talk</span></code> method:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">elif</span> <span class="pre">command</span> <span class="pre">==</span> <span class="pre">&quot;talk&quot;:</span></code> → checks if the user’s command was <code class="docutils literal notranslate"><span class="pre">talk</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code> → checks if there is a character in the room</p>
@@ -755,6 +784,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → deals with rooms with no character</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;There</span> <span class="pre">is</span> <span class="pre">no</span> <span class="pre">one</span> <span class="pre">here</span> <span class="pre">to</span> <span class="pre">talk</span> <span class="pre">to&quot;)</span></code> → message for when there is no character</p></li>
 </ul>
+</div>
 </section>
 <section id="stage-3-task">
 <h2>Stage 3 task<a class="headerlink" href="#stage-3-task" title="Link to this heading">¶</a></h2>
