@@ -1,6 +1,7 @@
 # OOP Primer
 
-```{topic} In this lesson you will:
+```{topic} Learning Intentions
+By the end of this lesson, you will be able to:
 * understand that OOP is a way of organising programs using objects
 * identify the terms class, object, attribute, and method
 * explain the difference between a class and an object

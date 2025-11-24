@@ -1,26 +1,34 @@
 # Stage 2 - Movement
 
-```{topic} In this lesson you will:
-
-- learn to define methods with arguments and return values
-- how event driven programming works
-- how to create main loops for event driven programs
-- how to create event handlers for event driven programs
-- how to test branching code
+```{topic} Learning Intentions
+By the end of this lesson you will:
+* understand event-driven programming and the role of a main loop 
+* know how methods use arguments and return values to control program behaviour 
+* create a method that returns a new state (the `move` method) 
+* build a main loop that reads user input and triggers event handlers 
+* test branching code and handle invalid commands with clear feedback 
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hZd1FcDApCI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction
 
-In Stage 1 we created three rooms, link them together, and got the program to describe them. While that was necessary, it doesn't make for a very good adventure game. So, in Stage 2 we will add code that allows the user to move between rooms, and we will create the **main loop**.
+In Stage 1 you made three rooms, connected them, and got the program to describe each one. That was a good start, but it’s not much of a game yet. In Stage 2 you’ll write code that lets the player move between rooms, which means changing the game’s **state** (for example, which room you are in), and you’ll build the **main loop**.
 
-The main loop is an essential aspect of **event-driven programming**. Our **main.py** will initialize the game, creating all the necessary objects. It will then enter in **main loop** where it will wait for the user to provide input, and then respond to this input.
+```{admonition} State machines
+:class: note
+A state machine is a way of thinking about how a program changes as things happen. At any moment, the program is in one **state**—like being in a certain room in your game. When an event happens, such as the player typing a command, the program follows a rule that decides what the next state should be. 
 
-```{admonition} Event driven programming
-Event-driven programming is a type of computer programming where the order of tasks is determined by events, like a user clicking a button or receiving information from a sensor. 
+For example, typing “east” might move you from the Armoury to the Lab. Each state has certain things you can do, and each action can move you to a new state. It’s like following a map where every choice leads to a different place, and the program always knows exactly where it is and what it should do next.
+```
 
-Instead of following a set plan like in traditional programming, the program waits for events to happen and then reacts to them. This makes the program more flexible and able to change as needed.
+The main loop is a key part of **event-driven programming**. Your **main.py** file will set up the game and create all the objects it needs. Then it will enter the **main loop**, where the program waits for the player to type something and then reacts to that input.
+
+```{admonition} Event-driven programming
+:class: note
+Event-driven programming is when a program doesn’t just run straight from top to bottom, but instead waits for things to happen and reacts to them. These things are called **events**, like the user typing a command, clicking a button, or a sensor sending data. 
+
+The program sits in a loop, **listening** for these events, and when one occurs, it runs the code that matches that event. This makes programs more flexible because they only do something when there’s a reason to, just like you don’t answer someone until they speak to you first.
 ```
 
 To achieve this we will need to complete the following steps:
@@ -82,18 +90,18 @@ class Room():
 
 We need to create the **main loop** before we call this code, but let's **investigate** our new code anyway.
 
-- `def move(self, direction):` &rarr;  defines the `move` method which accepts one argument: `direction`
-- `# returns the room linked in the given direction` &rarr;  comment to explain the method
-- `if direction in self.linked_rooms.keys():` &rarr;  checks if passed `direction` is a valid option
-  - `self.linked_rooms.keys()`
-    - gets all the `keys` from the `linked_rooms` attribute for this `Room` object
-    - since the `keys` are the directions of the linked rooms, this list is a list of all the valid directions.
-  - `if direction in` &rarr;  checks if the provided direction is in the list of valid directions
-- `return self.linked_rooms[direction]` &rarr; if the direction is valid, the `Room` object in that direction will be returned
-- `self.linked_rooms[direction]` &rarr; get the `Room` object for the provided `direction`
-- `else:` &rarr;  if the provided direction is not valid, then this block will be executed.
-- `print("You can't go that way")` &rarr; lets the user know the direction is not valid
-- `return self` &rarr; since the user cannot move into another room, the method returns the current `Room` object (`self`)
+```{admonition} Code Explaination
+* `def move(self, direction):` &rarr; defines the `move` function and takes one input: the direction the player wants to go.
+* `# returns the room linked in the given direction` &rarr; a comment explaining what the function does.
+* `if direction in self.linked_rooms.keys():` &rarr; checks whether the direction the player typed is actually one of the directions this room allows.
+  * `self.linked_rooms.keys()` &rarr; gets all the possible directions you can go from this room.
+  * `if direction in` &rarr; checks if the player’s direction is one of those options.
+* `return self.linked_rooms[direction]` &rarr; returns the room in that direction if it’s valid.
+  * `self.linked_rooms[direction]` &rarr; retrieves the room object linked to that direction from the dictionary.
+* `else:` &rarr; runs if the direction isn’t allowed.
+  * `print("You can't go that way")` &rarr; tells the player they tried an invalid direction.
+  * `return self` &rarr; keeps the player in the same room because the move didn’t work.
+```
 
 ## Initialize starting room
 
@@ -135,12 +143,14 @@ current_room = cavern
 
 Let's **investigate** the new code
 
-- the `'''` at lines 21 and 26 turns the room descriptions in a comment block, so the program will ignore them
-  - you could simply delete these lines, but by **commenting them out** they are still available if you need them for debugging purposes.
-- `# initialise variables` &rarr; a code structure comment
-- `current_room = cavern` 
-  - creates a variable to keep track of the current room the player is in.
-  - sets the initial `current_room` as the `cavern` `Room` object
+```{admonition} Code Explaination
+* The `'''` on lines 21 and 26 &rarr; turns the room descriptions into a big comment, so Python ignores that code.
+  * You *could* delete it, but leaving it commented out means you can bring it back later if you need it for debugging.
+* `# initialise variables` &rarr; a comment to explain what the next lines of code are doing.
+* `current_room = cavern`
+  * makes a variable that tracks which room the player is currently in.
+  * starts the player in the `cavern` room.
+```
 
 ## Create main loop
 
@@ -192,6 +202,7 @@ while running:
 Finally we can run our code, but don't forget **PRIMM**. **Predict** you think the program will do, then **run** the program.
 
 ```{admonition} Escaping an infinite loop
+:class: info
 In Python, when you find yourself in an infinte loop, you can exit the loop my pressing `ctrl` + `c` on Windows or `control` + `C` on macOS.
 
 In addition, if you are using Thonny, you can click the **stop** icon.
@@ -199,19 +210,24 @@ In addition, if you are using Thonny, you can click the **stop** icon.
 
 Let's **investigate** the new code line-by-line.
 
-- `running = True` &rarr; used to keep the **main loop** running until the user exits.
-  - this is called a **flag variable** which will be changed to `False` when the user chooses to exit
-- `# ----- MAIN LOOP -----` &rarr; code structure comment. This is a major component, hence the capitalization.
-- `while running:` &rarr; the start of our **main loop**
-  - as long as `running` remains `True` the **main loop** will repeat
-- `current_room.describe()` &rarr; calls the `describe` method for the `current_room`
-  - initially this is the `cavern`
-- `command = input("> ").lower()` &rarr; gets user input
-  - `input("> ")` &rarr; places `"> "` on the screen as a prompt then accepts the user input
-  - `.lower()` &rarr; converts the user input to all lowercase
-  - `command =` &rarr; assigns the converted user input to the `command` variable
+```{admonition} Code Explaination
+* `running = True` &rarr; used to keep the **main loop** going until the player decides to quit.
 
-Notice that no matter what the user enters, the same thing repeats. That's because we have create the **main loop** and accepted the user's input, but we haven't responded to that input.
+  * This is called a **flag variable** &mdash;it starts as `True`, and when the player wants to exit, it gets changed to `False`.
+* `# ----- MAIN LOOP -----` &rarr; a comment showing where the main loop begins.
+* `while running:` &rarr; starts the **main loop**.
+  * The loop keeps repeating as long as `running` is `True`.
+* `current_room.describe()` &rarr; runs the `describe` function for whatever room is stored in the `current_room` variable.
+  * At the start, this is the `cavern`.
+* `command = input("> ").lower()` &rarr; reads what the player types.
+  * `input("> ")` &rarr; shows `"> "` on the screen and waits for the player to type something.
+  * `.lower()` &rarr; turns the input into lowercase so the program can read it more easily.
+  * `command =` &rarr; stores the final text in the `command` variable.
+```
+
+Notice that no matter what the player types, the same thing keeps happening. That’s because we’ve built the **main loop**, which is waiting for events (the player’s input), but we haven’t written any code to *react* to those events yet. 
+
+In a **state machine**, the game should change state when something happens—like moving to a new room—but right now there are no rules telling the program how to change state when an event occurs. So the loop just repeats without doing anything new.
 
 ## Responding to commands
 

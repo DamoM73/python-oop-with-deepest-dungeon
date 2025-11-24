@@ -1,6 +1,7 @@
 # Stage 1 - Create Rooms
 
-```{topic} In this lesson you will:
+```{topic} Learning Intentions
+By the end of this lesson, you will be able to:
 * understand how classes, attributes, and methods work together in a Python program
 * read simple UML class diagrams and identify the class name, its attributes, and its methods
 * make a basic Python class that uses an `__init__` method and another method you create
@@ -77,7 +78,8 @@ class Room():
 - `class Room():` - defined the `Room` class object
 ```
 
-```{note} Naming conventions
+```{admonition} Naming conventions
+:class: note
 Most Python names use `snake_case`, but class names are different. Class names must use `CamelCase`, like `Room`.
 
 Python won’t give you an error if you break this rule, but following it makes your code easier to read and maintain.

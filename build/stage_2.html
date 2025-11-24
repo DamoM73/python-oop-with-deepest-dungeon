@@ -254,24 +254,30 @@
           <section id="stage-2-movement">
 <h1>Stage 2 - Movement<a class="headerlink" href="#stage-2-movement" title="Link to this heading">¶</a></h1>
 <aside class="topic">
-<p class="topic-title">In this lesson you will:</p>
+<p class="topic-title">Learning Intentions</p>
+<p>By the end of this lesson you will:</p>
 <ul class="simple">
-<li><p>learn to define methods with arguments and return values</p></li>
-<li><p>how event driven programming works</p></li>
-<li><p>how to create main loops for event driven programs</p></li>
-<li><p>how to create event handlers for event driven programs</p></li>
-<li><p>how to test branching code</p></li>
+<li><p>understand event-driven programming and the role of a main loop</p></li>
+<li><p>know how methods use arguments and return values to control program behaviour</p></li>
+<li><p>create a method that returns a new state (the <code class="docutils literal notranslate"><span class="pre">move</span></code> method)</p></li>
+<li><p>build a main loop that reads user input and triggers event handlers</p></li>
+<li><p>test branching code and handle invalid commands with clear feedback</p></li>
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hZd1FcDApCI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
-<p>In Stage 1 we created three rooms, link them together, and got the program to describe them. While that was necessary, it doesn’t make for a very good adventure game. So, in Stage 2 we will add code that allows the user to move between rooms, and we will create the <strong>main loop</strong>.</p>
-<p>The main loop is an essential aspect of <strong>event-driven programming</strong>. Our <strong>main.py</strong> will initialize the game, creating all the necessary objects. It will then enter in <strong>main loop</strong> where it will wait for the user to provide input, and then respond to this input.</p>
-<div class="admonition-event-driven-programming admonition">
-<p class="admonition-title">Event driven programming</p>
-<p>Event-driven programming is a type of computer programming where the order of tasks is determined by events, like a user clicking a button or receiving information from a sensor.</p>
-<p>Instead of following a set plan like in traditional programming, the program waits for events to happen and then reacts to them. This makes the program more flexible and able to change as needed.</p>
+<p>In Stage 1 you made three rooms, connected them, and got the program to describe each one. That was a good start, but it’s not much of a game yet. In Stage 2 you’ll write code that lets the player move between rooms, which means changing the game’s <strong>state</strong> (for example, which room you are in), and you’ll build the <strong>main loop</strong>.</p>
+<div class="note admonition">
+<p class="admonition-title">State machines</p>
+<p>A state machine is a way of thinking about how a program changes as things happen. At any moment, the program is in one <strong>state</strong>—like being in a certain room in your game. When an event happens, such as the player typing a command, the program follows a rule that decides what the next state should be.</p>
+<p>For example, typing “east” might move you from the Armoury to the Lab. Each state has certain things you can do, and each action can move you to a new state. It’s like following a map where every choice leads to a different place, and the program always knows exactly where it is and what it should do next.</p>
+</div>
+<p>The main loop is a key part of <strong>event-driven programming</strong>. Your <strong>main.py</strong> file will set up the game and create all the objects it needs. Then it will enter the <strong>main loop</strong>, where the program waits for the player to type something and then reacts to that input.</p>
+<div class="note admonition">
+<p class="admonition-title">Event-driven programming</p>
+<p>Event-driven programming is when a program doesn’t just run straight from top to bottom, but instead waits for things to happen and reacts to them. These things are called <strong>events</strong>, like the user typing a command, clicking a button, or a sensor sending data.</p>
+<p>The program sits in a loop, <strong>listening</strong> for these events, and when one occurs, it runs the code that matches that event. This makes programs more flexible because they only do something when there’s a reason to, just like you don’t answer someone until they speak to you first.</p>
 </div>
 <p>To achieve this we will need to complete the following steps:</p>
 <ol class="arabic simple">
@@ -330,26 +336,30 @@
 </span></pre></div>
 </div>
 <p>We need to create the <strong>main loop</strong> before we call this code, but let’s <strong>investigate</strong> our new code anyway.</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">move(self,</span> <span class="pre">direction):</span></code> →  defines the <code class="docutils literal notranslate"><span class="pre">move</span></code> method which accepts one argument: <code class="docutils literal notranslate"><span class="pre">direction</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">returns</span> <span class="pre">the</span> <span class="pre">room</span> <span class="pre">linked</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">given</span> <span class="pre">direction</span></code> →  comment to explain the method</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">direction</span> <span class="pre">in</span> <span class="pre">self.linked_rooms.keys():</span></code> →  checks if passed <code class="docutils literal notranslate"><span class="pre">direction</span></code> is a valid option</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">move(self,</span> <span class="pre">direction):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">move</span></code> function and takes one input: the direction the player wants to go.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">returns</span> <span class="pre">the</span> <span class="pre">room</span> <span class="pre">linked</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">given</span> <span class="pre">direction</span></code> → a comment explaining what the function does.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">direction</span> <span class="pre">in</span> <span class="pre">self.linked_rooms.keys():</span></code> → checks whether the direction the player typed is actually one of the directions this room allows.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">self.linked_rooms.keys()</span></code></p>
-<ul>
-<li><p>gets all the <code class="docutils literal notranslate"><span class="pre">keys</span></code> from the <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> attribute for this <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
-<li><p>since the <code class="docutils literal notranslate"><span class="pre">keys</span></code> are the directions of the linked rooms, this list is a list of all the valid directions.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.linked_rooms.keys()</span></code> → gets all the possible directions you can go from this room.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">direction</span> <span class="pre">in</span></code> → checks if the player’s direction is one of those options.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">direction</span> <span class="pre">in</span></code> →  checks if the provided direction is in the list of valid directions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">self.linked_rooms[direction]</span></code> → returns the room in that direction if it’s valid.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.linked_rooms[direction]</span></code> → retrieves the room object linked to that direction from the dictionary.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">self.linked_rooms[direction]</span></code> → if the direction is valid, the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object in that direction will be returned</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">self.linked_rooms[direction]</span></code> → get the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object for the provided <code class="docutils literal notranslate"><span class="pre">direction</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> →  if the provided direction is not valid, then this block will be executed.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way&quot;)</span></code> → lets the user know the direction is not valid</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">self</span></code> → since the user cannot move into another room, the method returns the current <code class="docutils literal notranslate"><span class="pre">Room</span></code> object (<code class="docutils literal notranslate"><span class="pre">self</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → runs if the direction isn’t allowed.</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;You</span> <span class="pre">can't</span> <span class="pre">go</span> <span class="pre">that</span> <span class="pre">way&quot;)</span></code> → tells the player they tried an invalid direction.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">self</span></code> → keeps the player in the same room because the move didn’t work.</p></li>
 </ul>
+</li>
+</ul>
+</div>
 </section>
 <section id="initialize-starting-room">
 <h2>Initialize starting room<a class="headerlink" href="#initialize-starting-room" title="Link to this heading">¶</a></h2>
@@ -386,20 +396,23 @@
 </span></pre></div>
 </div>
 <p>Let’s <strong>investigate</strong> the new code</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p>the <code class="docutils literal notranslate"><span class="pre">'''</span></code> at lines 21 and 26 turns the room descriptions in a comment block, so the program will ignore them</p>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">'''</span></code> on lines 21 and 26 → turns the room descriptions into a big comment, so Python ignores that code.</p>
 <ul>
-<li><p>you could simply delete these lines, but by <strong>commenting them out</strong> they are still available if you need them for debugging purposes.</p></li>
+<li><p>You <em>could</em> delete it, but leaving it commented out means you can bring it back later if you need it for debugging.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialise</span> <span class="pre">variables</span></code> → a code structure comment</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialise</span> <span class="pre">variables</span></code> → a comment to explain what the next lines of code are doing.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">current_room</span> <span class="pre">=</span> <span class="pre">cavern</span></code></p>
 <ul>
-<li><p>creates a variable to keep track of the current room the player is in.</p></li>
-<li><p>sets the initial <code class="docutils literal notranslate"><span class="pre">current_room</span></code> as the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> <code class="docutils literal notranslate"><span class="pre">Room</span></code> object</p></li>
+<li><p>makes a variable that tracks which room the player is currently in.</p></li>
+<li><p>starts the player in the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> room.</p></li>
 </ul>
 </li>
 </ul>
+</div>
 </section>
 <section id="create-main-loop">
 <h2>Create main loop<a class="headerlink" href="#create-main-loop" title="Link to this heading">¶</a></h2>
@@ -444,38 +457,42 @@
 </span></pre></div>
 </div>
 <p>Finally we can run our code, but don’t forget <strong>PRIMM</strong>. <strong>Predict</strong> you think the program will do, then <strong>run</strong> the program.</p>
-<div class="admonition-escaping-an-infinite-loop admonition">
+<div class="info admonition">
 <p class="admonition-title">Escaping an infinite loop</p>
 <p>In Python, when you find yourself in an infinte loop, you can exit the loop my pressing <code class="docutils literal notranslate"><span class="pre">ctrl</span></code> + <code class="docutils literal notranslate"><span class="pre">c</span></code> on Windows or <code class="docutils literal notranslate"><span class="pre">control</span></code> + <code class="docutils literal notranslate"><span class="pre">C</span></code> on macOS.</p>
 <p>In addition, if you are using Thonny, you can click the <strong>stop</strong> icon.</p>
 </div>
 <p>Let’s <strong>investigate</strong> the new code line-by-line.</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">True</span></code> → used to keep the <strong>main loop</strong> running until the user exits.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">True</span></code> → used to keep the <strong>main loop</strong> going until the player decides to quit.</p>
 <ul>
-<li><p>this is called a <strong>flag variable</strong> which will be changed to <code class="docutils literal notranslate"><span class="pre">False</span></code> when the user chooses to exit</p></li>
+<li><p>This is called a <strong>flag variable</strong> —it starts as <code class="docutils literal notranslate"><span class="pre">True</span></code>, and when the player wants to exit, it gets changed to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">-----</span> <span class="pre">MAIN</span> <span class="pre">LOOP</span> <span class="pre">-----</span></code> → code structure comment. This is a major component, hence the capitalization.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">running:</span></code> → the start of our <strong>main loop</strong></p>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">-----</span> <span class="pre">MAIN</span> <span class="pre">LOOP</span> <span class="pre">-----</span></code> → a comment showing where the main loop begins.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">running:</span></code> → starts the <strong>main loop</strong>.</p>
 <ul>
-<li><p>as long as <code class="docutils literal notranslate"><span class="pre">running</span></code> remains <code class="docutils literal notranslate"><span class="pre">True</span></code> the <strong>main loop</strong> will repeat</p></li>
+<li><p>The loop keeps repeating as long as <code class="docutils literal notranslate"><span class="pre">running</span></code> is <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">current_room.describe()</span></code> → calls the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method for the <code class="docutils literal notranslate"><span class="pre">current_room</span></code></p>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room.describe()</span></code> → runs the <code class="docutils literal notranslate"><span class="pre">describe</span></code> function for whatever room is stored in the <code class="docutils literal notranslate"><span class="pre">current_room</span></code> variable.</p>
 <ul>
-<li><p>initially this is the <code class="docutils literal notranslate"><span class="pre">cavern</span></code></p></li>
+<li><p>At the start, this is the <code class="docutils literal notranslate"><span class="pre">cavern</span></code>.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">=</span> <span class="pre">input(&quot;&gt;</span> <span class="pre">&quot;).lower()</span></code> → gets user input</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">=</span> <span class="pre">input(&quot;&gt;</span> <span class="pre">&quot;).lower()</span></code> → reads what the player types.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">input(&quot;&gt;</span> <span class="pre">&quot;)</span></code> → places <code class="docutils literal notranslate"><span class="pre">&quot;&gt;</span> <span class="pre">&quot;</span></code> on the screen as a prompt then accepts the user input</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">.lower()</span></code> → converts the user input to all lowercase</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">=</span></code> → assigns the converted user input to the <code class="docutils literal notranslate"><span class="pre">command</span></code> variable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">input(&quot;&gt;</span> <span class="pre">&quot;)</span></code> → shows <code class="docutils literal notranslate"><span class="pre">&quot;&gt;</span> <span class="pre">&quot;</span></code> on the screen and waits for the player to type something.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.lower()</span></code> → turns the input into lowercase so the program can read it more easily.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">command</span> <span class="pre">=</span></code> → stores the final text in the <code class="docutils literal notranslate"><span class="pre">command</span></code> variable.</p></li>
 </ul>
 </li>
 </ul>
-<p>Notice that no matter what the user enters, the same thing repeats. That’s because we have create the <strong>main loop</strong> and accepted the user’s input, but we haven’t responded to that input.</p>
+</div>
+<p>Notice that no matter what the player types, the same thing keeps happening. That’s because we’ve built the <strong>main loop</strong>, which is waiting for events (the player’s input), but we haven’t written any code to <em>react</em> to those events yet.</p>
+<p>In a <strong>state machine</strong>, the game should change state when something happens—like moving to a new room—but right now there are no rules telling the program how to change state when an event occurs. So the loop just repeats without doing anything new.</p>
 </section>
 <section id="responding-to-commands">
 <h2>Responding to commands<a class="headerlink" href="#responding-to-commands" title="Link to this heading">¶</a></h2>

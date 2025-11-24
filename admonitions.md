@@ -1,8 +1,8 @@
 ```{topic} In this lesson you will:
 ```
 
-```{admonition} Code Explaination
-```
+```{admonition} Concept
+:class: note
 
 ```{admonition} Information
 :class: info
