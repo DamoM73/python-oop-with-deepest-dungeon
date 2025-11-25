@@ -1,32 +1,37 @@
 # Stage 8 - Useability
 
-```{topic} In this lesson you will:
-
-- Improve the code useabilty
+```{topic} Learning Intentions
+In this lesson you will:
+* understand why making something easy to use is important for the person using it
+* know what UI and UX mean and why they matter when people use a program
+* understand how comments and neat code make a program easier to read and fix
+* improve a program by adding features that help the user, like a help option or clearer messages
+* tidy up a program by removing code you don’t need and organising it so it’s easier to read and use
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lHSCfn0U45k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction
 
-Our dungeon is complete. We have a fully functioning game, but before we sign-off we need to improve the useability of our program and tidy up our code.
+Our dungeon works, but before we finish we need to make it easier to use and clean up the code.
 
-To do this we will:
+We will:
 
-- Create a **help** command
-- Improve the user experience and user interface
-- Add a farewell message
-- Add some in-code comments
-- Remove unused code
-- Standardise our white-space
+* add a **help** command
+* make the program easier to read and use
+* add a goodbye message at the end
+* write more comments in the code
+* delete code we don’t need
+* make our spacing neat and consistent
+
 
 ## Help command
 
-We know all the commands we can use because we wrote the code. Someone else might not know what they can say. In addition, if they don't enter one of the commands, the program only says `I don't understand.`, which is far from helpful.
+We know the commands because we wrote the code. A new player won’t know what they’re allowed to type. Right now, if they type something wrong, the program just says “I don’t understand,” which isn’t very helpful.
 
-To make life easier for new players, we should create a **help** command which lists all the commands. But how will the player know about the **help** command, without using the **help** command? Simple, we change the catch-all event handler (under the `else:`) to inform the user about the help command.
+To fix this, we should add a **help** command that shows all the commands. But players won’t know the help command exists unless we tell them. So we update the final `else:` section to remind them to type “help” when they get something wrong.
 
-To implement this, add the highlighted code below to **main.py**:
+Now add the highlighted code to **main.py**.
 
 ```{code-block} python
 :linenos:
@@ -161,23 +166,25 @@ while running:
         print("Enter 'help' to list the copmmands.")
 ```
 
-By now this code should be familiar and makes sense to you.
+You’ve seen this kind of code many times now, so you should already understand how it works without investigating it.
 
 ## Improving the UI and UX
 
-Although our program is visually very simple, the user stills interacts with it, which means we need to consider the UI and the UX.
+Even though our program looks simple, people still have to use it, so we need to think about the UI and UX &mdash; how it looks and how easy it is to use.
+
 
 ```{admonition} UI and UX
-UI stands for User Interface, which is basically what you see on your screen when you use an app or a website. This includes things like buttons, menus, icons, and colors. UI design focuses on making things look good and easy to use.
+:class: note
+UI means **User Interface**. It’s the stuff you actually see on the screen when you use an app or website — things like buttons, menus, icons, and colours. UI is about making everything look clear and easy to use.
 
-UX stands for User Experience, which is how you feel when you use an app or a website. It's about how easy it is to use, how it makes you feel, and whether it helps you achieve what you're trying to do. UX design focuses on making things easy and enjoyable to use.
+UX means **User Experience**. It’s about what it *feels* like to use the app — if it’s easy, confusing, fun, or annoying. UX is about making sure the user has a smooth and enjoyable time using the program.
 ```
 
-We have already addressed some UI and UX problems by adding the **help** command. Play the game and see if you can identify anything else.
+We’ve already fixed some UI and UX issues by adding the **help** command. Now play the game and see if you can spot anything else that feels confusing.
 
-Did you notice that after entering a command, the game responds and then quickly describes the room again. It's really easy to loose the command response in this quick action. Let's change that by writing the response and then asking the user to press a key to proceed.
+You might notice that after you type a command, the game shows the response and then instantly prints the room description again. This makes it easy to miss what the game just told you. To fix that, we’ll show the response and then make the user press a key before the game continues.
 
-I implement this, add the highlighted code below.
+To do this, add the highlighted code below.
 
 ```{code-block} python
 :linenos:
@@ -317,16 +324,18 @@ Save the file, **predict** and then **run** the code.
 
 How does that work? Let's **investigate**:
 
-- `input("\nPress <Enter> key to continue")` &rarr; this is a hack. That is we are using `input` in an unconventional way to achieve our desired outcome.
-  - the normal operation of `input` is to wait for the user response &rarr; addresses the pausing of the game
-  - normally the user enters their response by pressing the Enter key &rarr; stops the pausing
-  - the value the user enters is **not** assigned to a variable, so it just disappears
+```{admonition} Code Explaination
+* `input("\nPress <Enter> key to continue")` is basically a little trick. We’re using `input` in a way it’s not normally meant to be used.
+  * Normally, `input` waits for the user to type something, which is why it pauses the game.
+  * The user presses **Enter** to continue, which ends the pause.
+  * We don’t save what the user types, so whatever they enter is ignored and disappears.
+```
 
 ## Farewell message
 
-When the game ends, it just stops. Whether the player won or lost it just exits the the Shell prompt. To make things a little more polite, we should add an farewell message.
+When the game ends, it just shuts off straight away. No message, even if you win or lose. To make the ending feel a bit nicer, we should add a goodbye message.
 
-To include a farewell message add the highlighted code below
+Add the highlighted code below to include the farewell message.
 
 ```{code-block} python
 :linenos:
@@ -465,7 +474,13 @@ print("Thank you for playing Deepest Dungeon")
 
 ## In-code comments
 
-We already have some in-code comment that helps structure our code, but we have missed much of the main loop. We should add some comment to the main loop to make our code more readable and therefore maintainable.
+We already have a few comments in the code to help explain what parts do, but most of the main loop doesn’t have any. Adding comments there will make the code easier to read and easier to fix later.
+
+
+```{admonition} Code maintainability
+:class: note
+Code maintainability means making your code easy to understand, fix, and update later. If your code is neat, well-organised, and has clear comments, you or someone else can quickly figure out how it works. This makes it easier to find bugs, add new features, and change things without breaking the program.
+```
 
 Let's first start with **main.py**
 
@@ -613,7 +628,7 @@ while running:
 print("Thank you for playing Deepest Dungeon")
 ```
 
-When you create classes your should really have a comment that explains what each method does. If you look at the classes in our **room.py**, **item.py** and **character.py** files you will see that we have already done this.
+When you make classes, it’s a good idea to add a comment explaining what each method does. If you check the classes in **room.py**, **item.py**, and **character.py**, you’ll see we’ve already done this there.
 
 ## Remove unused code
 
@@ -764,7 +779,7 @@ print("Thank you for playing Deepest Dungeon")
 
 ## Final code
 
-White space is the blank lines between our code. You can use this to help structure your code.
+Whitespace is the empty lines in your code. You can use it to break your code into clear sections and make it easier to read.
 
 Finalise your code by adjusting it so to look the same as the following code:
 
@@ -1035,8 +1050,8 @@ class Item():
 
 ## Final Make
 
-The tutorials are now over. It is time to make this dungeon yours by adding new features. The Extensions Ideas page has some suggestions.
+The tutorials are finished. Now it’s your turn to make the dungeon your own by adding new features. You can check the Extension Ideas page for inspiration.
 
-The current code does have a couple of logical errors, but you will have to test it to find out what they are and then try and solve them. Don't forget to use your debugger to help you with this.
+There are a few logic mistakes in the code, but you’ll need to test the game to find them and work out how to fix them. Make sure you use your debugger to help.
 
-Good luck. May your adventure be long and fruitful.
+Good luck on your adventure.

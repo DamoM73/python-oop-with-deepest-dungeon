@@ -1,45 +1,48 @@
 # Stage 7 - Victory Conditions
 
-```{topic} In this lesson you will:
-
-- Count the number of enemies
-- Create victory conditions
+```{topic} Learning Intentions
+In this lesson you will:
+* Know the difference between class variables and normal (instance) variables in an OOP programme.
+* Understand how objects can share information by using a class variable.
+* Know when and where to put if-statements inside methods so an object can make decisions.
+* Create and change class variables so objects can share the same data.
+* Write methods that use if-statements to change what an object does based on what is happening in the programme.
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hTGv542obJo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction
 
-We are close to finishing our text-based adventure game. We now have a dungeon in which the user can move around, collect different items, interact with different characters and have the result of those interactions determined by the character type.
+We’re almost done with our text-based adventure game. You now have a dungeon where the player can move around, pick up items, and talk or fight with different characters. What happens in these interactions depends on the type of character they meet.
 
-In this stage we will look at establishing victory conditions for the game.
+In this stage, you’re going to set up how the player wins the game.
 
-We will do this by:
+You will do this by:
 
-- keeping a count of the number of enemies
-- reducing the enemy count when each enemy is defeated
-- declare the player victorious when there are no enemies left
+* counting how many enemies exist
+* lowering that count each time an enemy is defeated
+* checking when the count reaches zero so the player wins the game
 
 ### Class Diagram
 
-Look to our class diagram for this stage and you will notice something new. 
+Have a look at the class diagram for this stage and you’ll see something new.
 
-The `Enemy` class has a new: 
+The `Enemy` class now has:
 
-- `num_of_enemy` attribute
-- `get_num_of_enemy` method
+* a `num_of_enemy` attribute
+* a `get_num_of_enemy` method
 
 ![lesson 7 class diagram](./assets/lesson_7_class_diagram.png)
 
-Notice the `num_of_enemy` attribute is underlined. This indicates that this is a **class variable**. This means that the variable is shared across to all instances of that class. Each instance of that class can access and modify the variable, and any changes will be shared with other classes.
+The `num_of_enemy` attribute is underlined in the diagram. That underline shows it’s a **class variable**. A class variable is shared by every object made from that class. All `Enemy` objects can read it and change it, and whenever one object changes it, the others see the new value too.
 
-In our example, the `num_of_enemy` will be shared with all the `Enemy` objects we create in our game.
+In this game, `num_of_enemy` keeps track of how many `Enemy` objects exist, and every enemy you create will share that same number.
 
 ## Count Number of Enemies
 
-To keep track of the number of `Enemy` objects in the game, we need to add a **class variable** to the `Enemy` class.
+To keep track of how many `Enemy` objects are in the game, we need to add a **class variable** to the `Enemy` class.
 
-So we need to open the **character.py** file, and add the highlighted code below.
+Open **character.py** and add the highlighted code shown below.
 
 ```{code-block} python
 :linenos:
@@ -108,13 +111,14 @@ Save the code, and **run** it to ensure there are no errors.
 
 **Investigating** the code:
 
-- `num_of_enemy = 0` &rarr; creates our **class variable**
-  - important to note the location and the indent level of **class variables**:
-    - need to be placed before the `__init__` method
-    - indented once &rarr; same level as method definitions
-  - also note that, unlike the other attributes, `num_of_enemy` does start with `self` because it is a **class variable**
-- `Enemy.num_of_enemy += 1` &rarr; increases `num_of_enemy` by one each time a new `Enemy` object is created.
-  - since `__init__` runs each time a new enemy is made, the value of `num_of_enemy` will increase
+```{admonition} Code Explaination
+* `num_of_enemy = 0` &rarr; this creates the **class variable**.
+  * Class variables must be written **before** the `__init__` method.
+  * They are indented once, at the same level as the methods.
+  * It does **not** use `self` because it belongs to the whole class, not to one object.
+* `Enemy.num_of_enemy += 1` &rarr; this adds 1 to `num_of_enemy` every time a new `Enemy` is created.
+  * Because `__init__` runs whenever you make a new enemy, the total number of enemies goes up each time.
+```
 
 Now that we are keeping track of the number of enemies, but we can't see what that number is. So let's create a method to find out how many enemies are in the dungeon
 
@@ -188,18 +192,20 @@ class Enemy(Character):
 
 Let's investigate that method:
 
-- `def get_num_of_enemy():` &rarr; defines the method
-  - there is no `self` argument &rarr; this method is not tied to a particular instance, but rather the whole class.
-- `return Enemy.num_of_enemy` &rarr; provides the current value of `num_of_enemy`
-  - notice the `Enemy.` &rarr; tells Python this is a **class variable** of the `Enemy` class
+```{admonition} Code Explaination
+* `def get_num_of_enemy():` &rarr; this creates the method.
+  * It doesn’t have `self` because it’s not linked to one object; it works for the whole class.
+* `return Enemy.num_of_enemy` &rarr; this gives back the current number of enemies.
+  * The `Enemy.` part tells Python to use the **class variable** from the `Enemy` class.
+```
 
 ## Reduce Enemy Count
 
-So we have a count of the number of enemies, and we can retrieve that value, now we need to reduce the enemy count when the player defeats an enemy.
+We can now count how many enemies there are and check that number, but we also need to **lower** the count when the player beats an enemy.
 
-The `Enemy` class `fight` method already has code that is executed when the player defeats the enemy, so we just need to add to that.
+The `fight` method in the `Enemy` class already runs code when an enemy is defeated, so we just need to add one extra line there.
 
-Still in **character.py** go to insert the highlighted line below:
+Stay in **character.py** and add the highlighted line below.
 
 ```{code-block} python
 :linenos:
@@ -270,14 +276,16 @@ class Enemy(Character):
 
 Save the code before we **Investigate** it:
 
-- line `53` &rarr; already determines if the player beats the enemy
-- `Enemy.num_of_enemy -= 1` &rarr; reduces the value of the **class variable** by one.
+```{admonition} Code Explaination
+* Line `53` already checks if the player wins the fight.
+* `Enemy.num_of_enemy -= 1` makes the class variable go down by one when an enemy is defeated.
+```
 
 ## Check for Victory
 
-The player will be victorious when they have defeated all the enemies in the dungeon. When all the enemies have been defeated the `Enemy.num_of_emeny` will be `0`. So we need to find the best place to check this.
+The player wins the game when every enemy has been defeated. When that happens, `Enemy.num_of_enemy` will be `0`. So we need to choose the right spot in the code to check for this.
 
-Let's look back at **main.py**. Line `89` is where Python decides if they player wins, so it makes sense to put out `num_of_enemy` check around here.
+In **main.py**, line `89` is already where the game checks if the player wins, so that’s the best place to add our `num_of_enemy` check.
 
 Add the highlighted code below:
 
@@ -408,10 +416,12 @@ while running:
 
 **Investigating** that code:
 
-- line `89` &rarr; already established that our new code will only run when the player defeats an enemy
-- `if Enemy.get_num_of_enemy() == 0:` &rarr; checks if the **class variable** is `0`
-- `print("You have slain all the enemies. You are victorious!")` &rarr; displays a victory message
-- `running = False` &rarr; readies to finish the game by exiting the main loop.
+```{admonition} Code Explaination
+* Line `89` makes sure this code only runs after the player defeats an enemy.
+* `if Enemy.get_num_of_enemy() == 0:` checks if the class variable has reached `0`.
+* `print("You have slain all the enemies. You are victorious!")` shows the win message.
+* `running = False` stops the main loop so the game can end.
+```
 
 ## Testing
 

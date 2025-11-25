@@ -5,14 +5,15 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Extension - Player Class" href="ext_player.html"><link rel="prev" title="Stage 7 - Victory Conditions" href="stage_7.html">
         <link rel="prefetch" href="_static/oop_logo.png" as="image">
+        <link rel="prefetch" href="_static/oop_logo.png" as="image">
 
     <link rel="shortcut icon" href="_static/logo.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>Stage 8 - Useability - Deepest Dungeon - Python OOP</title>
+        <title>Stage 8 - Useability - Deepest Dungeon</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4abda5ee" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
     
     
 
@@ -166,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Deepest Dungeon - Python OOP</div></a>
+      <a href="index.html"><div class="brand">Deepest Dungeon</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,10 +188,11 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="_static/oop_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="_static/oop_logo.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/oop_logo.png" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Deepest Dungeon - Python OOP</span>
+  <span class="sidebar-brand-text">Deepest Dungeon</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -255,30 +257,35 @@
           <section id="stage-8-useability">
 <h1>Stage 8 - Useability<a class="headerlink" href="#stage-8-useability" title="Link to this heading">¶</a></h1>
 <aside class="topic">
-<p class="topic-title">In this lesson you will:</p>
+<p class="topic-title">Learning Intentions</p>
+<p>In this lesson you will:</p>
 <ul class="simple">
-<li><p>Improve the code useabilty</p></li>
+<li><p>understand why making something easy to use is important for the person using it</p></li>
+<li><p>know what UI and UX mean and why they matter when people use a program</p></li>
+<li><p>understand how comments and neat code make a program easier to read and fix</p></li>
+<li><p>improve a program by adding features that help the user, like a help option or clearer messages</p></li>
+<li><p>tidy up a program by removing code you don’t need and organising it so it’s easier to read and use</p></li>
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lHSCfn0U45k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
-<p>Our dungeon is complete. We have a fully functioning game, but before we sign-off we need to improve the useability of our program and tidy up our code.</p>
-<p>To do this we will:</p>
+<p>Our dungeon works, but before we finish we need to make it easier to use and clean up the code.</p>
+<p>We will:</p>
 <ul class="simple">
-<li><p>Create a <strong>help</strong> command</p></li>
-<li><p>Improve the user experience and user interface</p></li>
-<li><p>Add a farewell message</p></li>
-<li><p>Add some in-code comments</p></li>
-<li><p>Remove unused code</p></li>
-<li><p>Standardise our white-space</p></li>
+<li><p>add a <strong>help</strong> command</p></li>
+<li><p>make the program easier to read and use</p></li>
+<li><p>add a goodbye message at the end</p></li>
+<li><p>write more comments in the code</p></li>
+<li><p>delete code we don’t need</p></li>
+<li><p>make our spacing neat and consistent</p></li>
 </ul>
 </section>
 <section id="help-command">
 <h2>Help command<a class="headerlink" href="#help-command" title="Link to this heading">¶</a></h2>
-<p>We know all the commands we can use because we wrote the code. Someone else might not know what they can say. In addition, if they don’t enter one of the commands, the program only says <code class="docutils literal notranslate"><span class="pre">I</span> <span class="pre">don't</span> <span class="pre">understand.</span></code>, which is far from helpful.</p>
-<p>To make life easier for new players, we should create a <strong>help</strong> command which lists all the commands. But how will the player know about the <strong>help</strong> command, without using the <strong>help</strong> command? Simple, we change the catch-all event handler (under the <code class="docutils literal notranslate"><span class="pre">else:</span></code>) to inform the user about the help command.</p>
-<p>To implement this, add the highlighted code below to <strong>main.py</strong>:</p>
+<p>We know the commands because we wrote the code. A new player won’t know what they’re allowed to type. Right now, if they type something wrong, the program just says “I don’t understand,” which isn’t very helpful.</p>
+<p>To fix this, we should add a <strong>help</strong> command that shows all the commands. But players won’t know the help command exists unless we tell them. So we update the final <code class="docutils literal notranslate"><span class="pre">else:</span></code> section to remind them to type “help” when they get something wrong.</p>
+<p>Now add the highlighted code to <strong>main.py</strong>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -409,19 +416,19 @@
 <span class="hll"><span class="linenos">128</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
-<p>By now this code should be familiar and makes sense to you.</p>
+<p>You’ve seen this kind of code many times now, so you should already understand how it works without investigating it.</p>
 </section>
 <section id="improving-the-ui-and-ux">
 <h2>Improving the UI and UX<a class="headerlink" href="#improving-the-ui-and-ux" title="Link to this heading">¶</a></h2>
-<p>Although our program is visually very simple, the user stills interacts with it, which means we need to consider the UI and the UX.</p>
-<div class="admonition-ui-and-ux admonition">
+<p>Even though our program looks simple, people still have to use it, so we need to think about the UI and UX — how it looks and how easy it is to use.</p>
+<div class="note admonition">
 <p class="admonition-title">UI and UX</p>
-<p>UI stands for User Interface, which is basically what you see on your screen when you use an app or a website. This includes things like buttons, menus, icons, and colors. UI design focuses on making things look good and easy to use.</p>
-<p>UX stands for User Experience, which is how you feel when you use an app or a website. It’s about how easy it is to use, how it makes you feel, and whether it helps you achieve what you’re trying to do. UX design focuses on making things easy and enjoyable to use.</p>
+<p>UI means <strong>User Interface</strong>. It’s the stuff you actually see on the screen when you use an app or website — things like buttons, menus, icons, and colours. UI is about making everything look clear and easy to use.</p>
+<p>UX means <strong>User Experience</strong>. It’s about what it <em>feels</em> like to use the app — if it’s easy, confusing, fun, or annoying. UX is about making sure the user has a smooth and enjoyable time using the program.</p>
 </div>
-<p>We have already addressed some UI and UX problems by adding the <strong>help</strong> command. Play the game and see if you can identify anything else.</p>
-<p>Did you notice that after entering a command, the game responds and then quickly describes the room again. It’s really easy to loose the command response in this quick action. Let’s change that by writing the response and then asking the user to press a key to proceed.</p>
-<p>I implement this, add the highlighted code below.</p>
+<p>We’ve already fixed some UI and UX issues by adding the <strong>help</strong> command. Now play the game and see if you can spot anything else that feels confusing.</p>
+<p>You might notice that after you type a command, the game shows the response and then instantly prints the room description again. This makes it easy to miss what the game just told you. To fix that, we’ll show the response and then make the user press a key before the game continues.</p>
+<p>To do this, add the highlighted code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -555,20 +562,23 @@
 </div>
 <p>Save the file, <strong>predict</strong> and then <strong>run</strong> the code.</p>
 <p>How does that work? Let’s <strong>investigate</strong>:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">input(&quot;\nPress</span> <span class="pre">&lt;Enter&gt;</span> <span class="pre">key</span> <span class="pre">to</span> <span class="pre">continue&quot;)</span></code> → this is a hack. That is we are using <code class="docutils literal notranslate"><span class="pre">input</span></code> in an unconventional way to achieve our desired outcome.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">input(&quot;\nPress</span> <span class="pre">&lt;Enter&gt;</span> <span class="pre">key</span> <span class="pre">to</span> <span class="pre">continue&quot;)</span></code> is basically a little trick. We’re using <code class="docutils literal notranslate"><span class="pre">input</span></code> in a way it’s not normally meant to be used.</p>
 <ul>
-<li><p>the normal operation of <code class="docutils literal notranslate"><span class="pre">input</span></code> is to wait for the user response → addresses the pausing of the game</p></li>
-<li><p>normally the user enters their response by pressing the Enter key → stops the pausing</p></li>
-<li><p>the value the user enters is <strong>not</strong> assigned to a variable, so it just disappears</p></li>
+<li><p>Normally, <code class="docutils literal notranslate"><span class="pre">input</span></code> waits for the user to type something, which is why it pauses the game.</p></li>
+<li><p>The user presses <strong>Enter</strong> to continue, which ends the pause.</p></li>
+<li><p>We don’t save what the user types, so whatever they enter is ignored and disappears.</p></li>
 </ul>
 </li>
 </ul>
+</div>
 </section>
 <section id="farewell-message">
 <h2>Farewell message<a class="headerlink" href="#farewell-message" title="Link to this heading">¶</a></h2>
-<p>When the game ends, it just stops. Whether the player won or lost it just exits the the Shell prompt. To make things a little more polite, we should add an farewell message.</p>
-<p>To include a farewell message add the highlighted code below</p>
+<p>When the game ends, it just shuts off straight away. No message, even if you win or lose. To make the ending feel a bit nicer, we should add a goodbye message.</p>
+<p>Add the highlighted code below to include the farewell message.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -704,7 +714,11 @@
 </section>
 <section id="in-code-comments">
 <h2>In-code comments<a class="headerlink" href="#in-code-comments" title="Link to this heading">¶</a></h2>
-<p>We already have some in-code comment that helps structure our code, but we have missed much of the main loop. We should add some comment to the main loop to make our code more readable and therefore maintainable.</p>
+<p>We already have a few comments in the code to help explain what parts do, but most of the main loop doesn’t have any. Adding comments there will make the code easier to read and easier to fix later.</p>
+<div class="note admonition">
+<p class="admonition-title">Code maintainability</p>
+<p>Code maintainability means making your code easy to understand, fix, and update later. If your code is neat, well-organised, and has clear comments, you or someone else can quickly figure out how it works. This makes it easier to find bugs, add new features, and change things without breaking the program.</p>
+</div>
 <p>Let’s first start with <strong>main.py</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
@@ -847,7 +861,7 @@
 <span class="linenos">139</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Deepest Dungeon&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>When you create classes your should really have a comment that explains what each method does. If you look at the classes in our <strong>room.py</strong>, <strong>item.py</strong> and <strong>character.py</strong> files you will see that we have already done this.</p>
+<p>When you make classes, it’s a good idea to add a comment explaining what each method does. If you check the classes in <strong>room.py</strong>, <strong>item.py</strong>, and <strong>character.py</strong>, you’ll see we’ve already done this there.</p>
 </section>
 <section id="remove-unused-code">
 <h2>Remove unused code<a class="headerlink" href="#remove-unused-code" title="Link to this heading">¶</a></h2>
@@ -995,7 +1009,7 @@
 </section>
 <section id="final-code">
 <h2>Final code<a class="headerlink" href="#final-code" title="Link to this heading">¶</a></h2>
-<p>White space is the blank lines between our code. You can use this to help structure your code.</p>
+<p>Whitespace is the empty lines in your code. You can use it to break your code into clear sections and make it easier to read.</p>
 <p>Finalise your code by adjusting it so to look the same as the following code:</p>
 <section id="main-py">
 <h3>main.py<a class="headerlink" href="#main-py" title="Link to this heading">¶</a></h3>
@@ -1261,9 +1275,9 @@
 </section>
 <section id="final-make">
 <h2>Final Make<a class="headerlink" href="#final-make" title="Link to this heading">¶</a></h2>
-<p>The tutorials are now over. It is time to make this dungeon yours by adding new features. The Extensions Ideas page has some suggestions.</p>
-<p>The current code does have a couple of logical errors, but you will have to test it to find out what they are and then try and solve them. Don’t forget to use your debugger to help you with this.</p>
-<p>Good luck. May your adventure be long and fruitful.</p>
+<p>The tutorials are finished. Now it’s your turn to make the dungeon your own by adding new features. You can check the Extension Ideas page for inspiration.</p>
+<p>There are a few logic mistakes in the code, but you’ll need to test the game to find them and work out how to fix them. Make sure you use your debugger to help.</p>
+<p>Good luck on your adventure.</p>
 </section>
 </section>
 

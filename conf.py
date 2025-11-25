@@ -38,13 +38,15 @@ exclude_patterns = ['_build',
 
 html_theme = 'furo'
 html_static_path = ['_static']
-html_logo = 'oop_logo.png'
-html_title = "Deepest Dungeon - Python OOP"
+html_logo = None
+html_title = "Deepest Dungeon"
 html_favicon = "logo.ico"
 html_css_files = ["custom.css"]
 
 
 html_theme_options = {
+    "light_logo": "oop_logo.png",
+    "dark_logo": "oop_logo.png",
     "footer_icons": [
         {
             "name": "GitHub",

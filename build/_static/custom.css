@@ -54,6 +54,24 @@ h4 {
 }
 
 /* Sidebar background (covers gutter left of nav) */
+body:not([data-theme="dark"]) {
+  background: #ffdfb4 !important;
+}
+body:not([data-theme="dark"]) .page {
+  background: #ffdfb4 !important;
+}
+.main,
+.main-content,
+.content,
+.article {
+  background: #ffffff !important;
+}
+body[data-theme="dark"] .main,
+body[data-theme="dark"] .main-content,
+body[data-theme="dark"] .content,
+body[data-theme="dark"] .article {
+  background: transparent !important;
+}
 .sidebar-drawer,
 .sidebar,
 .sidebar-container,
@@ -117,17 +135,14 @@ h4 {
   ) !important;
 }
 
-/* Override base background (left gutter) while keeping content white */
-html,
-body {
-  background: #ffdfb4 !important;
+/* Sidebar subtitle via pseudo-element */
+.sidebar-brand-text::after {
+  content: "Object Orentated Python";
+  display: block;
+  font-size: 0.9rem;
+  color: var(--color-foreground-muted);
+  margin-top: 0.1rem;
 }
-.page {
-  background: #ffdfb4 !important; /* ensure outer layout uses the gutter color */
-}
-.main,
-.main-content,
-.content,
-.article {
-  background: #ffffff !important; /* keep center content area white */
+.sidebar-brand-text {
+  color: #000000 !important;
 }

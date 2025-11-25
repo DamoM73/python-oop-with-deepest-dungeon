@@ -5,14 +5,15 @@
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Stage 8 - Useability" href="stage_8.html"><link rel="prev" title="Stage 6 - Use Items" href="stage_6.html">
         <link rel="prefetch" href="_static/oop_logo.png" as="image">
+        <link rel="prefetch" href="_static/oop_logo.png" as="image">
 
     <link rel="shortcut icon" href="_static/logo.ico"><!-- Generated with Sphinx 8.2.3 and Furo 2025.09.25 -->
-        <title>Stage 7 - Victory Conditions - Deepest Dungeon - Python OOP</title>
+        <title>Stage 7 - Victory Conditions - Deepest Dungeon</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=4abda5ee" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
     
     
 
@@ -166,7 +167,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="index.html"><div class="brand">Deepest Dungeon - Python OOP</div></a>
+      <a href="index.html"><div class="brand">Deepest Dungeon</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -187,10 +188,11 @@
       
       <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
   <div class="sidebar-logo-container">
-    <img class="sidebar-logo" src="_static/oop_logo.png" alt="Logo"/>
+    <img class="sidebar-logo only-light" src="_static/oop_logo.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="_static/oop_logo.png" alt="Dark Logo"/>
   </div>
   
-  <span class="sidebar-brand-text">Deepest Dungeon - Python OOP</span>
+  <span class="sidebar-brand-text">Deepest Dungeon</span>
   
 </a><form class="sidebar-search-container" method="get" action="search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -255,40 +257,44 @@
           <section id="stage-7-victory-conditions">
 <h1>Stage 7 - Victory Conditions<a class="headerlink" href="#stage-7-victory-conditions" title="Link to this heading">¶</a></h1>
 <aside class="topic">
-<p class="topic-title">In this lesson you will:</p>
+<p class="topic-title">Learning Intentions</p>
+<p>In this lesson you will:</p>
 <ul class="simple">
-<li><p>Count the number of enemies</p></li>
-<li><p>Create victory conditions</p></li>
+<li><p>Know the difference between class variables and normal (instance) variables in an OOP programme.</p></li>
+<li><p>Understand how objects can share information by using a class variable.</p></li>
+<li><p>Know when and where to put if-statements inside methods so an object can make decisions.</p></li>
+<li><p>Create and change class variables so objects can share the same data.</p></li>
+<li><p>Write methods that use if-statements to change what an object does based on what is happening in the programme.</p></li>
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hTGv542obJo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
-<p>We are close to finishing our text-based adventure game. We now have a dungeon in which the user can move around, collect different items, interact with different characters and have the result of those interactions determined by the character type.</p>
-<p>In this stage we will look at establishing victory conditions for the game.</p>
-<p>We will do this by:</p>
+<p>We’re almost done with our text-based adventure game. You now have a dungeon where the player can move around, pick up items, and talk or fight with different characters. What happens in these interactions depends on the type of character they meet.</p>
+<p>In this stage, you’re going to set up how the player wins the game.</p>
+<p>You will do this by:</p>
 <ul class="simple">
-<li><p>keeping a count of the number of enemies</p></li>
-<li><p>reducing the enemy count when each enemy is defeated</p></li>
-<li><p>declare the player victorious when there are no enemies left</p></li>
+<li><p>counting how many enemies exist</p></li>
+<li><p>lowering that count each time an enemy is defeated</p></li>
+<li><p>checking when the count reaches zero so the player wins the game</p></li>
 </ul>
 <section id="class-diagram">
 <h3>Class Diagram<a class="headerlink" href="#class-diagram" title="Link to this heading">¶</a></h3>
-<p>Look to our class diagram for this stage and you will notice something new.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class has a new:</p>
+<p>Have a look at the class diagram for this stage and you’ll see something new.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class now has:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> attribute</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">get_num_of_enemy</span></code> method</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> attribute</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">get_num_of_enemy</span></code> method</p></li>
 </ul>
 <p><img alt="lesson 7 class diagram" src="_images/lesson_7_class_diagram.png" /></p>
-<p>Notice the <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> attribute is underlined. This indicates that this is a <strong>class variable</strong>. This means that the variable is shared across to all instances of that class. Each instance of that class can access and modify the variable, and any changes will be shared with other classes.</p>
-<p>In our example, the <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> will be shared with all the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects we create in our game.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> attribute is underlined in the diagram. That underline shows it’s a <strong>class variable</strong>. A class variable is shared by every object made from that class. All <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects can read it and change it, and whenever one object changes it, the others see the new value too.</p>
+<p>In this game, <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> keeps track of how many <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects exist, and every enemy you create will share that same number.</p>
 </section>
 </section>
 <section id="count-number-of-enemies">
 <h2>Count Number of Enemies<a class="headerlink" href="#count-number-of-enemies" title="Link to this heading">¶</a></h2>
-<p>To keep track of the number of <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects in the game, we need to add a <strong>class variable</strong> to the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class.</p>
-<p>So we need to open the <strong>character.py</strong> file, and add the highlighted code below.</p>
+<p>To keep track of how many <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects are in the game, we need to add a <strong>class variable</strong> to the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class.</p>
+<p>Open <strong>character.py</strong> and add the highlighted code shown below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -351,24 +357,23 @@
 </div>
 <p>Save the code, and <strong>run</strong> it to ensure there are no errors.</p>
 <p><strong>Investigating</strong> the code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">num_of_enemy</span> <span class="pre">=</span> <span class="pre">0</span></code> → creates our <strong>class variable</strong></p>
+<li><p><code class="docutils literal notranslate"><span class="pre">num_of_enemy</span> <span class="pre">=</span> <span class="pre">0</span></code> → this creates the <strong>class variable</strong>.</p>
 <ul>
-<li><p>important to note the location and the indent level of <strong>class variables</strong>:</p>
-<ul>
-<li><p>need to be placed before the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method</p></li>
-<li><p>indented once → same level as method definitions</p></li>
+<li><p>Class variables must be written <strong>before</strong> the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method.</p></li>
+<li><p>They are indented once, at the same level as the methods.</p></li>
+<li><p>It does <strong>not</strong> use <code class="docutils literal notranslate"><span class="pre">self</span></code> because it belongs to the whole class, not to one object.</p></li>
 </ul>
 </li>
-<li><p>also note that, unlike the other attributes, <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> does start with <code class="docutils literal notranslate"><span class="pre">self</span></code> because it is a <strong>class variable</strong></p></li>
-</ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Enemy.num_of_enemy</span> <span class="pre">+=</span> <span class="pre">1</span></code> → increases <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> by one each time a new <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> object is created.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">Enemy.num_of_enemy</span> <span class="pre">+=</span> <span class="pre">1</span></code> → this adds 1 to <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> every time a new <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> is created.</p>
 <ul>
-<li><p>since <code class="docutils literal notranslate"><span class="pre">__init__</span></code> runs each time a new enemy is made, the value of <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> will increase</p></li>
+<li><p>Because <code class="docutils literal notranslate"><span class="pre">__init__</span></code> runs whenever you make a new enemy, the total number of enemies goes up each time.</p></li>
 </ul>
 </li>
 </ul>
+</div>
 <p>Now that we are keeping track of the number of enemies, but we can’t see what that number is. So let’s create a method to find out how many enemies are in the dungeon</p>
 <p>Still working in <strong>character.py</strong>, add the highlighted code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
@@ -435,24 +440,27 @@
 </span></pre></div>
 </div>
 <p>Let’s investigate that method:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">get_num_of_enemy():</span></code> → defines the method</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">get_num_of_enemy():</span></code> → this creates the method.</p>
 <ul>
-<li><p>there is no <code class="docutils literal notranslate"><span class="pre">self</span></code> argument → this method is not tied to a particular instance, but rather the whole class.</p></li>
+<li><p>It doesn’t have <code class="docutils literal notranslate"><span class="pre">self</span></code> because it’s not linked to one object; it works for the whole class.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">Enemy.num_of_enemy</span></code> → provides the current value of <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code></p>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">Enemy.num_of_enemy</span></code> → this gives back the current number of enemies.</p>
 <ul>
-<li><p>notice the <code class="docutils literal notranslate"><span class="pre">Enemy.</span></code> → tells Python this is a <strong>class variable</strong> of the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">Enemy.</span></code> part tells Python to use the <strong>class variable</strong> from the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class.</p></li>
 </ul>
 </li>
 </ul>
+</div>
 </section>
 <section id="reduce-enemy-count">
 <h2>Reduce Enemy Count<a class="headerlink" href="#reduce-enemy-count" title="Link to this heading">¶</a></h2>
-<p>So we have a count of the number of enemies, and we can retrieve that value, now we need to reduce the enemy count when the player defeats an enemy.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class <code class="docutils literal notranslate"><span class="pre">fight</span></code> method already has code that is executed when the player defeats the enemy, so we just need to add to that.</p>
-<p>Still in <strong>character.py</strong> go to insert the highlighted line below:</p>
+<p>We can now count how many enemies there are and check that number, but we also need to <strong>lower</strong> the count when the player beats an enemy.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">fight</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class already runs code when an enemy is defeated, so we just need to add one extra line there.</p>
+<p>Stay in <strong>character.py</strong> and add the highlighted line below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -518,15 +526,18 @@
 </pre></div>
 </div>
 <p>Save the code before we <strong>Investigate</strong> it:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p>line <code class="docutils literal notranslate"><span class="pre">53</span></code> → already determines if the player beats the enemy</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Enemy.num_of_enemy</span> <span class="pre">-=</span> <span class="pre">1</span></code> → reduces the value of the <strong>class variable</strong> by one.</p></li>
+<li><p>Line <code class="docutils literal notranslate"><span class="pre">53</span></code> already checks if the player wins the fight.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Enemy.num_of_enemy</span> <span class="pre">-=</span> <span class="pre">1</span></code> makes the class variable go down by one when an enemy is defeated.</p></li>
 </ul>
+</div>
 </section>
 <section id="check-for-victory">
 <h2>Check for Victory<a class="headerlink" href="#check-for-victory" title="Link to this heading">¶</a></h2>
-<p>The player will be victorious when they have defeated all the enemies in the dungeon. When all the enemies have been defeated the <code class="docutils literal notranslate"><span class="pre">Enemy.num_of_emeny</span></code> will be <code class="docutils literal notranslate"><span class="pre">0</span></code>. So we need to find the best place to check this.</p>
-<p>Let’s look back at <strong>main.py</strong>. Line <code class="docutils literal notranslate"><span class="pre">89</span></code> is where Python decides if they player wins, so it makes sense to put out <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> check around here.</p>
+<p>The player wins the game when every enemy has been defeated. When that happens, <code class="docutils literal notranslate"><span class="pre">Enemy.num_of_enemy</span></code> will be <code class="docutils literal notranslate"><span class="pre">0</span></code>. So we need to choose the right spot in the code to check for this.</p>
+<p>In <strong>main.py</strong>, line <code class="docutils literal notranslate"><span class="pre">89</span></code> is already where the game checks if the player wins, so that’s the best place to add our <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> check.</p>
 <p>Add the highlighted code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
@@ -651,12 +662,15 @@
 </pre></div>
 </div>
 <p><strong>Investigating</strong> that code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p>line <code class="docutils literal notranslate"><span class="pre">89</span></code> → already established that our new code will only run when the player defeats an enemy</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">Enemy.get_num_of_enemy()</span> <span class="pre">==</span> <span class="pre">0:</span></code> → checks if the <strong>class variable</strong> is <code class="docutils literal notranslate"><span class="pre">0</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;You</span> <span class="pre">have</span> <span class="pre">slain</span> <span class="pre">all</span> <span class="pre">the</span> <span class="pre">enemies.</span> <span class="pre">You</span> <span class="pre">are</span> <span class="pre">victorious!&quot;)</span></code> → displays a victory message</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> → readies to finish the game by exiting the main loop.</p></li>
+<li><p>Line <code class="docutils literal notranslate"><span class="pre">89</span></code> makes sure this code only runs after the player defeats an enemy.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">Enemy.get_num_of_enemy()</span> <span class="pre">==</span> <span class="pre">0:</span></code> checks if the class variable has reached <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;You</span> <span class="pre">have</span> <span class="pre">slain</span> <span class="pre">all</span> <span class="pre">the</span> <span class="pre">enemies.</span> <span class="pre">You</span> <span class="pre">are</span> <span class="pre">victorious!&quot;)</span></code> shows the win message.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> stops the main loop so the game can end.</p></li>
 </ul>
+</div>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>
