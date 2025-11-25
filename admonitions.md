@@ -1,4 +1,5 @@
-```{topic} In this lesson you will:
+```{topic} Learning Intentions
+In this lesson you will:
 ```
 
 ```{admonition} Concept

@@ -254,13 +254,14 @@
           <section id="stage-4-character-types">
 <h1>Stage 4 - Character Types<a class="headerlink" href="#stage-4-character-types" title="Link to this heading">¶</a></h1>
 <aside class="topic">
-<p class="topic-title">In this lesson you will:</p>
+<p class="topic-title">Learning Intentions</p>
+<p>In this lesson you will:</p>
 <ul class="simple">
-<li><p>Learn about the OOP concepts of inheritence and polymorphism</p></li>
-<li><p>Learn about the different types of programming errors</p></li>
-<li><p>Refactor code</p></li>
-<li><p>Use testing to identify errors</p></li>
-<li><p>Troubleshoot a logic error</p></li>
+<li><p>Understand what inheritance is and how child classes get attributes and methods from a parent class</p></li>
+<li><p>Explain polymorphism and how different classes can use the same method in different ways</p></li>
+<li><p>Identify the three types of programming errors: syntax, runtime, and logic errors</p></li>
+<li><p>Refactor existing code to use child classes (Friend and Enemy) without changing program behaviour</p></li>
+<li><p>Test and troubleshoot code by using expected vs actual result tables to find and fix logic and runtime errors</p></li>
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/J8U97_SRx7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -280,13 +281,14 @@
 </ul>
 <section id="class-diagram">
 <h3>Class Diagram<a class="headerlink" href="#class-diagram" title="Link to this heading">¶</a></h3>
-<p>Our new class diagram has two new classes <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> and <code class="docutils literal notranslate"><span class="pre">Friend</span></code>.</p>
+<p>The class diagram now shows two new classes: <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> and <code class="docutils literal notranslate"><span class="pre">Friend</span></code>.</p>
 <p><img alt="lesson 4 class diagram" src="_images/lesson_4_class_diagram.png" /></p>
-<p>Notice that they both have arrows pointing towards the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class, that’s because they are both child classes of the parent class. A child class <strong>inherits</strong> all the attributes and methods from the parent class. In addition, they may have extra attributes and methods, or they can even overwrite an attribute or method they inherit. Let’s look at our class diagram to see this in action.</p>
-<div class="admonition-inheritance admonition">
+<p>Both classes have arrows pointing to <code class="docutils literal notranslate"><span class="pre">Character</span></code> because they are child classes. This means they <strong>inherit</strong> everything the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class has. They can also add new features or replace methods they inherited.</p>
+<p>The diagram shows how these new classes build on top of the original <code class="docutils literal notranslate"><span class="pre">Character</span></code> class.</p>
+<div class="note admonition">
 <p class="admonition-title">Inheritance</p>
-<p>Inheritance is a concept in object-oriented programming (OOP) that allows you to create a new class based on an existing class. Think of it like a family tree, where a child class inherits characteristics from its parent class, just like how a child inherits traits from their parents.</p>
-<p>Inheritance makes it easier to reuse code and add new classes without having to rewrite the same information over and over again. It also makes it easier to keep track of different types of animals and what they have in common and what makes them unique.</p>
+<p>Inheritance in OOP means making a new class that is based on an existing one. It’s like a family tree: a child class gets traits from its parent class.</p>
+<p>This helps you avoid rewriting the same code and makes it easier to organise different types of things by what they share and what makes them different.</p>
 </div>
 <section id="enemy-class">
 <h4>Enemy class<a class="headerlink" href="#enemy-class" title="Link to this heading">¶</a></h4>
@@ -306,18 +308,17 @@
 </section>
 <section id="why-use-inheritance">
 <h4>Why use inheritance?<a class="headerlink" href="#why-use-inheritance" title="Link to this heading">¶</a></h4>
-<p>In the end our two child classes operate similarly to two classes with the following class diagrams (blue text indicates overwritten methods).</p>
+<p>The two child classes end up working a lot like the classes shown in the diagrams.</p>
 <p><img alt="lesson 4 child classes" src="_images/lesson_4_child_classes.png" /></p>
-<p>So why don’t we just two separate classes?</p>
-<p>Remember the DRY principle? → <strong>D</strong>on’t <strong>R</strong>epeat <strong>Y</strong>ourself?</p>
-<p>If we have two describe methods that are exactly the same, we want to only write it once. This ensures code that is more accurate and easier to maintain.</p>
-<p>For example, if I want to change the wording of the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, I will only need to change it in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class. The change will flow down to the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> and <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> classes. Similarly, if there is an error in the <code class="docutils literal notranslate"><span class="pre">talk</span></code> method, then I only need to fix it in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class.</p>
-<div class="admonition-oop-terminology admonition">
+<p>But why not just make two completely separate classes? Because of the DRY rule: <strong>Don’t Repeat Yourself</strong>.</p>
+<p>If both classes use the same <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, it’s better to write it once in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class. Then <code class="docutils literal notranslate"><span class="pre">Friend</span></code> and <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> automatically get it. This makes the code easier to fix and update.</p>
+<p>If you ever change the <code class="docutils literal notranslate"><span class="pre">describe</span></code> or <code class="docutils literal notranslate"><span class="pre">talk</span></code> method, you only change it in one place — the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class — and both child classes get the updated version.</p>
+<div class="note admonition">
 <p class="admonition-title">OOP Terminology</p>
-<p>OOP can have several names for the same concept. I will be consistent throughout this course, but if you use other resources, they may use different terminology.</p>
+<p>In OOP, different books and websites sometimes use different words for the same idea. Here are the main ones you might see:</p>
 <ul class="simple">
-<li><p>parent class → superclass or base class</p></li>
-<li><p>child class → subclass or derived class</p></li>
+<li><p><strong>parent class</strong> can also be called a <strong>superclass</strong> or <strong>base class</strong></p></li>
+<li><p><strong>child class</strong> can also be called a <strong>subclass</strong> or <strong>derived class</strong></p></li>
 </ul>
 </div>
 <p>Let’s make these changes to the code.</p>
@@ -366,25 +367,15 @@
 </span></pre></div>
 </div>
 <p>Investigating that code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Friend(Character):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">(Character)</span></code> → tells Python that <code class="docutils literal notranslate"><span class="pre">Character</span></code> is the parent class of <code class="docutils literal notranslate"><span class="pre">Friend</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Friend(Character):</span></code> → creates a new class called <code class="docutils literal notranslate"><span class="pre">Friend</span></code>, and the <code class="docutils literal notranslate"><span class="pre">(Character)</span></code> shows that <code class="docutils literal notranslate"><span class="pre">Friend</span></code> comes from the <code class="docutils literal notranslate"><span class="pre">Character</span></code> parent class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">name):</span></code> → is a special method that runs automatically whenever you make a new <code class="docutils literal notranslate"><span class="pre">Friend</span></code> object.</p></li>
+<li><p>The comment explains that this sets up the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> object using the parent class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">super().__init__(name)</span></code> → tells Python to run the parent class’s <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method first. This gives <code class="docutils literal notranslate"><span class="pre">Friend</span></code> all the attributes and methods that <code class="docutils literal notranslate"><span class="pre">Character</span></code> has. Because <code class="docutils literal notranslate"><span class="pre">Character</span></code> needs a <code class="docutils literal notranslate"><span class="pre">name</span></code>, we pass the <code class="docutils literal notranslate"><span class="pre">name</span></code> through.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">name):</span></code> → automatically runs when you create a <code class="docutils literal notranslate"><span class="pre">Friend</span></code> object</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialise</span> <span class="pre">the</span> <span class="pre">Friend</span> <span class="pre">object</span> <span class="pre">by</span> <span class="pre">calling</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">initialise</span></code> → method descriptive comment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">super().__init__(name)</span></code> → this is very new</p>
-<ul>
-<li><p>tells Python to run the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method of the parent class (superclass)</p>
-<ul>
-<li><p>running <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">__init__</span></code> will inherits all the attributes and method from <code class="docutils literal notranslate"><span class="pre">Character</span></code></p></li>
-</ul>
-</li>
-<li><p>the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> of <code class="docutils literal notranslate"><span class="pre">Character</span></code> requires a <code class="docutils literal notranslate"><span class="pre">name</span></code> so we pass the <code class="docutils literal notranslate"><span class="pre">name</span></code> argument</p></li>
-</ul>
-</li>
-</ul>
+</div>
 </section>
 <section id="create-enemy-class">
 <h3>Create Enemy class<a class="headerlink" href="#create-enemy-class" title="Link to this heading">¶</a></h3>
@@ -432,14 +423,17 @@
 </span><span class="hll"><span class="linenos">41</span>        <span class="bp">self</span><span class="o">.</span><span class="n">weakness</span> <span class="o">=</span> <span class="kc">None</span>
 </span></pre></div>
 </div>
-<p>Now unpack the code that create the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class:</p>
+<p>Now unpack the code that creates the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Enemy(Character):</span></code> → define the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class as a child of the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,name):</span></code> → automatically runs when an <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> object is created</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialise</span> <span class="pre">the</span> <span class="pre">Enemy</span> <span class="pre">object</span> <span class="pre">by</span> <span class="pre">calling</span> <span class="pre">the</span> <span class="pre">character</span> <span class="pre">initialise</span></code> → method descriptive comment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">super().__init__(name)</span></code> → runs the parent class’ <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method which causes inheritance</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">self.weakness</span> <span class="pre">=</span> <span class="pre">None</span></code> → adds an additional <code class="docutils literal notranslate"><span class="pre">weakness</span></code> attribute to all <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Enemy(Character):</span></code> → creates the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class and shows it is a child of the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">name):</span></code> → runs automatically when you make a new <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> object.</p></li>
+<li><p>The comment explains that this sets up the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> by using the parent class first.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">super().__init__(name)</span></code> → runs the parent class’s <code class="docutils literal notranslate"><span class="pre">__init__</span></code> so the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> gets all the usual character features.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">self.weakness</span> <span class="pre">=</span> <span class="pre">None</span></code> → adds a new attribute called <code class="docutils literal notranslate"><span class="pre">weakness</span></code> that every enemy will have.</p></li>
 </ul>
+</div>
 <p>Now that we have two character types, we need to change the characters that we have created.</p>
 </section>
 </section>
@@ -522,16 +516,19 @@
 </pre></div>
 </div>
 <p>Investigating that code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">character</span> <span class="pre">import</span> <span class="pre">Friend,</span> <span class="pre">Enemy</span></code> → we will no longer have <code class="docutils literal notranslate"><span class="pre">Character</span></code> objects, but rather <code class="docutils literal notranslate"><span class="pre">Friend</span></code> and <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ugine</span> <span class="pre">=</span> <span class="pre">Enemy(&quot;Ugine&quot;)</span></code> → changes <code class="docutils literal notranslate"><span class="pre">Ugine</span></code> to an <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> object</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">ugine.weakness</span> <span class="pre">=</span> <span class="pre">&quot;cheese&quot;</span></code> → <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> object have a <code class="docutils literal notranslate"><span class="pre">weakness</span></code> attribute, Ugine’s is cheese</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">nigel</span> <span class="pre">=</span> <span class="pre">Friend(&quot;Nigel&quot;)</span></code> → changes <code class="docutils literal notranslate"><span class="pre">Nigel</span></code> to a <code class="docutils literal notranslate"><span class="pre">Friend</span></code> object</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">character</span> <span class="pre">import</span> <span class="pre">Friend,</span> <span class="pre">Enemy</span></code> → means we’re now creating characters as either <code class="docutils literal notranslate"><span class="pre">Friend</span></code> or <code class="docutils literal notranslate"><span class="pre">Enemy</span></code>, not as basic <code class="docutils literal notranslate"><span class="pre">Character</span></code> objects anymore.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ugine</span> <span class="pre">=</span> <span class="pre">Enemy(&quot;Ugine&quot;)</span></code> → creates Ugine as an <code class="docutils literal notranslate"><span class="pre">Enemy</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ugine.weakness</span> <span class="pre">=</span> <span class="pre">&quot;cheese&quot;</span></code> → sets Ugine’s weakness, because all enemies have a <code class="docutils literal notranslate"><span class="pre">weakness</span></code> attribute.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nigel</span> <span class="pre">=</span> <span class="pre">Friend(&quot;Nigel&quot;)</span></code> → creates Nigel as a <code class="docutils literal notranslate"><span class="pre">Friend</span></code>.</p></li>
 </ul>
+</div>
 <section id="refactoring-testing">
 <h3>Refactoring testing<a class="headerlink" href="#refactoring-testing" title="Link to this heading">¶</a></h3>
-<p>What we have just done is called <strong>refactoring</strong> our code. That is, we have made a change to our code, without changing what it does. Whenever you refactor your code the next step should always be testing, so let’s test.</p>
-<p>What do we need to test. We need to make sure that we can still have all the same interactions with both Ugine and Nigel. Draw up the testing table below and then complete it.</p>
+<p>Refactoring connects directly to the code we just changed. You updated your code to use the new <code class="docutils literal notranslate"><span class="pre">Friend</span></code> and <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> classes instead of the original <code class="docutils literal notranslate"><span class="pre">Character</span></code> class. Now you need to make sure those changes didn’t break anything.</p>
+<p>Refactoring means you changed <em>how</em> the code is written, not <em>what</em> it should do. So the next job is to test it. Check that Ugine and Nigel still behave the same as before by filling in the testing table.</p>
 <div class="table-wrapper colwidths-auto docutils container">
 <table class="docutils align-default">
 <thead>
@@ -580,15 +577,15 @@
 </section>
 <section id="adjusting-the-interactions">
 <h2>Adjusting the interactions<a class="headerlink" href="#adjusting-the-interactions" title="Link to this heading">¶</a></h2>
-<p>We want to change our interactions according to the character’s type. We don’t want to hug our enemies, nor do we want to fight our friends. In OOP this is called <strong>polymorphism</strong>.</p>
-<div class="admonition-polymorphism admonition">
+<p>We want the game to react differently depending on the type of character. You shouldn’t hug an enemy, and you shouldn’t fight a friend. When different classes respond to the same action in different ways, this is called <strong>polymorphism</strong>.</p>
+<div class="note admonition">
 <p class="admonition-title">Polymorphism</p>
-<p>Polymorphism is a concept in object-oriented programming (OOP) that allows objects of different classes to respond to the same method call in different ways. This is like having multiple people with different jobs, all able to perform the same action, but in their own unique way.</p>
-<p>Polymorphism allows for objects of different classes to be treated as objects of their class or as objects of a parent class, without having to know the exact type of the object. This makes it easier to write generic code that can work with objects of multiple classes, making your code more flexible and adaptable to changes in the future.</p>
+<p>Polymorphism in OOP means different classes can use the same method but do different things with it. It’s like asking different people to “work” — they all do it, but the way they work depends on their job.</p>
+<p>This lets your code treat different objects in a similar way, even if they aren’t the same type. It makes your programs easier to write, easier to update, and more flexible when things change.</p>
 </div>
 <section id="adjusting-the-hug-method">
 <h3>Adjusting the hug method<a class="headerlink" href="#adjusting-the-hug-method" title="Link to this heading">¶</a></h3>
-<p>Currently, the <code class="docutils literal notranslate"><span class="pre">hug</span></code> method is inherited from the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class, which basically says the character doesn’t want to hug you. This is fine for enemies, so we don’t have to change the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class, but this is not what we want our friends to do, so let’s change the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class.</p>
+<p>Right now, the <code class="docutils literal notranslate"><span class="pre">hug</span></code> method comes from the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class, and it always says the character doesn’t want to hug you. That’s okay for enemies, so we’ll leave them as they are. But friends <em>should</em> hug you back, so we need to change the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class to make that happen.</p>
 <p>Return to the <strong>character.py</strong> file and add the highlighted code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
@@ -638,19 +635,18 @@
 </pre></div>
 </div>
 <p>Investigating the code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">hug(self):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">hug</span></code> method for the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class</p>
-<ul>
-<li><p>same name as <code class="docutils literal notranslate"><span class="pre">Character</span></code> method → replaces <code class="docutils literal notranslate"><span class="pre">hug</span></code> method for all <code class="docutils literal notranslate"><span class="pre">Friend</span></code> objects</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">hug(self):</span></code> → creates a new <code class="docutils literal notranslate"><span class="pre">hug</span></code> method for the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class. Because it has the same name as the one in <code class="docutils literal notranslate"><span class="pre">Character</span></code>, it replaces the old version for all friends.</p></li>
+<li><p>The comment explains what the method is meant to do.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">hugs</span> <span class="pre">you</span> <span class="pre">back.&quot;)</span></code> → shows a message using the friend’s name.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">the</span> <span class="pre">friend</span> <span class="pre">responds</span> <span class="pre">to</span> <span class="pre">a</span> <span class="pre">hug</span></code> → method’s explanatory comment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">hugs</span> <span class="pre">you</span> <span class="pre">back.&quot;)</span></code> → display message using object’s <code class="docutils literal notranslate"><span class="pre">name</span></code></p></li>
-</ul>
+</div>
 </section>
 <section id="adjusting-the-fight-method">
 <h3>Adjusting the fight method<a class="headerlink" href="#adjusting-the-fight-method" title="Link to this heading">¶</a></h3>
-<p>Now it’s time to adjust the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for our <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class. We have a simple fight mechanic. Each <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> has a <code class="docutils literal notranslate"><span class="pre">weakness</span></code>. If you use their <code class="docutils literal notranslate"><span class="pre">weakness</span></code> to fight them, you win, otherwise you loose.</p>
+<p>Now we need to update the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class. The fighting system is simple: every enemy has a <strong>weakness</strong>. If you fight them using their weakness, you win. If you use anything else, you lose.</p>
 <p>The highlighted code below enacts this mechanic.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
@@ -709,21 +705,20 @@
 </span></pre></div>
 </div>
 <p>Investing that code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">fight(self,</span> <span class="pre">item):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class</p>
-<ul>
-<li><p>accepts the <code class="docutils literal notranslate"><span class="pre">item</span></code> argument which is the weapon the player uses</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">fight(self,</span> <span class="pre">item):</span></code> → creates the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for enemies. The <code class="docutils literal notranslate"><span class="pre">item</span></code> is the weapon the player chooses.</p></li>
+<li><p>The comment explains that this method checks the weapon and returns whether the player survives.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">item</span> <span class="pre">==</span> <span class="pre">self.weakness:</span></code> → checks if the weapon matches the enemy’s weakness.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">strike</span> <span class="pre">{self.name}</span> <span class="pre">down</span> <span class="pre">with</span> <span class="pre">{item}.&quot;)</span></code> → shows a message if you win.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">True</span></code> → tells <strong>main.py</strong> that the player won the fight.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → runs when the weapon is not the enemy’s weakness.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">crushes</span> <span class="pre">you.</span> <span class="pre">Puny</span> <span class="pre">adventurer&quot;)</span></code> → shows the losing message.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">False</span></code> → tells <strong>main.py</strong> that the player lost.</p></li>
 </ul>
-</li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">fights</span> <span class="pre">enemy</span> <span class="pre">with</span> <span class="pre">provided</span> <span class="pre">item</span> <span class="pre">and</span> <span class="pre">returns</span> <span class="pre">if</span> <span class="pre">player</span> <span class="pre">survives</span></code> → method’s explanatory comment</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">item</span> <span class="pre">==</span> <span class="pre">self.weakness:</span></code> → checks if the <code class="docutils literal notranslate"><span class="pre">item</span></code> is this enemy’s weakness</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">strike</span> <span class="pre">{self.name}</span> <span class="pre">down</span> <span class="pre">with</span> <span class="pre">{item}.&quot;)</span></code> → displays success message</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">True</span></code> → informs <strong>main.py</strong> of victory in the fight</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → when the <code class="docutils literal notranslate"><span class="pre">item</span></code> is not this enemy’s weakness</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">crushes</span> <span class="pre">you.</span> <span class="pre">Puny</span> <span class="pre">adventurer&quot;)</span></code> → displays failure message</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">False</span></code> → informs <strong>main.py</strong> of loss in the fight</p></li>
-</ul>
-<p>Now that our <code class="docutils literal notranslate"><span class="pre">fight</span></code> method is ready, we need to change our fight event handler in <strong>main.py</strong>. Use the highlighted code below:</p>
+</div>
+<p>Now that the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method is finished, we need to update the fight section in <strong>main.py</strong> so the game uses the new system. Replace that part of the code with the updated version shown.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -804,18 +799,28 @@
 </pre></div>
 </div>
 <p>Investigate the code:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">weapon</span> <span class="pre">=</span> <span class="pre">input(&quot;What</span> <span class="pre">will</span> <span class="pre">you</span> <span class="pre">fight</span> <span class="pre">with?</span> <span class="pre">&gt;</span> <span class="pre">&quot;).lower()</span></code> → asks the user to input their weapon</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon):</span></code> → checks to see if user wins the fight</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">weapon</span> <span class="pre">=</span> <span class="pre">input(&quot;What</span> <span class="pre">will</span> <span class="pre">you</span> <span class="pre">fight</span> <span class="pre">with?</span> <span class="pre">&gt;</span> <span class="pre">&quot;).lower()</span></code> → asks the player to type the weapon they want to use.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon):</span></code> → checks if the player wins the fight.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">current_room.character.fight(weapon)</span></code> → calls the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method displaying a message</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> → since the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method returns a Boolean indicating the player’s success, we can use this to check the fight result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room.character.fight(weapon)</span></code> → calls the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method, which also prints the fight message.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">if</span></code> works because <code class="docutils literal notranslate"><span class="pre">fight</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code> if you win and <code class="docutils literal notranslate"><span class="pre">False</span></code> if you lose.</p></li>
+<li><p>You don’t have to say <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">true</span></code> or <code class="docutils literal notranslate"><span class="pre">==</span> <span class="pre">false</span></code> because the <code class="docutils literal notranslate"><span class="pre">if</span></code> statement checks for truthy or falsy values</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">current_room.character</span> <span class="pre">=</span> <span class="pre">None</span></code> → if the player won the fight, the room now has no character</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → if the player looses the fight</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> → set the main loop flag to <code class="docutils literal notranslate"><span class="pre">False</span></code> so the game will finish</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room.character</span> <span class="pre">=</span> <span class="pre">None</span></code> → removes the character from the room when the player wins.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → runs if the player loses the fight.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> → stops the main loop, which ends the game.</p></li>
 </ul>
+</div>
+<div class="note admonition">
+<p class="admonition-title">Truthy and Falsy Values</p>
+<p>In Python, some values act like <strong>True</strong> and some act like <strong>False</strong> when used in an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement, even if they aren’t actually the words <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. These are called <strong>truthy</strong> and <strong>falsy</strong> values.</p>
+<p>Truthy values include things like non-empty strings, non-zero numbers, and lists with items in them, while falsy values include <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code>, empty strings, empty lists, and <code class="docutils literal notranslate"><span class="pre">False</span></code> itself.</p>
+<p>This matters because when you write something like <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character:</span></code>, Python checks whether that value is truthy (meaning it exists or has content) or falsy (meaning it’s empty or <code class="docutils literal notranslate"><span class="pre">None</span></code>), and runs the code based on that.</p>
+</div>
 </section>
 <section id="testing">
 <h3>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h3>
@@ -868,7 +873,7 @@
 <section id="friend-fight-error">
 <h3>Friend fight error<a class="headerlink" href="#friend-fight-error" title="Link to this heading">¶</a></h3>
 <p>Did you get the following error?</p>
-<div class="highlight-pseudocode notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>Traceback (most recent call last):
+<div class="highlight-error notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>Traceback (most recent call last):
 <span class="linenos">2</span>  File &quot;h:\GIT\python-oop-with-deepest-dungeon\python_files\stage_4\main.py&quot;, line 66, in &lt;module&gt;
 <span class="linenos">3</span>    if current_room.character.fight(weapon):
 <span class="linenos">4</span>       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -882,8 +887,12 @@
 <li><p><strong>line 4</strong> → the error is specifically in the call to <code class="docutils literal notranslate"><span class="pre">fight</span></code></p></li>
 <li><p><strong>line 5</strong> → <code class="docutils literal notranslate"><span class="pre">fight</span></code> was only expecting one argument (<code class="docutils literal notranslate"><span class="pre">self</span></code>), but we gave two (<code class="docutils literal notranslate"><span class="pre">self</span></code>,<code class="docutils literal notranslate"><span class="pre">weapon</span></code>)</p></li>
 </ul>
-<p>So let’s think about this. We have two <code class="docutils literal notranslate"><span class="pre">fight</span></code> methods, which one was causing the problem? Well, Ugine worked fine, but Nigel didn’t, so it must be the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for friends.</p>
-<p>That method is in our <strong>character.py</strong> file, so let’s look at it.</p>
+<p>So let’s think about this:</p>
+<ol class="arabic simple">
+<li><p>We have two <code class="docutils literal notranslate"><span class="pre">fight</span></code> methods, which one was causing the problem?</p></li>
+<li><p>Ugine’s fight worked fine, but Nigel didn’t, so it must be the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for friends.</p></li>
+<li><p>That method is in our <strong>character.py</strong> file, so let’s look at it.</p></li>
+</ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -940,13 +949,16 @@
 <span class="linenos">54</span>            <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </div>
-<p>Looking closely at the code:</p>
+<ol class="arabic simple" start="4">
+<li><p>Looking closely at the code:</p>
 <ul class="simple">
-<li><p><strong>lines 30 - 38</strong> → the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class does not have a <code class="docutils literal notranslate"><span class="pre">fight</span></code> method, so it is using the inherited <code class="docutils literal notranslate"><span class="pre">fight</span></code> method from the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class</p></li>
-<li><p><strong>line 26</strong> → the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method only accepts one argument <code class="docutils literal notranslate"><span class="pre">(self)</span></code>, but how does this compare to the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method?</p></li>
-<li><p><strong>line 47</strong> → the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method accepts two arguments <code class="docutils literal notranslate"><span class="pre">(self,</span> <span class="pre">item)</span></code></p></li>
+<li><p><strong>lines 30 - 38</strong> → the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class does not have a <code class="docutils literal notranslate"><span class="pre">fight</span></code> method, so it is using the inherited <code class="docutils literal notranslate"><span class="pre">fight</span></code> method from the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class in <strong>line 26</strong>.</p></li>
+<li><p><strong>line 26</strong> → the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method only accepts one argument <code class="docutils literal notranslate"><span class="pre">(self)</span></code>, but how does this compare to the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method in <strong>line 47</strong>?</p></li>
+<li><p><strong>line 47</strong> → the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method accepts <em>two</em> arguments <code class="docutils literal notranslate"><span class="pre">(self,</span> <span class="pre">item)</span></code></p></li>
 </ul>
-<p>Ok so we’ve found a discrepancy, but which one do we want to change? Remember we changed our <strong>main.py</strong> code to deal with fighting with a weapon, so the easiest way to solve this error is to add another argument to the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method.</p>
+</li>
+</ol>
+<p>We’ve found the problem, but now we need to decide what to fix. Since we updated <strong>main.py</strong> so that fighting always uses a weapon, the simplest solution is to update the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class’s <code class="docutils literal notranslate"><span class="pre">fight</span></code> method so it also accepts the extra argument.</p>
 <p>So make the following changes to <strong>character.py</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
@@ -1052,34 +1064,17 @@
 </tbody>
 </table>
 </div>
-<p>Wait, another problem fighting Nigel, but this one is different. There is no error message, the program just ends when you fight him. This is what we call a <strong>logic error</strong>.</p>
-<div class="admonition-types-of-programming-errors admonition">
+<p>There’s another problem when you try to fight Nigel, but this time it’s different. You don’t get an error message—the program just stops. This type of mistake is called a <strong>logic error</strong>.</p>
+<div class="note admonition">
 <p class="admonition-title">Types of programming errors</p>
-<p>There are three basic categories of programming errors:</p>
+<p>There are three main types of programming errors:</p>
 <ul class="simple">
-<li><p><strong>syntax errors</strong></p>
-<ul>
-<li><p>caused by not following the programming language rules</p></li>
-<li><p>Python will not even run the program, and immediately display an error message</p></li>
-</ul>
-</li>
-<li><p><strong>runtime errors</strong></p>
-<ul>
-<li><p>caused when Python tries to execute a command, but something is wrong</p></li>
-<li><p>Python will run the program, but display an error when it comes across a runtime error</p></li>
-<li><p>our <code class="docutils literal notranslate"><span class="pre">fight</span></code> method error was a runtime error</p></li>
-</ul>
-</li>
-<li><p><strong>logic errors</strong></p>
-<ul>
-<li><p>caused when the program does exactly what you tell it to do, but not what you want it to do</p></li>
-<li><p>Python will never display an error, but the program doesn’t do what you want it to do</p></li>
-<li><p>these are the hardest to troubleshoot</p></li>
-</ul>
-</li>
+<li><p><strong>Syntax errors</strong> happen when you break the rules of Python. The program won’t run at all and will instantly show an error.</p></li>
+<li><p><strong>Runtime errors</strong> happen while the program is running. Python tries to do something but can’t, so it crashes and shows an error. The earlier fight error was one of these.</p></li>
+<li><p><strong>Logic errors</strong> happen when the program runs without crashing, but it doesn’t do what you meant. Python won’t warn you, so these are the hardest to find.</p></li>
 </ul>
 </div>
-<p>Here is the interaction I got from running the code before it ended:</p>
+<p>This is what the game showed right before the program suddenly stopped:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>You are in the laboratory
 <span class="linenos">2</span>A strange odour hangs in a room filled with unknownable contraptions.
 <span class="linenos">3</span>Nigel is here, a burly dwarf with golden bead in woven through his beard.
@@ -1092,8 +1087,8 @@
 </section>
 <section id="troubleshooting-a-logic-error">
 <h3>Troubleshooting a logic error<a class="headerlink" href="#troubleshooting-a-logic-error" title="Link to this heading">¶</a></h3>
-<p>Troubleshooting logic errors is a bit like detective work. You need to trace the program flow to work out where the error is.</p>
-<p>So we’ll start our investigation in the <strong>main.py</strong>. Looking at the main loop, we can be confident that the problem involves the <code class="docutils literal notranslate"><span class="pre">fight</span></code> event handler, so let’s zoom into that.</p>
+<p>Fixing logic errors is kind of like being a detective. You have to follow what the program is doing step by step to spot where things go wrong.</p>
+<p>We’ll start by checking <strong>main.py</strong>. Since the issue happens when you try to fight Nigel, the problem is probably in the part of the main loop that handles the <code class="docutils literal notranslate"><span class="pre">fight</span></code> command, so that’s the section we need to look at closely.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
 <span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos">67</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -1105,27 +1100,13 @@
 <span class="linenos">73</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>In the test when the user fought Nigel:</p>
+<p>In the test when we fought Nigel:</p>
 <ul class="simple">
-<li><p>the user got the message <code class="docutils literal notranslate"><span class="pre">Nigel</span> <span class="pre">doesn't</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">fight</span> <span class="pre">you</span></code></p>
-<ul>
-<li><p>this comes from the call to the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method</p></li>
-<li><p><strong>line 68</strong> must of been executed</p></li>
-</ul>
-</li>
-<li><p>the game ended</p>
-<ul>
-<li><p>therefore <code class="docutils literal notranslate"><span class="pre">running</span></code> needed to be changed to <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
-<li><p><strong>line 71</strong> must of been executed</p></li>
-</ul>
-</li>
-<li><p>the only way that <strong>line 71</strong> could have been executed would be if the user lost their fight with Nigel</p></li>
-<li><p><strong>line 68</strong> determines if the user won the fight, so lets look closely at this.</p>
-<ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon):</span></code> → makes a call to the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method and gets a Boolean response indicating success</p></li>
-<li><p>since Nigel is a friend we need to look at the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method</p></li>
-</ul>
-</li>
+<li><p>We saw the message <code class="docutils literal notranslate"><span class="pre">Nigel</span> <span class="pre">doesn't</span> <span class="pre">want</span> <span class="pre">to</span> <span class="pre">fight</span> <span class="pre">you</span></code>, which means the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method ran and <strong>line 68</strong> was used.</p></li>
+<li><p>Then the game ended, so <code class="docutils literal notranslate"><span class="pre">running</span></code> must have been set to <code class="docutils literal notranslate"><span class="pre">False</span></code>, which happens on <strong>line 71</strong>.</p></li>
+<li><p><strong>Line 71</strong> only runs if the player loses the fight with Nigel.</p></li>
+<li><p><strong>Line 68</strong> is where the program checks if the player won or lost, using <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon):</span></code>, which calls the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method and expects a <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> answer.</p></li>
+<li><p>Because Nigel is a friend, we now need to look at the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method that friends use, which is in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class.</p></li>
 </ul>
 <p>So zooming into the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class in <strong>character.py</strong>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">26</span>    <span class="k">def</span><span class="w"> </span><span class="nf">fight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
@@ -1133,8 +1114,9 @@
 <span class="linenos">28</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> doesn&#39;t want to fight you&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Now I can see the problem. If <strong>main.py</strong> is expecting a Boolean value, it won’t get one because the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method doesn’t return anything.</p>
-<p>Well, that’s not entirely correct. All Python functions (including methods) return a value. If the <code class="docutils literal notranslate"><span class="pre">return</span></code> statement is not used, then the default values of <code class="docutils literal notranslate"><span class="pre">None</span></code> is returned, but why does that stop our game?</p>
+<p>Here’s the issue: <strong>main.py</strong> expects the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method to return a True or False value, but the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class’s <code class="docutils literal notranslate"><span class="pre">fight</span></code> method doesn’t return anything.</p>
+<p>In Python, if a function doesn’t have a <code class="docutils literal notranslate"><span class="pre">return</span></code> statement, it still returns something — the default value <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<p>The problem is that <code class="docutils literal notranslate"><span class="pre">None</span></code> counts as <code class="docutils literal notranslate"><span class="pre">False</span></code> in an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement, so the game thinks the player lost the fight, which makes the program end.</p>
 <p>Let’s zoom back in to the fight handler in <strong>main.py</strong> to understand.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
 <span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1149,13 +1131,13 @@
 </div>
 <p>Looking at <strong>line 4</strong>:</p>
 <ul class="simple">
-<li><p>for Nigel <code class="docutils literal notranslate"><span class="pre">current_room.character.fight(weapon)</span></code> will return <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
-<li><p><strong>line 4</strong> becomes <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">None:</span></code> which equates to <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">False:</span></code></p></li>
-<li><p>jumps to the <code class="docutils literal notranslate"><span class="pre">else</span></code> statement on <strong>line 6</strong></p></li>
-<li><p>which means <strong>line 7</strong> is executed changing <code class="docutils literal notranslate"><span class="pre">running</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
+<li><p>When fighting Nigel, <code class="docutils literal notranslate"><span class="pre">current_room.character.fight(weapon)</span></code> returns <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p>That means the line becomes <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">None:</span></code>, which works the same as <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">False:</span></code>.</p></li>
+<li><p>So the program skips the “win” part and goes straight to the <code class="docutils literal notranslate"><span class="pre">else</span></code> on line 6.</p></li>
+<li><p>Line 7 then runs and sets <code class="docutils literal notranslate"><span class="pre">running</span></code> to <code class="docutils literal notranslate"><span class="pre">False</span></code>, which ends the game.</p></li>
 </ul>
-<p>Ok, that all makes sense. Now we have to fix the problem. What we need is for <strong>line 4</strong> to receive a <code class="docutils literal notranslate"><span class="pre">True</span></code> when it calls the <code class="docutils literal notranslate"><span class="pre">Character</span></code> <code class="docutils literal notranslate"><span class="pre">fight</span></code> method.</p>
-<p>Jump back to <strong>character.py</strong> and add the highlighted code below to solve our logic error.</p>
+<p>So now we know what’s happening. To fix it, the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class’s <code class="docutils literal notranslate"><span class="pre">fight</span></code> method needs to return <code class="docutils literal notranslate"><span class="pre">True</span></code> so line 4 treats it as a win.</p>
+<p>Update the method in <strong>character.py</strong> to solve the logic error.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -1213,6 +1195,12 @@
 <span class="linenos">55</span>            <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </div>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
+<ul class="simple">
+<li><p><strong>line 29</strong> now returns <code class="docutils literal notranslate"><span class="pre">True</span></code> when you fight a friend, which means the <strong>line 71</strong> of the <strong>main.py</strong> <code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">==</span> <span class="pre">False</span></code> does not run.</p></li>
+</ul>
+</div>
 </section>
 <section id="third-test-lucky">
 <h3>Third test lucky?<a class="headerlink" href="#third-test-lucky" title="Link to this heading">¶</a></h3>
@@ -1261,8 +1249,8 @@
 </tbody>
 </table>
 </div>
-<p>Did you manage to hug Nigel after fighting him? No. That’s because we returned a successful fight, which meant that Nigel was deleted from the room. We need to fix that.</p>
-<p>We need to fix it. In <strong>main.py</strong> adjust the highlighted code below.</p>
+<p>Were you able to hug Nigel after fighting him? Probably not. That’s because the game treated the fight as a win, so it deleted Nigel from the room. We need to fix that so friends don’t disappear when you “fight” them.</p>
+<p>In <strong>main.py</strong> adjust the highlighted code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">65</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
 <span class="linenos">66</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 <span class="linenos">67</span>            <span class="n">weapon</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;What will you fight with? &gt; &quot;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
@@ -1275,7 +1263,16 @@
 <span class="linenos">74</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The new <strong>line 69</strong> checks if <code class="docutils literal notranslate"><span class="pre">current_room.character</span></code> is an <strong>Enemy</strong> subtype. This means that only Enemies will be delete.</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">isinstance(current_room.character,</span> <span class="pre">Enemy):</span></code> → checks whether the character in the room is an <strong>Enemy</strong>.</p>
+<ul>
+<li><p>This is <code class="docutils literal notranslate"><span class="pre">True</span></code> only when the character was created using the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class.</p></li>
+</ul>
+</li>
+</ul>
+</div>
 </section>
 <section id="final-test">
 <h3>Final test<a class="headerlink" href="#final-test" title="Link to this heading">¶</a></h3>
