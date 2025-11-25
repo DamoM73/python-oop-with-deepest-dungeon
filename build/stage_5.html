@@ -254,23 +254,28 @@
           <section id="stage-5-item-creation">
 <h1>Stage 5 - Item Creation<a class="headerlink" href="#stage-5-item-creation" title="Link to this heading">¶</a></h1>
 <aside class="topic">
-<p class="topic-title">In this lesson you will:</p>
+<p class="topic-title">Learning Intentions</p>
+<p>In this lesson you will:
+Knowledge</p>
 <ul class="simple">
-<li><p>Create items</p></li>
-<li><p>Add the items to their room</p></li>
+<li><p>Understand what an Item class is and why games use items.</p></li>
+<li><p>Explain how classes, attributes, and methods work together when creating items.</p></li>
+<li><p>Describe how rooms, characters, and items link together to build a game world.</p></li>
+<li><p>Create an Item class and give it attributes and a describe method.</p></li>
+<li><p>Add Item objects to rooms and update the room description so items appear correctly when the game runs.</p></li>
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/jYSs_-wY8ys" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
-<p>Now our dungeon is starting to take shape. The user can move between multiple rooms in which they can interact with different characters. We have two different types of characters, with different user interactions.</p>
-<p>In this stage we will continue to fill out our dungeon. Most Dungeon crawlers will contain different items that the player can interact with, so let’s create some items.</p>
-<p>To achieve this we will:</p>
+<p>Our dungeon is starting to look like a real game. You can now move between rooms and meet different characters, and each type of character behaves in their own way.</p>
+<p>Next, we’re going to make the dungeon feel more alive by adding items. Most dungeon-style games let players find and use different objects, so we’ll do the same.</p>
+<p>In this stage you will:</p>
 <ul class="simple">
-<li><p>Define an Item class</p></li>
-<li><p>Create Item objects</p></li>
-<li><p>Add the Item objects to the rooms</p></li>
-<li><p>Include the Item objects in the room description.</p></li>
+<li><p>Make an Item class</p></li>
+<li><p>Create your own item objects</p></li>
+<li><p>Put those items into different rooms</p></li>
+<li><p>Update the room descriptions so the items show up when you enter a room</p></li>
 </ul>
 <section id="class-diagram">
 <h3>Class Diagram<a class="headerlink" href="#class-diagram" title="Link to this heading">¶</a></h3>
@@ -292,12 +297,15 @@
 </span></pre></div>
 </div>
 <p>In investigating the code everything should be familiar:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p>defining the <code class="docutils literal notranslate"><span class="pre">Item</span></code> class</p></li>
-<li><p>defining our <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method</p></li>
-<li><p>assigning the <code class="docutils literal notranslate"><span class="pre">name</span></code> argument to the <code class="docutils literal notranslate"><span class="pre">self.name</span></code> attribute</p></li>
-<li><p>creating a placeholder <code class="docutils literal notranslate"><span class="pre">self.description</span></code> attribute to be assigned a value later</p></li>
+<li><p>We made the Item class.</p></li>
+<li><p>We wrote the <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method that runs when you create a new item.</p></li>
+<li><p>We took the item’s name and stored it in <code class="docutils literal notranslate"><span class="pre">self.name</span></code>.</p></li>
+<li><p>We added <code class="docutils literal notranslate"><span class="pre">self.description</span></code> so we can give the item a description later.</p></li>
 </ul>
+</div>
 </section>
 <section id="create-item-objects">
 <h2>Create Item objects<a class="headerlink" href="#create-item-objects" title="Link to this heading">¶</a></h2>
@@ -393,16 +401,19 @@
 </div>
 <p><strong>Predict</strong> what you think will happen and <strong>run</strong> the code.</p>
 <p>Again, in investigating the code this should all be familiar.</p>
-<p>For each of the items, we have:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
+<p>For each item, we did the following:</p>
 <ul class="simple">
-<li><p>imported our new class (Item)</p></li>
-<li><p>called <code class="docutils literal notranslate"><span class="pre">Item()</span></code> to create a Item object and then assigned it to a variable</p></li>
-<li><p>assigned a string to the Item object’s  <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute</p></li>
+<li><p>Imported the Item class.</p></li>
+<li><p>Used <code class="docutils literal notranslate"><span class="pre">Item()</span></code> to make a new item and stored it in a variable.</p></li>
+<li><p>Gave the item a description by setting its <code class="docutils literal notranslate"><span class="pre">description</span></code> attribute.</p></li>
 </ul>
+</div>
 </section>
 <section id="add-the-item-object-to-the-the-rooms">
 <h2>Add the item object to the the rooms.<a class="headerlink" href="#add-the-item-object-to-the-the-rooms" title="Link to this heading">¶</a></h2>
-<p>To add the Item objects to the rooms, we need to first adjust the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class, so go to <strong>room.py</strong> and add the code below.</p>
+<p>To put items into rooms, we first need to update the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class. Open <strong>room.py</strong> and add the code shown.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -533,15 +544,27 @@
 </pre></div>
 </div>
 <p><strong>Predict</strong> what you think will happen and then <strong>run</strong> the program.</p>
-<p>Investigating this code, and it will all look familiar to you.</p>
-<p>For each item we assigned it to the <code class="docutils literal notranslate"><span class="pre">item</span></code> attribute of a Room object.</p>
+<p>Investigating these two code changes should look familiar to you.</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
+<ul class="simple">
+<li><p>We added an <code class="docutils literal notranslate"><span class="pre">item</span></code> attribute to the Room class.</p></li>
+<li><p>We made three items:</p>
+<ul>
+<li><p>each item was given a name</p></li>
+<li><p>each item was given a description</p></li>
+</ul>
+</li>
+<li><p>We placed one item into each room.</p></li>
+</ul>
+</div>
 </section>
 <section id="include-the-item-objects-in-the-room-description">
 <h2>Include the Item objects in the room description<a class="headerlink" href="#include-the-item-objects-in-the-room-description" title="Link to this heading">¶</a></h2>
-<p>Despite writing all this code, your program <em>should</em> run the same as when we started. That’s because none of these changes have been outputted. For the Item objects we are going to follow the same process that we did for the Character objects:</p>
+<p>Even though you’ve added all this new code, the program will still look the same when it runs. That’s because we haven’t told it to show the items yet. To fix this, we’ll do the same thing we did for characters:</p>
 <ul class="simple">
-<li><p>create a <code class="docutils literal notranslate"><span class="pre">describe</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Item</span></code> class</p></li>
-<li><p>call the Item <code class="docutils literal notranslate"><span class="pre">describe</span></code> method from the Room <code class="docutils literal notranslate"><span class="pre">describe</span></code> method</p></li>
+<li><p>Make a <code class="docutils literal notranslate"><span class="pre">describe</span></code> method inside the Item class.</p></li>
+<li><p>Make the Room’s <code class="docutils literal notranslate"><span class="pre">describe</span></code> method call the item’s <code class="docutils literal notranslate"><span class="pre">describe</span></code> method.</p></li>
 </ul>
 <p>First we need to go to the <strong>item.py</strong> file and add the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># item.py</span>
@@ -558,11 +581,11 @@
 </span><span class="hll"><span class="linenos">12</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You see </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> in the room. It is </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>    
 </span></pre></div>
 </div>
-<p>In investing this code, you should already recognise all the elements:</p>
+<p>In investing this code, you should already recognise all these elements:</p>
 <ul class="simple">
 <li><p>defining method</p></li>
-<li><p>method describing comment</p></li>
-<li><p>display to terminal using attributes of the object.</p></li>
+<li><p>describing the method in a comment</p></li>
+<li><p>displaying attributes to the terminal</p></li>
 </ul>
 <p>Now head to <strong>room.py</strong> and add the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>

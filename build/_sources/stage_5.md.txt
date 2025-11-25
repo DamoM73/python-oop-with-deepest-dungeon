@@ -1,25 +1,30 @@
 # Stage 5 - Item Creation
 
-```{topic} In this lesson you will:
-
-- Create items
-- Add the items to their room
+```{topic} Learning Intentions
+In this lesson you will:
+Knowledge
+* Understand what an Item class is and why games use items. 
+* Explain how classes, attributes, and methods work together when creating items. 
+* Describe how rooms, characters, and items link together to build a game world. 
+* Create an Item class and give it attributes and a describe method. 
+* Add Item objects to rooms and update the room description so items appear correctly when the game runs. 
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/jYSs_-wY8ys" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction
 
-Now our dungeon is starting to take shape. The user can move between multiple rooms in which they can interact with different characters. We have two different types of characters, with different user interactions.
+Our dungeon is starting to look like a real game. You can now move between rooms and meet different characters, and each type of character behaves in their own way.
 
-In this stage we will continue to fill out our dungeon. Most Dungeon crawlers will contain different items that the player can interact with, so let's create some items.
+Next, we’re going to make the dungeon feel more alive by adding items. Most dungeon-style games let players find and use different objects, so we’ll do the same.
 
-To achieve this we will:
+In this stage you will:
 
-- Define an Item class
-- Create Item objects
-- Add the Item objects to the rooms
-- Include the Item objects in the room description.
+* Make an Item class
+* Create your own item objects
+* Put those items into different rooms
+* Update the room descriptions so the items show up when you enter a room
+
 
 ### Class Diagram
 
@@ -46,10 +51,12 @@ class Item():
 
 In investigating the code everything should be familiar:
 
-- defining the `Item` class
-- defining our `__init__` method
-- assigning the `name` argument to the `self.name` attribute
-- creating a placeholder `self.description` attribute to be assigned a value later
+```{admonition} Code Explaination
+* We made the Item class.
+* We wrote the `__init__` method that runs when you create a new item.
+* We took the item’s name and stored it in `self.name`.
+* We added `self.description` so we can give the item a description later.
+```
 
 ## Create Item objects
 
@@ -151,15 +158,17 @@ while running:
 
 Again, in investigating the code this should all be familiar.
 
-For each of the items, we have:
+```{admonition} Code Explaination
+For each item, we did the following:
 
-- imported our new class (Item)
-- called `Item()` to create a Item object and then assigned it to a variable
-- assigned a string to the Item object's  `description` attribute
+* Imported the Item class.
+* Used `Item()` to make a new item and stored it in a variable.
+* Gave the item a description by setting its `description` attribute.
+```
 
 ## Add the item object to the the rooms.
 
-To add the Item objects to the rooms, we need to first adjust the `Room` class, so go to **room.py** and add the code below.
+To put items into rooms, we first need to update the `Room` class. Open **room.py** and add the code shown.
 
 ```{code-block} python
 :linenos:
@@ -299,16 +308,22 @@ while running:
 
 **Predict** what you think will happen and then **run** the program.
 
-Investigating this code, and it will all look familiar to you.
+Investigating these two code changes should look familiar to you.
 
-For each item we assigned it to the `item` attribute of a Room object.
+```{admonition} Code Explaination
+* We added an `item` attribute to the Room class.
+* We made three items:
+  * each item was given a name
+  * each item was given a description
+* We placed one item into each room.
+```
 
 ## Include the Item objects in the room description
 
-Despite writing all this code, your program *should* run the same as when we started. That's because none of these changes have been outputted. For the Item objects we are going to follow the same process that we did for the Character objects:
+Even though you've added all this new code, the program will still look the same when it runs. That’s because we haven’t told it to show the items yet. To fix this, we’ll do the same thing we did for characters:
 
-- create a `describe` method in the `Item` class
-- call the Item `describe` method from the Room `describe` method
+* Make a `describe` method inside the Item class.
+* Make the Room’s `describe` method call the item’s `describe` method.
 
 First we need to go to the **item.py** file and add the code below:
 
@@ -329,11 +344,11 @@ class Item():
         print(f"You see {self.name} in the room. It is {self.description}.")    
 ```
 
-In investing this code, you should already recognise all the elements:
+In investing this code, you should already recognise all these elements:
 
-- defining method
-- method describing comment
-- display to terminal using attributes of the object.
+* defining method
+* describing the method in a comment
+* displaying attributes to the terminal
 
 Now head to **room.py** and add the following code:
 
