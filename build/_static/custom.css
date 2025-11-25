@@ -1,0 +1,133 @@
+/* Match admonition text to regular body size */
+.admonition,
+.admonition p,
+.admonition .admonition-title {
+  font-size: inherit;
+}
+/* Increase specificity so it overrides the theme defaults */
+.admonition > .admonition-title {
+  font-size: inherit !important;
+  font-weight: 700 !important;
+}
+/* Ensure nested admonition titles also pick up weight */
+.admonition .admonition-title {
+  font-weight: 700 !important;
+}
+
+/* Make topic directive text match body size */
+.topic,
+.topic p,
+.topic .topic-title {
+  font-size: inherit;
+}
+/* Increase specificity to override theme defaults */
+.topic > .topic-title {
+  font-size: inherit !important;
+  font-weight: 700;
+}
+
+/* Make code blocks match body font size */
+pre,
+.highlight pre,
+.literal-block {
+  font-size: inherit;
+}
+
+/* Make inline code match body font size */
+code,
+.docutils.literal {
+  font-size: inherit;
+}
+
+/* Heading color tweaks */
+h1 {
+  color: #ff9100 !important;
+}
+h2 {
+  color: #ffab3c !important;
+}
+h3 {
+  color: #ffba5f !important;
+}
+h4 {
+  color: #fbca89 !important;
+}
+
+/* Sidebar background (covers gutter left of nav) */
+.sidebar-drawer,
+.sidebar,
+.sidebar-container,
+.sidebar-scroll {
+  background: #ffdfb4 !important;
+}
+.sidebar-search-container {
+  position: relative !important;
+  background: linear-gradient(
+    90deg,
+    rgba(251, 202, 137, 0) 0%,
+    #fbca89 var(--sidebar-item-spacing-horizontal),
+    #fbca89 100%
+  ) !important;
+}
+.sidebar-search {
+  background: linear-gradient(
+    90deg,
+    rgba(239, 239, 244, 0) 0%,
+    #efeff4 var(--sidebar-item-spacing-horizontal),
+    #efeff4 100%
+  ) !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  position: relative;
+  z-index: 1;
+  padding-left: calc(var(--sidebar-search-icon-size) + var(--sidebar-item-spacing-horizontal) * 2) !important;
+}
+/* Restore the search icon (matches Furo default) */
+.sidebar-search-container::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: var(--sidebar-item-spacing-horizontal);
+  width: var(--sidebar-search-icon-size);
+  height: var(--sidebar-search-icon-size);
+  display: block;
+  transform: translateY(-50%);
+  background-color: var(--color-sidebar-search-icon) !important;
+  z-index: 5;
+  mask-image: var(--icon-search);
+  -webkit-mask-image: var(--icon-search);
+  mask-repeat: no-repeat;
+  -webkit-mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-position: center;
+  pointer-events: none;
+}
+
+/* Left menu active/highlighted page */
+:root {
+  --color-sidebar-item-background--current: #fbca89;
+}
+.sidebar-tree .current > .reference,
+.sidebar-tree .current-page > .reference {
+  background: linear-gradient(
+    90deg,
+    rgba(251, 202, 137, 0) 0%,
+    #fbca89 var(--sidebar-item-spacing-horizontal),
+    #fbca89 100%
+  ) !important;
+}
+
+/* Override base background (left gutter) while keeping content white */
+html,
+body {
+  background: #ffdfb4 !important;
+}
+.page {
+  background: #ffdfb4 !important; /* ensure outer layout uses the gutter color */
+}
+.main,
+.main-content,
+.content,
+.article {
+  background: #ffffff !important; /* keep center content area white */
+}

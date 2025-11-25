@@ -2,32 +2,36 @@
 
 ## Why teach Object Orientated Programming?
 
-Introducing your students to Object Orientated Programming (OOP) opens them to a world of possibilities.
+Introducing students to Object-Oriented Programming (OOP) sets them up with skills that underpin modern software development.
 
-Object Orientated Programming is one of the major programming paradigms currently in use. In learning how to use OOP students will learn good programming practice. They will learn to produce code that is more efficient, secure, maintainable, and extendable.
+OOP is a core programming paradigm used across industry. Teaching it early helps students write code that is cleaner, more secure, easier to maintain, and simpler to extend.
 
-This is especially important for Python. Although Python can implement a functional paradigm, it is essentially a Object Orientated language (everything in Python is an object). Many Python modules and easily available resources assume the reader is familiar with OOP. Once your students have a solid understanding of OOP, they can extend their Python skills by accessing the resources provided by the Python community.
+This matters in Python. While Python supports functional styles, it is fundamentally object-oriented. Most Python libraries and community resources assume readers understand classes, objects, and methods. Once students grasp OOP, they can make full use of the wider Python ecosystem.
 
-Finally, starting your students on OOP will make it easier for them later in their coding career. If your students study programming at ta tertiary level, they will need to learn to code in OOP. The longer their introduction to OOP is postponed, the hard it is for them to accommodate the new programming paradigm (this I know from my own experience).
+Upper secondary Digital Technologies subjects are also increasingly expecting students to apply OOP in their solutions, making early exposure even more important.
+
+A strong grounding in OOP prepares students for future study. Tertiary programming courses expect students to work with object-oriented design from day one, and delaying exposure only makes that transition harder.
 
 ## Why this site?
 
-I created this site for use with my secondary school students. It is inspired by some of the courses that finally taught me how to code using OOP.
+This site was developed for use with secondary Digital Technologies students and is based on the resources that finally helped me learn to code effectively with OOP.
 
-This site supports my classroom practice by addressing two issues:
+It supports my classroom practice by addressing two common issues:
 
-- the divergence of my students' coding experience entering into this introductory unit
-- regular and extended absences during the Covid 19 pandemic
+* students arrive with very different levels of coding experience
+* extended student absences, particularly during the COVID-19 period
 
-My pedagogical approach is thus:
+My teaching approach is:
 
-- Students are presented with the website and are invited to proceed at their own pace.
-  - This allows students to race ahead if they wish.
-  - I have included a page with extension challenges, for those students who finish before the class.
-- I live code the content with the class.
-  - This represents the minimum progress I expect from students
-  - If they are behind what I am doing in class, they need to use this website to catch up.
-- If students fall behind, they can catch up via this site.
+* Students access the website and work through the material at their own pace.
+
+  * Students who move quickly can progress ahead.
+  * An extension page is provided for those who finish early.
+* I live-code each section with the class.
+
+  * This sets the minimum expected progress.
+  * Students who fall behind what is covered in class must use the website to catch up.
+* Any student who misses lessons or needs extra time can use this site to get back on track.
 
 ```{admonition} Corrections
 :class: important
@@ -45,17 +49,16 @@ The videos linked from this site where created prior to developing this site. Al
 
 ### Australian Curriculum
 
-The content of this website can be used to address the following content descriptors of the Australian
-Curriculum - Digital Technologies. The intention is to add both flowchart and pseudocode to this course to more fully meet the requirements of the Australian Curriculum.
+The content of this website can be used to address the following content descriptors of the Australian Curriculum - Digital Technologies. The intention is to add both flowchart and pseudocode to this course to more fully meet the requirements of the Australian Curriculum.
 
-| Level | Australian Curriculum v8.4 | Australian Curriculum v9 |
-| :--- | :--- | :--- |
-| Years 7 and 8 | [ACTDIP029](https://www.australiancurriculum.edu.au/Search/?q=ACTDIP029) | [AC9TDI8P05](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY78&content-description-code=AC9TDI8P05&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
-| | [ACTDIP030](https://www.australiancurriculum.edu.au/Search/?q=ACTDIP030)  | [AC9TDI8P06](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY78&content-description-code=AC9TDI8P06&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
-| | | [AC9TDI8P09](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY78&content-description-code=AC9TDI8P09&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
-| Years 9 and 10 | [ACTDIP040](https://www.australiancurriculum.edu.au/Search/?q=ACTDIP040) | [AC9TDI10P05](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY910&content-description-code=AC9TDI10P05&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
-| | [ACTDIP041](https://www.australiancurriculum.edu.au/Search/?q=ACTDIP041) | [AC9TDI10P06](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY910&content-description-code=AC9TDI10P06&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
-| | | [AC9TDI10P08](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY910&content-description-code=AC9TDI10P08&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
+| Level | Australian Curriculum v9 |
+| :--- | :--- |
+| Years 7 and 8 | [AC9TDI8P05](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY78&content-description-code=AC9TDI8P05&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
+| | [AC9TDI8P06](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY78&content-description-code=AC9TDI8P06&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
+| | [AC9TDI8P09](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY78&content-description-code=AC9TDI8P09&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
+| Years 9 and 10 | [AC9TDI10P05](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY910&content-description-code=AC9TDI10P05&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
+| | [AC9TDI10P06](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY910&content-description-code=AC9TDI10P06&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
+| | [AC9TDI10P08](https://v9.australiancurriculum.edu.au/f-10-curriculum/learning-areas/digital-technologies/year-7_year-8_year-9_year-10/content-description?subject-identifier=TECTDIY910&content-description-code=AC9TDI10P08&detailed-content-descriptions=0&hide-ccp=0&hide-gc=0&side-by-side=1&strands-start-index=0&subjects-start-index=0&view=quick) |
 
 
 ### Website Blocked

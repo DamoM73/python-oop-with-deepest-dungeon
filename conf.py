@@ -41,6 +41,8 @@ html_static_path = ['_static']
 html_logo = 'oop_logo.png'
 html_title = "Deepest Dungeon - Python OOP"
 html_favicon = "logo.ico"
+html_css_files = ["custom.css"]
+
 
 html_theme_options = {
     "footer_icons": [
