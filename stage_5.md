@@ -3,11 +3,11 @@
 ```{topic} Learning Intentions
 In this lesson you will:
 Knowledge
-* Understand what an Item class is and why games use items. 
-* Explain how classes, attributes, and methods work together when creating items. 
-* Describe how rooms, characters, and items link together to build a game world. 
-* Create an Item class and give it attributes and a describe method. 
-* Add Item objects to rooms and update the room description so items appear correctly when the game runs. 
+* understand what a class is and why objects might need their own attributes and behaviours
+* explain how classes, attributes, and methods work together to define different kinds of objects
+* describe how objects can be linked to form a larger system
+* create a new class with attributes and a method that describes the object
+* add objects to a structure and update output so these objects appear correctly when the program runs
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/jYSs_-wY8ys" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

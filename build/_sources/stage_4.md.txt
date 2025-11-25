@@ -2,11 +2,12 @@
 
 ```{topic} Learning Intentions
 In this lesson you will:
-* Understand what inheritance is and how child classes get attributes and methods from a parent class 
-* Explain polymorphism and how different classes can use the same method in different ways 
-* Identify the three types of programming errors: syntax, runtime, and logic errors 
-* Refactor existing code to use child classes (Friend and Enemy) without changing program behaviour 
-* Test and troubleshoot code by using expected vs actual result tables to find and fix logic and runtime errors 
+* understand what inheritance is and how child classes get attributes and methods from a parent class
+* explain polymorphism and how different classes can use the same method in different ways
+* identify the three types of programming errors: syntax, runtime, and logic errors
+* refactor code to use child classes without changing behaviour
+* test and troubleshoot code by comparing expected and actual results to find and fix logic and runtime errors
+errors 
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/J8U97_SRx7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

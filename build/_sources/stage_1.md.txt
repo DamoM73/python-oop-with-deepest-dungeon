@@ -2,11 +2,11 @@
 
 ```{topic} Learning Intentions
 By the end of this lesson, you will be able to:
-* understand how classes, attributes, and methods work together in a Python program
+* understand how classes, attributes, and methods work together
 * read simple UML class diagrams and identify the class name, its attributes, and its methods
-* make a basic Python class that uses an `__init__` method and another method you create
+* make a basic Python class with an `__init__` method and another method you create
 * create objects from a class and give them values for their attributes
-* connect objects to each other and show those connections when the program runs
+* connect objects to each other and show those connections in your output
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GeSTPYPPEfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

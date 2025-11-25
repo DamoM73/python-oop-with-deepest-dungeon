@@ -2,13 +2,13 @@
 
 ```{topic} Learninng Intentions
 By the end of this lesson you will:
-* Understand how classes, attributes, and methods work together in a program.
-* Recognise how different objects can interact inside a larger system.
-* Identify how user commands trigger events in an event-driven program.
-* Create new classes and objects with relevant attributes.
-* Link objects so they interact in meaningful ways.
-* Write simple methods that control object behaviour.
-* Update a main loop so it responds to user input with different actions.
+* understand how classes, attributes, and methods work together
+* recognise how different objects can interact inside a larger system
+* identify how user actions can trigger events in an event-driven program
+* create new classes and objects with relevant attributes
+* link objects so they interact in meaningful ways
+* write simple methods that control behaviour
+* update a main loop so it responds to user input with different actions
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ufsmJYdUg1Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

@@ -2,10 +2,10 @@
 
 ```{topic} Learning Intentions
 By the end of this lesson you will:
-* understand event-driven programming and the role of a main loop 
-* know how methods use arguments and return values to control program behaviour 
-* create a method that returns a new state (the `move` method) 
-* build a main loop that reads user input and triggers event handlers 
+* understand event-driven programming and the role of a main loop
+* know how methods use arguments and return values to control behaviour
+* create a method that returns a new state
+* build a main loop that reads user input and triggers event handlers
 * test branching code and handle invalid commands with clear feedback 
 ```
 

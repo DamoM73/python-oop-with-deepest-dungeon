@@ -2,11 +2,11 @@
 
 ```{topic} Learning Intentions
 In this lesson you will:
-* understand why a list is a suitable collection type for storing multiple items in a game inventory 
-* explain how user commands trigger different branches of code in the game loop 
-* describe how items, rooms, and characters interact through attributes and methods in the program 
-* create and update a list in Python to store and manage collected items (the backpack) 
-* implement new commands in the game loop to pick up items, view the backpack, and restrict fighting to available items
+* understand why a list is a suitable way to store multiple pieces of data
+* explain how user commands can trigger different branches of code
+* describe how different objects interact through attributes and methods
+* create and update a list in Python to store and manage items
+* implement new commands that use lists to control what actions are allowed
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/JsUGdNxLlLM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
