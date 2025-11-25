@@ -42,6 +42,7 @@ html_logo = None
 html_title = "Deepest Dungeon"
 html_favicon = "logo.ico"
 html_css_files = ["custom.css"]
+html_show_copyright = False
 
 
 html_theme_options = {
