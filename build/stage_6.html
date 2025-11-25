@@ -254,52 +254,61 @@
           <section id="stage-6-use-items">
 <h1>Stage 6 - Use Items<a class="headerlink" href="#stage-6-use-items" title="Link to this heading">¶</a></h1>
 <aside class="topic">
-<p class="topic-title">In this lesson you will:</p>
+<p class="topic-title">Learning Intentions</p>
+<p>In this lesson you will:</p>
 <ul class="simple">
-<li><p>Take an items</p></li>
-<li><p>Create a backpack to place items</p></li>
-<li><p>Limit weapons to items in dungeon</p></li>
+<li><p>understand why a list is a suitable collection type for storing multiple items in a game inventory</p></li>
+<li><p>explain how user commands trigger different branches of code in the game loop</p></li>
+<li><p>describe how items, rooms, and characters interact through attributes and methods in the program</p></li>
+<li><p>create and update a list in Python to store and manage collected items (the backpack)</p></li>
+<li><p>implement new commands in the game loop to pick up items, view the backpack, and restrict fighting to available items</p></li>
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/JsUGdNxLlLM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
-<p>Our game is progressing nicely. They player can move between multiple rooms, interact with different types of characters. We also have different items in these room.</p>
-<p>The next step is to allow the player to collect the items and use them.</p>
-<p>To achieve this we will:</p>
+<p>Our game is coming along well. You can move around, meet different characters, and find items in the rooms.</p>
+<p>Now we want the player to pick up items and actually use them.</p>
+<p>To do this we will:</p>
 <ul class="simple">
-<li><p>create a backpack variable that can store items</p></li>
-<li><p>add a take command that collects the items</p></li>
-<li><p>add a backpack command to list the items in the backpack</p></li>
-<li><p>restrict the fight weapon to items in the backpack</p></li>
+<li><p>make a backpack variable to hold the items you collect</p></li>
+<li><p>add a take command so you can pick up items</p></li>
+<li><p>add a backpack command so you can see what you’re carrying</p></li>
+<li><p>make sure you can only fight using items that are actually in your backpack</p></li>
 </ul>
 <section id="class-diagram">
 <h3>Class Diagram<a class="headerlink" href="#class-diagram" title="Link to this heading">¶</a></h3>
-<p>If we look at the class diagram, we notice that there are no changes. All of the changes in this section will be made in the <strong>main.py</strong> file, and will not involve adjusting any classes.</p>
+<p>When you check the class diagram, nothing new has been added. Everything in this part of the lesson will be changed only in <strong>main.py</strong>, and you won’t need to edit any classes.</p>
 <p><img alt="lesson 6 class diagram" src="_images/lesson_5_class_diagram.png" /></p>
 </section>
 </section>
 <section id="creating-a-backpack">
 <h2>Creating a backpack<a class="headerlink" href="#creating-a-backpack" title="Link to this heading">¶</a></h2>
-<p>The first thing we need to create is a backpack variable, so we can store the items we collect. To achieve this, we need a variable type that can hold multiple values. In Python these are called <strong>collections</strong>. We will be using <strong>lists</strong>, a type of <strong>collection</strong> that you will be familiar with.</p>
-<div class="admonition-collections-in-python admonition">
+<p>First, we need to make a backpack variable so we can keep the items we pick up. To do that, we need a type of variable that can store more than one thing at a time. In Python, these are called <strong>collections</strong>. This is the second type of collection you’ve used — the first was <strong>dictionaries</strong>. Now we’ll use a <strong>list</strong>, which is another collection type you already know.</p>
+<div class="note admonition">
 <p class="admonition-title">Collections in Python</p>
-<p>In Python, a collection is a way to group things together. There are different types of collections like lists, sets, and dictionaries. You can use them to store a bunch of values or items, like a shopping list or a list of names. Each type of collection has different rules and ways to use it. By choosing the right type of collection for what you need, it can help you write better code that works faster and is easier to read.</p>
-<p>Python has following collections built it:</p>
+<p>In Python, a <strong>collection</strong> is just a way to store a bunch of things together. You’ve already used some of these before. Different collection types work in different ways, and choosing the right one makes your code easier to understand and faster to run.</p>
+<p>Here are the main built-in collection types:</p>
 <ul class="simple">
-<li><p><strong>Lists:</strong> ordered collections of values, which can be of any data type. They are created using square brackets [] and values are separated by commas.</p></li>
-<li><p><strong>Tuples:</strong> similar to lists, but they are immutable, which means that their values cannot be changed after they are created. They are created using parentheses () and values are separated by commas.</p></li>
-<li><p><strong>Sets:</strong> unordered collections of unique values. They are created using curly braces {} or the set() constructor.</p></li>
-<li><p><strong>Dictionaries:</strong> unordered collections of key-value pairs. They are created using curly braces {} and key-value pairs are separated by commas, with a colon : between the key and value.</p></li>
+<li><p><strong>Lists:</strong> store things in order and can hold any type of value. You make them with square brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p></li>
+<li><p><strong>Tuples:</strong> like lists, but you can’t change them once they’re made. You create them with parentheses <code class="docutils literal notranslate"><span class="pre">()</span></code>.</p></li>
+<li><p><strong>Sets:</strong> store values with no duplicates and don’t keep any order. You make them with <code class="docutils literal notranslate"><span class="pre">{}</span></code> or <code class="docutils literal notranslate"><span class="pre">set()</span></code>.</p></li>
+<li><p><strong>Dictionaries:</strong> store pairs of information using a key and a value. You make them with <code class="docutils literal notranslate"><span class="pre">{key:</span> <span class="pre">value}</span></code>.</p></li>
 </ul>
-<p>It also has modules to support other collections:</p>
+<p>Python also has extra modules for other collection types:</p>
 <ul class="simple">
-<li><p><strong>Arrays:</strong> used to store a sequence of values of the same data type. They are created using the array module.</p></li>
-<li><p><strong>Queues:</strong> data structures that use a first-in, first-out (FIFO) method to store and retrieve data. They are implemented using the queue module.</p></li>
-<li><p><strong>Stacks:</strong> Stacks are data structures that use a last-in, first-out (LIFO) method to store and retrieve data. They are implemented using the stack module.</p></li>
+<li><p><strong>Arrays:</strong> store lots of values of the same type.</p></li>
+<li><p><strong>Queues:</strong> store items so the first thing in is the first thing out (FIFO).</p></li>
+<li><p><strong>Stacks:</strong> store items so the last thing in is the first thing out (LIFO).</p></li>
 </ul>
 </div>
-<p>Lists are the perfect collection for our purposed. It can start as empty and we can then use the <code class="docutils literal notranslate"><span class="pre">append()</span></code> method to add items as they are picked up by the user. We can also check if out backpack contains an item using the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator. We can access the time using list indexation, as well as using <code class="docutils literal notranslate"><span class="pre">pop</span></code> to remove the item from the backpack. So let’s create it.</p>
+<p>Lists work really well for what we need:</p>
+<ul class="simple">
+<li><p>They can start empty, and we can use <code class="docutils literal notranslate"><span class="pre">append()</span></code> to add items when the player picks them up.</p></li>
+<li><p>We can also check whether the backpack has a certain item using the <code class="docutils literal notranslate"><span class="pre">in</span></code> operator.</p></li>
+<li><p>Lists let us access items by their position</p></li>
+<li><p>We can use <code class="docutils literal notranslate"><span class="pre">pop()</span></code> to remove an item from the backpack.</p></li>
+</ul>
 <p>Open <strong>main.py</strong> and add the highlighted code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
@@ -396,11 +405,17 @@
 <span class="linenos">93</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t understand.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>We don’t need to <strong>investigate</strong> this line of code, as we all know what it does.</p>
+<p><strong>Investigating</strong> this line of code.</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">backpack</span> <span class="pre">=</span> <span class="pre">[]</span></code> → creates an empty list and assigns it the name <code class="docutils literal notranslate"><span class="pre">backpack</span></code></p></li>
+</ul>
+</div>
 </section>
 <section id="add-take-command">
 <h2>Add take command<a class="headerlink" href="#add-take-command" title="Link to this heading">¶</a></h2>
-<p>Now that we have a backpack we need to create a command that allows the user to pick up items in the room and place them in the backpack. We will use <strong>take</strong> as that command.</p>
+<p>Now that we’ve made a backpack, we need a command that lets the player pick up items from the room and put them into it. We’ll use <strong>take</strong> as that command.</p>
 <p>Still working in <strong>main.py</strong> add the take command using the highlighted code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
@@ -506,15 +521,18 @@
 </div>
 <p>Save <strong>main.py</strong> <strong>predict</strong> what you think will happen and then <strong>run</strong> the code. What happens to the room description after you take an item?</p>
 <p>In <strong>investigating</strong> this code, most of it should be familiar from our previous command event handlers. The different code is:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">backpack.append(current_room.item)</span></code> → take the <code class="docutils literal notranslate"><span class="pre">Item</span></code> object in the room and adds it to the end of the <code class="docutils literal notranslate"><span class="pre">backpack</span></code> list.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">put</span> <span class="pre">{current_room.item.name}</span> <span class="pre">into</span> <span class="pre">your</span> <span class="pre">backpack&quot;)</span></code> → informs the user that they have collected the item</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">current_room.item</span> <span class="pre">=</span> <span class="pre">None</span></code> → removes the <code class="docutils literal notranslate"><span class="pre">Item</span></code> object from the room by setting the <code class="docutils literal notranslate"><span class="pre">Room</span></code> object’s <code class="docutils literal notranslate"><span class="pre">item</span></code> attribute to <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">backpack.append(current_room.item)</span></code> → puts the item from the room into the backpack list.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">put</span> <span class="pre">{current_room.item.name}</span> <span class="pre">into</span> <span class="pre">your</span> <span class="pre">backpack&quot;)</span></code> → tells the player what item they picked up.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">current_room.item</span> <span class="pre">=</span> <span class="pre">None</span></code> → clears the item from the room so it’s no longer there.</p></li>
 </ul>
+</div>
 </section>
 <section id="add-backpack-command">
 <h2>Add backpack command<a class="headerlink" href="#add-backpack-command" title="Link to this heading">¶</a></h2>
-<p>Now that we are putting items in the backpack, we need to create a way for the user to see what they have. We will make a new <strong>backpack</strong> command that lists the <code class="docutils literal notranslate"><span class="pre">Item</span></code> objects stored in their backpack.</p>
+<p>Now that we can collect items, we need a way for the player to check what they’re carrying. We’ll add a new <strong>backpack</strong> command that shows all the items currently inside it.</p>
 <p>Still working in <strong>main.py</strong>, add the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
@@ -632,20 +650,57 @@
 <li><p>the items are added to the backpack when they are picked up</p></li>
 <li><p>the items are removed from the room when they are picked up</p></li>
 </ul>
+<p>Here is an example for the Cavern testing table. Make sure you also make one for each room.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-left"><p>Room</p></th>
+<th class="head text-left"><p>Command</p></th>
+<th class="head text-left"><p>Expected result</p></th>
+<th class="head text-left"><p>Actual results</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-left"><p>Cavern</p></td>
+<td class="text-left"><p>Backpack</p></td>
+<td class="text-left"><p>It is empty</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Cavern</p></td>
+<td class="text-left"><p>Take</p></td>
+<td class="text-left"><p>You put chair into your backpack</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-even"><td class="text-left"><p>Cavern</p></td>
+<td class="text-left"><p>Backpack</p></td>
+<td class="text-left"><p>Chair</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+<tr class="row-odd"><td class="text-left"><p>Cavern</p></td>
+<td class="text-left"><p>Take</p></td>
+<td class="text-left"><p>There is nothing here to take</p></td>
+<td class="text-left"><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
 <p>If your testing all works out, then it’s time to <strong>investigate</strong> the code.</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">elif</span> <span class="pre">command</span> <span class="pre">==</span> <span class="pre">&quot;backpack&quot;:</span></code> → the event handler for the <code class="docutils literal notranslate"><span class="pre">backpack</span></code> command</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">backpack</span> <span class="pre">==</span> <span class="pre">[]:</span></code> → checks if the backpack is empty</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;It</span> <span class="pre">is</span> <span class="pre">empty&quot;)</span></code> → informs the user that the backpack is empty</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → if the backpack is not empty</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;You</span> <span class="pre">have:&quot;)</span></code> → displays a message before listing backpack items</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">backpack:</span></code> → iterates over each item in the backpack</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;-</span> <span class="pre">{item.name.capitalize()}&quot;)</span></code> → capitalizes and prints the name of the current <code class="docutils literal notranslate"><span class="pre">item</span></code> that the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is dealing with.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">elif</span> <span class="pre">command</span> <span class="pre">==</span> <span class="pre">&quot;backpack&quot;:</span></code> → this runs when the player types <strong>backpack</strong>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">backpack</span> <span class="pre">==</span> <span class="pre">[]:</span></code> → checks whether the backpack has nothing in it.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;It</span> <span class="pre">is</span> <span class="pre">empty&quot;)</span></code> → tells the player the backpack is empty.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → runs if the backpack has at least one item.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;You</span> <span class="pre">have:&quot;)</span></code> → shows a heading before listing the items.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">backpack:</span></code> → goes through each item in the backpack, one at a time.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;-</span> <span class="pre">{item.name.capitalize()}&quot;)</span></code> → prints the name of each item, with a capital letter at the start.</p></li>
 </ul>
+</div>
 </section>
 <section id="adjusting-the-fight-command">
 <h2>Adjusting the fight command<a class="headerlink" href="#adjusting-the-fight-command" title="Link to this heading">¶</a></h2>
-<p>Finally we will adjust the <code class="docutils literal notranslate"><span class="pre">fight</span></code> event handler so the user can only use items they currently have in their backpack.</p>
+<p>Lastly, we need to change the <code class="docutils literal notranslate"><span class="pre">fight</span></code> command so the player can only use items that are actually in their backpack.</p>
 <p>Still working in <strong>main.py</strong>, add the code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
@@ -767,31 +822,38 @@
 </div>
 <p>Save <strong>main.py</strong>. <strong>Predict</strong> what you think will happen, and then <strong>run</strong> the code.</p>
 <p>Let’s <strong>investigate</strong> that code, but be aware that there are a number of different sections to that code.</p>
-<p>First we need to check that the user actually has the entered weapon in their backpack.</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
+<p>First, we need to make sure the player actually has the weapon they typed.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">available_weapons</span> <span class="pre">=</span> <span class="pre">[]</span></code> → creates a new list that contains the <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute for all items in the backpack.</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">available_weapons</span> <span class="pre">=</span> <span class="pre">[]</span></code> → makes a new list to hold the <strong>names</strong> of all items in the backpack.</p>
 <ul>
-<li><p>the backpack stored <code class="docutils literal notranslate"><span class="pre">Item</span></code> objects</p></li>
-<li><p>the user entered the item name as a string</p></li>
-<li><p>therefore, we need to create a list of the name of all the items in the backpack</p></li>
+<li><p>the backpack stores <code class="docutils literal notranslate"><span class="pre">Item</span></code> objects</p></li>
+<li><p>the player types a weapon as a <strong>string</strong></p></li>
+<li><p>so we need a list of item <strong>names</strong>, not item objects</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">backpack:</span></code> → iterates over each item in the backpack</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">available_weapons.append(item.name)</span></code> → add the <code class="docutils literal notranslate"><span class="pre">name</span></code> attribute of the current item to the <code class="docutils literal notranslate"><span class="pre">available_weapons</span></code> list.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">weapon</span> <span class="pre">in</span> <span class="pre">available_weapons:</span></code> → checks that the weapon entered by the user is in the list of available weapons.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">backpack:</span></code> → goes through each item in the backpack</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">available_weapons.append(item.name)</span></code> → adds the name of each item to the <code class="docutils literal notranslate"><span class="pre">available_weapons</span></code> list</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">weapon</span> <span class="pre">in</span> <span class="pre">available_weapons:</span></code> → checks if the player really has that weapon</p></li>
 </ul>
-<p>If the user entered an available weapon, then we need to fight with this weapon. Lines <code class="docutils literal notranslate"><span class="pre">88</span></code> to <code class="docutils literal notranslate"><span class="pre">91</span></code> are the same as before, but the have been indented one level. To to this easily increase a block of code’s indentation:</p>
+<p>If the player <em>does</em> have the weapon, we fight using it. Those lines are the same as before, just moved in one tab:</p>
 <ul class="simple">
-<li><p>highlight lines <code class="docutils literal notranslate"><span class="pre">88</span></code> to <code class="docutils literal notranslate"><span class="pre">91</span></code>, ether using the mouse or <strong>shift</strong> + <strong>arrow</strong> keys.</p></li>
-<li><p>then press the <strong>Tab</strong> key once</p></li>
+<li><p>To indent those lines quickly:</p>
+<ul>
+<li><p>highlight lines 88–91</p></li>
+<li><p>press <strong>Tab</strong> once</p></li>
 </ul>
-<p>If the user didn’t enter an available weapon, then we need to inform them, then make them loose the fight and end the game. This happens in lines <code class="docutils literal notranslate"><span class="pre">92</span></code> to <code class="docutils literal notranslate"><span class="pre">95</span></code></p>
+</li>
+</ul>
+<p>If the player <em>doesn’t</em> have the weapon, we tell them and they lose the fight:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → the weapon entered is not in the <code class="docutils literal notranslate"><span class="pre">available_weapons</span></code> list</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">don't</span> <span class="pre">have</span> <span class="pre">{weapon}&quot;)</span></code> → inform the user that they do not have that item in the backpack</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{current_room.character.name}</span> <span class="pre">strikes</span> <span class="pre">you</span> <span class="pre">down.&quot;)</span></code> → resolves the fight as a defeat for the user</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> ends the game by exiting the main loop.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → runs when the weapon isn’t in <code class="docutils literal notranslate"><span class="pre">available_weapons</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">don't</span> <span class="pre">have</span> <span class="pre">{weapon}&quot;)</span></code> → tells the player they don’t have that item</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{current_room.character.name}</span> <span class="pre">strikes</span> <span class="pre">you</span> <span class="pre">down.&quot;)</span></code> → the enemy defeats them</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> → ends the game by stopping the main loop</p></li>
 </ul>
+</div>
 </section>
 <section id="testing">
 <h2>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h2>

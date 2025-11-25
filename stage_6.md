@@ -1,55 +1,62 @@
 # Stage 6 - Use Items
 
-```{topic} In this lesson you will:
-
-- Take an items
-- Create a backpack to place items
-- Limit weapons to items in dungeon
+```{topic} Learning Intentions
+In this lesson you will:
+* understand why a list is a suitable collection type for storing multiple items in a game inventory 
+* explain how user commands trigger different branches of code in the game loop 
+* describe how items, rooms, and characters interact through attributes and methods in the program 
+* create and update a list in Python to store and manage collected items (the backpack) 
+* implement new commands in the game loop to pick up items, view the backpack, and restrict fighting to available items
 ```
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/JsUGdNxLlLM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction
 
-Our game is progressing nicely. They player can move between multiple rooms, interact with different types of characters. We also have different items in these room.
+Our game is coming along well. You can move around, meet different characters, and find items in the rooms.
 
-The next step is to allow the player to collect the items and use them.
+Now we want the player to pick up items and actually use them.
 
-To achieve this we will:
+To do this we will:
 
-- create a backpack variable that can store items
-- add a take command that collects the items
-- add a backpack command to list the items in the backpack
-- restrict the fight weapon to items in the backpack
+* make a backpack variable to hold the items you collect
+* add a take command so you can pick up items
+* add a backpack command so you can see what you’re carrying
+* make sure you can only fight using items that are actually in your backpack
 
 ### Class Diagram
 
-If we look at the class diagram, we notice that there are no changes. All of the changes in this section will be made in the **main.py** file, and will not involve adjusting any classes.
+When you check the class diagram, nothing new has been added. Everything in this part of the lesson will be changed only in **main.py**, and you won’t need to edit any classes.
 
 ![lesson 6 class diagram](./assets/lesson_5_class_diagram.png)
 
 ## Creating a backpack
 
-The first thing we need to create is a backpack variable, so we can store the items we collect. To achieve this, we need a variable type that can hold multiple values. In Python these are called **collections**. We will be using **lists**, a type of **collection** that you will be familiar with.
+First, we need to make a backpack variable so we can keep the items we pick up. To do that, we need a type of variable that can store more than one thing at a time. In Python, these are called **collections**. This is the second type of collection you’ve used — the first was **dictionaries**. Now we’ll use a **list**, which is another collection type you already know.
 
 ```{admonition} Collections in Python
-In Python, a collection is a way to group things together. There are different types of collections like lists, sets, and dictionaries. You can use them to store a bunch of values or items, like a shopping list or a list of names. Each type of collection has different rules and ways to use it. By choosing the right type of collection for what you need, it can help you write better code that works faster and is easier to read.
+:class: note
+In Python, a **collection** is just a way to store a bunch of things together. You’ve already used some of these before. Different collection types work in different ways, and choosing the right one makes your code easier to understand and faster to run.
 
-Python has following collections built it:
+Here are the main built-in collection types:
 
-- **Lists:** ordered collections of values, which can be of any data type. They are created using square brackets [] and values are separated by commas.
-- **Tuples:** similar to lists, but they are immutable, which means that their values cannot be changed after they are created. They are created using parentheses () and values are separated by commas.
-- **Sets:** unordered collections of unique values. They are created using curly braces {} or the set() constructor.
-- **Dictionaries:** unordered collections of key-value pairs. They are created using curly braces {} and key-value pairs are separated by commas, with a colon : between the key and value.
+* **Lists:** store things in order and can hold any type of value. You make them with square brackets `[]`.
+* **Tuples:** like lists, but you can’t change them once they’re made. You create them with parentheses `()`.
+* **Sets:** store values with no duplicates and don’t keep any order. You make them with `{}` or `set()`.
+* **Dictionaries:** store pairs of information using a key and a value. You make them with `{key: value}`.
 
-It also has modules to support other collections:
+Python also has extra modules for other collection types:
 
-- **Arrays:** used to store a sequence of values of the same data type. They are created using the array module.
-- **Queues:** data structures that use a first-in, first-out (FIFO) method to store and retrieve data. They are implemented using the queue module.
-- **Stacks:** Stacks are data structures that use a last-in, first-out (LIFO) method to store and retrieve data. They are implemented using the stack module.
+* **Arrays:** store lots of values of the same type.
+* **Queues:** store items so the first thing in is the first thing out (FIFO).
+* **Stacks:** store items so the last thing in is the first thing out (LIFO).
 ```
 
-Lists are the perfect collection for our purposed. It can start as empty and we can then use the `append()` method to add items as they are picked up by the user. We can also check if out backpack contains an item using the `in` operator. We can access the time using list indexation, as well as using `pop` to remove the item from the backpack. So let's create it.
+Lists work really well for what we need:
+* They can start empty, and we can use `append()` to add items when the player picks them up. 
+* We can also check whether the backpack has a certain item using the `in` operator. 
+* Lists let us access items by their position
+* We can use `pop()` to remove an item from the backpack.
 
 Open **main.py** and add the highlighted code below:
 
@@ -151,11 +158,15 @@ while running:
         print("I don't understand.")
 ```
 
-We don't need to **investigate** this line of code, as we all know what it does.
+**Investigating** this line of code.
+
+```{admonition} Code Explaination
+* `backpack = []` &rarr; creates an empty list and assigns it the name `backpack`
+```
 
 ## Add take command
 
-Now that we have a backpack we need to create a command that allows the user to pick up items in the room and place them in the backpack. We will use **take** as that command.
+Now that we’ve made a backpack, we need a command that lets the player pick up items from the room and put them into it. We’ll use **take** as that command.
 
 Still working in **main.py** add the take command using the highlighted code below:
 
@@ -268,13 +279,15 @@ Save **main.py** **predict** what you think will happen and then **run** the cod
 
 In **investigating** this code, most of it should be familiar from our previous command event handlers. The different code is:
 
-- `backpack.append(current_room.item)` &rarr; take the `Item` object in the room and adds it to the end of the `backpack` list.
-- `print(f"You put {current_room.item.name} into your backpack")` &rarr; informs the user that they have collected the item
-- `current_room.item = None` &rarr; removes the `Item` object from the room by setting the `Room` object's `item` attribute to `None`
+```{admonition} Code Explaination
+* `backpack.append(current_room.item)` &rarr; puts the item from the room into the backpack list.
+* `print(f"You put {current_room.item.name} into your backpack")` &rarr; tells the player what item they picked up.
+* `current_room.item = None` &rarr; clears the item from the room so it’s no longer there.
+```
 
 ## Add backpack command
 
-Now that we are putting items in the backpack, we need to create a way for the user to see what they have. We will make a new **backpack** command that lists the `Item` objects stored in their backpack.
+Now that we can collect items, we need a way for the player to check what they’re carrying. We’ll add a new **backpack** command that shows all the items currently inside it.
 
 Still working in **main.py**, add the code below:
 
@@ -398,19 +411,30 @@ We need to make sure that:
 - the items are added to the backpack when they are picked up
 - the items are removed from the room when they are picked up
 
+Here is an example for the Cavern testing table. Make sure you also make one for each room.
+
+| Room | Command | Expected result | Actual results |
+| :--- | :--- | :--- | :--- |
+| Cavern | Backpack | It is empty | |
+| Cavern | Take | You put chair into your backpack | |
+| Cavern | Backpack | Chair | |
+| Cavern | Take | There is nothing here to take | |
+
 If your testing all works out, then it's time to **investigate** the code.
 
-- `elif command == "backpack":` &rarr; the event handler for the `backpack` command
-- `if backpack == []:` &rarr; checks if the backpack is empty
-- `print("It is empty")` &rarr; informs the user that the backpack is empty
-- `else:` &rarr; if the backpack is not empty
-- `print("You have:")` &rarr; displays a message before listing backpack items
-- `for item in backpack:` &rarr; iterates over each item in the backpack
-- `print(f"- {item.name.capitalize()}")` &rarr; capitalizes and prints the name of the current `item` that the `for` loop is dealing with.
+```{admonition} Code Explaination
+* `elif command == "backpack":` &rarr; this runs when the player types **backpack**.
+* `if backpack == []:` &rarr; checks whether the backpack has nothing in it.
+* `print("It is empty")` &rarr; tells the player the backpack is empty.
+* `else:` &rarr; runs if the backpack has at least one item.
+* `print("You have:")` &rarr; shows a heading before listing the items.
+* `for item in backpack:` &rarr; goes through each item in the backpack, one at a time.
+* `print(f"- {item.name.capitalize()}")` &rarr; prints the name of each item, with a capital letter at the start.
+```
 
 ## Adjusting the fight command
 
-Finally we will adjust the `fight` event handler so the user can only use items they currently have in their backpack.
+Lastly, we need to change the `fight` command so the player can only use items that are actually in their backpack.
 
 Still working in **main.py**, add the code below.
 
@@ -539,27 +563,32 @@ Save **main.py**. **Predict** what you think will happen, and then **run** the c
 
 Let's **investigate** that code, but be aware that there are a number of different sections to that code.
 
-First we need to check that the user actually has the entered weapon in their backpack.
+```{admonition} Code Explaination
+First, we need to make sure the player actually has the weapon they typed.
 
-- `available_weapons = []` &rarr; creates a new list that contains the `name` attribute for all items in the backpack.
-  - the backpack stored `Item` objects
-  - the user entered the item name as a string
-  - therefore, we need to create a list of the name of all the items in the backpack
-- `for item in backpack:` &rarr; iterates over each item in the backpack
-- `available_weapons.append(item.name)` &rarr; add the `name` attribute of the current item to the `available_weapons` list.
-- `if weapon in available_weapons:` &rarr; checks that the weapon entered by the user is in the list of available weapons.
-  
-If the user entered an available weapon, then we need to fight with this weapon. Lines `88` to `91` are the same as before, but the have been indented one level. To to this easily increase a block of code's indentation:
+* `available_weapons = []` &rarr; makes a new list to hold the **names** of all items in the backpack.
 
-- highlight lines `88` to `91`, ether using the mouse or **shift** + **arrow** keys.
-- then press the **Tab** key once
+  * the backpack stores `Item` objects
+  * the player types a weapon as a **string**
+  * so we need a list of item **names**, not item objects
+* `for item in backpack:` &rarr; goes through each item in the backpack
+* `available_weapons.append(item.name)` &rarr; adds the name of each item to the `available_weapons` list
+* `if weapon in available_weapons:` &rarr; checks if the player really has that weapon
 
-If the user didn't enter an available weapon, then we need to inform them, then make them loose the fight and end the game. This happens in lines `92` to `95`
+If the player *does* have the weapon, we fight using it. Those lines are the same as before, just moved in one tab:
 
-- `else:` &rarr; the weapon entered is not in the `available_weapons` list
-- `print(f"You don't have {weapon}")` &rarr; inform the user that they do not have that item in the backpack
-- `print(f"{current_room.character.name} strikes you down.")` &rarr; resolves the fight as a defeat for the user
-- `running = False` ends the game by exiting the main loop.
+* To indent those lines quickly:
+
+    * highlight lines 88–91
+    * press **Tab** once
+
+If the player *doesn’t* have the weapon, we tell them and they lose the fight:
+
+* `else:` &rarr; runs when the weapon isn’t in `available_weapons`
+* `print(f"You don't have {weapon}")` &rarr; tells the player they don’t have that item
+* `print(f"{current_room.character.name} strikes you down.")` &rarr; the enemy defeats them
+* `running = False` &rarr; ends the game by stopping the main loop
+```
 
 ## Testing
 
