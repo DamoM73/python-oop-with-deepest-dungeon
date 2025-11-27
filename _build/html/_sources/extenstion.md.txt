@@ -1,6 +1,0 @@
-# Extensions ideas
-
-Now that you have finished Deepest Dungeon, it's time to start making it yours but extending it. Below are some suggestions for extra features you could add to your dungeon.
-
-## The Dungeon
-

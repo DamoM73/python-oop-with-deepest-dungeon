@@ -7,6 +7,7 @@ This website provides tutorials that introduce Object Orientated Programming thr
 :caption: "Contents:"
 
 introduction
+student_intro
 oop_introduction
 stage_1
 stage_2

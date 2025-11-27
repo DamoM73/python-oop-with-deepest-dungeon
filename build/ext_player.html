@@ -203,6 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -259,13 +260,17 @@
 <aside class="topic">
 <p class="topic-title">In this lesson you will:</p>
 <ul class="simple">
-<li><p>learn how to refactor code by consolodating existing code into a new class.</p></li>
+<li><p>understand why grouping related features into a single class makes a program easier to manage</p></li>
+<li><p>recognise how attributes and methods represent a thing’s data and actions</p></li>
+<li><p>identify when code should be moved out of one place and into a class during refactoring</p></li>
+<li><p>understand how objects can interact by calling each other’s methods</p></li>
+<li><p>create a simple class with attributes and methods, then use it in a program to replace repeated code</p></li>
 </ul>
 </aside>
-<p>In this extensions tutorial, we will refactor our code to create a Player class. This will give the game a player object which we can use to add features associated with the player (health, inventory, gear, weapons etc.). The first feature we will add is the player inventory, known in our game as the backpack.</p>
+<p>In this tutorial, you’ll reorganise your code by making a <strong>Player</strong> class. This will give you a player object that can hold all the player’s features, like health, items, gear, and weapons. The first thing you’ll add is the player’s inventory, which we call the backpack.</p>
 <section id="planning">
 <h2>Planning<a class="headerlink" href="#planning" title="Link to this heading">¶</a></h2>
-<p>Currently the code dealing with the backpack is held in <code class="docutils literal notranslate"><span class="pre">main.py</span></code>. Before we plan our new class, we need to look at this code an identify all relevant feature we need to incorporate. So let’s look at the <code class="docutils literal notranslate"><span class="pre">main.py</span></code> from the end of the standard tutorials.</p>
+<p>Right now, all the backpack code is written inside <code class="docutils literal notranslate"><span class="pre">main.py</span></code>. Before we create our new Player class, we need to look at that code and figure out which parts should be moved into the class. So we’ll start by checking the <code class="docutils literal notranslate"><span class="pre">main.py</span></code> file from the end of the earlier tutorials.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -401,32 +406,32 @@
 </pre></div>
 </div>
 <p>You will notice that there are four places that <code class="docutils literal notranslate"><span class="pre">main.py</span></code> interacts with the player’s backpack.</p>
-<ul class="simple">
+<ol class="arabic simple">
 <li><p><strong>line 54</strong> → defines the backpack variable as an empty list</p></li>
 <li><p><strong>lines 82 - 85</strong> → checks if chosen weapon is in the backpack</p></li>
 <li><p><strong>lines 101 - 106</strong> → adds item to backpack</p></li>
 <li><p><strong>lines 109-114</strong> → displays the contents of the backpack</p></li>
-</ul>
+</ol>
 <p>If we were to move these features to a Player class, we need to consider the nature of the four features:</p>
-<ul class="simple">
+<ol class="arabic simple">
 <li><p>the backpack describes part of the player → attribute</p></li>
 <li><p>checking for weapon in backpack is an action → method</p></li>
 <li><p>adding an item to backpack is an action → method</p></li>
 <li><p>displaying the contents of the backpack is an actions → method</p></li>
-</ul>
+</ol>
 <p>Therefore the class diagram would look like this:</p>
 <p><img alt="player class diagram" src="_images/player_class_diagram.png" /></p>
 <p>Now that we have a plan. Lets implement it in our code.</p>
 </section>
 <section id="coding">
 <h2>Coding<a class="headerlink" href="#coding" title="Link to this heading">¶</a></h2>
-<p>We are going to refactor this code is little chunks. That way we can regularly test to ensure we haven’t introduced new bugs</p>
+<p>We’re going to update this code in small steps. This makes it easier to test as we go and check that we haven’t accidentally created any new bugs.</p>
 <section id="create-player-class">
 <h3>Create Player class<a class="headerlink" href="#create-player-class" title="Link to this heading">¶</a></h3>
-<p>First we need to create the Player Class.</p>
+<p>First, we need to make the Player class.</p>
 <ol class="arabic simple">
-<li><p>Create a new file called <strong>player.py</strong>. Make sure it is in the same folder as the other program files.</p></li>
-<li><p>Next add the <strong>Player</strong> class and it’s <code class="docutils literal notranslate"><span class="pre">__init__</span></code> with the code below.</p></li>
+<li><p>Create a new file called <strong>player.py</strong> in the same folder as your other files.</p></li>
+<li><p>Add the <strong>Player</strong> class and its <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method using the code shown below.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="c1"># player.py</span>
 </span><span class="linenos">2</span>
@@ -439,9 +444,9 @@
 </section>
 <section id="replace-references-to-backpack">
 <h3>Replace references to backpack<a class="headerlink" href="#replace-references-to-backpack" title="Link to this heading">¶</a></h3>
-<p>Now in <strong>main.py</strong> we will create a instance of the Player class by making a player object.</p>
+<p>Now in <strong>main.py</strong>, we’re going to make a player object so we can use the Player class in our program.</p>
 <ol class="arabic simple">
-<li><p>Import the Player class (code below)</p></li>
+<li><p>Import the Player class using the code shown below.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
 <span class="linenos">4</span><span class="kn">from</span><span class="w"> </span><span class="nn">character</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enemy</span><span class="p">,</span> <span class="n">Friend</span>
@@ -462,7 +467,7 @@
 </span></pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p><strong>Delete</strong> the <code class="docutils literal notranslate"><span class="pre">backback</span></code> variable in <strong>line 58</strong></p></li>
+<li><p>Delete the <code class="docutils literal notranslate"><span class="pre">backpack</span></code> variable on <strong>line 58</strong>.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">55</span><span class="c1"># initialise variables</span>
 <span class="linenos">56</span><span class="n">running</span> <span class="o">=</span> <span class="kc">True</span>
@@ -472,7 +477,7 @@
 </pre></div>
 </div>
 <ol class="arabic simple" start="4">
-<li><p>Change the <code class="docutils literal notranslate"><span class="pre">backpack</span></code> reference in the <strong>fight</strong> command to refer to <code class="docutils literal notranslate"><span class="pre">player.backpack</span></code></p></li>
+<li><p>Change the <code class="docutils literal notranslate"><span class="pre">backpack</span></code> in the <strong>fight</strong> command so it uses <code class="docutils literal notranslate"><span class="pre">player.backpack</span></code> instead.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 81</span>    <span class="c1"># fight</span>
 <span class="linenos"> 82</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
@@ -498,7 +503,7 @@
 </pre></div>
 </div>
 <ol class="arabic simple" start="5">
-<li><p>Change the <code class="docutils literal notranslate"><span class="pre">backpack</span></code> reference in the <strong>take</strong> command to refer to <code class="docutils literal notranslate"><span class="pre">player.backpack</span></code></p></li>
+<li><p>Change the <code class="docutils literal notranslate"><span class="pre">backpack</span></code> in the <strong>take</strong> command so it uses <code class="docutils literal notranslate"><span class="pre">player.backpack</span></code> instead.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">102</span>    <span class="c1"># take</span>
 <span class="linenos">103</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
@@ -511,7 +516,7 @@
 </pre></div>
 </div>
 <ol class="arabic simple" start="6">
-<li><p>Change the <code class="docutils literal notranslate"><span class="pre">backpack</span></code> references in the <strong>backpack</strong> command to refer to <code class="docutils literal notranslate"><span class="pre">player.backpack</span></code></p></li>
+<li><p>Change the <code class="docutils literal notranslate"><span class="pre">backpack</span></code> in the <strong>backpack</strong> command so it uses <code class="docutils literal notranslate"><span class="pre">player.backpack</span></code> instead.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">110</span>    <span class="c1"># backpack</span>
 <span class="linenos">111</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;backpack&quot;</span><span class="p">:</span>
@@ -525,14 +530,14 @@
 </div>
 <section id="test-backpack-replacement">
 <h4>Test backpack replacement<a class="headerlink" href="#test-backpack-replacement" title="Link to this heading">¶</a></h4>
-<p>That is our first block of refactoring. Time to test to ensure everything still works.</p>
+<p>That’s the first section of our code changes done. Now test your program to make sure everything still works.</p>
 </section>
 </section>
 <section id="add-item-method">
 <h3>add_item method<a class="headerlink" href="#add-item-method" title="Link to this heading">¶</a></h3>
-<p>To create effective code we should shift all backpack related code into the <strong>Player</strong> class. We will start with the <strong>add_method</strong> that add items to the backpack.</p>
+<p>To make our code cleaner, we should move all the backpack code into the <strong>Player</strong> class. We’ll start by adding the <strong>add_item</strong> method, which puts items into the backpack.</p>
 <ol class="arabic simple">
-<li><p>In <strong>player.py</strong> create the <code class="docutils literal notranslate"><span class="pre">add_item</span></code> method using the code below.</p></li>
+<li><p>In <strong>player.py</strong>, create the <code class="docutils literal notranslate"><span class="pre">add_item</span></code> method using the code below.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># player.py</span>
 <span class="linenos"> 2</span>
@@ -546,9 +551,9 @@
 </span><span class="hll"><span class="linenos">10</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> into your backpack&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
-<p>Now we need to remove that code from <strong>main.py</strong>, and replace it with a call to the <code class="docutils literal notranslate"><span class="pre">add_item</span></code> method.</p>
+<p>Now we need to take that code out of <strong>main.py</strong> and replace it with a call to the <code class="docutils literal notranslate"><span class="pre">add_item</span></code> method.</p>
 <ol class="arabic simple" start="2">
-<li><p><strong>replace</strong> the highlighted <strong>main.py</strong> code below:</p></li>
+<li><p>Remove the highlighted code in <strong>main.py</strong> shown below:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">102</span>    <span class="c1"># take</span>
 <span class="linenos">103</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
@@ -561,7 +566,7 @@
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>with this highlighted code:</p></li>
+<li><p>And replace it with this highlighted code:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">102</span>    <span class="c1"># take</span>
 <span class="linenos">103</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
@@ -574,15 +579,15 @@
 </div>
 <section id="test-add-item-method">
 <h4>Test add_item method<a class="headerlink" href="#test-add-item-method" title="Link to this heading">¶</a></h4>
-<p>Now go and test that you can still add items to your backpack.</p>
+<p>Now test your program to make sure you can still add items to your backpack.</p>
 </section>
 </section>
 <section id="display-contents-method">
 <h3>display_contents method<a class="headerlink" href="#display-contents-method" title="Link to this heading">¶</a></h3>
-<p>Next we will refactor the code that displays the contents of the backpack.</p>
+<p>Next, we’ll update the code that shows what’s inside the backpack.</p>
 <ol class="arabic simple">
-<li><p>Return to the <strong>player.py</strong> file</p></li>
-<li><p>Add the code below to the <strong>Player</strong> class</p></li>
+<li><p>Go back to the <strong>player.py</strong> file.</p></li>
+<li><p>Add the code below to the <strong>Player</strong> class.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># player.py</span>
 <span class="linenos"> 2</span>
@@ -606,7 +611,7 @@
 </div>
 <ol class="arabic simple" start="3">
 <li><p>Go back to <strong>main.py</strong></p></li>
-<li><p><strong>Replace</strong> the highlighted code below:</p></li>
+<li><p>Remove the highlighted code shown below:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">109</span>    <span class="c1"># backpack</span>
 <span class="linenos">110</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;backpack&quot;</span><span class="p">:</span>
@@ -619,7 +624,7 @@
 </span></pre></div>
 </div>
 <ol class="arabic simple" start="5">
-<li><p>with this code:</p></li>
+<li><p>And replace it with this highlighted code:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">109</span>    <span class="c1"># backpack</span>
 <span class="linenos">110</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;backpack&quot;</span><span class="p">:</span>
@@ -628,12 +633,12 @@
 </div>
 <section id="test-display-contents-method">
 <h4>Test display_contents method<a class="headerlink" href="#test-display-contents-method" title="Link to this heading">¶</a></h4>
-<p>Run your code and ensure that you can still see your backpack content.</p>
+<p>Run your program and check that you can still see everything inside your backpack.</p>
 </section>
 </section>
 <section id="check-item-in-method">
 <h3>check_item_in method<a class="headerlink" href="#check-item-in-method" title="Link to this heading">¶</a></h3>
-<p>Finally we need to change the backpack interaction in the fight command, but we’re going to do more than just a simple replace. We’re going to change the fight section so that the backpack returns the item rather than just item.name. This will allow future extensions including weapons with damage and players and characters with hit points.</p>
+<p>Finally, we need to change how the fight command uses the backpack, and this time it’s more than a simple swap. We’re going to update the fight code so the backpack gives us the whole item, not just <code class="docutils literal notranslate"><span class="pre">item.name</span></code>. This will make it easier later to add things like weapon damage and health points for players and characters.</p>
 <p>In <strong>player.py</strong> add the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># player.py</span>
 <span class="linenos"> 2</span>
@@ -662,17 +667,20 @@
 </span></pre></div>
 </div>
 <p>This code is different, so lets <strong>investigate</strong> it:</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">check_item_in(self,</span> <span class="pre">item_name):</span></code> → defines the function and expects the item name (a string) to be provided.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">self.backpack:</span></code> → iterate through each item object stored in <code class="docutils literal notranslate"><span class="pre">self.backpack</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">item.name</span> <span class="pre">==</span> <span class="pre">item_name:</span></code> → checks if the current item’s name is the same as the <code class="docutils literal notranslate"><span class="pre">item_name</span></code> provided</p>
+<li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">check_item_in(self,</span> <span class="pre">item_name):</span></code> sets up the function and expects you to give it the item’s name as a string.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">self.backpack:</span></code> goes through every item object in the backpack.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">item.name</span> <span class="pre">==</span> <span class="pre">item_name:</span></code> checks if the current item’s name matches the name you typed.</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">item</span></code> → returns the current item ending the method. Note this only happens if the names match</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">item</span></code> sends back that item and ends the function. This only happens when the names match.</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">None</span></code> → returns a <code class="docutils literal notranslate"><span class="pre">None</span></code> value to indicate that none of the items in <code class="docutils literal notranslate"><span class="pre">self.backpack</span></code> have the same name as the <code class="docutils literal notranslate"><span class="pre">item_name</span></code> provided</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">None</span></code> sends back <code class="docutils literal notranslate"><span class="pre">None</span></code> if no item in the backpack has the same name as what you typed.</p></li>
 </ul>
-<p>In <strong>main.py</strong> change the fight command code to the same as below. Take note of the highlighted lines.</p>
+</div>
+<p>In <strong>main.py</strong>, change the fight command so it matches the code shown below. Pay attention to the highlighted lines.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">81</span>    <span class="c1"># fight</span>
 <span class="linenos">82</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
 <span class="linenos">83</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -695,16 +703,19 @@
 </pre></div>
 </div>
 <p>Lets <strong>investigate</strong> those lines of code.</p>
+<div class="admonition-code-explaination admonition">
+<p class="admonition-title">Code Explaination</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">choice</span> <span class="pre">=</span> <span class="pre">input(&quot;What</span> <span class="pre">will</span> <span class="pre">you</span> <span class="pre">fight</span> <span class="pre">with?</span> <span class="pre">&gt;</span> <span class="pre">&quot;).lower()</span></code> → we had to change the variable name, since weapon will be used to hold the item object return from <code class="docutils literal notranslate"><span class="pre">check_item_in</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">weapon</span> <span class="pre">=</span> <span class="pre">player.check_item_in(choice)</span></code> → if the requested item is in the back, the item object is stored in <code class="docutils literal notranslate"><span class="pre">weapon</span></code> otherwise, <code class="docutils literal notranslate"><span class="pre">None</span></code> will be stored there.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">weapon:</span></code> → uses the <strong>Truthiness</strong> of objects. If there is an item_object in <code class="docutils literal notranslate"><span class="pre">weapon</span></code> then this will equate to <code class="docutils literal notranslate"><span class="pre">True</span></code>, if <code class="docutils literal notranslate"><span class="pre">None</span></code> is stored in <code class="docutils literal notranslate"><span class="pre">weapon</span></code> then this will equate to <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon.name):</span></code> → <code class="docutils literal notranslate"><span class="pre">weapon</span></code> now stores a item object rather than a name, but the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method requires a string of the item name. So we have to pass the <code class="docutils literal notranslate"><span class="pre">weapon.name</span></code> attribute.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">don't</span> <span class="pre">have</span> <span class="pre">{choice}&quot;)</span></code> → if the <code class="docutils literal notranslate"><span class="pre">choice</span></code> is not in the backpack, then <code class="docutils literal notranslate"><span class="pre">weapon</span></code> will be <code class="docutils literal notranslate"><span class="pre">None</span></code>, but <code class="docutils literal notranslate"><span class="pre">None</span></code> doesn’t have a name attribute, so we can use the same trick we use in <strong>line 87</strong>. Rather we will just feedback what the user entered.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">choice</span> <span class="pre">=</span> <span class="pre">input(&quot;What</span> <span class="pre">will</span> <span class="pre">you</span> <span class="pre">fight</span> <span class="pre">with?</span> <span class="pre">&gt;</span> <span class="pre">&quot;).lower()</span></code> → we changed the variable name because <code class="docutils literal notranslate"><span class="pre">weapon</span></code> will now store the actual item object returned from <code class="docutils literal notranslate"><span class="pre">check_item_in</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">weapon</span> <span class="pre">=</span> <span class="pre">player.check_item_in(choice)</span></code> → if the item is in the backpack, <code class="docutils literal notranslate"><span class="pre">weapon</span></code> will hold the item object. If not, <code class="docutils literal notranslate"><span class="pre">weapon</span></code> will be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">weapon:</span></code> → this checks if <code class="docutils literal notranslate"><span class="pre">weapon</span></code> is a real item object. If it is, this is <code class="docutils literal notranslate"><span class="pre">True</span></code>. If it’s <code class="docutils literal notranslate"><span class="pre">None</span></code>, it’s <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon.name):</span></code> → <code class="docutils literal notranslate"><span class="pre">weapon</span></code> now has the whole item object, not just the name, but the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method still needs a string, so we use <code class="docutils literal notranslate"><span class="pre">weapon.name</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">don't</span> <span class="pre">have</span> <span class="pre">{choice}&quot;)</span></code> → if the item isn’t in the backpack, <code class="docutils literal notranslate"><span class="pre">weapon</span></code> is <code class="docutils literal notranslate"><span class="pre">None</span></code>, which doesn’t have a name. So instead, we just print whatever the player typed.</p></li>
 </ul>
+</div>
 <section id="check-item-in-test">
 <h4>check_item_in test<a class="headerlink" href="#check-item-in-test" title="Link to this heading">¶</a></h4>
-<p>Final test. Run your code and make sure that all the fight options work.</p>
+<p>Final test: run your program and check that all the different fight options still work properly.</p>
 </section>
 </section>
 </section>

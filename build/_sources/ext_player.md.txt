@@ -1,14 +1,18 @@
 # Extension - Player Class
 
 ```{topic} In this lesson you will:
-- learn how to refactor code by consolodating existing code into a new class.
+* understand why grouping related features into a single class makes a program easier to manage 
+* recognise how attributes and methods represent a thing’s data and actions
+* identify when code should be moved out of one place and into a class during refactoring
+* understand how objects can interact by calling each other’s methods
+* create a simple class with attributes and methods, then use it in a program to replace repeated code 
 ```
 
-In this extensions tutorial, we will refactor our code to create a Player class. This will give the game a player object which we can use to add features associated with the player (health, inventory, gear, weapons etc.). The first feature we will add is the player inventory, known in our game as the backpack.
+In this tutorial, you’ll reorganise your code by making a **Player** class. This will give you a player object that can hold all the player’s features, like health, items, gear, and weapons. The first thing you’ll add is the player’s inventory, which we call the backpack.
 
 ## Planning
 
-Currently the code dealing with the backpack is held in `main.py`. Before we plan our new class, we need to look at this code an identify all relevant feature we need to incorporate. So let's look at the `main.py` from the end of the standard tutorials.
+Right now, all the backpack code is written inside `main.py`. Before we create our new Player class, we need to look at that code and figure out which parts should be moved into the class. So we’ll start by checking the `main.py` file from the end of the earlier tutorials.
 
 ```{code-block} python
 :linenos:
@@ -149,17 +153,17 @@ print("Thank you for playing Darkest Dungeon")
 
 You will notice that there are four places that `main.py` interacts with the player's backpack.
 
-- **line 54** &rarr; defines the backpack variable as an empty list
-- **lines 82 - 85** &rarr; checks if chosen weapon is in the backpack
-- **lines 101 - 106** &rarr; adds item to backpack
-- **lines 109-114** &rarr; displays the contents of the backpack
+1. **line 54** &rarr; defines the backpack variable as an empty list
+2. **lines 82 - 85** &rarr; checks if chosen weapon is in the backpack
+3. **lines 101 - 106** &rarr; adds item to backpack
+4. **lines 109-114** &rarr; displays the contents of the backpack
 
 If we were to move these features to a Player class, we need to consider the nature of the four features:
 
-- the backpack describes part of the player &rarr; attribute
-- checking for weapon in backpack is an action &rarr; method
-- adding an item to backpack is an action &rarr; method
-- displaying the contents of the backpack is an actions &rarr; method
+1. the backpack describes part of the player &rarr; attribute
+2. checking for weapon in backpack is an action &rarr; method
+3. adding an item to backpack is an action &rarr; method
+4. displaying the contents of the backpack is an actions &rarr; method
 
 Therefore the class diagram would look like this:
 
@@ -169,14 +173,14 @@ Now that we have a plan. Lets implement it in our code.
 
 ## Coding
 
-We are going to refactor this code is little chunks. That way we can regularly test to ensure we haven't introduced new bugs
+We’re going to update this code in small steps. This makes it easier to test as we go and check that we haven’t accidentally created any new bugs.
 
 ### Create Player class
 
-First we need to create the Player Class.
+First, we need to make the Player class.
 
-1. Create a new file called **player.py**. Make sure it is in the same folder as the other program files.
-2. Next add the **Player** class and it's `__init__` with the code below.
+1. Create a new file called **player.py** in the same folder as your other files.
+2. Add the **Player** class and its `__init__` method using the code shown below.
 
 ```{code-block} python
 :linenos:
@@ -191,9 +195,9 @@ class Player():
 
 ### Replace references to backpack
 
-Now in **main.py** we will create a instance of the Player class by making a player object.
+Now in **main.py**, we’re going to make a player object so we can use the Player class in our program.
 
-1. Import the Player class (code below)
+1. Import the Player class using the code shown below.
 
 ```{code-block} python
 :linenos:
@@ -220,7 +224,7 @@ lab.item = cheese
 player = Player()
 ```
 
-3. **Delete** the `backback` variable in **line 58**
+3. Delete the `backpack` variable on **line 58**.
 
 ```{code-block} python
 :linenos:
@@ -232,7 +236,7 @@ current_room = cavern
 # ----- MAIN LOOP -----
 ```
 
-4. Change the `backpack` reference in the **fight** command to refer to `player.backpack`
+4. Change the `backpack` in the **fight** command so it uses `player.backpack` instead.
 
 ```{code-block} python
 :linenos:
@@ -261,7 +265,7 @@ current_room = cavern
             print("There is no one here to fight")
 ```
 
-5. Change the `backpack` reference in the **take** command to refer to `player.backpack`
+5. Change the `backpack` in the **take** command so it uses `player.backpack` instead.
 
 ```{code-block} python
 :linenos:
@@ -277,7 +281,7 @@ current_room = cavern
             print("There is nothing here to take")
 ```
 
-6. Change the `backpack` references in the **backpack** command to refer to `player.backpack`
+6. Change the `backpack` in the **backpack** command so it uses `player.backpack` instead.
 
 ```{code-block} python
 :linenos:
@@ -295,13 +299,13 @@ current_room = cavern
 
 #### Test backpack replacement
 
-That is our first block of refactoring. Time to test to ensure everything still works.
+That’s the first section of our code changes done. Now test your program to make sure everything still works.
 
 ### add_item method
 
-To create effective code we should shift all backpack related code into the **Player** class. We will start with the **add_method** that add items to the backpack.
+To make our code cleaner, we should move all the backpack code into the **Player** class. We’ll start by adding the **add_item** method, which puts items into the backpack.
 
-1. In **player.py** create the `add_item` method using the code below.
+1. In **player.py**, create the `add_item` method using the code below.
 
 ```{code-block} python
 :linenos:
@@ -319,9 +323,9 @@ class Player():
         print(f"You put {item.name} into your backpack")
 ```
 
-Now we need to remove that code from **main.py**, and replace it with a call to the `add_item` method.
+Now we need to take that code out of **main.py** and replace it with a call to the `add_item` method.
 
-2. **replace** the highlighted **main.py** code below:
+2. Remove the highlighted code in **main.py** shown below:
 
 ```{code-block} python
 :linenos:
@@ -337,7 +341,7 @@ Now we need to remove that code from **main.py**, and replace it with a call to 
             print("There is nothing here to take")
 ```
 
-3. with this highlighted code:
+3. And replace it with this highlighted code:
 
 ```{code-block} python
 :linenos:
@@ -354,14 +358,14 @@ Now we need to remove that code from **main.py**, and replace it with a call to 
 
 #### Test add_item method
 
-Now go and test that you can still add items to your backpack.
+Now test your program to make sure you can still add items to your backpack.
 
 ### display_contents method
 
-Next we will refactor the code that displays the contents of the backpack.
+Next, we’ll update the code that shows what’s inside the backpack.
 
-1. Return to the **player.py** file
-2. Add the code below to the **Player** class
+1. Go back to the **player.py** file.
+2. Add the code below to the **Player** class.
 
 ```{code-block} python
 :linenos:
@@ -388,7 +392,7 @@ class Player():
 ```
 
 3. Go back to **main.py**
-4. **Replace** the highlighted code below:
+4. Remove the highlighted code shown below:
 
 ```{code-block} python
 :linenos:
@@ -404,7 +408,7 @@ class Player():
                 print(f"- {item.name.capitalize()}")
 ```
 
-5. with this code:
+5. And replace it with this highlighted code:
 
 ```{code-block} python
 :linenos:
@@ -417,11 +421,11 @@ class Player():
 
 #### Test display_contents method
 
-Run your code and ensure that you can still see your backpack content.
+Run your program and check that you can still see everything inside your backpack.
 
 ### check_item_in method
 
-Finally we need to change the backpack interaction in the fight command, but we're going to do more than just a simple replace. We're going to change the fight section so that the backpack returns the item rather than just item.name. This will allow future extensions including weapons with damage and players and characters with hit points.
+Finally, we need to change how the fight command uses the backpack, and this time it’s more than a simple swap. We’re going to update the fight code so the backpack gives us the whole item, not just `item.name`. This will make it easier later to add things like weapon damage and health points for players and characters.
 
 In **player.py** add the code below:
 
@@ -457,13 +461,15 @@ class Player():
 
 This code is different, so lets **investigate** it:
 
-- `def check_item_in(self, item_name):` &rarr; defines the function and expects the item name (a string) to be provided.
-- `for item in self.backpack:` &rarr; iterate through each item object stored in `self.backpack`
-- `if item.name == item_name:` &rarr; checks if the current item's name is the same as the `item_name` provided
-  - `return item` &rarr; returns the current item ending the method. Note this only happens if the names match
-- `return None` &rarr; returns a `None` value to indicate that none of the items in `self.backpack` have the same name as the `item_name` provided
+```{admonition} Code Explaination
+* `def check_item_in(self, item_name):` sets up the function and expects you to give it the item’s name as a string.
+* `for item in self.backpack:` goes through every item object in the backpack.
+* `if item.name == item_name:` checks if the current item’s name matches the name you typed.
+  * `return item` sends back that item and ends the function. This only happens when the names match.
+* `return None` sends back `None` if no item in the backpack has the same name as what you typed.
+```
 
-In **main.py** change the fight command code to the same as below. Take note of the highlighted lines.
+In **main.py**, change the fight command so it matches the code shown below. Pay attention to the highlighted lines.
 
 ```{code-block} python
 :linenos:
@@ -492,12 +498,14 @@ In **main.py** change the fight command code to the same as below. Take note of 
 
 Lets **investigate** those lines of code.
 
-- `choice = input("What will you fight with? > ").lower()` &rarr; we had to change the variable name, since weapon will be used to hold the item object return from `check_item_in`
-- `weapon = player.check_item_in(choice)` &rarr; if the requested item is in the back, the item object is stored in `weapon` otherwise, `None` will be stored there.
-- `if weapon:` &rarr; uses the **Truthiness** of objects. If there is an item_object in `weapon` then this will equate to `True`, if `None` is stored in `weapon` then this will equate to `False`
-- `if current_room.character.fight(weapon.name):` &rarr; `weapon` now stores a item object rather than a name, but the `fight` method requires a string of the item name. So we have to pass the `weapon.name` attribute.
-- `print(f"You don't have {choice}")` &rarr; if the `choice` is not in the backpack, then `weapon` will be `None`, but `None` doesn't have a name attribute, so we can use the same trick we use in **line 87**. Rather we will just feedback what the user entered.
+```{admonition} Code Explaination
+* `choice = input("What will you fight with? > ").lower()` → we changed the variable name because `weapon` will now store the actual item object returned from `check_item_in`.
+* `weapon = player.check_item_in(choice)` → if the item is in the backpack, `weapon` will hold the item object. If not, `weapon` will be `None`.
+* `if weapon:` → this checks if `weapon` is a real item object. If it is, this is `True`. If it’s `None`, it’s `False`.
+* `if current_room.character.fight(weapon.name):` → `weapon` now has the whole item object, not just the name, but the `fight` method still needs a string, so we use `weapon.name`.
+* `print(f"You don't have {choice}")` → if the item isn’t in the backpack, `weapon` is `None`, which doesn’t have a name. So instead, we just print whatever the player typed.
+```
 
 #### check_item_in test
 
-Final test. Run your code and make sure that all the fight options work.
+Final test: run your program and check that all the different fight options still work properly.
