@@ -46,8 +46,8 @@ html_show_copyright = False
 
 
 html_theme_options = {
-    "light_logo": "oop_logo.png",
-    "dark_logo": "oop_logo.png",
+    "light_logo": "opp_logo.png",
+    "dark_logo": "opp_logo.png",
     "footer_icons": [
         {
             "name": "GitHub",
