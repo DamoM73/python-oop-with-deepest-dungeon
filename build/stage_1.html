@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
     
     
 
@@ -203,7 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction for Students</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -269,23 +269,31 @@
 </ul>
 </aside>
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GeSTPYPPEfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
-<p>In this lesson we will create three rooms and link those rooms together. Below is a rough map of our dungeon.</p>
+<section id="how-we-plan">
+<h2>How we plan<a class="headerlink" href="#how-we-plan" title="Link to this heading">¶</a></h2>
+<p>When working with computers you need to break problems into clear, logical steps that a computer can follow exactly. Humans can rely on shortcuts, guesses, and experience to fill in gaps, but computers cannot use those heuristics. A computer only does exactly what it is told, so every step must be precise, ordered, and unambiguous.</p>
+<p>This computational thinking helps you turn a messy real-world problem into a series of simple, complete instructions that a computer can execute without ever needing to “figure things out” on its own.</p>
+<p>To aid in this planning we will use <strong>pseudocode</strong>. Pseudocode is a simple way of writing out the steps of a program using plain English instead of real code, so you can focus on the logic without worrying about exact syntax. It shows what the program should do, in order, using clear instructions like IF, ELSE, REPEAT, and OUTPUT.</p>
+<p>It doesn’t run on a computer, but it helps you plan your thinking before you start writing real code, making mistakes easier to spot and your final program easier to build.</p>
+</section>
+<section id="planning">
+<h2>Planning<a class="headerlink" href="#planning" title="Link to this heading">¶</a></h2>
+<p>In this lesson we want to create three rooms and link those rooms together. Below is a rough map of our dungeon.</p>
 <p><img alt="map" src="_images/dungeon_map.png" /></p>
 <p>To achieve this we will need to create two files:</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">main.py</span></code> → runs the program</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">room.py</span></code> → stores information about the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class</p></li>
+<li><p><em><strong>main.py</strong></em> → runs the program</p></li>
+<li><p><em><strong>room.py</strong></em> → stores information about the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class</p></li>
 </ul>
-<p>In those two files we will complete the following steps:</p>
-<ol class="arabic simple">
-<li><p>Define the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class</p></li>
-<li><p>Create <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</p></li>
-<li><p>Describe <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</p></li>
-<li><p>Link the <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects</p></li>
-<li><p>Include the linked <code class="docutils literal notranslate"><span class="pre">Rooms</span></code> when each <code class="docutils literal notranslate"><span class="pre">Room</span></code> object is described</p></li>
-</ol>
+<p>In those two files we will need to do the following:</p>
+<div class="pseudocode admonition">
+<p class="admonition-title">Stage 1 Pseudocode</p>
+<p>Define the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class<br>
+Create <code class="docutils literal notranslate"><span class="pre">Room</span></code> object<br>
+Describe <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects<br>
+Link the <code class="docutils literal notranslate"><span class="pre">Room</span></code> objects<br>
+Include the linked <code class="docutils literal notranslate"><span class="pre">Rooms</span></code> when each <code class="docutils literal notranslate"><span class="pre">Room</span></code> object is described<br></p>
+</div>
 <section id="class-diagram">
 <h3>Class diagram<a class="headerlink" href="#class-diagram" title="Link to this heading">¶</a></h3>
 <p>UML <strong>class diagrams</strong> are a simple way to show what a class looks like and how it works with other classes.</p>
@@ -303,9 +311,9 @@
 <li><p>The class name is <code class="docutils literal notranslate"><span class="pre">Room</span></code></p></li>
 <li><p>The attributes are:</p>
 <ul>
-<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> which is a string datatype</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> which is a string datatype</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> which is a dictionary</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> which is a <strong>string</strong> datatype</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">description</span></code> which is a <strong>string</strong> datatype</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> which is a <strong>dictionary</strong></p></li>
 </ul>
 </li>
 <li><p>The methods are:</p>
@@ -346,7 +354,7 @@
 </div>
 <section id="dunder-init-method">
 <h3>Dunder init method<a class="headerlink" href="#dunder-init-method" title="Link to this heading">¶</a></h3>
-<p>Every Python class has a special method called the <em>dunder init</em>. Its real name is <code class="docutils literal notranslate"><span class="pre">__init__</span></code> — the “double underscores” are why we call it <em>dunder</em>.</p>
+<p>Every Python class has a special method called the <strong>dunder init</strong>. Its real name is <code class="docutils literal notranslate"><span class="pre">__init__</span></code> — the “double underscores” are why we call it <strong>dunder</strong>.</p>
 <p>The dunder init runs automatically every time you create a new object from a class. It sets up the object’s attributes and gets it ready to use. You can also use it to run any other setup the object needs.</p>
 <p>Now we’ll make a dunder init for our <code class="docutils literal notranslate"><span class="pre">Room</span></code> class.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># room.py</span>
@@ -386,21 +394,21 @@
 </div>
 </section>
 <section id="save-room-py">
-<h3>Save room.py<a class="headerlink" href="#save-room-py" title="Link to this heading">¶</a></h3>
+<h3>Save <em><strong>room.py</strong></em><a class="headerlink" href="#save-room-py" title="Link to this heading">¶</a></h3>
 <div class="warning admonition">
 <p class="admonition-title">Saving files</p>
 <p>Since this program will be using multiple files, the location they are saved is important.</p>
-<p>The <strong>main.py</strong> file will be importing classes from the your other files. The first place it will look is within the local directory (ie. the folder it is saved in).</p>
+<p>The <em><strong>main.py</strong></em> file will be importing classes from the your other files. The first place it will look is within the local directory (ie. the folder it is saved in).</p>
 <p>To minimise potential problems, you need to create a new folder for these tutorials.</p>
 <p>It is also important to ensure you file names are correct, inlcuding the capilatisation and the <strong>.py</strong> extension.</p>
 </div>
-<p>Make a folder called <strong>deepest_dungeon</strong>. Calling your <strong>room.py</strong> save it in your <strong>deepest_dungeon</strong> folder.</p>
+<p>Make a folder called <em><strong>deepest_dungeon</strong></em>. Calling your <em><strong>room.py</strong></em> save it in your <em><strong>deepest_dungeon</strong></em> folder.</p>
 </section>
 </section>
 <section id="create-room-objects">
 <h2>Create Room objects<a class="headerlink" href="#create-room-objects" title="Link to this heading">¶</a></h2>
-<p>Create a new file. Save it as <strong>main.py</strong> in your <strong>deepest_dungeon</strong> folder. This file is going to control our game.</p>
-<p>Then type to following code into the *<em>main.py</em></p>
+<p>Create a new file. Save it as <em><strong>main.py</strong></em> in your <em><strong>deepest_dungeon</strong></em> folder. This file is going to control our game.</p>
+<p>Then type to following code into the <em><strong>main.py</strong></em></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="c1"># main.py</span>
 </span><span class="linenos"> 2</span>
 <span class="hll"><span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -415,7 +423,7 @@
 <span class="hll"><span class="linenos">12</span><span class="nb">print</span><span class="p">(</span><span class="n">cavern</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </span></pre></div>
 </div>
-<p>We’re going to run our program for the first time, but before let’s introduce the PRIMM concept.</p>
+<p>We’re going to run our program for the first time, but before let’s introduce the <strong>PRIMM</strong> concept.</p>
 <div class="note admonition">
 <p class="admonition-title">PRIMM</p>
 <p>Throughout this course we will use the <strong>PRIMM</strong> process to reinforce our learning. <strong>PRIMM</strong> stands for <strong>Predict</strong>, <strong>Run</strong>, <strong>Investigate</strong>, <strong>Modify</strong>, and <strong>Make</strong>. It reflects effective programming practices and encourages curiosity in programming.</p>
@@ -427,7 +435,7 @@
 </div>
 <p>Lets run through the <strong>PRIMM</strong> process now</p>
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
-<p>Let’s <strong>investigate</strong> the <em>new</em> code line-by-line.</p>
+<p>Let’s <strong>investigate</strong> the new code line-by-line.</p>
 <div class="admonition-code-explaination admonition">
 <p class="admonition-title">Code Explaination</p>
 <ul class="simple">
@@ -435,12 +443,12 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">room</span> <span class="pre">import</span> <span class="pre">Room</span></code> → this imports your own class.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">Room</span></code> is the class you created.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">room</span></code> is the file <code class="docutils literal notranslate"><span class="pre">room.py</span></code> where that class lives.</p></li>
-<li><p>This line basically means: <em>import the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class from the file <code class="docutils literal notranslate"><span class="pre">room.py</span></code></em>.</p></li>
-<li><p>The class name is CamelCase (<code class="docutils literal notranslate"><span class="pre">Room</span></code>), and the file name is lowercase (<code class="docutils literal notranslate"><span class="pre">room</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">room</span></code> is the file <em><strong>room.py</strong></em> where that class lives.</p></li>
+<li><p>This line basically means: import the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class from the file <em><strong>room.py</strong></em>.</p></li>
+<li><p>The class name is CamelCase (<code class="docutils literal notranslate"><span class="pre">Room</span></code>), and the file name is lowercase (<em><strong>room</strong></em>).</p></li>
 </ul>
 </li>
-<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">create</span> <span class="pre">rooms</span></code> → another comment to organise your code. <code class="docutils literal notranslate"><span class="pre">main.py</span></code> will get long, so comments help keep things clear.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">create</span> <span class="pre">rooms</span></code> → another comment to organise your code. <em><strong>main.py</strong></em> will get long, so comments help keep things clear.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cavern</span> <span class="pre">=</span> <span class="pre">Room(&quot;Cavern&quot;)</span></code> → this creates your first room.</p>
 <ul>
 <li><p><code class="docutils literal notranslate"><span class="pre">Room(&quot;Cavern&quot;)</span></code> makes a new <code class="docutils literal notranslate"><span class="pre">Room</span></code> object.</p>
@@ -514,7 +522,7 @@
 <p>It’s better programming practice to use methods instead of grabbing an object’s attributes directly. In the class diagram, the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class has a <code class="docutils literal notranslate"><span class="pre">describe()</span></code> method for this purpose.</p>
 <p><img alt="lesson 1 class diagram" src="_images/lesson_1_class_diagram.png" /></p>
 <p>Using a method like <code class="docutils literal notranslate"><span class="pre">describe()</span></code> is a cleaner and safer way to show a room’s details, so we’ll add that method to our code.</p>
-<p>Go back to the <strong>room.py</strong> file and add the highlighted code below.</p>
+<p>Go back to the <em><strong>room.py</strong></em> file and add the highlighted code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -530,7 +538,7 @@
 </span><span class="hll"><span class="linenos">13</span>        <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
 </span></pre></div>
 </div>
-<p>Then go back to <strong>main.py</strong> and replace lines 15 and 16 with the highlighted code below.</p>
+<p>Then go back to <em><strong>main.py</strong></em> and replace lines 15 and 16 with the highlighted code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -552,7 +560,7 @@
 </span></pre></div>
 </div>
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
-<p>Let’s <strong>investigate</strong> the <em>new</em> code line-by-line. First the code in <strong>room.py</strong>:</p>
+<p>Let’s <strong>investigate</strong> the <em>new</em> code line-by-line. First the code in <em><strong>room.py</strong></em>:</p>
 <div class="admonition-code-explaination admonition">
 <p class="admonition-title">Code Explaination</p>
 <ul class="simple">
@@ -574,7 +582,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">print(self.description)</span></code> → this prints whatever description the room has.</p></li>
 </ul>
 </div>
-<p>Now the code in <strong>main.py</strong></p>
+<p>Now the code in <em><strong>main.py</strong></em></p>
 <div class="admonition-code-explaination admonition">
 <p class="admonition-title">Code Explaination</p>
 <ul class="simple">
@@ -617,7 +625,7 @@
 <p>Dictionaries are useful when you want to group information together and label it clearly so you can find it later.</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">link_room</span></code> method takes two pieces of information — the room you want to connect and the direction it’s in. It then adds this information to the <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> dictionary so the room knows what’s next to it.</p>
-<p>So lets implement this. First go back to <strong>room.py</strong>, and add the code highlighted below</p>
+<p>So lets implement this. First go back to <em><strong>room.py</strong></em>, and add the code highlighted below</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -638,7 +646,7 @@
 </span><span class="hll"><span class="linenos">18</span>        <span class="bp">self</span><span class="o">.</span><span class="n">linked_rooms</span><span class="p">[</span><span class="n">direction</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span> <span class="o">=</span> <span class="n">room_to_link</span>
 </span></pre></div>
 </div>
-<p>Then open the <strong>main.py</strong> and add the code highlighted below:</p>
+<p>Then open the <em><strong>main.py</strong></em> and add the code highlighted below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -666,8 +674,8 @@
 </pre></div>
 </div>
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
-<p>Did you predict that nothing would change? We’ll fix that later. In the meanwhile, let’s <strong>investigate</strong> the <em>new</em> code line-by-line.</p>
-<p>First the code in <strong>room.py</strong>:</p>
+<p>Did you predict that nothing would change? We’ll fix that later. In the meanwhile, let’s <strong>investigate</strong> the <strong>new</strong> code line-by-line.</p>
+<p>First the code in <em><strong>room.py</strong></em>:</p>
 <div class="admonition-code-explaination admonition">
 <p class="admonition-title">Code Explaination</p>
 <ul class="simple">
@@ -694,7 +702,7 @@
 </li>
 </ul>
 </div>
-<p>Then in <strong>main.py</strong>:</p>
+<p>Then in <em><strong>main.py</strong></em>:</p>
 <div class="admonition-code-explaination admonition">
 <p class="admonition-title">Code Explaination</p>
 <ul class="simple">
@@ -709,8 +717,8 @@
 </section>
 <section id="include-linked-rooms-in-description">
 <h2>Include linked Rooms in description<a class="headerlink" href="#include-linked-rooms-in-description" title="Link to this heading">¶</a></h2>
-<p>When you ran the code, nothing <em>looked</em> different, but the rooms <em>were</em> actually linked together. We just weren’t showing those links on the screen. Now we’ll fix that by adding the connected rooms to the room’s description.</p>
-<p>Go to your <strong>room.py</strong> file and include the highlighted code below.</p>
+<p>When you ran the code, nothing looked different, but the rooms were actually linked together. We just weren’t showing those links on the screen. Now we’ll fix that by adding the connected rooms to the room’s description.</p>
+<p>Go to your <em><strong>room.py</strong></em> file and include the highlighted code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -734,7 +742,7 @@
 </pre></div>
 </div>
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
-<p>Let’s <strong>investigate</strong> the <em>new</em> code line-by-line.</p>
+<p>Let’s <strong>investigate</strong> the new code line-by-line.</p>
 <div class="admonition-code-explaination admonition">
 <p class="admonition-title">Code Explaination</p>
 <ul class="simple">
@@ -825,13 +833,14 @@
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Stage 1 - Create Rooms</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#how-we-plan">How we plan</a></li>
+<li><a class="reference internal" href="#planning">Planning</a><ul>
 <li><a class="reference internal" href="#class-diagram">Class diagram</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#define-the-room-class">Define the Room class</a><ul>
 <li><a class="reference internal" href="#dunder-init-method">Dunder init method</a></li>
-<li><a class="reference internal" href="#save-room-py">Save room.py</a></li>
+<li><a class="reference internal" href="#save-room-py">Save <em><strong>room.py</strong></em></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#create-room-objects">Create Room objects</a></li>

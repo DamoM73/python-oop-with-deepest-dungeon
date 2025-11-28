@@ -11,24 +11,37 @@ By the end of this lesson, you will be able to:
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GeSTPYPPEfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
-## Introduction
+## How we plan
 
-In this lesson we will create three rooms and link those rooms together. Below is a rough map of our dungeon.
+When working with computers you need to break problems into clear, logical steps that a computer can follow exactly. Humans can rely on shortcuts, guesses, and experience to fill in gaps, but computers cannot use those heuristics. A computer only does exactly what it is told, so every step must be precise, ordered, and unambiguous. 
+
+This computational thinking helps you turn a messy real-world problem into a series of simple, complete instructions that a computer can execute without ever needing to “figure things out” on its own.
+
+To aid in this planning we will use **pseudocode**. Pseudocode is a simple way of writing out the steps of a program using plain English instead of real code, so you can focus on the logic without worrying about exact syntax. It shows what the program should do, in order, using clear instructions like IF, ELSE, REPEAT, and OUTPUT. 
+
+It doesn’t run on a computer, but it helps you plan your thinking before you start writing real code, making mistakes easier to spot and your final program easier to build.
+
+## Planning
+
+In this lesson we want to create three rooms and link those rooms together. Below is a rough map of our dungeon.
 
 ![map](./assets/dungeon_map.png)
-
+ 
 To achieve this we will need to create two files:
 
-- `main.py` &rarr; runs the program
-- `room.py` &rarr; stores information about the `Room` class
+- ***main.py*** &rarr; runs the program
+- ***room.py*** &rarr; stores information about the `Room` class
 
-In those two files we will complete the following steps:
+In those two files we will need to do the following:
 
-1. Define the `Room` class
-2. Create `Room` objects
-3. Describe `Room` objects
-4. Link the `Room` objects
-5. Include the linked `Rooms` when each `Room` object is described
+```{admonition} Stage 1 Pseudocode
+:class: pseudocode
+Define the `Room` class<br>
+Create `Room` object<br>
+Describe `Room` objects<br>
+Link the `Room` objects<br>
+Include the linked `Rooms` when each `Room` object is described<br>
+```
 
 ### Class diagram
 
@@ -50,9 +63,9 @@ From the diagram we can tell:
 
 - The class name is `Room`
 - The attributes are:
-  - `name` which is a string datatype
-  - `description` which is a string datatype
-  - `linked_rooms` which is a dictionary
+  - `name` which is a **string** datatype
+  - `description` which is a **string** datatype
+  - `linked_rooms` which is a **dictionary**
 - The methods are:
   - `describe` which takes no arguments and returns no values
   - `link_room` which returns nothing and takes two arguments:
@@ -89,7 +102,7 @@ File names should stay lowercase. This matters when you import your class from t
 
 ### Dunder init method
 
-Every Python class has a special method called the *dunder init*. Its real name is `__init__` — the “double underscores” are why we call it *dunder*.
+Every Python class has a special method called the **dunder init**. Its real name is `__init__` — the “double underscores” are why we call it **dunder**.
 
 The dunder init runs automatically every time you create a new object from a class. It sets up the object’s attributes and gets it ready to use. You can also use it to run any other setup the object needs.
 
@@ -122,26 +135,26 @@ class Room():
   * It’s good practice to create all attributes inside `__init__`, even if they don’t have a value yet. Setting them to `None` keeps things organised.
 ```
 
-### Save room.py
+### Save ***room.py***
 
 ```{admonition} Saving files
 :class: warning
 Since this program will be using multiple files, the location they are saved is important. 
 
-The **main.py** file will be importing classes from the your other files. The first place it will look is within the local directory (ie. the folder it is saved in).
+The ***main.py*** file will be importing classes from the your other files. The first place it will look is within the local directory (ie. the folder it is saved in).
 
 To minimise potential problems, you need to create a new folder for these tutorials.
 
 It is also important to ensure you file names are correct, inlcuding the capilatisation and the **.py** extension.
 ```
 
-Make a folder called **deepest_dungeon**. Calling your **room.py** save it in your **deepest_dungeon** folder.
+Make a folder called ***deepest_dungeon***. Calling your ***room.py*** save it in your ***deepest_dungeon*** folder.
 
 ## Create Room objects
 
-Create a new file. Save it as **main.py** in your **deepest_dungeon** folder. This file is going to control our game.
+Create a new file. Save it as ***main.py*** in your ***deepest_dungeon*** folder. This file is going to control our game.
 
-Then type to following code into the **main.py*
+Then type to following code into the ***main.py***
 
 ```{code-block} python
 :linenos:
@@ -160,7 +173,7 @@ lab = Room("Laboratory")
 print(cavern.name)
 ```
 
-We're going to run our program for the first time, but before let's introduce the PRIMM concept.
+We're going to run our program for the first time, but before let's introduce the **PRIMM** concept.
 
 ```{admonition} PRIMM
 :class: note
@@ -181,16 +194,16 @@ Lets run through the **PRIMM** process now
 
 **Predict** in detail what you think the program will do, then **run** the program.
 
-Let's **investigate** the *new* code line-by-line.
+Let's **investigate** the new code line-by-line.
 
 ```{admonition} Code Explaination
 * `# main.py` &rarr; this is just a comment so you know which file you’re looking at.
 * `from room import Room` &rarr; this imports your own class.
   * `Room` is the class you created.
-  * `room` is the file `room.py` where that class lives.
-  * This line basically means: *import the `Room` class from the file `room.py`*.
-  * The class name is CamelCase (`Room`), and the file name is lowercase (`room`).
-* `# create rooms` &rarr; another comment to organise your code. `main.py` will get long, so comments help keep things clear.
+  * `room` is the file ***room.py*** where that class lives.
+  * This line basically means: import the `Room` class from the file ***room.py***.
+  * The class name is CamelCase (`Room`), and the file name is lowercase (***room***).
+* `# create rooms` &rarr; another comment to organise your code. ***main.py*** will get long, so comments help keep things clear.
 * `cavern = Room("Cavern")` &rarr; this creates your first room.
   * `Room("Cavern")` makes a new `Room` object.
     * When you create it, the `__init__` method runs automatically.
@@ -267,7 +280,7 @@ It’s better programming practice to use methods instead of grabbing an object�
 
 Using a method like `describe()` is a cleaner and safer way to show a room’s details, so we’ll add that method to our code.
 
-Go back to the **room.py** file and add the highlighted code below.
+Go back to the ***room.py*** file and add the highlighted code below.
 
 ```{code-block} python
 :linenos:
@@ -287,7 +300,7 @@ class Room():
         print(self.description)
 ```
 
-Then go back to **main.py** and replace lines 15 and 16 with the highlighted code below.
+Then go back to ***main.py*** and replace lines 15 and 16 with the highlighted code below.
 
 ```{code-block} python
 :linenos:
@@ -314,7 +327,7 @@ lab.describe()
 
 **Predict** in detail what you think the program will do, then **run** the program.
 
-Let's **investigate** the *new* code line-by-line. First the code in **room.py**:
+Let's **investigate** the *new* code line-by-line. First the code in ***room.py***:
 
 ```{admonition} Code Explaination
 * `def describe(self):` &rarr; this line starts the `describe` method.
@@ -329,7 +342,7 @@ Let's **investigate** the *new* code line-by-line. First the code in **room.py**
 * `print(self.description)` &rarr; this prints whatever description the room has.
 ```
 
-Now the code in **main.py**
+Now the code in ***main.py***
 
 ```{admonition} Code Explaination
 * `# describe rooms` &rarr; this is just a comment to organise the code.
@@ -361,7 +374,6 @@ The class diagram shows that each room uses an attribute called `linked_rooms` a
 
 For example, the Armoury’s `linked_rooms` dictionary might look like a list of directions that lead to other rooms.
 
-
 ```{code-block} python
 :linenos:
 {
@@ -381,7 +393,7 @@ Dictionaries are useful when you want to group information together and label it
 
 The `link_room` method takes two pieces of information — the room you want to connect and the direction it’s in. It then adds this information to the `linked_rooms` dictionary so the room knows what’s next to it.
 
-So lets implement this. First go back to **room.py**, and add the code highlighted below
+So lets implement this. First go back to ***room.py***, and add the code highlighted below
 
 ```{code-block} python
 :linenos:
@@ -406,7 +418,7 @@ class Room():
         self.linked_rooms[direction.lower()] = room_to_link
 ```
 
-Then open the **main.py** and add the code highlighted below:
+Then open the ***main.py*** and add the code highlighted below:
 
 ```{code-block} python
 :linenos:
@@ -439,9 +451,9 @@ lab.describe()
 
 **Predict** in detail what you think the program will do, then **run** the program.
 
-Did you predict that nothing would change? We'll fix that later. In the meanwhile, let's **investigate** the *new* code line-by-line. 
+Did you predict that nothing would change? We'll fix that later. In the meanwhile, let's **investigate** the **new** code line-by-line. 
 
-First the code in **room.py**:
+First the code in ***room.py***:
 
 ```{admonition} Code Explaination
 * `self.linked_rooms = {}` &rarr; this line creates the `linked_rooms` attribute.
@@ -458,7 +470,7 @@ First the code in **room.py**:
     * If it was already there, it replaces the old value.
 ```
 
-Then in **main.py**:
+Then in ***main.py***:
 
 ```{admonition} Code Explaination
 - `# link rooms` &rarr; code structuring comment
@@ -472,9 +484,9 @@ Notice that each connection needs two calls to the `link_rooms` method.
 
 ## Include linked Rooms in description
 
-When you ran the code, nothing *looked* different, but the rooms *were* actually linked together. We just weren’t showing those links on the screen. Now we’ll fix that by adding the connected rooms to the room’s description.
+When you ran the code, nothing looked different, but the rooms were actually linked together. We just weren’t showing those links on the screen. Now we’ll fix that by adding the connected rooms to the room’s description.
 
-Go to your **room.py** file and include the highlighted code below.
+Go to your ***room.py*** file and include the highlighted code below.
 
 ```{code-block} python
 :linenos:
@@ -503,7 +515,7 @@ class Room():
 
 **Predict** in detail what you think the program will do, then **run** the program.
 
-Let's **investigate** the *new* code line-by-line.
+Let's **investigate** the new code line-by-line.
 
 ```{admonition} Code Explaination
 * `for direction in self.linked_rooms:` &rarr; this loop goes through every entry in the `linked_rooms` dictionary.

@@ -9,6 +9,14 @@ In this lesson you will:
 ```{admonition} Code Explaination
 ```
 
+```{admonition} Pseudocode
+:class: pseudocode
+```
+
+```{admonition} Pseudocode
+:class: pseudocode
+```
+
 ```{admonition} Title
 :class: warning
 ```

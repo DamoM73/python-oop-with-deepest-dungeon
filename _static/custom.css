@@ -1,4 +1,4 @@
-/* Match admonition text to regular body size */
+﻿/* Match admonition text to regular body size */
 .admonition,
 .admonition p,
 .admonition .admonition-title {
@@ -12,6 +12,26 @@
 /* Ensure nested admonition titles also pick up weight */
 .admonition .admonition-title {
   font-weight: 700 !important;
+}
+
+/* Custom "pseudocode" admonition in navy */
+:root {
+  --admonition-pseudocode: #0b3d91;
+  --admonition-pseudocode-bg: #ffffff;
+}
+body[data-theme="dark"] {
+  --admonition-pseudocode-bg: rgba(11, 61, 145, 0.2);
+}
+.admonition.pseudocode {
+  border-color: var(--admonition-pseudocode);
+  background: var(--admonition-pseudocode-bg);
+}
+.admonition.pseudocode > .admonition-title {
+  background: var(--admonition-pseudocode);
+  color: #ffffff !important;
+}
+.admonition.pseudocode > .admonition-title:before {
+  background-color: #ffffff !important;
 }
 
 /* Make topic directive text match body size */
