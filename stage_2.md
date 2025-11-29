@@ -17,12 +17,12 @@ In Stage 1 you made three rooms, connected them, and got the program to describe
 
 ```{admonition} State machines
 :class: note
-A state machine is a way of thinking about how a program changes as things happen. At any moment, the program is in one **state**—like being in a certain room in your game. When an event happens, such as the player typing a command, the program follows a rule that decides what the next state should be. 
+A state machine is a way of thinking about how a program changes as things happen. At any moment, the program is in one **state** (like being in a certain room in your game). When an event happens, such as the player typing a command, the program follows a rule that decides what the next state should be. 
 
 For example, typing “east” might move you from the Armoury to the Lab. Each state has certain things you can do, and each action can move you to a new state. It’s like following a map where every choice leads to a different place, and the program always knows exactly where it is and what it should do next.
 ```
 
-The main loop is a key part of **event-driven programming**. Your **main.py** file will set up the game and create all the objects it needs. Then it will enter the **main loop**, where the program waits for the player to type something and then reacts to that input.
+The main loop is a key part of **event-driven programming**. Your ***main.py*** file will set up the game and create all the objects it needs. Then it will enter the **main loop**, where the program waits for the player to type something and then reacts to that input.
 
 ```{admonition} Event-driven programming
 :class: note
@@ -33,12 +33,15 @@ The program sits in a loop, **listening** for these events, and when one occurs,
 
 To achieve this we will need to complete the following steps:
 
-1. Create the `move` method
-2. Initialize the starting room
-3. Create the main loop which:
+```{admonition} Pseudocode
+:class: pseudocode
+- Create the `move` method
+- Initialize the starting room
+- Create the main loop which:
    - describes current room
    - accepts user input
    - responds to user input
+```
 
 ### Class Diagram
 
@@ -53,7 +56,7 @@ Notice we have a new method `move(direction):room`
 
 ## Create the move method
 
-Open the **room.py** file and add the code highlighted below:
+Open the ***room.py*** file and add the code highlighted below:
 
 ```{code-block} python
 :linenos:
@@ -105,7 +108,7 @@ We need to create the **main loop** before we call this code, but let's **invest
 
 ## Initialize starting room
 
-Now go to the **main.py** file and make the highlighted changes below
+Now go to the ***main.py*** file and make the highlighted changes below
 
 ```{code-block} python
 :linenos:
@@ -145,7 +148,7 @@ Let's **investigate** the new code
 
 ```{admonition} Code Explaination
 * The `'''` on lines 21 and 26 &rarr; turns the room descriptions into a big comment, so Python ignores that code.
-  * You *could* delete it, but leaving it commented out means you can bring it back later if you need it for debugging.
+  * You could delete it, but leaving it commented out means you can bring it back later if you need it for debugging.
 * `# initialise variables` &rarr; a comment to explain what the next lines of code are doing.
 * `current_room = cavern`
   * makes a variable that tracks which room the player is currently in.
@@ -154,9 +157,9 @@ Let's **investigate** the new code
 
 ## Create main loop
 
-Still working in the **main.py** file, we will now make the main loop.
+Still working in the ***main.py*** file, we will now make the main loop.
 
-Add the code highlighted below to have our first look at the main loop code
+Add the highlighted code below so you can see the main loop for the first time.
 
 ```{code-block} python
 :linenos:
@@ -203,17 +206,16 @@ Finally we can run our code, but don't forget **PRIMM**. **Predict** you think t
 
 ```{admonition} Escaping an infinite loop
 :class: info
-In Python, when you find yourself in an infinte loop, you can exit the loop my pressing `ctrl` + `c` on Windows or `control` + `C` on macOS.
+If your Python program gets stuck in an infinite loop, you can stop it by pressing `Ctrl + C` on Windows or `Control + C` on a Mac. 
 
-In addition, if you are using Thonny, you can click the **stop** icon.
+If you’re using Thonny, you can also click the **stop** button to end the program.
 ```
 
 Let's **investigate** the new code line-by-line.
 
 ```{admonition} Code Explaination
 * `running = True` &rarr; used to keep the **main loop** going until the player decides to quit.
-
-  * This is called a **flag variable** &mdash;it starts as `True`, and when the player wants to exit, it gets changed to `False`.
+  * This is called a **flag variable**&mdash;it starts as `True`, and when the player wants to exit, it gets changed to `False`.
 * `# ----- MAIN LOOP -----` &rarr; a comment showing where the main loop begins.
 * `while running:` &rarr; starts the **main loop**.
   * The loop keeps repeating as long as `running` is `True`.
@@ -225,15 +227,15 @@ Let's **investigate** the new code line-by-line.
   * `command =` &rarr; stores the final text in the `command` variable.
 ```
 
-Notice that no matter what the player types, the same thing keeps happening. That’s because we’ve built the **main loop**, which is waiting for events (the player’s input), but we haven’t written any code to *react* to those events yet. 
+Notice that no matter what the player types, the same thing keeps happening. That’s because we’ve built the **main loop**, which is waiting for events (the player’s input), but we haven’t written any code to react to those events yet. 
 
-In a **state machine**, the game should change state when something happens—like moving to a new room—but right now there are no rules telling the program how to change state when an event occurs. So the loop just repeats without doing anything new.
+In a **state machine**, the game should change state when something happens&mdash;like moving to a new room&mdash;but right now there are no rules telling the program how to change state when an event occurs. So the loop just repeats without doing anything new.
 
 ## Responding to commands
 
 In Event Driven Programming the entering of user's commands is called an **event**. Now we have to create code that responds to those events. This kind of code is called an **event handler**.
 
-Back in our **main.py** we're going to create an **event handler** to deal with the entry of a direction (`"north"`, `"south"`, `"east"` or `"west"`). Add the highlighted code.
+Back in our ***main.py*** we're going to create an **event handler** to deal with the entry of a direction (`"north"`, `"south"`, `"east"` or `"west"`). Add the highlighted code.
 
 ```{code-block} python
 :linenos:
@@ -290,7 +292,6 @@ Let's **investigate** that code.
 * `current_room = current_room.move(command)` &rarr; works out which room to go to next.
   * `current_room.move(command)` &rarr; calls the `move` function, using the player’s direction to find the next room.
   * `current_room =` &rarr; updates `current_room` so the game’s state now matches the new room.
-
 ```
 
 ### Testing
@@ -393,7 +394,7 @@ The code now understands the movement commands and the quit command, but what if
 
 We should tell the player when their command doesn’t make sense, so they know they need to try something else. Let’s fix that.
 
-Change **main.py** to include the highlighted code below.
+Change ***main.py*** to include the highlighted code below.
 
 ```{code-block} python
 :linenos:
@@ -463,3 +464,12 @@ Now we need to test those two additional features. Draw up a table to test each 
 | `south` | moved to armoury | moved to armoury |
 | `dog` | "I don't understand." | "I don't understand." |
 | `quit` | program exits | program exits |
+
+---
+
+## Stage 2 task
+
+There is not much to do for our **Make** phase of this stage, but you do need to test that you can navigate to and from your stage 1 task additional room.
+
+Take the table you used to test navigating the rooms and expand it to also test navigating to your stage 1 task room.
+ 

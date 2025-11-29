@@ -36,11 +36,11 @@ In those two files we will need to do the following:
 
 ```{admonition} Stage 1 Pseudocode
 :class: pseudocode
-Define the `Room` class<br>
-Create `Room` object<br>
-Describe `Room` objects<br>
-Link the `Room` objects<br>
-Include the linked `Rooms` when each `Room` object is described<br>
+- Define the `Room` class
+- Create `Room` object
+- Describe `Room` objects
+- Link the `Room` objects
+- Include the linked `Rooms` when each `Room` object is described
 ```
 
 ### Class diagram

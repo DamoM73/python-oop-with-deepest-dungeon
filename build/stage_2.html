@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
     
     
 
@@ -203,7 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction for Students</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Stage 2 - Movement</a></li>
@@ -274,27 +274,30 @@
 <p>In Stage 1 you made three rooms, connected them, and got the program to describe each one. That was a good start, but it’s not much of a game yet. In Stage 2 you’ll write code that lets the player move between rooms, which means changing the game’s <strong>state</strong> (for example, which room you are in), and you’ll build the <strong>main loop</strong>.</p>
 <div class="note admonition">
 <p class="admonition-title">State machines</p>
-<p>A state machine is a way of thinking about how a program changes as things happen. At any moment, the program is in one <strong>state</strong>—like being in a certain room in your game. When an event happens, such as the player typing a command, the program follows a rule that decides what the next state should be.</p>
+<p>A state machine is a way of thinking about how a program changes as things happen. At any moment, the program is in one <strong>state</strong> (like being in a certain room in your game). When an event happens, such as the player typing a command, the program follows a rule that decides what the next state should be.</p>
 <p>For example, typing “east” might move you from the Armoury to the Lab. Each state has certain things you can do, and each action can move you to a new state. It’s like following a map where every choice leads to a different place, and the program always knows exactly where it is and what it should do next.</p>
 </div>
-<p>The main loop is a key part of <strong>event-driven programming</strong>. Your <strong>main.py</strong> file will set up the game and create all the objects it needs. Then it will enter the <strong>main loop</strong>, where the program waits for the player to type something and then reacts to that input.</p>
+<p>The main loop is a key part of <strong>event-driven programming</strong>. Your <em><strong>main.py</strong></em> file will set up the game and create all the objects it needs. Then it will enter the <strong>main loop</strong>, where the program waits for the player to type something and then reacts to that input.</p>
 <div class="note admonition">
 <p class="admonition-title">Event-driven programming</p>
 <p>Event-driven programming is when a program doesn’t just run straight from top to bottom, but instead waits for things to happen and reacts to them. These things are called <strong>events</strong>, like the user typing a command, clicking a button, or a sensor sending data.</p>
 <p>The program sits in a loop, <strong>listening</strong> for these events, and when one occurs, it runs the code that matches that event. This makes programs more flexible because they only do something when there’s a reason to, just like you don’t answer someone until they speak to you first.</p>
 </div>
 <p>To achieve this we will need to complete the following steps:</p>
-<ol class="arabic simple">
+<div class="pseudocode admonition">
+<p class="admonition-title">Pseudocode</p>
+<ul class="simple">
 <li><p>Create the <code class="docutils literal notranslate"><span class="pre">move</span></code> method</p></li>
 <li><p>Initialize the starting room</p></li>
 <li><p>Create the main loop which:</p>
-<ul class="simple">
+<ul>
 <li><p>describes current room</p></li>
 <li><p>accepts user input</p></li>
 <li><p>responds to user input</p></li>
 </ul>
 </li>
-</ol>
+</ul>
+</div>
 <section id="class-diagram">
 <h3>Class Diagram<a class="headerlink" href="#class-diagram" title="Link to this heading">¶</a></h3>
 <p>We have updated the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class diagram to reflect the Stage 2 work.</p>
@@ -308,7 +311,7 @@
 </section>
 <section id="create-the-move-method">
 <h2>Create the move method<a class="headerlink" href="#create-the-move-method" title="Link to this heading">¶</a></h2>
-<p>Open the <strong>room.py</strong> file and add the code highlighted below:</p>
+<p>Open the <em><strong>room.py</strong></em> file and add the code highlighted below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -367,7 +370,7 @@
 </section>
 <section id="initialize-starting-room">
 <h2>Initialize starting room<a class="headerlink" href="#initialize-starting-room" title="Link to this heading">¶</a></h2>
-<p>Now go to the <strong>main.py</strong> file and make the highlighted changes below</p>
+<p>Now go to the <em><strong>main.py</strong></em> file and make the highlighted changes below</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -405,7 +408,7 @@
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">'''</span></code> on lines 21 and 26 → turns the room descriptions into a big comment, so Python ignores that code.</p>
 <ul>
-<li><p>You <em>could</em> delete it, but leaving it commented out means you can bring it back later if you need it for debugging.</p></li>
+<li><p>You could delete it, but leaving it commented out means you can bring it back later if you need it for debugging.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">initialise</span> <span class="pre">variables</span></code> → a comment to explain what the next lines of code are doing.</p></li>
@@ -420,8 +423,8 @@
 </section>
 <section id="create-main-loop">
 <h2>Create main loop<a class="headerlink" href="#create-main-loop" title="Link to this heading">¶</a></h2>
-<p>Still working in the <strong>main.py</strong> file, we will now make the main loop.</p>
-<p>Add the code highlighted below to have our first look at the main loop code</p>
+<p>Still working in the <em><strong>main.py</strong></em> file, we will now make the main loop.</p>
+<p>Add the highlighted code below so you can see the main loop for the first time.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -463,8 +466,8 @@
 <p>Finally we can run our code, but don’t forget <strong>PRIMM</strong>. <strong>Predict</strong> you think the program will do, then <strong>run</strong> the program.</p>
 <div class="info admonition">
 <p class="admonition-title">Escaping an infinite loop</p>
-<p>In Python, when you find yourself in an infinte loop, you can exit the loop my pressing <code class="docutils literal notranslate"><span class="pre">ctrl</span></code> + <code class="docutils literal notranslate"><span class="pre">c</span></code> on Windows or <code class="docutils literal notranslate"><span class="pre">control</span></code> + <code class="docutils literal notranslate"><span class="pre">C</span></code> on macOS.</p>
-<p>In addition, if you are using Thonny, you can click the <strong>stop</strong> icon.</p>
+<p>If your Python program gets stuck in an infinite loop, you can stop it by pressing <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">C</span></code> on Windows or <code class="docutils literal notranslate"><span class="pre">Control</span> <span class="pre">+</span> <span class="pre">C</span></code> on a Mac.</p>
+<p>If you’re using Thonny, you can also click the <strong>stop</strong> button to end the program.</p>
 </div>
 <p>Let’s <strong>investigate</strong> the new code line-by-line.</p>
 <div class="admonition-code-explaination admonition">
@@ -472,7 +475,7 @@
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">True</span></code> → used to keep the <strong>main loop</strong> going until the player decides to quit.</p>
 <ul>
-<li><p>This is called a <strong>flag variable</strong> —it starts as <code class="docutils literal notranslate"><span class="pre">True</span></code>, and when the player wants to exit, it gets changed to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
+<li><p>This is called a <strong>flag variable</strong>—it starts as <code class="docutils literal notranslate"><span class="pre">True</span></code>, and when the player wants to exit, it gets changed to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
 </li>
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">-----</span> <span class="pre">MAIN</span> <span class="pre">LOOP</span> <span class="pre">-----</span></code> → a comment showing where the main loop begins.</p></li>
@@ -495,13 +498,13 @@
 </li>
 </ul>
 </div>
-<p>Notice that no matter what the player types, the same thing keeps happening. That’s because we’ve built the <strong>main loop</strong>, which is waiting for events (the player’s input), but we haven’t written any code to <em>react</em> to those events yet.</p>
+<p>Notice that no matter what the player types, the same thing keeps happening. That’s because we’ve built the <strong>main loop</strong>, which is waiting for events (the player’s input), but we haven’t written any code to react to those events yet.</p>
 <p>In a <strong>state machine</strong>, the game should change state when something happens—like moving to a new room—but right now there are no rules telling the program how to change state when an event occurs. So the loop just repeats without doing anything new.</p>
 </section>
 <section id="responding-to-commands">
 <h2>Responding to commands<a class="headerlink" href="#responding-to-commands" title="Link to this heading">¶</a></h2>
 <p>In Event Driven Programming the entering of user’s commands is called an <strong>event</strong>. Now we have to create code that responds to those events. This kind of code is called an <strong>event handler</strong>.</p>
-<p>Back in our <strong>main.py</strong> we’re going to create an <strong>event handler</strong> to deal with the entry of a direction (<code class="docutils literal notranslate"><span class="pre">&quot;north&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;south&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;east&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;west&quot;</span></code>). Add the highlighted code.</p>
+<p>Back in our <em><strong>main.py</strong></em> we’re going to create an <strong>event handler</strong> to deal with the entry of a direction (<code class="docutils literal notranslate"><span class="pre">&quot;north&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;south&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">&quot;east&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;west&quot;</span></code>). Add the highlighted code.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -716,7 +719,7 @@
 <h3>Capture incorrect commands<a class="headerlink" href="#capture-incorrect-commands" title="Link to this heading">¶</a></h3>
 <p>The code now understands the movement commands and the quit command, but what if the player types something completely different? The loop just keeps going and shows the same room again. That’s not very helpful.</p>
 <p>We should tell the player when their command doesn’t make sense, so they know they need to try something else. Let’s fix that.</p>
-<p>Change <strong>main.py</strong> to include the highlighted code below.</p>
+<p>Change <em><strong>main.py</strong></em> to include the highlighted code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -802,6 +805,12 @@
 </div>
 </section>
 </section>
+<hr class="docutils" />
+<section id="stage-2-task">
+<h2>Stage 2 task<a class="headerlink" href="#stage-2-task" title="Link to this heading">¶</a></h2>
+<p>There is not much to do for our <strong>Make</strong> phase of this stage, but you do need to test that you can navigate to and from your stage 1 task additional room.</p>
+<p>Take the table you used to test navigating the rooms and expand it to also test navigating to your stage 1 task room.</p>
+</section>
 </section>
 
         </article>
@@ -878,6 +887,7 @@
 <li><a class="reference internal" href="#id1">Testing</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#stage-2-task">Stage 2 task</a></li>
 </ul>
 </li>
 </ul>
