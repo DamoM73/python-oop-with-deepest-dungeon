@@ -31,7 +31,7 @@ We know the commands because we wrote the code. A new player won’t know what t
 
 To fix this, we should add a **help** command that shows all the commands. But players won’t know the help command exists unless we tell them. So we update the final `else:` section to remind them to type “help” when they get something wrong.
 
-Now add the highlighted code to **main.py**.
+Now add the highlighted code to ***main.py***.
 
 ```{code-block} python
 :linenos:
@@ -482,7 +482,7 @@ We already have a few comments in the code to help explain what parts do, but mo
 Code maintainability means making your code easy to understand, fix, and update later. If your code is neat, well-organised, and has clear comments, you or someone else can quickly figure out how it works. This makes it easier to find bugs, add new features, and change things without breaking the program.
 ```
 
-Let's first start with **main.py**
+Let's first start with ***main.py***
 
 ```{code-block} python
 :linenos:
@@ -628,11 +628,11 @@ while running:
 print("Thank you for playing Deepest Dungeon")
 ```
 
-When you make classes, it’s a good idea to add a comment explaining what each method does. If you check the classes in **room.py**, **item.py**, and **character.py**, you’ll see we’ve already done this there.
+When you make classes, it’s a good idea to add a comment explaining what each method does. If you check the classes in ***room.py***, ***item.py***, and ***character.py***, you’ll see we’ve already done this there.
 
 ## Remove unused code
 
-Remember the code in **main.py** that we commented out. Well we no longer need it. Go ahead and **delete** the code highlighted below.
+Remember the code in ***main.py*** that we commented out. Well we no longer need it. Go ahead and **delete** the code highlighted below.
 
 ```{code-block} python
 :linenos:
@@ -783,7 +783,7 @@ Whitespace is the empty lines in your code. You can use it to break your code in
 
 Finalise your code by adjusting it so to look the same as the following code:
 
-### main.py
+### ***main.py***
 
 ```{code-block} python
 :linenos:
@@ -921,7 +921,7 @@ while running:
 print("Thank you for playing Darkest Dungeon")
 ```
 
-### room.py
+### ***room.py***
 
 ```{code-block} python
 :linenos:
@@ -961,7 +961,7 @@ class Room():
             return self
 ```
 
-### character.py
+### ***character.py***
 
 ```{code-block} python
 :linenos:
@@ -1031,7 +1031,7 @@ class Enemy(Character):
         return Enemy.num_of_enemy
 ```
 
-### item.py
+### ***item.py***
 
 ```{code-block} python
 :linenos:
@@ -1055,3 +1055,4 @@ The tutorials are finished. Now it’s your turn to make the dungeon your own by
 There are a few logic mistakes in the code, but you’ll need to test the game to find them and work out how to fix them. Make sure you use your debugger to help.
 
 Good luck on your adventure.
+

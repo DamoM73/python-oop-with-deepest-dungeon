@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
     
     
 
@@ -203,7 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction for Students</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -295,7 +295,7 @@
 <section id="count-number-of-enemies">
 <h2>Count Number of Enemies<a class="headerlink" href="#count-number-of-enemies" title="Link to this heading">¶</a></h2>
 <p>To keep track of how many <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> objects are in the game, we need to add a <strong>class variable</strong> to the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class.</p>
-<p>Open <strong>character.py</strong> and add the highlighted code shown below.</p>
+<p>Open <em><strong>character.py</strong></em> and add the highlighted code shown below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -376,7 +376,7 @@
 </ul>
 </div>
 <p>Now that we are keeping track of the number of enemies, but we can’t see what that number is. So let’s create a method to find out how many enemies are in the dungeon</p>
-<p>Still working in <strong>character.py</strong>, add the highlighted code below:</p>
+<p>Still working in <em><strong>character.py</strong></em>, add the highlighted code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -461,7 +461,7 @@
 <h2>Reduce Enemy Count<a class="headerlink" href="#reduce-enemy-count" title="Link to this heading">¶</a></h2>
 <p>We can now count how many enemies there are and check that number, but we also need to <strong>lower</strong> the count when the player beats an enemy.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">fight</span></code> method in the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class already runs code when an enemy is defeated, so we just need to add one extra line there.</p>
-<p>Stay in <strong>character.py</strong> and add the highlighted line below.</p>
+<p>Stay in <em><strong>character.py</strong></em> and add the highlighted line below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -538,7 +538,7 @@
 <section id="check-for-victory">
 <h2>Check for Victory<a class="headerlink" href="#check-for-victory" title="Link to this heading">¶</a></h2>
 <p>The player wins the game when every enemy has been defeated. When that happens, <code class="docutils literal notranslate"><span class="pre">Enemy.num_of_enemy</span></code> will be <code class="docutils literal notranslate"><span class="pre">0</span></code>. So we need to choose the right spot in the code to check for this.</p>
-<p>In <strong>main.py</strong>, line <code class="docutils literal notranslate"><span class="pre">89</span></code> is already where the game checks if the player wins, so that’s the best place to add our <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> check.</p>
+<p>In <em><strong>main.py</strong></em>, line <code class="docutils literal notranslate"><span class="pre">89</span></code> is already where the game checks if the player wins, so that’s the best place to add our <code class="docutils literal notranslate"><span class="pre">num_of_enemy</span></code> check.</p>
 <p>Add the highlighted code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>

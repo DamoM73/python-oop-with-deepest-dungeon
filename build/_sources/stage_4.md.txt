@@ -78,7 +78,7 @@ Let's make these changes to the code.
 
 ## Define different character types
 
-Open your **character.py** file and add the highlighted code below to create the `Friend` class:
+Open your ***character.py*** file and add the highlighted code below to create the `Friend` class:
 
 ### Create Friend class
 
@@ -195,7 +195,7 @@ Now that we have two character types, we need to change the characters that we h
 
 ## Change character types
 
-Return to **main.py**, and change the highlighted code:
+Return to ***main.py***, and change the highlighted code:
 
 ```{code-block} python
 :linenos:
@@ -317,7 +317,7 @@ This lets your code treat different objects in a similar way, even if they aren�
 
 Right now, the `hug` method comes from the `Character` class, and it always says the character doesn’t want to hug you. That’s okay for enemies, so we’ll leave them as they are. But friends *should* hug you back, so we need to change the `Friend` class to make that happen.
 
-Return to the **character.py** file and add the highlighted code:
+Return to the ***character.py*** file and add the highlighted code:
 
 ```{code-block} python
 :linenos:
@@ -449,13 +449,13 @@ Investing that code:
 * The comment explains that this method checks the weapon and returns whether the player survives.
 * `if item == self.weakness:` &rarr; checks if the weapon matches the enemy’s weakness.
 * `print(f"You strike {self.name} down with {item}.")` &rarr; shows a message if you win.
-* `return True` &rarr; tells **main.py** that the player won the fight.
+* `return True` &rarr; tells ***main.py*** that the player won the fight.
 * `else:` &rarr; runs when the weapon is not the enemy’s weakness.
 * `print(f"{self.name} crushes you. Puny adventurer")` &rarr; shows the losing message.
-* `return False` &rarr; tells **main.py** that the player lost.
+* `return False` &rarr; tells ***main.py*** that the player lost.
 ```
 
-Now that the `fight` method is finished, we need to update the fight section in **main.py** so the game uses the new system. Replace that part of the code with the updated version shown.
+Now that the `fight` method is finished, we need to update the fight section in ***main.py*** so the game uses the new system. Replace that part of the code with the updated version shown.
 
 ```{code-block} python
 :linenos:
@@ -580,7 +580,7 @@ Did you get the following error?
 ```{code-block} error
 :linenos:
 Traceback (most recent call last):
-  File "h:\GIT\python-oop-with-deepest-dungeon\python_files\stage_4\main.py", line 66, in <module>
+  File "h:\GIT\python-oop-with-deepest-dungeon\python_files\stage_4\***main.py***", line 66, in <module>
     if current_room.character.fight(weapon):
        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 TypeError: Character.fight() takes 1 positional argument but 2 were given
@@ -588,7 +588,7 @@ TypeError: Character.fight() takes 1 positional argument but 2 were given
 
 Why did we get the error? Let's read the error message:
 
-- **line 2** &rarr; the error is at line 66 of **main.py**
+- **line 2** &rarr; the error is at line 66 of ***main.py***
 - **line 3** &rarr; the error is contained in `if current_room.character.fight(weapon):`
 - **line 4** &rarr; the error is specifically in the call to `fight`
 - **line 5** &rarr; `fight` was only expecting one argument (`self`), but we gave two (`self`,`weapon`)
@@ -596,7 +596,7 @@ Why did we get the error? Let's read the error message:
 So let's think about this:
 1. We have two `fight` methods, which one was causing the problem? 
 2. Ugine's fight worked fine, but Nigel didn't, so it must be the `fight` method for friends.
-3. That method is in our **character.py** file, so let's look at it.
+3. That method is in our ***character.py*** file, so let's look at it.
 
 ```{code-block} python
 :linenos:
@@ -663,9 +663,9 @@ class Enemy(Character):
    * **line 26** &rarr; the `Character` `fight` method only accepts one argument `(self)`, but how does this compare to the `Enemy` `fight` method in **line 47**?
    * **line 47** &rarr; the `Enemy` `fight` method accepts *two* arguments `(self, item)`
 
-We’ve found the problem, but now we need to decide what to fix. Since we updated **main.py** so that fighting always uses a weapon, the simplest solution is to update the `Character` class’s `fight` method so it also accepts the extra argument.
+We’ve found the problem, but now we need to decide what to fix. Since we updated ***main.py*** so that fighting always uses a weapon, the simplest solution is to update the `Character` class’s `fight` method so it also accepts the extra argument.
 
-So make the following changes to **character.py**:
+So make the following changes to ***character.py***:
 
 ```{code-block} python
 :linenos:
@@ -765,7 +765,7 @@ Nigel doesn't want to fight you
 
 Fixing logic errors is kind of like being a detective. You have to follow what the program is doing step by step to spot where things go wrong.
 
-We’ll start by checking **main.py**. Since the issue happens when you try to fight Nigel, the problem is probably in the part of the main loop that handles the `fight` command, so that’s the section we need to look at closely.
+We’ll start by checking ***main.py***. Since the issue happens when you try to fight Nigel, the problem is probably in the part of the main loop that handles the `fight` command, so that’s the section we need to look at closely.
 
 ```{code-block} python
 :linenos:
@@ -790,7 +790,7 @@ In the test when we fought Nigel:
 * **Line 68** is where the program checks if the player won or lost, using `if current_room.character.fight(weapon):`, which calls the `fight` method and expects a `True` or `False` answer.
 * Because Nigel is a friend, we now need to look at the `fight` method that friends use, which is in the `Character` class.
 
-So zooming into the `fight` method in the `Character` class in **character.py**:
+So zooming into the `fight` method in the `Character` class in ***character.py***:
 
 ```{code-block} python
 :linenos:
@@ -800,13 +800,13 @@ So zooming into the `fight` method in the `Character` class in **character.py**:
         print(f"{self.name} doesn't want to fight you")
 ```
 
-Here’s the issue: **main.py** expects the `fight` method to return a True or False value, but the `Character` class’s `fight` method doesn’t return anything.
+Here’s the issue: ***main.py*** expects the `fight` method to return a True or False value, but the `Character` class’s `fight` method doesn’t return anything.
 
 In Python, if a function doesn’t have a `return` statement, it still returns something — the default value `None`.
 
 The problem is that `None` counts as `False` in an `if` statement, so the game thinks the player lost the fight, which makes the program end.
 
-Let's zoom back in to the fight handler in **main.py** to understand.
+Let's zoom back in to the fight handler in ***main.py*** to understand.
 
 ```{code-block} python
 :linenos:
@@ -832,7 +832,7 @@ Looking at **line 4**:
 
 So now we know what’s happening. To fix it, the `Character` class’s `fight` method needs to return `True` so line 4 treats it as a win. 
 
-Update the method in **character.py** to solve the logic error.
+Update the method in ***character.py*** to solve the logic error.
 
 ```{code-block} python
 :linenos:
@@ -895,7 +895,7 @@ class Enemy(Character):
 ```
 
 ```{admonition} Code Explaination
-* **line 29** now returns `True` when you fight a friend, which means the **line 71** of the **main.py** `running == False` does not run.
+* **line 29** now returns `True` when you fight a friend, which means the **line 71** of the ***main.py*** `running == False` does not run.
 ```
 
 ### Third test lucky?
@@ -912,7 +912,7 @@ Let's test and make sure that our logic error has been solved. Again, complete t
 
 Were you able to hug Nigel after fighting him? Probably not. That’s because the game treated the fight as a win, so it deleted Nigel from the room. We need to fix that so friends don’t disappear when you “fight” them.
 
-In **main.py** adjust the highlighted code below.
+In ***main.py*** adjust the highlighted code below.
 
 ```{code-block} python
 :linenos:
@@ -944,3 +944,4 @@ Finally check that you can attempt to fight Nigel, and then still hug him afterw
 Now it is time for your to implement the **Make** phase.
 
 Consider the additional character or characters that you have added, and change them into either a Friend, or an Enemy. Don't forget their weakness if they are an enemy.
+

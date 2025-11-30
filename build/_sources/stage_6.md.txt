@@ -26,7 +26,7 @@ To do this we will:
 
 ### Class Diagram
 
-When you check the class diagram, nothing new has been added. Everything in this part of the lesson will be changed only in **main.py**, and you won’t need to edit any classes.
+When you check the class diagram, nothing new has been added. Everything in this part of the lesson will be changed only in ***main.py***, and you won’t need to edit any classes.
 
 ![lesson 6 class diagram](./assets/lesson_5_class_diagram.png)
 
@@ -58,7 +58,7 @@ Lists work really well for what we need:
 * Lists let us access items by their position
 * We can use `pop()` to remove an item from the backpack.
 
-Open **main.py** and add the highlighted code below:
+Open ***main.py*** and add the highlighted code below:
 
 ```{code-block} python
 :linenos:
@@ -168,7 +168,7 @@ while running:
 
 Now that we’ve made a backpack, we need a command that lets the player pick up items from the room and put them into it. We’ll use **take** as that command.
 
-Still working in **main.py** add the take command using the highlighted code below:
+Still working in ***main.py*** add the take command using the highlighted code below:
 
 ```{code-block} python
 :linenos:
@@ -275,7 +275,7 @@ while running:
         print("I don't understand.")
 ```
 
-Save **main.py** **predict** what you think will happen and then **run** the code. What happens to the room description after you take an item?
+Save ***main.py*** **predict** what you think will happen and then **run** the code. What happens to the room description after you take an item?
 
 In **investigating** this code, most of it should be familiar from our previous command event handlers. The different code is:
 
@@ -289,7 +289,7 @@ In **investigating** this code, most of it should be familiar from our previous 
 
 Now that we can collect items, we need a way for the player to check what they’re carrying. We’ll add a new **backpack** command that shows all the items currently inside it.
 
-Still working in **main.py**, add the code below:
+Still working in ***main.py***, add the code below:
 
 ```{code-block} python
 :linenos:
@@ -403,7 +403,7 @@ while running:
         print("I don't understand.")
 ```
 
-Save the **main.py** file, **predict** and then **run** your code. This time we should do some serious testing.
+Save the ***main.py*** file, **predict** and then **run** your code. This time we should do some serious testing.
 
 We need to make sure that:
 
@@ -436,7 +436,7 @@ If your testing all works out, then it's time to **investigate** the code.
 
 Lastly, we need to change the `fight` command so the player can only use items that are actually in their backpack.
 
-Still working in **main.py**, add the code below.
+Still working in ***main.py***, add the code below.
 
 ```{code-block} python
 :linenos:
@@ -559,7 +559,7 @@ while running:
         print("I don't understand.")
 ```
 
-Save **main.py**. **Predict** what you think will happen, and then **run** the code.
+Save ***main.py***. **Predict** what you think will happen, and then **run** the code.
 
 Let's **investigate** that code, but be aware that there are a number of different sections to that code.
 
@@ -605,3 +605,5 @@ If your code passes all the tests, it's time to **make** some code in the stage 
 ## Stage 6 task
 
 You need to apply the changes we made to your other characters. Especially if you have another enemy. Make sure that the user can collect their weakness and use it against them.
+
+

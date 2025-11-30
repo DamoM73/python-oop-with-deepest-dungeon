@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
     
     
 
@@ -203,7 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction for Students</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -282,7 +282,7 @@
 </ul>
 <section id="class-diagram">
 <h3>Class Diagram<a class="headerlink" href="#class-diagram" title="Link to this heading">¶</a></h3>
-<p>When you check the class diagram, nothing new has been added. Everything in this part of the lesson will be changed only in <strong>main.py</strong>, and you won’t need to edit any classes.</p>
+<p>When you check the class diagram, nothing new has been added. Everything in this part of the lesson will be changed only in <em><strong>main.py</strong></em>, and you won’t need to edit any classes.</p>
 <p><img alt="lesson 6 class diagram" src="_images/lesson_5_class_diagram.png" /></p>
 </section>
 </section>
@@ -313,7 +313,7 @@
 <li><p>Lists let us access items by their position</p></li>
 <li><p>We can use <code class="docutils literal notranslate"><span class="pre">pop()</span></code> to remove an item from the backpack.</p></li>
 </ul>
-<p>Open <strong>main.py</strong> and add the highlighted code below:</p>
+<p>Open <em><strong>main.py</strong></em> and add the highlighted code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -420,7 +420,7 @@
 <section id="add-take-command">
 <h2>Add take command<a class="headerlink" href="#add-take-command" title="Link to this heading">¶</a></h2>
 <p>Now that we’ve made a backpack, we need a command that lets the player pick up items from the room and put them into it. We’ll use <strong>take</strong> as that command.</p>
-<p>Still working in <strong>main.py</strong> add the take command using the highlighted code below:</p>
+<p>Still working in <em><strong>main.py</strong></em> add the take command using the highlighted code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -523,7 +523,7 @@
 <span class="linenos">100</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t understand.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Save <strong>main.py</strong> <strong>predict</strong> what you think will happen and then <strong>run</strong> the code. What happens to the room description after you take an item?</p>
+<p>Save <em><strong>main.py</strong></em> <strong>predict</strong> what you think will happen and then <strong>run</strong> the code. What happens to the room description after you take an item?</p>
 <p>In <strong>investigating</strong> this code, most of it should be familiar from our previous command event handlers. The different code is:</p>
 <div class="admonition-code-explaination admonition">
 <p class="admonition-title">Code Explaination</p>
@@ -537,7 +537,7 @@
 <section id="add-backpack-command">
 <h2>Add backpack command<a class="headerlink" href="#add-backpack-command" title="Link to this heading">¶</a></h2>
 <p>Now that we can collect items, we need a way for the player to check what they’re carrying. We’ll add a new <strong>backpack</strong> command that shows all the items currently inside it.</p>
-<p>Still working in <strong>main.py</strong>, add the code below:</p>
+<p>Still working in <em><strong>main.py</strong></em>, add the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -647,7 +647,7 @@
 <span class="linenos">107</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t understand.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Save the <strong>main.py</strong> file, <strong>predict</strong> and then <strong>run</strong> your code. This time we should do some serious testing.</p>
+<p>Save the <em><strong>main.py</strong></em> file, <strong>predict</strong> and then <strong>run</strong> your code. This time we should do some serious testing.</p>
 <p>We need to make sure that:</p>
 <ul class="simple">
 <li><p>we can pick up all the items in all the rooms</p></li>
@@ -705,7 +705,7 @@
 <section id="adjusting-the-fight-command">
 <h2>Adjusting the fight command<a class="headerlink" href="#adjusting-the-fight-command" title="Link to this heading">¶</a></h2>
 <p>Lastly, we need to change the <code class="docutils literal notranslate"><span class="pre">fight</span></code> command so the player can only use items that are actually in their backpack.</p>
-<p>Still working in <strong>main.py</strong>, add the code below.</p>
+<p>Still working in <em><strong>main.py</strong></em>, add the code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -824,7 +824,7 @@
 <span class="linenos">116</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;I don&#39;t understand.&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Save <strong>main.py</strong>. <strong>Predict</strong> what you think will happen, and then <strong>run</strong> the code.</p>
+<p>Save <em><strong>main.py</strong></em>. <strong>Predict</strong> what you think will happen, and then <strong>run</strong> the code.</p>
 <p>Let’s <strong>investigate</strong> that code, but be aware that there are a number of different sections to that code.</p>
 <div class="admonition-code-explaination admonition">
 <p class="admonition-title">Code Explaination</p>

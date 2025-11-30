@@ -473,3 +473,4 @@ There is not much to do for our **Make** phase of this stage, but you do need to
 
 Take the table you used to test navigating the rooms and expand it to also test navigating to your stage 1 task room.
  
+

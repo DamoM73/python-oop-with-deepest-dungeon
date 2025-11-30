@@ -145,7 +145,7 @@ The ***main.py*** file will be importing classes from the your other files. The 
 
 To minimise potential problems, you need to create a new folder for these tutorials.
 
-It is also important to ensure you file names are correct, inlcuding the capilatisation and the **.py** extension.
+It is also important to ensure you file names are correct, inlcuding the capilatisation and the ***.py*** extension.
 ```
 
 Make a folder called ***deepest_dungeon***. Calling your ***room.py*** save it in your ***deepest_dungeon*** folder.
@@ -536,3 +536,4 @@ Taking the knowledge your have gained through this lesson, you need to:
 
 - create one, or more additional rooms
 - link those additional rooms to one or more of your other rooms.
+

@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
     
     
 
@@ -203,7 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction for Students</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -286,7 +286,7 @@
 <h2>Help command<a class="headerlink" href="#help-command" title="Link to this heading">¶</a></h2>
 <p>We know the commands because we wrote the code. A new player won’t know what they’re allowed to type. Right now, if they type something wrong, the program just says “I don’t understand,” which isn’t very helpful.</p>
 <p>To fix this, we should add a <strong>help</strong> command that shows all the commands. But players won’t know the help command exists unless we tell them. So we update the final <code class="docutils literal notranslate"><span class="pre">else:</span></code> section to remind them to type “help” when they get something wrong.</p>
-<p>Now add the highlighted code to <strong>main.py</strong>.</p>
+<p>Now add the highlighted code to <em><strong>main.py</strong></em>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -720,7 +720,7 @@
 <p class="admonition-title">Code maintainability</p>
 <p>Code maintainability means making your code easy to understand, fix, and update later. If your code is neat, well-organised, and has clear comments, you or someone else can quickly figure out how it works. This makes it easier to find bugs, add new features, and change things without breaking the program.</p>
 </div>
-<p>Let’s first start with <strong>main.py</strong></p>
+<p>Let’s first start with <em><strong>main.py</strong></em></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -862,11 +862,11 @@
 <span class="linenos">139</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Deepest Dungeon&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>When you make classes, it’s a good idea to add a comment explaining what each method does. If you check the classes in <strong>room.py</strong>, <strong>item.py</strong>, and <strong>character.py</strong>, you’ll see we’ve already done this there.</p>
+<p>When you make classes, it’s a good idea to add a comment explaining what each method does. If you check the classes in <em><strong>room.py</strong></em>, <em><strong>item.py</strong></em>, and <em><strong>character.py</strong></em>, you’ll see we’ve already done this there.</p>
 </section>
 <section id="remove-unused-code">
 <h2>Remove unused code<a class="headerlink" href="#remove-unused-code" title="Link to this heading">¶</a></h2>
-<p>Remember the code in <strong>main.py</strong> that we commented out. Well we no longer need it. Go ahead and <strong>delete</strong> the code highlighted below.</p>
+<p>Remember the code in <em><strong>main.py</strong></em> that we commented out. Well we no longer need it. Go ahead and <strong>delete</strong> the code highlighted below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -1013,7 +1013,7 @@
 <p>Whitespace is the empty lines in your code. You can use it to break your code into clear sections and make it easier to read.</p>
 <p>Finalise your code by adjusting it so to look the same as the following code:</p>
 <section id="main-py">
-<h3>main.py<a class="headerlink" href="#main-py" title="Link to this heading">¶</a></h3>
+<h3><em><strong>main.py</strong></em><a class="headerlink" href="#main-py" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -1150,7 +1150,7 @@
 </div>
 </section>
 <section id="room-py">
-<h3>room.py<a class="headerlink" href="#room-py" title="Link to this heading">¶</a></h3>
+<h3><em><strong>room.py</strong></em><a class="headerlink" href="#room-py" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -1189,7 +1189,7 @@
 </div>
 </section>
 <section id="character-py">
-<h3>character.py<a class="headerlink" href="#character-py" title="Link to this heading">¶</a></h3>
+<h3><em><strong>character.py</strong></em><a class="headerlink" href="#character-py" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -1258,7 +1258,7 @@
 </div>
 </section>
 <section id="item-py">
-<h3>item.py<a class="headerlink" href="#item-py" title="Link to this heading">¶</a></h3>
+<h3><em><strong>item.py</strong></em><a class="headerlink" href="#item-py" title="Link to this heading">¶</a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># item.py</span>
 <span class="linenos"> 2</span><span class="k">class</span><span class="w"> </span><span class="nc">Item</span><span class="p">():</span>
 <span class="linenos"> 3</span>    
@@ -1349,10 +1349,10 @@
 <li><a class="reference internal" href="#in-code-comments">In-code comments</a></li>
 <li><a class="reference internal" href="#remove-unused-code">Remove unused code</a></li>
 <li><a class="reference internal" href="#final-code">Final code</a><ul>
-<li><a class="reference internal" href="#main-py">main.py</a></li>
-<li><a class="reference internal" href="#room-py">room.py</a></li>
-<li><a class="reference internal" href="#character-py">character.py</a></li>
-<li><a class="reference internal" href="#item-py">item.py</a></li>
+<li><a class="reference internal" href="#main-py"><em><strong>main.py</strong></em></a></li>
+<li><a class="reference internal" href="#room-py"><em><strong>room.py</strong></em></a></li>
+<li><a class="reference internal" href="#character-py"><em><strong>character.py</strong></em></a></li>
+<li><a class="reference internal" href="#item-py"><em><strong>item.py</strong></em></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#final-make">Final Make</a></li>

@@ -6,9 +6,9 @@ Everyone makes mistakes—even seasoned professional developers!
 
 Python is good at catching mistakes like syntax errors and run-time errors. Unfortunately, there is a third type of error that you may have already experienced. **Logic errors** occur when a valid program doesn’t do what the programmer intended.
 
-For example, type the code below and save it has `buggy_code.py`.
+For example, type the code below and save it has ***buggy_code.py***.
 
-For this tutorial download {download}`buggy_code.py<./python_files/buggy_code.py>` file and save it to your lesson folder.
+For this tutorial download ***{download}`buggy_code.py<./python_files/buggy_code.py>`*** file and save it to your lesson folder.
 
 ```{literalinclude} ./python_files/buggy_code.py
 :linenos:
@@ -22,7 +22,7 @@ Knowing how to find and fix bugs in your code is a skill that you will use for y
 
 ## Using Thonny's Debugger
 
-To debug `buggy_code.py` we need to understand the debugging tools we have at our disposal. Thonny has a debugger built-in, but before we explore it, we need to make sure you have the correct setup.
+To debug ***buggy_code.py*** we need to understand the debugging tools we have at our disposal. Thonny has a debugger built-in, but before we explore it, we need to make sure you have the correct setup.
 
 Open the **View** menu and ensure there is a tick beside both **Stack** and **Variables**.
 
@@ -36,7 +36,7 @@ To enter into Thonny's Debugger click on the **Debug** button.
 
 To see how the debugger works, let’s start by writing a simple program without any bugs.
 
-Type the following into Thonny and save it as `debug_a.py`:
+Type the following into Thonny and save it as ***debug_a.py***:
 
 ```{code-block} python
 :linenos:
@@ -55,7 +55,7 @@ Your Thonny should now look like the image below:
 
 - **Code Panel:** Thonny has paused the execution of the code. The yellow highlight shows the code that Python will execute next.
 - **Variables Panel:** Since the program hasn't assigned any values, it shows no variables.
-- **Shell Panel:** %Debug launches is the command that launches the program (debug_a.py).
+- **Shell Panel:** %Debug launches is the command that launches the program (***debug_a.py***).
 - **Stack Panel:** Shows the current function and module that is running.
 
 Something else has happened, other debugging buttons are now available.
@@ -234,11 +234,11 @@ The next **Resume** click will restart the program. The debugger will pause at t
 Notice the changed values in the variables panel.
 ```
 
-Now that we know how to control Thonny's debugger, let's go back and debug `buggy_code.py`.
+Now that we know how to control Thonny's debugger, let's go back and debug ***buggy_code.py***.
 
 ## Debugging a Logic Error
 
-First let's look closely at `buggy_code.py`:
+First let's look closely at ***buggy_code.py***:
 
 ```{code-block} python
 :linenos:
@@ -403,3 +403,5 @@ Stop the debugging, make the change to the code below.
 Run the program normally. Is the output `_h_e_l_l_o_`?
 
 Problem solved. You have now successfully debugged faulty code.
+
+

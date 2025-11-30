@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
     
     
 
@@ -203,7 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction for Students</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -261,8 +261,8 @@
 <h2>Programming mistakes<a class="headerlink" href="#programming-mistakes" title="Link to this heading">¶</a></h2>
 <p>Everyone makes mistakes—even seasoned professional developers!</p>
 <p>Python is good at catching mistakes like syntax errors and run-time errors. Unfortunately, there is a third type of error that you may have already experienced. <strong>Logic errors</strong> occur when a valid program doesn’t do what the programmer intended.</p>
-<p>For example, type the code below and save it has <code class="docutils literal notranslate"><span class="pre">buggy_code.py</span></code>.</p>
-<p>For this tutorial download <a class="reference download internal" download="" href="_downloads/f3924eb4631f500ccb9650a05e39cfca/buggy_code.py"><code class="xref download docutils literal notranslate"><span class="pre">buggy_code.py</span></code></a> file and save it to your lesson folder.</p>
+<p>For example, type the code below and save it has <em><strong>buggy_code.py</strong></em>.</p>
+<p>For this tutorial download <em><strong><a class="reference download internal" download="" href="_downloads/f3924eb4631f500ccb9650a05e39cfca/buggy_code.py"><code class="xref download docutils literal notranslate"><span class="pre">buggy_code.py</span></code></a></strong></em> file and save it to your lesson folder.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">add_underscores</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="n">new_word</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span>
 <span class="linenos">3</span>    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)):</span>
@@ -279,7 +279,7 @@
 </section>
 <section id="using-thonny-s-debugger">
 <h2>Using Thonny’s Debugger<a class="headerlink" href="#using-thonny-s-debugger" title="Link to this heading">¶</a></h2>
-<p>To debug <code class="docutils literal notranslate"><span class="pre">buggy_code.py</span></code> we need to understand the debugging tools we have at our disposal. Thonny has a debugger built-in, but before we explore it, we need to make sure you have the correct setup.</p>
+<p>To debug <em><strong>buggy_code.py</strong></em> we need to understand the debugging tools we have at our disposal. Thonny has a debugger built-in, but before we explore it, we need to make sure you have the correct setup.</p>
 <p>Open the <strong>View</strong> menu and ensure there is a tick beside both <strong>Stack</strong> and <strong>Variables</strong>.</p>
 <p><img alt="image" src="_images/debugging_1.png" /></p>
 <p>To enter into Thonny’s Debugger click on the <strong>Debug</strong> button.</p>
@@ -287,7 +287,7 @@
 <section id="controlling-the-debugger">
 <h3>Controlling the debugger<a class="headerlink" href="#controlling-the-debugger" title="Link to this heading">¶</a></h3>
 <p>To see how the debugger works, let’s start by writing a simple program without any bugs.</p>
-<p>Type the following into Thonny and save it as <code class="docutils literal notranslate"><span class="pre">debug_a.py</span></code>:</p>
+<p>Type the following into Thonny and save it as <em><strong>debug_a.py</strong></em>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;michelle&quot;</span><span class="p">,</span> <span class="s2">&quot;nicole&quot;</span><span class="p">,</span> <span class="s2">&quot;simone&quot;</span><span class="p">,</span> <span class="s2">&quot;emma&quot;</span><span class="p">]</span>
 <span class="linenos">2</span>
 <span class="linenos">3</span><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
@@ -301,7 +301,7 @@
 <ul class="simple">
 <li><p><strong>Code Panel:</strong> Thonny has paused the execution of the code. The yellow highlight shows the code that Python will execute next.</p></li>
 <li><p><strong>Variables Panel:</strong> Since the program hasn’t assigned any values, it shows no variables.</p></li>
-<li><p><strong>Shell Panel:</strong> %Debug launches is the command that launches the program (debug_a.py).</p></li>
+<li><p><strong>Shell Panel:</strong> %Debug launches is the command that launches the program (<em><strong>debug_a.py</strong></em>).</p></li>
 <li><p><strong>Stack Panel:</strong> Shows the current function and module that is running.</p></li>
 </ul>
 <p>Something else has happened, other debugging buttons are now available.</p>
@@ -412,12 +412,12 @@
 <p class="admonition-title">Hint</p>
 <p>Notice the changed values in the variables panel.</p>
 </div>
-<p>Now that we know how to control Thonny’s debugger, let’s go back and debug <code class="docutils literal notranslate"><span class="pre">buggy_code.py</span></code>.</p>
+<p>Now that we know how to control Thonny’s debugger, let’s go back and debug <em><strong>buggy_code.py</strong></em>.</p>
 </section>
 </section>
 <section id="debugging-a-logic-error">
 <h2>Debugging a Logic Error<a class="headerlink" href="#debugging-a-logic-error" title="Link to this heading">¶</a></h2>
-<p>First let’s look closely at <code class="docutils literal notranslate"><span class="pre">buggy_code.py</span></code>:</p>
+<p>First let’s look closely at <em><strong>buggy_code.py</strong></em>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="k">def</span><span class="w"> </span><span class="nf">add_underscores</span><span class="p">(</span><span class="n">word</span><span class="p">):</span>
 </span><span class="hll"><span class="linenos">2</span>    <span class="n">new_word</span> <span class="o">=</span> <span class="s2">&quot;_&quot;</span>
 </span><span class="hll"><span class="linenos">3</span>    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">word</span><span class="p">)):</span>

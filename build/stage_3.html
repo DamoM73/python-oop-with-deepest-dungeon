@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
     
     
 
@@ -203,7 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction for Students</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -298,7 +298,7 @@
 </section>
 <section id="define-the-character-class">
 <h2>Define the Character class<a class="headerlink" href="#define-the-character-class" title="Link to this heading">¶</a></h2>
-<p>In Thonny create a new file and enter the code below. Then save it as <strong>character.py</strong> in the same folder as <strong>main.py</strong> and <strong>room.py</strong> (remember capitalisation).</p>
+<p>In Thonny create a new file and enter the code below. Then save it as <em><strong>character.py</strong></em> in the same folder as <em><strong>main.py</strong></em> and <em><strong>room.py</strong></em> (remember capitalisation).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="c1"># character.py</span>
 </span><span class="linenos">2</span>
 <span class="hll"><span class="linenos">3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -326,8 +326,8 @@
 </section>
 <section id="create-characters">
 <h2>Create characters<a class="headerlink" href="#create-characters" title="Link to this heading">¶</a></h2>
-<p>Now that we have a <code class="docutils literal notranslate"><span class="pre">Character</span></code> class, we can go to <strong>main.py</strong> and create <code class="docutils literal notranslate"><span class="pre">Character</span></code> objects.</p>
-<p>Open <strong>main.py</strong> and add the highlighted code below.</p>
+<p>Now that we have a <code class="docutils literal notranslate"><span class="pre">Character</span></code> class, we can go to <em><strong>main.py</strong></em> and create <code class="docutils literal notranslate"><span class="pre">Character</span></code> objects.</p>
+<p>Open <em><strong>main.py</strong></em> and add the highlighted code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -386,8 +386,8 @@
 <p><img alt="lesson 3 class diagram" src="_images/lesson_3_class_diagram.png" /></p>
 <p>This is an arbitrary decision. We could easily had added the new attribute to the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That’s why the class diagram is so important.</p>
 <section id="add-character-attribute-to-room-class-in-room-py">
-<h3>Add character attribute to Room class in room.py<a class="headerlink" href="#add-character-attribute-to-room-class-in-room-py" title="Link to this heading">¶</a></h3>
-<p>Return to <strong>room.py</strong> and add the highlighted line below.</p>
+<h3>Add character attribute to Room class in <em><strong>room.py</strong></em><a class="headerlink" href="#add-character-attribute-to-room-class-in-room-py" title="Link to this heading">¶</a></h3>
+<p>Return to <em><strong>room.py</strong></em> and add the highlighted line below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -428,8 +428,8 @@
 </div>
 </section>
 <section id="add-characters-to-the-rooms-in-main-py">
-<h3>Add characters to the rooms in main.py<a class="headerlink" href="#add-characters-to-the-rooms-in-main-py" title="Link to this heading">¶</a></h3>
-<p>The return to <strong>main.py</strong> and add characters to our rooms using the highlighted code below.</p>
+<h3>Add characters to the rooms in <em><strong>main.py</strong></em><a class="headerlink" href="#add-characters-to-the-rooms-in-main-py" title="Link to this heading">¶</a></h3>
+<p>The return to <em><strong>main.py</strong></em> and add characters to our rooms using the highlighted code below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -509,7 +509,7 @@
 </ol>
 <section id="add-describe-method-to-character-class">
 <h3>Add describe method to Character class<a class="headerlink" href="#add-describe-method-to-character-class" title="Link to this heading">¶</a></h3>
-<p>Go to <strong>character.py</strong> and add the highlighted code below to create the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method</p>
+<p>Go to <em><strong>character.py</strong></em> and add the highlighted code below to create the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -552,7 +552,7 @@
 <h3>Modify the Room class describe method<a class="headerlink" href="#modify-the-room-class-describe-method" title="Link to this heading">¶</a></h3>
 <p>Before we change the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, we need to fix a small issue. We have three rooms but only two characters, which means one room (the cavern) has no character in it. We don’t want the game to talk about a character unless one is actually there.</p>
 <p>Because we set <code class="docutils literal notranslate"><span class="pre">character</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code> when a room is empty, the cavern still has <code class="docutils literal notranslate"><span class="pre">cavern.character</span> <span class="pre">=</span> <span class="pre">None</span></code>. So, when we describe a room, we should only show the character’s description if the <code class="docutils literal notranslate"><span class="pre">character</span></code> value is not <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
-<p>Return to <strong>room.py</strong> and modify the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method as highlighted below.</p>
+<p>Return to <em><strong>room.py</strong></em> and modify the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method as highlighted below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -617,7 +617,7 @@
 <p><img alt="lesson 3 class diagram" src="_images/lesson_3_class_diagram.png" /></p>
 <section id="add-new-methods-to-character-class">
 <h3>Add new methods to Character class<a class="headerlink" href="#add-new-methods-to-character-class" title="Link to this heading">¶</a></h3>
-<p>Return to the <strong>character.py</strong> file. First lets add the talk method by adding code highlighted below.</p>
+<p>Return to the <em><strong>character.py</strong></em> file. First lets add the talk method by adding code highlighted below.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># character.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Character</span><span class="p">():</span>
@@ -648,7 +648,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">send</span> <span class="pre">conversation</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">terminal</span></code> → a note explaining what the method does</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">self.conversation</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code> → checks if the character actually has something to say</p>
 <ul>
-<li><p>in <strong>main.py</strong>, Nigel has a conversation, but Ugine doesn’t</p></li>
+<li><p>in <em><strong>main.py</strong></em>, Nigel has a conversation, but Ugine doesn’t</p></li>
 <li><p>the method needs to handle both situations</p></li>
 </ul>
 </li>
@@ -699,7 +699,7 @@
 <section id="add-the-interactions-to-the-main-loop">
 <h2>Add the interactions to the main loop<a class="headerlink" href="#add-the-interactions-to-the-main-loop" title="Link to this heading">¶</a></h2>
 <p>Now that the player can interact with our characters, we need to add the three options (talk, hug, fight) to our event handler in the main loop.</p>
-<p>Return to <strong>main.py</strong>, and add the highlighted code:</p>
+<p>Return to <em><strong>main.py</strong></em>, and add the highlighted code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -868,8 +868,8 @@
 <li><a class="reference internal" href="#define-the-character-class">Define the Character class</a></li>
 <li><a class="reference internal" href="#create-characters">Create characters</a></li>
 <li><a class="reference internal" href="#add-characters-to-the-rooms">Add Characters to the Rooms</a><ul>
-<li><a class="reference internal" href="#add-character-attribute-to-room-class-in-room-py">Add character attribute to Room class in room.py</a></li>
-<li><a class="reference internal" href="#add-characters-to-the-rooms-in-main-py">Add characters to the rooms in main.py</a></li>
+<li><a class="reference internal" href="#add-character-attribute-to-room-class-in-room-py">Add character attribute to Room class in <em><strong>room.py</strong></em></a></li>
+<li><a class="reference internal" href="#add-characters-to-the-rooms-in-main-py">Add characters to the rooms in <em><strong>main.py</strong></em></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#include-characters-in-room-description">Include characters in room description</a><ul>

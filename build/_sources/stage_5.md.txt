@@ -34,7 +34,7 @@ The new class diagram shows our new Items class, as well as the new item attribu
 
 ## Define the Item class
 
-In Thonny create a new file and enter the code below. Then save it as **item.py** in the same folder as **main.py**, **character.py** and **room.py**.
+In Thonny create a new file and enter the code below. Then save it as ***item.py*** in the same folder as ***main.py***, ***character.py*** and ***room.py***.
 
 ```{code-block} python
 :linenos:
@@ -60,7 +60,7 @@ In investigating the code everything should be familiar:
 
 ## Create Item objects
 
-To create the Item objects, move to the **main.py** file and add the code below:
+To create the Item objects, move to the ***main.py*** file and add the code below:
 
 ```{code-block} python
 :linenos:
@@ -168,7 +168,7 @@ For each item, we did the following:
 
 ## Add the item object to the the rooms.
 
-To put items into rooms, we first need to update the `Room` class. Open **room.py** and add the code shown.
+To put items into rooms, we first need to update the `Room` class. Open ***room.py*** and add the code shown.
 
 ```{code-block} python
 :linenos:
@@ -207,7 +207,7 @@ class Room():
             return self
 ```
 
-Save the **room.py** file and then return to the **main.py** file, add the highlighted code:
+Save the ***room.py*** file and then return to the ***main.py*** file, add the highlighted code:
 
 ```{code-block} python
 :linenos:
@@ -325,7 +325,7 @@ Even though you've added all this new code, the program will still look the same
 * Make a `describe` method inside the Item class.
 * Make the Room’s `describe` method call the item’s `describe` method.
 
-First we need to go to the **item.py** file and add the code below:
+First we need to go to the ***item.py*** file and add the code below:
 
 ```{code-block} python
 :linenos:
@@ -350,7 +350,7 @@ In investing this code, you should already recognise all these elements:
 * describing the method in a comment
 * displaying attributes to the terminal
 
-Now head to **room.py** and add the following code:
+Now head to ***room.py*** and add the following code:
 
 ```{code-block} python
 :linenos:
@@ -414,3 +414,4 @@ You should:
 
 - make an additional item for each of your additional rooms
 - add your additional items to their room.
+

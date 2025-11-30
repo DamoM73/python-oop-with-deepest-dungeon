@@ -42,7 +42,7 @@ In this game, `num_of_enemy` keeps track of how many `Enemy` objects exist, and 
 
 To keep track of how many `Enemy` objects are in the game, we need to add a **class variable** to the `Enemy` class.
 
-Open **character.py** and add the highlighted code shown below.
+Open ***character.py*** and add the highlighted code shown below.
 
 ```{code-block} python
 :linenos:
@@ -122,7 +122,7 @@ Save the code, and **run** it to ensure there are no errors.
 
 Now that we are keeping track of the number of enemies, but we can't see what that number is. So let's create a method to find out how many enemies are in the dungeon
 
-Still working in **character.py**, add the highlighted code below:
+Still working in ***character.py***, add the highlighted code below:
 
 ```{code-block} python
 :linenos:
@@ -205,7 +205,7 @@ We can now count how many enemies there are and check that number, but we also n
 
 The `fight` method in the `Enemy` class already runs code when an enemy is defeated, so we just need to add one extra line there.
 
-Stay in **character.py** and add the highlighted line below.
+Stay in ***character.py*** and add the highlighted line below.
 
 ```{code-block} python
 :linenos:
@@ -285,7 +285,7 @@ Save the code before we **Investigate** it:
 
 The player wins the game when every enemy has been defeated. When that happens, `Enemy.num_of_enemy` will be `0`. So we need to choose the right spot in the code to check for this.
 
-In **main.py**, line `89` is already where the game checks if the player wins, so that’s the best place to add our `num_of_enemy` check.
+In ***main.py***, line `89` is already where the game checks if the player wins, so that’s the best place to add our `num_of_enemy` check.
 
 Add the highlighted code below:
 
@@ -428,3 +428,4 @@ while running:
 Now time to test our code. 
 
 **Predict** what you think will happen, then run your code. Make sure that you test that the player wins when they have defeated all the enemies.
+

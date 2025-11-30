@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
     
     
 
@@ -203,7 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction for Students</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -270,7 +270,7 @@
 <p>In this tutorial, you’ll reorganise your code by making a <strong>Player</strong> class. This will give you a player object that can hold all the player’s features, like health, items, gear, and weapons. The first thing you’ll add is the player’s inventory, which we call the backpack.</p>
 <section id="planning">
 <h2>Planning<a class="headerlink" href="#planning" title="Link to this heading">¶</a></h2>
-<p>Right now, all the backpack code is written inside <code class="docutils literal notranslate"><span class="pre">main.py</span></code>. Before we create our new Player class, we need to look at that code and figure out which parts should be moved into the class. So we’ll start by checking the <code class="docutils literal notranslate"><span class="pre">main.py</span></code> file from the end of the earlier tutorials.</p>
+<p>Right now, all the backpack code is written inside <em><strong>main.py</strong></em>. Before we create our new Player class, we need to look at that code and figure out which parts should be moved into the class. So we’ll start by checking the <em><strong>main.py</strong></em> file from the end of the earlier tutorials.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># main.py</span>
 <span class="linenos">  2</span>
 <span class="linenos">  3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -405,7 +405,7 @@
 <span class="linenos">132</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Darkest Dungeon&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>You will notice that there are four places that <code class="docutils literal notranslate"><span class="pre">main.py</span></code> interacts with the player’s backpack.</p>
+<p>You will notice that there are four places that <em><strong>main.py</strong></em> interacts with the player’s backpack.</p>
 <ol class="arabic simple">
 <li><p><strong>line 54</strong> → defines the backpack variable as an empty list</p></li>
 <li><p><strong>lines 82 - 85</strong> → checks if chosen weapon is in the backpack</p></li>
@@ -430,7 +430,7 @@
 <h3>Create Player class<a class="headerlink" href="#create-player-class" title="Link to this heading">¶</a></h3>
 <p>First, we need to make the Player class.</p>
 <ol class="arabic simple">
-<li><p>Create a new file called <strong>player.py</strong> in the same folder as your other files.</p></li>
+<li><p>Create a new file called <em><strong>player.py</strong></em> in the same folder as your other files.</p></li>
 <li><p>Add the <strong>Player</strong> class and its <code class="docutils literal notranslate"><span class="pre">__init__</span></code> method using the code shown below.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="c1"># player.py</span>
@@ -444,7 +444,7 @@
 </section>
 <section id="replace-references-to-backpack">
 <h3>Replace references to backpack<a class="headerlink" href="#replace-references-to-backpack" title="Link to this heading">¶</a></h3>
-<p>Now in <strong>main.py</strong>, we’re going to make a player object so we can use the Player class in our program.</p>
+<p>Now in <em><strong>main.py</strong></em>, we’re going to make a player object so we can use the Player class in our program.</p>
 <ol class="arabic simple">
 <li><p>Import the Player class using the code shown below.</p></li>
 </ol>
@@ -537,7 +537,7 @@
 <h3>add_item method<a class="headerlink" href="#add-item-method" title="Link to this heading">¶</a></h3>
 <p>To make our code cleaner, we should move all the backpack code into the <strong>Player</strong> class. We’ll start by adding the <strong>add_item</strong> method, which puts items into the backpack.</p>
 <ol class="arabic simple">
-<li><p>In <strong>player.py</strong>, create the <code class="docutils literal notranslate"><span class="pre">add_item</span></code> method using the code below.</p></li>
+<li><p>In <em><strong>player.py</strong></em>, create the <code class="docutils literal notranslate"><span class="pre">add_item</span></code> method using the code below.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># player.py</span>
 <span class="linenos"> 2</span>
@@ -551,9 +551,9 @@
 </span><span class="hll"><span class="linenos">10</span>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;You put </span><span class="si">{</span><span class="n">item</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> into your backpack&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
-<p>Now we need to take that code out of <strong>main.py</strong> and replace it with a call to the <code class="docutils literal notranslate"><span class="pre">add_item</span></code> method.</p>
+<p>Now we need to take that code out of <em><strong>main.py</strong></em> and replace it with a call to the <code class="docutils literal notranslate"><span class="pre">add_item</span></code> method.</p>
 <ol class="arabic simple" start="2">
-<li><p>Remove the highlighted code in <strong>main.py</strong> shown below:</p></li>
+<li><p>Remove the highlighted code in <em><strong>main.py</strong></em> shown below:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">102</span>    <span class="c1"># take</span>
 <span class="linenos">103</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;take&quot;</span><span class="p">:</span>
@@ -586,7 +586,7 @@
 <h3>display_contents method<a class="headerlink" href="#display-contents-method" title="Link to this heading">¶</a></h3>
 <p>Next, we’ll update the code that shows what’s inside the backpack.</p>
 <ol class="arabic simple">
-<li><p>Go back to the <strong>player.py</strong> file.</p></li>
+<li><p>Go back to the <em><strong>player.py</strong></em> file.</p></li>
 <li><p>Add the code below to the <strong>Player</strong> class.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># player.py</span>
@@ -610,7 +610,7 @@
 </span></pre></div>
 </div>
 <ol class="arabic simple" start="3">
-<li><p>Go back to <strong>main.py</strong></p></li>
+<li><p>Go back to <em><strong>main.py</strong></em></p></li>
 <li><p>Remove the highlighted code shown below:</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">109</span>    <span class="c1"># backpack</span>
@@ -639,7 +639,7 @@
 <section id="check-item-in-method">
 <h3>check_item_in method<a class="headerlink" href="#check-item-in-method" title="Link to this heading">¶</a></h3>
 <p>Finally, we need to change how the fight command uses the backpack, and this time it’s more than a simple swap. We’re going to update the fight code so the backpack gives us the whole item, not just <code class="docutils literal notranslate"><span class="pre">item.name</span></code>. This will make it easier later to add things like weapon damage and health points for players and characters.</p>
-<p>In <strong>player.py</strong> add the code below:</p>
+<p>In <em><strong>player.py</strong></em> add the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># player.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Player</span><span class="p">():</span>
@@ -680,7 +680,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">return</span> <span class="pre">None</span></code> sends back <code class="docutils literal notranslate"><span class="pre">None</span></code> if no item in the backpack has the same name as what you typed.</p></li>
 </ul>
 </div>
-<p>In <strong>main.py</strong>, change the fight command so it matches the code shown below. Pay attention to the highlighted lines.</p>
+<p>In <em><strong>main.py</strong></em>, change the fight command so it matches the code shown below. Pay attention to the highlighted lines.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">81</span>    <span class="c1"># fight</span>
 <span class="linenos">82</span>    <span class="k">elif</span> <span class="n">command</span><span class="o">==</span> <span class="s2">&quot;fight&quot;</span><span class="p">:</span>
 <span class="linenos">83</span>        <span class="k">if</span> <span class="n">current_room</span><span class="o">.</span><span class="n">character</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>

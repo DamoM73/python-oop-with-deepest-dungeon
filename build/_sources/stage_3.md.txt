@@ -39,7 +39,7 @@ We also need to add a `character` attribute to the `Room` class so we can record
 
 ## Define the Character class
 
-In Thonny create a new file and enter the code below. Then save it as **character.py** in the same folder as **main.py** and **room.py** (remember capitalisation).
+In Thonny create a new file and enter the code below. Then save it as ***character.py*** in the same folder as ***main.py*** and ***room.py*** (remember capitalisation).
 
 ```{code-block} python
 :linenos:
@@ -70,9 +70,9 @@ Let's investigate this code:
 
 ## Create characters
 
-Now that we have a `Character` class, we can go to **main.py** and create `Character` objects.
+Now that we have a `Character` class, we can go to ***main.py*** and create `Character` objects.
 
-Open **main.py** and add the highlighted code below.
+Open ***main.py*** and add the highlighted code below.
 
 ```{code-block} python
 :linenos:
@@ -136,9 +136,9 @@ Now we have two classes that work together: `Room` and `Character`. We need a wa
 
 This is an arbitrary decision. We could easily had added the new attribute to the `Character` class showing this is the room the character is in. Both are valid. The important thing is to be consistent, and to document your decision for others to understand. That's why the class diagram is so important.
 
-### Add character attribute to Room class in room.py
+### Add character attribute to Room class in ***room.py***
 
-Return to **room.py** and add the highlighted line below.
+Return to ***room.py*** and add the highlighted line below.
 
 ```{code-block} python
 :linenos:
@@ -181,9 +181,9 @@ Investigating that code:
 - `self.character = None` &rarr; creates a new attribute called `character` and assigns `None` to it.
 ```
 
-### Add characters to the rooms in main.py
+### Add characters to the rooms in ***main.py***
 
-The return to **main.py** and add characters to our rooms using the highlighted code below.
+The return to ***main.py*** and add characters to our rooms using the highlighted code below.
 
 ```{code-block} python
 :linenos:
@@ -265,7 +265,7 @@ To add the characters to the room description is a two step method:
 
 ### Add describe method to Character class
 
-Go to **character.py** and add the highlighted code below to create the `describe` method
+Go to ***character.py*** and add the highlighted code below to create the `describe` method
 
 ```{code-block} python
 :linenos:
@@ -313,7 +313,7 @@ Before we change the `describe` method, we need to fix a small issue. We have th
 
 Because we set `character` to `None` when a room is empty, the cavern still has `cavern.character = None`. So, when we describe a room, we should only show the character's description if the `character` value is not `None`.
 
-Return to **room.py** and modify the `describe` method as highlighted below.
+Return to ***room.py*** and modify the `describe` method as highlighted below.
 
 ```{code-block} python
 :linenos:
@@ -379,7 +379,7 @@ If we look once again at our class diagram, we will see that in the character cl
 
 ### Add new methods to Character class
 
-Return to the **character.py** file. First lets add the talk method by adding code highlighted below.
+Return to the ***character.py*** file. First lets add the talk method by adding code highlighted below.
 
 ```{code-block} python
 :linenos:
@@ -412,7 +412,7 @@ Let's investigate this code:
 * `def talk(self):` &rarr; this creates the talk method for this character
 * `# send conversation to the terminal` &rarr; a note explaining what the method does
 * `if self.conversation is not None:` &rarr; checks if the character actually has something to say
-  * in **main.py**, Nigel has a conversation, but Ugine doesn’t
+  * in ***main.py***, Nigel has a conversation, but Ugine doesn’t
   * the method needs to handle both situations
 * `print(f"{self.name}: {self.conversation}")` &rarr; if the character has a conversation, print their name and what they say
 * `else:` &rarr; runs when the character has no conversation set
@@ -464,7 +464,7 @@ By this stage the code for both methods should look familiar:
 
 Now that the player can interact with our characters, we need to add the three options (talk, hug, fight) to our event handler in the main loop.
 
-Return to **main.py**, and add the highlighted code:
+Return to ***main.py***, and add the highlighted code:
 
 ```{code-block} python
 :linenos:
@@ -562,3 +562,4 @@ In Stage 1 you created an additional room. So now it is time to populate that ro
 
 - Create an additional character for each extra room you've added
 - Add those characters to your additional rooms
+

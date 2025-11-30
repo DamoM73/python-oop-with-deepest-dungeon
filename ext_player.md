@@ -12,7 +12,7 @@ In this tutorial, you’ll reorganise your code by making a **Player** class. Th
 
 ## Planning
 
-Right now, all the backpack code is written inside `main.py`. Before we create our new Player class, we need to look at that code and figure out which parts should be moved into the class. So we’ll start by checking the `main.py` file from the end of the earlier tutorials.
+Right now, all the backpack code is written inside ***main.py***. Before we create our new Player class, we need to look at that code and figure out which parts should be moved into the class. So we’ll start by checking the ***main.py*** file from the end of the earlier tutorials.
 
 ```{code-block} python
 :linenos:
@@ -151,7 +151,7 @@ while running:
 print("Thank you for playing Darkest Dungeon")
 ```
 
-You will notice that there are four places that `main.py` interacts with the player's backpack.
+You will notice that there are four places that ***main.py*** interacts with the player's backpack.
 
 1. **line 54** &rarr; defines the backpack variable as an empty list
 2. **lines 82 - 85** &rarr; checks if chosen weapon is in the backpack
@@ -179,7 +179,7 @@ We’re going to update this code in small steps. This makes it easier to test a
 
 First, we need to make the Player class.
 
-1. Create a new file called **player.py** in the same folder as your other files.
+1. Create a new file called ***player.py*** in the same folder as your other files.
 2. Add the **Player** class and its `__init__` method using the code shown below.
 
 ```{code-block} python
@@ -195,7 +195,7 @@ class Player():
 
 ### Replace references to backpack
 
-Now in **main.py**, we’re going to make a player object so we can use the Player class in our program.
+Now in ***main.py***, we’re going to make a player object so we can use the Player class in our program.
 
 1. Import the Player class using the code shown below.
 
@@ -305,7 +305,7 @@ That’s the first section of our code changes done. Now test your program to ma
 
 To make our code cleaner, we should move all the backpack code into the **Player** class. We’ll start by adding the **add_item** method, which puts items into the backpack.
 
-1. In **player.py**, create the `add_item` method using the code below.
+1. In ***player.py***, create the `add_item` method using the code below.
 
 ```{code-block} python
 :linenos:
@@ -323,9 +323,9 @@ class Player():
         print(f"You put {item.name} into your backpack")
 ```
 
-Now we need to take that code out of **main.py** and replace it with a call to the `add_item` method.
+Now we need to take that code out of ***main.py*** and replace it with a call to the `add_item` method.
 
-2. Remove the highlighted code in **main.py** shown below:
+2. Remove the highlighted code in ***main.py*** shown below:
 
 ```{code-block} python
 :linenos:
@@ -364,7 +364,7 @@ Now test your program to make sure you can still add items to your backpack.
 
 Next, we’ll update the code that shows what’s inside the backpack.
 
-1. Go back to the **player.py** file.
+1. Go back to the ***player.py*** file.
 2. Add the code below to the **Player** class.
 
 ```{code-block} python
@@ -391,7 +391,7 @@ class Player():
                 print(f"- {item.name.capitalize()}")
 ```
 
-3. Go back to **main.py**
+3. Go back to ***main.py***
 4. Remove the highlighted code shown below:
 
 ```{code-block} python
@@ -427,7 +427,7 @@ Run your program and check that you can still see everything inside your backpac
 
 Finally, we need to change how the fight command uses the backpack, and this time it’s more than a simple swap. We’re going to update the fight code so the backpack gives us the whole item, not just `item.name`. This will make it easier later to add things like weapon damage and health points for players and characters.
 
-In **player.py** add the code below:
+In ***player.py*** add the code below:
 
 ```{code-block} python
 :linenos:
@@ -469,7 +469,7 @@ This code is different, so lets **investigate** it:
 * `return None` sends back `None` if no item in the backpack has the same name as what you typed.
 ```
 
-In **main.py**, change the fight command so it matches the code shown below. Pay attention to the highlighted lines.
+In ***main.py***, change the fight command so it matches the code shown below. Pay attention to the highlighted lines.
 
 ```{code-block} python
 :linenos:
@@ -509,3 +509,5 @@ Lets **investigate** those lines of code.
 #### check_item_in test
 
 Final test: run your program and check that all the different fight options still work properly.
+
+

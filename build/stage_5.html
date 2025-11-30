@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=3ebbdeb9" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
     
     
 
@@ -203,7 +203,7 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction for Teachers</a></li>
-<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="student_intro.html">Introduction for Students</a></li>
 <li class="toctree-l1"><a class="reference internal" href="oop_introduction.html">OOP Primer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_1.html">Stage 1 - Create Rooms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stage_2.html">Stage 2 - Movement</a></li>
@@ -289,7 +289,7 @@ Knowledge</p>
 </section>
 <section id="define-the-item-class">
 <h2>Define the Item class<a class="headerlink" href="#define-the-item-class" title="Link to this heading">¶</a></h2>
-<p>In Thonny create a new file and enter the code below. Then save it as <strong>item.py</strong> in the same folder as <strong>main.py</strong>, <strong>character.py</strong> and <strong>room.py</strong>.</p>
+<p>In Thonny create a new file and enter the code below. Then save it as <em><strong>item.py</strong></em> in the same folder as <em><strong>main.py</strong></em>, <em><strong>character.py</strong></em> and <em><strong>room.py</strong></em>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos">1</span><span class="c1"># item.py</span>
 </span><span class="linenos">2</span>
 <span class="hll"><span class="linenos">3</span><span class="k">class</span><span class="w"> </span><span class="nc">Item</span><span class="p">():</span>
@@ -313,7 +313,7 @@ Knowledge</p>
 </section>
 <section id="create-item-objects">
 <h2>Create Item objects<a class="headerlink" href="#create-item-objects" title="Link to this heading">¶</a></h2>
-<p>To create the Item objects, move to the <strong>main.py</strong> file and add the code below:</p>
+<p>To create the Item objects, move to the <em><strong>main.py</strong></em> file and add the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -417,7 +417,7 @@ Knowledge</p>
 </section>
 <section id="add-the-item-object-to-the-the-rooms">
 <h2>Add the item object to the the rooms.<a class="headerlink" href="#add-the-item-object-to-the-the-rooms" title="Link to this heading">¶</a></h2>
-<p>To put items into rooms, we first need to update the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class. Open <strong>room.py</strong> and add the code shown.</p>
+<p>To put items into rooms, we first need to update the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class. Open <em><strong>room.py</strong></em> and add the code shown.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
@@ -452,7 +452,7 @@ Knowledge</p>
 <span class="linenos">32</span>            <span class="k">return</span> <span class="bp">self</span>
 </pre></div>
 </div>
-<p>Save the <strong>room.py</strong> file and then return to the <strong>main.py</strong> file, add the highlighted code:</p>
+<p>Save the <em><strong>room.py</strong></em> file and then return to the <em><strong>main.py</strong></em> file, add the highlighted code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># main.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="kn">from</span><span class="w"> </span><span class="nn">room</span><span class="w"> </span><span class="kn">import</span> <span class="n">Room</span>
@@ -570,7 +570,7 @@ Knowledge</p>
 <li><p>Make a <code class="docutils literal notranslate"><span class="pre">describe</span></code> method inside the Item class.</p></li>
 <li><p>Make the Room’s <code class="docutils literal notranslate"><span class="pre">describe</span></code> method call the item’s <code class="docutils literal notranslate"><span class="pre">describe</span></code> method.</p></li>
 </ul>
-<p>First we need to go to the <strong>item.py</strong> file and add the code below:</p>
+<p>First we need to go to the <em><strong>item.py</strong></em> file and add the code below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># item.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Item</span><span class="p">():</span>
@@ -591,7 +591,7 @@ Knowledge</p>
 <li><p>describing the method in a comment</p></li>
 <li><p>displaying attributes to the terminal</p></li>
 </ul>
-<p>Now head to <strong>room.py</strong> and add the following code:</p>
+<p>Now head to <em><strong>room.py</strong></em> and add the following code:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c1"># room.py</span>
 <span class="linenos"> 2</span>
 <span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
