@@ -19,15 +19,18 @@ Now that the user has a dungeon that they can move around, we need to make it in
 
 To achieve this we will:
 
-1. Define a character class
-2. Create characters
-3. Add characters to the rooms
-4. Include characters in the room descriptions
-5. Create character interactions
+```{admonition} Pseudocode
+:class: pseudocode
+- Define a character class
+- Create characters
+- Add characters to the rooms
+- Include characters in the room descriptions
+- Create character interactions
    - talk method
    - hug method
    - fight method
-6. Add interactions to the main loop
+- Add interactions to the main loop
+```
 
 ### Class Diagram
 

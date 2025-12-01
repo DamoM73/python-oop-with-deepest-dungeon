@@ -19,10 +19,13 @@ Now we want the player to pick up items and actually use them.
 
 To do this we will:
 
+```{admonition} Pseudocode
+:class: pseudocode
 * make a backpack variable to hold the items you collect
 * add a take command so you can pick up items
 * add a backpack command so you can see what you’re carrying
 * make sure you can only fight using items that are actually in your backpack
+```
 
 ### Class Diagram
 

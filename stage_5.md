@@ -20,11 +20,13 @@ Next, we’re going to make the dungeon feel more alive by adding items. Most du
 
 In this stage you will:
 
+```{admonition} Pseudocode
+:class: pseudocode
 * Make an Item class
 * Create your own item objects
 * Put those items into different rooms
 * Update the room descriptions so the items show up when you enter a room
-
+```
 
 ### Class Diagram
 

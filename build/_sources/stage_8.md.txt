@@ -17,13 +17,15 @@ Our dungeon works, but before we finish we need to make it easier to use and cle
 
 We will:
 
+```{admonition} Pseudocode
+:class: pseudocode
 * add a **help** command
 * make the program easier to read and use
 * add a goodbye message at the end
 * write more comments in the code
 * delete code we don’t need
 * make our spacing neat and consistent
-
+```
 
 ## Help command
 

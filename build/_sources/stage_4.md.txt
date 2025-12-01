@@ -18,11 +18,14 @@ So far we have created a multiple-room dungeon that the user can move between. W
 
 During this stage we will refine our characters by:
 
-- defining two character types:
+```{admonition} Pseudocode
+:class: pseudocode
+- define two character types:
   - friend
   - enemy
 - change our current characters to one of these types of characters
 - adjust our interactions to allow for different types of characters
+```
 
 ### Class Diagram
 

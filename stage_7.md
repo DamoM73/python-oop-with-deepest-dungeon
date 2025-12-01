@@ -19,9 +19,12 @@ In this stage, you’re going to set up how the player wins the game.
 
 You will do this by:
 
+```{admonition} Pseudocode
+:class: pseudocode
 * counting how many enemies exist
 * lowering that count each time an enemy is defeated
 * checking when the count reaches zero so the player wins the game
+```
 
 ### Class Diagram
 
