@@ -46,6 +46,18 @@ These callouts explains a new concpet that had been referred to. They helps you 
 These callouts appear when you need to be very careful about something.
 ```
 
+```{code-block} python
+:linenos:
+:emphasize-lines: 5
+"""
+Blocks like these contain code.
+It is formatted to identify Python syntax.
+Each line of code is numbered.
+When the text refers to highlighted code, look for lines like this. 
+When copying the code, ensure the indentations are accurate.
+"""
+```
+
 ### Different text formatting
 
 Throughout this site, the formatting has the following meaning:

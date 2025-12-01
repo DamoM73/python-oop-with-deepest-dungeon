@@ -16,15 +16,16 @@ You can add extra features to the characters:
 
 - have more than one conversation script (try randomly choosing from a list of conversations)
 - make extra character types (there are more than just friend and enemies)
+- use a local LLM to provide the dialogue for your characters
 
-## The player
+## The Player
 
 Now that you have a player class you could easily add more attributes. For example:
 
 - give the player money so they can buy items
 - allow for equipping of weapons or armour
 
-## The fight
+## The Fight
 
 At the moment the fight is very swift. You could make it more interesting by:
 
