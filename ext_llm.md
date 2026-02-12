@@ -167,7 +167,7 @@ class Character():
     def chat(self, message):
         # use the character's model to have a conversation
         response = ollama.generate(
-            model='self.model',
+            model=self.model,
             prompt=message
         )
         print(response['response'])

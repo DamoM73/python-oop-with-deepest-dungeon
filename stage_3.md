@@ -190,7 +190,7 @@ The return to ***main.py*** and add characters to our rooms using the highlighte
 
 ```{code-block} python
 :linenos:
-:emphasize-lines: 32-33
+:emphasize-lines: 31-33
 # main.py
 
 from room import Room
@@ -370,7 +370,7 @@ Test to make sure that you get character descriptions, but only when you enter a
 
 ## Create character interactions
 
-We want to add three interactions with out characters:
+We want to add three interactions with our characters:
 
 - talk
 - hug
