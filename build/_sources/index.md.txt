@@ -20,6 +20,7 @@ stage_6
 stage_7
 stage_8
 ext_player
+ext_llm
 extention
 debugging
 licencing

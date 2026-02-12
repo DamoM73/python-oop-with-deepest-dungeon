@@ -13,9 +13,6 @@ In this lesson you will:
 :class: pseudocode
 ```
 
-```{admonition} Pseudocode
-:class: pseudocode
-```
 
 ```{admonition} Title
 :class: warning
