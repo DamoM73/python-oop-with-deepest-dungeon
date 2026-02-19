@@ -413,7 +413,7 @@
 <span class="hll"><span class="linenos">34</span>    <span class="k">def</span><span class="w"> </span><span class="nf">chat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
 </span><span class="hll"><span class="linenos">35</span>        <span class="c1"># use the character&#39;s model to have a conversation</span>
 </span><span class="hll"><span class="linenos">36</span>        <span class="n">response</span> <span class="o">=</span> <span class="n">ollama</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span>
-</span><span class="hll"><span class="linenos">37</span>            <span class="n">model</span><span class="o">=</span><span class="s1">&#39;self.model&#39;</span><span class="p">,</span>
+</span><span class="hll"><span class="linenos">37</span>            <span class="n">model</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">,</span>
 </span><span class="hll"><span class="linenos">38</span>            <span class="n">prompt</span><span class="o">=</span><span class="n">message</span>
 </span><span class="hll"><span class="linenos">39</span>        <span class="p">)</span>
 </span><span class="hll"><span class="linenos">40</span>        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;response&#39;</span><span class="p">])</span>
