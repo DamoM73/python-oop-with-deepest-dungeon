@@ -165,7 +165,7 @@ while running:
     elif command == "quit":
         running = False
     else:
-        print("Enter 'help' to list the copmmands.")
+        print("Enter 'help' to list the commands.")
 ```
 
 You’ve seen this kind of code many times now, so you should already understand how it works without investigating it.
@@ -318,7 +318,7 @@ while running:
     elif command == "quit":
         running = False
     else:
-        print("Enter 'help' to list the copmmands.")
+        print("Enter 'help' to list the commands.")
     input("\nPress <Enter> key to continue")
 ```
 
@@ -469,7 +469,7 @@ while running:
     elif command == "quit":
         running = False
     else:
-        print("Enter 'help' to list the copmmands.")
+        print("Enter 'help' to list the commands.")
     input("\nPress <Enter> key to continue")
 print("Thank you for playing Deepest Dungeon")
 ```
@@ -625,7 +625,7 @@ while running:
         running = False
     # incorrect command
     else:
-        print("Enter 'help' to list the copmmands.")
+        print("Enter 'help' to list the commands.")
     input("\nPress <Enter> key to continue")
 print("Thank you for playing Deepest Dungeon")
 ```
@@ -774,7 +774,7 @@ while running:
         running = False
     # incorrect command
     else:
-        print("Enter 'help' to list the copmmands.")
+        print("Enter 'help' to list the commands.")
     input("\nPress <Enter> key to continue")
 print("Thank you for playing Deepest Dungeon")
 ```
