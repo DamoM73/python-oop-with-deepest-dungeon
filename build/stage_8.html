@@ -22,20 +22,24 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
-  --font-stack: gill sans, sans-serif;
-  --font-stack--monospace: monaco, monospace;
+  --font-stack: Verdana, sans-serif;
+  --font-stack--monospace: 'Courier New', monospace;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --font-stack: Verdana, sans-serif;
+  --font-stack--monospace: 'Courier New', monospace;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
+  --font-stack: Verdana, sans-serif;
+  --font-stack--monospace: 'Courier New', monospace;
   
       }
     }
@@ -214,6 +218,7 @@
 <li class="toctree-l1"><a class="reference internal" href="stage_7.html">Stage 7 - Victory Conditions</a></li>
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Stage 8 - Useability</a></li>
 <li class="toctree-l1"><a class="reference internal" href="ext_player.html">Extension - Player Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ext_llm.html">Extension - Character LLM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="extention.html">Extensions Ideas</a></li>
 <li class="toctree-l1"><a class="reference internal" href="debugging.html">Debugging with Thonny</a></li>
 <li class="toctree-l1"><a class="reference internal" href="licencing.html">Licensing</a></li>
@@ -417,7 +422,7 @@
 </span><span class="linenos">125</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
 <span class="linenos">126</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="linenos">127</span>    <span class="k">else</span><span class="p">:</span>
-<span class="hll"><span class="linenos">128</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+<span class="hll"><span class="linenos">128</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the commands.&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
 <p>You’ve seen this kind of code many times now, so you should already understand how it works without investigating it.</p>
@@ -560,7 +565,7 @@
 <span class="linenos">125</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
 <span class="linenos">126</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="linenos">127</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">128</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+<span class="linenos">128</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the commands.&quot;</span><span class="p">)</span>
 <span class="hll"><span class="linenos">129</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Press &lt;Enter&gt; key to continue&quot;</span><span class="p">)</span>
 </span></pre></div>
 </div>
@@ -710,7 +715,7 @@
 <span class="linenos">125</span>    <span class="k">elif</span> <span class="n">command</span> <span class="o">==</span> <span class="s2">&quot;quit&quot;</span><span class="p">:</span>
 <span class="linenos">126</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="linenos">127</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">128</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+<span class="linenos">128</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the commands.&quot;</span><span class="p">)</span>
 <span class="linenos">129</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Press &lt;Enter&gt; key to continue&quot;</span><span class="p">)</span>
 <span class="hll"><span class="linenos">130</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Deepest Dungeon&quot;</span><span class="p">)</span>
 </span></pre></div>
@@ -860,7 +865,7 @@
 <span class="linenos">134</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="hll"><span class="linenos">135</span>    <span class="c1"># incorrect command</span>
 </span><span class="linenos">136</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">137</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+<span class="linenos">137</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the commands.&quot;</span><span class="p">)</span>
 <span class="linenos">138</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Press &lt;Enter&gt; key to continue&quot;</span><span class="p">)</span>
 <span class="linenos">139</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Deepest Dungeon&quot;</span><span class="p">)</span>
 </pre></div>
@@ -1005,7 +1010,7 @@
 <span class="linenos">133</span>        <span class="n">running</span> <span class="o">=</span> <span class="kc">False</span>
 <span class="linenos">134</span>    <span class="c1"># incorrect command</span>
 <span class="linenos">135</span>    <span class="k">else</span><span class="p">:</span>
-<span class="linenos">136</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the copmmands.&quot;</span><span class="p">)</span>
+<span class="linenos">136</span>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Enter &#39;help&#39; to list the commands.&quot;</span><span class="p">)</span>
 <span class="linenos">137</span>    <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Press &lt;Enter&gt; key to continue&quot;</span><span class="p">)</span>
 <span class="linenos">138</span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Thank you for playing Deepest Dungeon&quot;</span><span class="p">)</span>
 </pre></div>
