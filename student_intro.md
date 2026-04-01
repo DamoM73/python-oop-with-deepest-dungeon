@@ -8,7 +8,7 @@ Each part of the game teaches you a new idea, shows you how it works in code, an
 
 ### Thonny
 
-We will be using Python as our coding langauge. To write that code we will be using a program called Thonny. You can download and install it from the [Thonny website](https://thonny.org/).
+We will be using Python as our coding language. To write that code we will be using a program called Thonny. You can download and install it from the [Thonny website](https://thonny.org/).
 
 ### Create a project folder
 
@@ -32,13 +32,13 @@ These callouts appears at the top of each page and explains what you will learn 
 These callouts provide the planning pseudocode for the tutorial
 ```
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
 These callouts appear after a code block. In these callout each new line is explained in detail.
 ```
 
-```{admonition} Concept Explainations
+```{admonition} Concept Explanations
 :class: note
-These callouts explains a new concpet that had been referred to. They helps you understand some of the techinical words we will use.
+These callouts explain a new concept that had been referred to. They help you understand some of the technical words we will use.
 ```
 
 ```{admonition} Warnings

@@ -65,7 +65,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
         
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -145,7 +145,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
         
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -228,7 +228,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
         
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:

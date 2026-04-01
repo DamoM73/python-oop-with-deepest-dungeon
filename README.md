@@ -4,10 +4,10 @@ This repository provides a tutorial to introduce students to Object-Oriented Pro
 
 ## Features
 
-- **Interactive lessons** on Python OOP principles.
-- **Text-based game** development to reinforce concepts.
-- **Sphinx and MyST** documentation format.
-- Includes a portable website build under the `_build` folder.
+* **Interactive lessons** on Python OOP principles.
+* **Text-based game** development to reinforce concepts.
+* **Sphinx and MyST** documentation format.
+* Includes a portable website build under the `_build` folder.
 
 ## Website
 

@@ -127,7 +127,7 @@ while running:
                 available_weapons.append(item.name)
             if weapon in available_weapons:
                 if current_room.character.fight(weapon):
-                    cif isinstance(current_room.character, Enemy):
+                    if isinstance(current_room.character, Enemy):
                         current_room.character = None
                         if Enemy.get_num_of_enemy() == 0:
                             print("You have slain all the enemies. You are victorious!")
@@ -982,7 +982,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
         
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:

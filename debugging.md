@@ -53,10 +53,10 @@ Your Thonny should now look like the image below:
 
 ![image](./assets/debugging_3.png)
 
-- **Code Panel:** Thonny has paused the execution of the code. The yellow highlight shows the code that Python will execute next.
-- **Variables Panel:** Since the program hasn't assigned any values, it shows no variables.
-- **Shell Panel:** %Debug launches is the command that launches the program (***debug_a.py***).
-- **Stack Panel:** Shows the current function and module that is running.
+* **Code Panel:** Thonny has paused the execution of the code. The yellow highlight shows the code that Python will execute next.
+* **Variables Panel:** Since the program hasn't assigned any values, it shows no variables.
+* **Shell Panel:** %Debug launches is the command that launches the program (***debug_a.py***).
+* **Stack Panel:** Shows the current function and module that is running.
 
 Something else has happened, other debugging buttons are now available.
 
@@ -259,13 +259,13 @@ The first step is to identify the section of code that is likely to contain the 
 
 Notice that there are two distinct sections of the program:
 
-- a function definition &rarr; `lines 1` to `5`
+* a function definition &rarr; `lines 1` to `5`
 
-- main code block
+* main code block
 
-  - `line 7` &rarr; defines a variable `phrase` with the value `"hello"`
+  * `line 7` &rarr; defines a variable `phrase` with the value `"hello"`
 
-  - `line 8` &rarr; then prints the result of calling `add_underscores(phrase)`
+  * `line 8` &rarr; then prints the result of calling `add_underscores(phrase)`
 
 Look at the main section:
 
@@ -299,20 +299,20 @@ Click the **Debug** button to launch Thonny's debugger. Thonny will run the code
 
 ![image](./assets/debugging_26.png)
 
-- **additional** **debugging window:**
-  - notice that Thonny has launched a new debugging window for `add_underscores('hello')` function.
-  - Whenever a Python enters a new scope Thonny will launch a debugging window for that scope.
-  - The values stored in the **local variables** are at the bottom of the new window.
-  - **Local variables** are variables that only the current function can see.
+* **additional** **debugging window:**
+  * notice that Thonny has launched a new debugging window for `add_underscores('hello')` function.
+  * Whenever a Python enters a new scope Thonny will launch a debugging window for that scope.
+  * The values stored in the **local variables** are at the bottom of the new window.
+  * **Local variables** are variables that only the current function can see.
 
-- **multiple** **stack values:**
-  - in the stack panel you will now see two values.
-    - first value <module> refers to the main section
-    - second value refers to the add_underscores function section
+* **multiple** **stack values:**
+  * in the stack panel you will now see two values.
+    * first value <module> refers to the main section
+    * second value refers to the add_underscores function section
 
-  - This shows us that the program is at:
-    - `line 8` in the main program
-    - `line 3` of the add_underscores function section.
+  * This shows us that the program is at:
+    * `line 8` in the main program
+    * `line 3` of the add_underscores function section.
 
 ```{admonition} Stack timeline
 
@@ -329,8 +329,8 @@ Let's look further.
 
 Click:
 
-- **Step into** once
-- **Step over** twice
+* **Step into** once
+* **Step over** twice
 
 You should end up with `new_word = word[index] + "_"` highlighted and ready to process (like below).
 
@@ -355,8 +355,8 @@ First click **Stop** and then **Debug** again.
 
 Click:
 
-- **Step into** once
-- **Step over** twice
+* **Step into** once
+* **Step over** twice
 
 You should now have the problem code highlighted (like below).
 
@@ -382,9 +382,9 @@ Keep click **Step into** and follow what is happening in the Local variables. St
 
 Looking closely at the debugging code. You will notice:
 
-- Python is about to assign the value of `'h_'` to  `new_word`
-- This is not right!
-- We want it to assign `'_h_'` to `new_word`  
+* Python is about to assign the value of `'h_'` to  `new_word`
+* This is not right!
+* We want it to assign `'_h_'` to `new_word`  
 
 Now we know **exactly** where the problem is, we need to work out why this is a problem.
 

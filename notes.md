@@ -5,8 +5,8 @@
 1. create venv
 2. pip install requirements
 3. make site: 
-   - sphinx-quickstart
-   - fill out answers with defaults
+   * sphinx-quickstart
+   * fill out answers with defaults
 
 ## Command line
 
@@ -23,5 +23,5 @@ Download ***{download}`lesson_6_ex_3.py<./python_files/lesson_6_ex_3.py>`*** fil
 ```{literalinclude} ./python_files/lesson_6_ex_3.py
 :linenos:
 :emphasize-lines: 24-36
-```.ve
+```
 

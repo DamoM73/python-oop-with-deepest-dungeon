@@ -2,7 +2,7 @@
 
 ```{topic} Learning Intentions
 In this lesson you will:
-- Understand how to integrate a local Large Language Model (LLM) into your game.
+* Understand how to integrate a local Large Language Model (LLM) into your game.
 ```
 
 In the previous sections, we have been using a simple function to generate dialogue for our characters. However, we can make our game more dynamic and engaging by using a local Large Language Model (LLM) to provide the dialogue for our characters.
@@ -32,7 +32,7 @@ Rather than the same llm for all our chartacters, we will create custom models f
 
 ### Modelfile
 
-We will start with and exmaple model for Nigel.
+We will start with an example model for Nigel.
 
 To do this we need to create a new file in your ***deepest_dungeon*** directory, then add this code to it:
 
@@ -47,11 +47,11 @@ PARAMETER num_ctx 4096
 ```
 
 ```{admonition} Code Explaination
-- **FROM** &rarr; this is the base model for our custom model. If you chose a different model, you will need to change this to match the model you chose.
-- **SYSTEM** &rarr; this is the system prompt that will be used to generate responses for this character. You can change this to create different personalities for your characters.
-- **PARAMETER** &rarr; these are parameters that control how the model generates responses. 
-    - **temperature** controls how creative the responses are, with higher values resulting in more creative responses. It can range between 0.0 and 2.0
-    - **num_ctx** parameter controls how much of the conversation history the model can see when generating a response.
+* **FROM** &rarr; this is the base model for our custom model. If you chose a different model, you will need to change this to match the model you chose.
+* **SYSTEM** &rarr; this is the system prompt that will be used to generate responses for this character. You can change this to create different personalities for your characters.
+* **PARAMETER** &rarr; these are parameters that control how the model generates responses. 
+    * **temperature** controls how creative the responses are, with higher values resulting in more creative responses. It can range between 0.0 and 2.0
+    * **num_ctx** parameter controls how much of the conversation history the model can see when generating a response.
 ```
 
 Save the file as ***nigel.txt*** in the Deepest Dungeon directory.
@@ -80,16 +80,16 @@ ollama create nigel -f nigel.txt
 ```
 
 ```{admonition} Code Explaination
-- **ollama** &rarr; calls the ollama server rnning on your laptop
-- **create** &rarr; this is the command to create a new model
-- **nigel** &rarr; this is the name of the new model. You can change this to match the name of your character.
-- **-f** &rarr; this flag tells ollama to use a file to create the model
-- **nigel.txt** &rarr; this is the file that contains the instructions for creating the model. This file needs to be in the current directory.
+* **ollama** &rarr; calls the ollama server rnning on your laptop
+* **create** &rarr; this is the command to create a new model
+* **nigel** &rarr; this is the name of the new model. You can change this to match the name of your character.
+* **-f** &rarr; this flag tells ollama to use a file to create the model
+* **nigel.txt** &rarr; this is the file that contains the instructions for creating the model. This file needs to be in the current directory.
 ```
 
 You can now go back to the Ollama UI and you should see your new model in the drop down menu. Select the model and chat with it to get a feel for how it responds.
 
-### Audjusting the model
+### Adjusting the model
 
 If you want to change the model, you can edit the ***nigel.txt*** file and then run the `ollama create` command again to update the model. You can experiment with different system prompts and parameters to create different personalities for your characters.
 
@@ -149,7 +149,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
         
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:

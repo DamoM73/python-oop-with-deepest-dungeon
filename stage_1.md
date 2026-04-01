@@ -29,18 +29,18 @@ In this lesson we want to create three rooms and link those rooms together. Belo
  
 To achieve this we will need to create two files:
 
-- ***main.py*** &rarr; runs the program
-- ***room.py*** &rarr; stores information about the `Room` class
+* ***main.py*** &rarr; runs the program
+* ***room.py*** &rarr; stores information about the `Room` class
 
 In those two files we will need to do the following:
 
 ```{admonition} Stage 1 Pseudocode
 :class: pseudocode
-- Define the `Room` class
-- Create `Room` object
-- Describe `Room` objects
-- Link the `Room` objects
-- Include the linked `Rooms` when each `Room` object is described
+* Define the `Room` class
+* Create `Room` object
+* Describe `Room` objects
+* Link the `Room` objects
+* Include the linked `Rooms` when each `Room` object is described
 ```
 
 ### Class diagram
@@ -51,9 +51,9 @@ In UML, classes are represented by the three row table.
 
 ![class diagram](./assets/class_diagrams.png)
 
-- The class name goes in row 1
-- All the class attributes go in row 2, along with their datatype
-- The class methods are shown in row 3, along with the arguments and datatype of any returned value
+* The class name goes in row 1
+* All the class attributes go in row 2, along with their datatype
+* The class methods are shown in row 3, along with the arguments and datatype of any returned value
 
 The case diagram for the `Room` class is as follows:
 
@@ -61,16 +61,16 @@ The case diagram for the `Room` class is as follows:
 
 From the diagram we can tell:
 
-- The class name is `Room`
-- The attributes are:
-  - `name` which is a **string** datatype
-  - `description` which is a **string** datatype
-  - `linked_rooms` which is a **dictionary**
-- The methods are:
-  - `describe` which takes no arguments and returns no values
-  - `link_room` which returns nothing and takes two arguments:
-    - `room`
-    - `direction`
+* The class name is `Room`
+* The attributes are:
+  * `name` which is a **string** datatype
+  * `description` which is a **string** datatype
+  * `linked_rooms` which is a **dictionary**
+* The methods are:
+  * `describe` which takes no arguments and returns no values
+  * `link_room` which returns nothing and takes two arguments:
+    * `room`
+    * `direction`
 
 ## Define the Room class
 
@@ -87,8 +87,8 @@ class Room():
 ```
 
 ```{admonition} Code Explaination
-- `# room.py` - is a simple comment containing the file name. Since this program involves multiple files, this is a simple way to keep track of which file you are currently working on.
-- `class Room():` - defined the `Room` class object
+* `# room.py` - is a simple comment containing the file name. Since this program involves multiple files, this is a simple way to keep track of which file you are currently working on.
+* `class Room():` - defined the `Room` class object
 ```
 
 ```{admonition} Naming conventions
@@ -355,10 +355,10 @@ Now the code in ***main.py***
 
 If you look at our map you will notice that the rooms are linked, so that our adventure can move between them.
 
-- Cavern &darr; Armoury
-- Armoury &uarr; Cavern
-- Armoury &rarr; Lab
-- Lab &larr; Armoury
+* Cavern &darr; Armoury
+* Armoury &uarr; Cavern
+* Armoury &rarr; Lab
+* Lab &larr; Armoury
 
 ![map](./assets/dungeon_map.png)
 
@@ -473,11 +473,11 @@ First the code in ***room.py***:
 Then in ***main.py***:
 
 ```{admonition} Code Explaination
-- `# link rooms` &rarr; code structuring comment
-- `cavern.link_rooms(armoury,"south")` &rarr; links the `cavern` and the `armoury` to the `"south"` of it.
-- `armoury.link_rooms(cavern,"north")` &rarr; links the `armoury` and the `cavern` to the `"north"` of it.
-- `armoury.link_rooms(lab,"east")` &rarr; links the `armoury` and the `lab` to the `"east"` of it.
-- `lab.link_rooms(armoury,"west")` &rarr; links the `lab` and the `armoury` to the `"west"` of it.
+* `# link rooms` &rarr; code structuring comment
+* `cavern.link_rooms(armoury,"south")` &rarr; links the `cavern` and the `armoury` to the `"south"` of it.
+* `armoury.link_rooms(cavern,"north")` &rarr; links the `armoury` and the `cavern` to the `"north"` of it.
+* `armoury.link_rooms(lab,"east")` &rarr; links the `armoury` and the `lab` to the `"east"` of it.
+* `lab.link_rooms(armoury,"west")` &rarr; links the `lab` and the `armoury` to the `"west"` of it.
 ```
 
 Notice that each connection needs two calls to the `link_rooms` method.
@@ -534,6 +534,6 @@ During this lesson we have only been focusing on the first four stages of the PR
 
 Taking the knowledge your have gained through this lesson, you need to:
 
-- create one, or more additional rooms
-- link those additional rooms to one or more of your other rooms.
+* create one, or more additional rooms
+* link those additional rooms to one or more of your other rooms.
 

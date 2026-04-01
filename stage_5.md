@@ -397,8 +397,8 @@ class Room():
 
 **Investigate** the code and you will notice that it is very similar to the character description:
 
-- check if there is an item in the room
-- when an item is present, call it's describe method.
+* check if there is an item in the room
+* when an item is present, call it's describe method.
 
 Go a step further and test the code by going to each room and checking that the correct item is displayed.
 
@@ -414,6 +414,6 @@ Now it is time for your to implement the **Make** phase.
 
 You should:
 
-- make an additional item for each of your additional rooms
-- add your additional items to their room.
+* make an additional item for each of your additional rooms
+* add your additional items to their room.
 

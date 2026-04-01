@@ -410,9 +410,9 @@ Save the ***main.py*** file, **predict** and then **run** your code. This time w
 
 We need to make sure that:
 
-- we can pick up all the items in all the rooms
-- the items are added to the backpack when they are picked up
-- the items are removed from the room when they are picked up
+* we can pick up all the items in all the rooms
+* the items are added to the backpack when they are picked up
+* the items are removed from the room when they are picked up
 
 Here is an example for the Cavern testing table. Make sure you also make one for each room.
 

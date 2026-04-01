@@ -20,11 +20,11 @@ During this stage we will refine our characters by:
 
 ```{admonition} Pseudocode
 :class: pseudocode
-- define two character types:
-  - friend
-  - enemy
-- change our current characters to one of these types of characters
-- adjust our interactions to allow for different types of characters
+* define two character types:
+  * friend
+  * enemy
+* change our current characters to one of these types of characters
+* adjust our interactions to allow for different types of characters
 ```
 
 ### Class Diagram
@@ -48,14 +48,14 @@ This helps you avoid rewriting the same code and makes it easier to organise dif
 
 The `Enemy` class:
 
-- inherits from the `Character class` the `name`, `description`, and `conversation` attributes as well as the `describe`, `talk`, and `hug` methods.
-- adds the `weakness` attribute
-- overwrites the `Character` `fight` method with its own `fight` method
+* inherits from the `Character class` the `name`, `description`, and `conversation` attributes as well as the `describe`, `talk`, and `hug` methods.
+* adds the `weakness` attribute
+* overwrites the `Character` `fight` method with its own `fight` method
 
 #### Friend class
 
-- inherits from the `Character class` the `name`, `description`, and `conversation` attributes as well as the `describe`, `talk`, and `fight` methods.
-- overwrites the `Character` `hug` method with its own `hug` method
+* inherits from the `Character class` the `name`, `description`, and `conversation` attributes as well as the `describe`, `talk`, and `fight` methods.
+* overwrites the `Character` `hug` method with its own `hug` method
 
 #### Why use inheritance?
 
@@ -103,7 +103,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
 
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -156,7 +156,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
 
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -340,7 +340,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
 
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -404,7 +404,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
 
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -591,10 +591,10 @@ TypeError: Character.fight() takes 1 positional argument but 2 were given
 
 Why did we get the error? Let's read the error message:
 
-- **line 2** &rarr; the error is at line 66 of ***main.py***
-- **line 3** &rarr; the error is contained in `if current_room.character.fight(weapon):`
-- **line 4** &rarr; the error is specifically in the call to `fight`
-- **line 5** &rarr; `fight` was only expecting one argument (`self`), but we gave two (`self`,`weapon`)
+* **line 2** &rarr; the error is at line 66 of ***main.py***
+* **line 3** &rarr; the error is contained in `if current_room.character.fight(weapon):`
+* **line 4** &rarr; the error is specifically in the call to `fight`
+* **line 5** &rarr; `fight` was only expecting one argument (`self`), but we gave two (`self`,`weapon`)
 
 So let's think about this:
 1. We have two `fight` methods, which one was causing the problem? 
@@ -619,7 +619,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
 
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -688,7 +688,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
 
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -855,7 +855,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
 
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:

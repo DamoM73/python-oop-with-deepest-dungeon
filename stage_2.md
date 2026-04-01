@@ -35,12 +35,12 @@ To achieve this we will need to complete the following steps:
 
 ```{admonition} Pseudocode
 :class: pseudocode
-- Create the `move` method
-- Initialize the starting room
-- Create the main loop which:
-   - describes current room
-   - accepts user input
-   - responds to user input
+* Create the `move` method
+* Initialize the starting room
+* Create the main loop which:
+   * describes current room
+   * accepts user input
+   * responds to user input
 ```
 
 ### Class Diagram
@@ -51,8 +51,8 @@ We have updated the `Room` class diagram to reflect the Stage 2 work.
 
 Notice we have a new method `move(direction):room`
 
-- accepts one argument (direction)
-- returns a `Room` object
+* accepts one argument (direction)
+* returns a `Room` object
 
 ## Create the move method
 
@@ -301,10 +301,10 @@ Let's **investigate** that code.
 Whenever you test branching code, it is important to ensure you methodically test **all** possible branches.
 
 To do this:
-- create a table which lists every possible branch
-- for each branch, list the expected results
-- record the actual results
-- idenfiy any discrepancies
+* create a table which lists every possible branch
+* for each branch, list the expected results
+* record the actual results
+* idenfiy any discrepancies
 ```
 
 Now that we can move between all our rooms, we can test that our code is working correctly. Draw up a  table to test each option. Below is an example of my table.
@@ -383,9 +383,9 @@ Make sure you test the **quit** option
 Let's **investigate** that code
 
 ```{admonition} Code Explaination
-- `elif command == "quit":` &rarr; if the command is not an acceptable direction, then check if it is `quit`
-- `running = False` change our **flag variable** to `False`
-  - this means that when the loops returns to the top, `where running` will be `False` and the loop will exit.
+* `elif command == "quit":` &rarr; if the command is not an acceptable direction, then check if it is `quit`
+* `running = False` change our **flag variable** to `False`
+  * this means that when the loops returns to the top, `where running` will be `False` and the loop will exit.
 ```
 
 ### Capture incorrect commands
@@ -452,8 +452,8 @@ Let's **investigate** the new code:
 
 ```{admonition} Information
 :class: info
-- `else:` &rarr; a catch-all option for any input which is not a recognised command.
-- `print("I don't understand.")` &rarr; lets the user know their command doesn't make sense.
+* `else:` &rarr; a catch-all option for any input which is not a recognised command.
+* `print("I don't understand.")` &rarr; lets the user know their command doesn't make sense.
 ```
 
 ### Testing

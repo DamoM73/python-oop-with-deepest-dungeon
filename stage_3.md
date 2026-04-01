@@ -1,6 +1,6 @@
 # Stage 3 - Character Creation
 
-```{topic} Learninng Intentions
+```{topic} Learning Intentions
 By the end of this lesson you will:
 * understand how classes, attributes, and methods work together
 * recognise how different objects can interact inside a larger system
@@ -21,15 +21,15 @@ To achieve this we will:
 
 ```{admonition} Pseudocode
 :class: pseudocode
-- Define a character class
-- Create characters
-- Add characters to the rooms
-- Include characters in the room descriptions
-- Create character interactions
-   - talk method
-   - hug method
-   - fight method
-- Add interactions to the main loop
+* Define a character class
+* Create characters
+* Add characters to the rooms
+* Include characters in the room descriptions
+* Create character interactions
+   * talk method
+   * hug method
+   * fight method
+* Add interactions to the main loop
 ```
 
 ### Class Diagram
@@ -181,7 +181,7 @@ Investigating that code:
 
 ```{admonition} Code Explaination
 :class: info
-- `self.character = None` &rarr; creates a new attribute called `character` and assigns `None` to it.
+* `self.character = None` &rarr; creates a new attribute called `character` and assigns `None` to it.
 ```
 
 ### Add characters to the rooms in ***main.py***
@@ -372,9 +372,9 @@ Test to make sure that you get character descriptions, but only when you enter a
 
 We want to add three interactions with our characters:
 
-- talk
-- hug
-- fight
+* talk
+* hug
+* fight
 
 If we look once again at our class diagram, we will see that in the character class, there is a method for each of these interactions.
 
@@ -402,7 +402,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
 
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -442,7 +442,7 @@ class Character():
         print(f"{self.name} is here, {self.description}")
 
     def talk(self):
-        # send converstation to the terminal
+        # send conversation to the terminal
         if self.conversation is not None:
             print(f"{self.name}: {self.conversation}")
         else:
@@ -459,9 +459,9 @@ class Character():
 
 By this stage the code for both methods should look familiar:
 
-- define the method with `self` as the first argument
-- provide a comment describing what the method does
-- display a message that uses one of the character's attributes
+* define the method with `self` as the first argument
+* provide a comment describing what the method does
+* display a message that uses one of the character's attributes
 
 ## Add the interactions to the main loop
 
@@ -549,12 +549,12 @@ while running:
 Since the event handler for all three interactions is virtually the same, we'll just investigate the code for the `talk` method:
 
 ```{admonition} Code Explaination
-- `elif command == "talk":` &rarr; checks if the user's command was `talk`
-- `if current_room.character is not None:` &rarr; checks if there is a character in the room
-  - remember that rooms can not have a character (eg. Cavern) so we need to allow for this.
-- `current_room.character.talk()` &rarr; if there is a character, the call its `talk()` method
-- `else:` &rarr; deals with rooms with no character
-- `print("There is no one here to talk to")` &rarr; message for when there is no character
+* `elif command == "talk":` &rarr; checks if the user's command was `talk`
+* `if current_room.character is not None:` &rarr; checks if there is a character in the room
+  * remember that rooms can not have a character (eg. Cavern) so we need to allow for this.
+* `current_room.character.talk()` &rarr; if there is a character, the call its `talk()` method
+* `else:` &rarr; deals with rooms with no character
+* `print("There is no one here to talk to")` &rarr; message for when there is no character
 ```
 
 ## Stage 3 task
@@ -563,6 +563,6 @@ Once again we have only been focusing on the first four stages of the PRIMM mode
 
 In Stage 1 you created an additional room. So now it is time to populate that room.
 
-- Create an additional character for each extra room you've added
-- Add those characters to your additional rooms
+* Create an additional character for each extra room you've added
+* Add those characters to your additional rooms
 
