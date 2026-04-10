@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=eff86c2a" />
     
     
 
@@ -277,13 +277,13 @@
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">¶</a></h2>
 <p>In Stage 1 you made three rooms, connected them, and got the program to describe each one. That was a good start, but it’s not much of a game yet. In Stage 2 you’ll write code that lets the player move between rooms, which means changing the game’s <strong>state</strong> (for example, which room you are in), and you’ll build the <strong>main loop</strong>.</p>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">State machines</p>
 <p>A state machine is a way of thinking about how a program changes as things happen. At any moment, the program is in one <strong>state</strong> (like being in a certain room in your game). When an event happens, such as the player typing a command, the program follows a rule that decides what the next state should be.</p>
 <p>For example, typing “east” might move you from the Armoury to the Lab. Each state has certain things you can do, and each action can move you to a new state. It’s like following a map where every choice leads to a different place, and the program always knows exactly where it is and what it should do next.</p>
 </div>
 <p>The main loop is a key part of <strong>event-driven programming</strong>. Your <em><strong>main.py</strong></em> file will set up the game and create all the objects it needs. Then it will enter the <strong>main loop</strong>, where the program waits for the player to type something and then reacts to that input.</p>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Event-driven programming</p>
 <p>Event-driven programming is when a program doesn’t just run straight from top to bottom, but instead waits for things to happen and reacts to them. These things are called <strong>events</strong>, like the user typing a command, clicking a button, or a sensor sending data.</p>
 <p>The program sits in a loop, <strong>listening</strong> for these events, and when one occurs, it runs the code that matches that event. This makes programs more flexible because they only do something when there’s a reason to, just like you don’t answer someone until they speak to you first.</p>
@@ -348,8 +348,8 @@
 </span></pre></div>
 </div>
 <p>We need to create the <strong>main loop</strong> before we call this code, but let’s <strong>investigate</strong> our new code anyway.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">move(self,</span> <span class="pre">direction):</span></code> → defines the <code class="docutils literal notranslate"><span class="pre">move</span></code> function and takes one input: the direction the player wants to go.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">returns</span> <span class="pre">the</span> <span class="pre">room</span> <span class="pre">linked</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">given</span> <span class="pre">direction</span></code> → a comment explaining what the function does.</p></li>
@@ -408,8 +408,8 @@
 </span></pre></div>
 </div>
 <p>Let’s <strong>investigate</strong> the new code</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">'''</span></code> on lines 21 and 26 → turns the room descriptions into a big comment, so Python ignores that code.</p>
 <ul>
@@ -469,14 +469,14 @@
 </span></pre></div>
 </div>
 <p>Finally we can run our code, but don’t forget <strong>PRIMM</strong>. <strong>Predict</strong> you think the program will do, then <strong>run</strong> the program.</p>
-<div class="info admonition">
+<div class="hint admonition">
 <p class="admonition-title">Escaping an infinite loop</p>
 <p>If your Python program gets stuck in an infinite loop, you can stop it by pressing <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">C</span></code> on Windows or <code class="docutils literal notranslate"><span class="pre">Control</span> <span class="pre">+</span> <span class="pre">C</span></code> on a Mac.</p>
 <p>If you’re using Thonny, you can also click the <strong>stop</strong> button to end the program.</p>
 </div>
 <p>Let’s <strong>investigate</strong> the new code line-by-line.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">True</span></code> → used to keep the <strong>main loop</strong> going until the player decides to quit.</p>
 <ul>
@@ -553,8 +553,8 @@
 </div>
 <p><strong>Predict</strong> you think the program will do, then <strong>run</strong> the program.</p>
 <p>Let’s <strong>investigate</strong> that code.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">command</span> <span class="pre">in</span> <span class="pre">[&quot;north&quot;,</span> <span class="pre">&quot;south&quot;,</span> <span class="pre">&quot;east&quot;,</span> <span class="pre">&quot;west&quot;]:</span></code> → runs this block only if the player typed a direction.</p>
 <ul>
@@ -572,7 +572,7 @@
 </div>
 <section id="testing">
 <h3>Testing<a class="headerlink" href="#testing" title="Link to this heading">¶</a></h3>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Testing branching code</p>
 <p>Whenever you test branching code, it is important to ensure you methodically test <strong>all</strong> possible branches.</p>
 <p>To do this:</p>
@@ -708,8 +708,8 @@
 <p><strong>Predict</strong> you think the program will do, then <strong>run</strong> the program.</p>
 <p>Make sure you test the <strong>quit</strong> option</p>
 <p>Let’s <strong>investigate</strong> that code</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">elif</span> <span class="pre">command</span> <span class="pre">==</span> <span class="pre">&quot;quit&quot;:</span></code> → if the command is not an acceptable direction, then check if it is <code class="docutils literal notranslate"><span class="pre">quit</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> change our <strong>flag variable</strong> to <code class="docutils literal notranslate"><span class="pre">False</span></code></p>
@@ -773,7 +773,7 @@
 <p><strong>Predict</strong> you think the program will do, then <strong>run</strong> the program.</p>
 <p>Make sure you test our error capturing by entering some incorrect commands.</p>
 <p>Let’s <strong>investigate</strong> the new code:</p>
-<div class="info admonition">
+<div class="hint admonition">
 <p class="admonition-title">Information</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">else:</span></code> → a catch-all option for any input which is not a recognised command.</p></li>
@@ -814,7 +814,10 @@
 <section id="stage-2-task">
 <h2>Stage 2 task<a class="headerlink" href="#stage-2-task" title="Link to this heading">¶</a></h2>
 <p>There is not much to do for our <strong>Make</strong> phase of this stage, but you do need to test that you can navigate to and from your stage 1 task additional room.</p>
+<div class="question admonition">
+<p class="admonition-title">Make</p>
 <p>Take the table you used to test navigating the rooms and expand it to also test navigating to your stage 1 task room.</p>
+</div>
 </section>
 </section>
 

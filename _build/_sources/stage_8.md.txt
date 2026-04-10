@@ -17,8 +17,7 @@ Our dungeon works, but before we finish we need to make it easier to use and cle
 
 We will:
 
-```{admonition} Pseudocode
-:class: pseudocode
+```{pseudocode} Pseudocode
 * add a **help** command
 * make the program easier to read and use
 * add a goodbye message at the end
@@ -176,7 +175,7 @@ Even though our program looks simple, people still have to use it, so we need to
 
 
 ```{admonition} UI and UX
-:class: note
+:class: hint
 UI means **User Interface**. It’s the stuff you actually see on the screen when you use an app or website — things like buttons, menus, icons, and colours. UI is about making everything look clear and easy to use.
 
 UX means **User Experience**. It’s about what it *feels* like to use the app — if it’s easy, confusing, fun, or annoying. UX is about making sure the user has a smooth and enjoyable time using the program.
@@ -326,7 +325,8 @@ Save the file, **predict** and then **run** the code.
 
 How does that work? Let's **investigate**:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `input("\nPress <Enter> key to continue")` is basically a little trick. We’re using `input` in a way it’s not normally meant to be used.
   * Normally, `input` waits for the user to type something, which is why it pauses the game.
   * The user presses **Enter** to continue, which ends the pause.
@@ -480,7 +480,7 @@ We already have a few comments in the code to help explain what parts do, but mo
 
 
 ```{admonition} Code maintainability
-:class: note
+:class: hint
 Code maintainability means making your code easy to understand, fix, and update later. If your code is neat, well-organised, and has clear comments, you or someone else can quickly figure out how it works. This makes it easier to find bugs, add new features, and change things without breaking the program.
 ```
 

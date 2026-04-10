@@ -16,7 +16,7 @@ By the end of this lesson you will:
 In Stage 1 you made three rooms, connected them, and got the program to describe each one. That was a good start, but it’s not much of a game yet. In Stage 2 you’ll write code that lets the player move between rooms, which means changing the game’s **state** (for example, which room you are in), and you’ll build the **main loop**.
 
 ```{admonition} State machines
-:class: note
+:class: hint
 A state machine is a way of thinking about how a program changes as things happen. At any moment, the program is in one **state** (like being in a certain room in your game). When an event happens, such as the player typing a command, the program follows a rule that decides what the next state should be. 
 
 For example, typing “east” might move you from the Armoury to the Lab. Each state has certain things you can do, and each action can move you to a new state. It’s like following a map where every choice leads to a different place, and the program always knows exactly where it is and what it should do next.
@@ -25,7 +25,7 @@ For example, typing “east” might move you from the Armoury to the Lab. Each 
 The main loop is a key part of **event-driven programming**. Your ***main.py*** file will set up the game and create all the objects it needs. Then it will enter the **main loop**, where the program waits for the player to type something and then reacts to that input.
 
 ```{admonition} Event-driven programming
-:class: note
+:class: hint
 Event-driven programming is when a program doesn’t just run straight from top to bottom, but instead waits for things to happen and reacts to them. These things are called **events**, like the user typing a command, clicking a button, or a sensor sending data. 
 
 The program sits in a loop, **listening** for these events, and when one occurs, it runs the code that matches that event. This makes programs more flexible because they only do something when there’s a reason to, just like you don’t answer someone until they speak to you first.
@@ -33,8 +33,7 @@ The program sits in a loop, **listening** for these events, and when one occurs,
 
 To achieve this we will need to complete the following steps:
 
-```{admonition} Pseudocode
-:class: pseudocode
+```{pseudocode} Pseudocode
 * Create the `move` method
 * Initialize the starting room
 * Create the main loop which:
@@ -93,7 +92,8 @@ class Room():
 
 We need to create the **main loop** before we call this code, but let's **investigate** our new code anyway.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `def move(self, direction):` &rarr; defines the `move` function and takes one input: the direction the player wants to go.
 * `# returns the room linked in the given direction` &rarr; a comment explaining what the function does.
 * `if direction in self.linked_rooms.keys():` &rarr; checks whether the direction the player typed is actually one of the directions this room allows.
@@ -146,7 +146,8 @@ current_room = cavern
 
 Let's **investigate** the new code
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * The `'''` on lines 21 and 26 &rarr; turns the room descriptions into a big comment, so Python ignores that code.
   * You could delete it, but leaving it commented out means you can bring it back later if you need it for debugging.
 * `# initialise variables` &rarr; a comment to explain what the next lines of code are doing.
@@ -205,7 +206,7 @@ while running:
 Finally we can run our code, but don't forget **PRIMM**. **Predict** you think the program will do, then **run** the program.
 
 ```{admonition} Escaping an infinite loop
-:class: info
+:class: hint
 If your Python program gets stuck in an infinite loop, you can stop it by pressing `Ctrl + C` on Windows or `Control + C` on a Mac. 
 
 If you’re using Thonny, you can also click the **stop** button to end the program.
@@ -213,7 +214,8 @@ If you’re using Thonny, you can also click the **stop** button to end the prog
 
 Let's **investigate** the new code line-by-line.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `running = True` &rarr; used to keep the **main loop** going until the player decides to quit.
   * This is called a **flag variable**&mdash;it starts as `True`, and when the player wants to exit, it gets changed to `False`.
 * `# ----- MAIN LOOP -----` &rarr; a comment showing where the main loop begins.
@@ -285,7 +287,8 @@ while running:
 
 Let's **investigate** that code.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `if command in ["north", "south", "east", "west"]:` &rarr; runs this block only if the player typed a direction.
   * `["north", "south", "east", "west"]` &rarr; the list of directions the game will accept.
   * `if command in` &rarr; checks whether what the player typed is in that list.
@@ -297,7 +300,7 @@ Let's **investigate** that code.
 ### Testing
 
 ```{admonition} Testing branching code
-:class: note
+:class: hint
 Whenever you test branching code, it is important to ensure you methodically test **all** possible branches.
 
 To do this:
@@ -382,7 +385,8 @@ Make sure you test the **quit** option
 
 Let's **investigate** that code
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `elif command == "quit":` &rarr; if the command is not an acceptable direction, then check if it is `quit`
 * `running = False` change our **flag variable** to `False`
   * this means that when the loops returns to the top, `where running` will be `False` and the loop will exit.
@@ -451,7 +455,7 @@ Make sure you test our error capturing by entering some incorrect commands.
 Let's **investigate** the new code:
 
 ```{admonition} Information
-:class: info
+:class: hint
 * `else:` &rarr; a catch-all option for any input which is not a recognised command.
 * `print("I don't understand.")` &rarr; lets the user know their command doesn't make sense.
 ```
@@ -471,6 +475,6 @@ Now we need to test those two additional features. Draw up a table to test each 
 
 There is not much to do for our **Make** phase of this stage, but you do need to test that you can navigate to and from your stage 1 task additional room.
 
+```{question} Make
 Take the table you used to test navigating the rooms and expand it to also test navigating to your stage 1 task room.
- 
-
+ ```

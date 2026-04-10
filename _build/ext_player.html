@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=eff86c2a" />
     
     
 
@@ -672,8 +672,8 @@
 </span></pre></div>
 </div>
 <p>This code is different, so lets <strong>investigate</strong> it:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">check_item_in(self,</span> <span class="pre">item_name):</span></code> sets up the function and expects you to give it the item’s name as a string.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">item</span> <span class="pre">in</span> <span class="pre">self.backpack:</span></code> goes through every item object in the backpack.</p></li>
@@ -708,8 +708,8 @@
 </pre></div>
 </div>
 <p>Lets <strong>investigate</strong> those lines of code.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">choice</span> <span class="pre">=</span> <span class="pre">input(&quot;What</span> <span class="pre">will</span> <span class="pre">you</span> <span class="pre">fight</span> <span class="pre">with?</span> <span class="pre">&gt;</span> <span class="pre">&quot;).lower()</span></code> → we changed the variable name because <code class="docutils literal notranslate"><span class="pre">weapon</span></code> will now store the actual item object returned from <code class="docutils literal notranslate"><span class="pre">check_item_in</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">weapon</span> <span class="pre">=</span> <span class="pre">player.check_item_in(choice)</span></code> → if the item is in the backpack, <code class="docutils literal notranslate"><span class="pre">weapon</span></code> will hold the item object. If not, <code class="docutils literal notranslate"><span class="pre">weapon</span></code> will be <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p></li>

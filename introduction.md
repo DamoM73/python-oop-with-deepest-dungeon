@@ -33,8 +33,7 @@ My teaching approach is:
   * Students who fall behind what is covered in class must use the website to catch up.
 * Any student who misses lessons or needs extra time can use this site to get back on track.
 
-```{admonition} Corrections
-:class: important
+```{warning} Corrections
 If you find any errors in this work, please **[raise an issue](https://github.com/DamoM73/python-oop-with-deepest-dungeon/issues)** via GitHub so I can remedy it. There is also a Github link in the footer of every page.
 ```
 
@@ -42,8 +41,7 @@ If you find any errors in this work, please **[raise an issue](https://github.co
 
 The source code for this site can be found on [Github](https://github.com/DamoM73/python-oop-with-deepest-dungeon) where it is published under a [GNU GPLv3 license](https://choosealicense.com/licenses/gpl-3.0/). You are free to download and reuse for your own purposes within the licensing requirements.
 
-```{admonition} Videos vs Website
-:class: warning
+```{warning} Videos vs Website
 The videos linked from this site where created prior to developing this site. Although they have similar content, this site provides more detail.
 ```
 

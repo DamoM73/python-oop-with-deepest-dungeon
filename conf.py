@@ -3,6 +3,9 @@
 # For the full list of built-in configuration values, see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
 
+from docutils import nodes
+from docutils.parsers.rst.directives.admonitions import Admonition
+
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
@@ -70,3 +73,28 @@ html_theme_options = {
         "font-stack--monospace": "'Courier New', monospace",
     },
 }
+
+
+class PseudocodeDirective(Admonition):
+    node_class = nodes.admonition
+
+    def run(self):
+        classes = self.options.setdefault("class", [])
+        if "pseudocode" not in classes:
+            classes.append("pseudocode")
+        return super().run()
+
+
+class QuestionDirective(Admonition):
+    node_class = nodes.admonition
+
+    def run(self):
+        classes = self.options.setdefault("class", [])
+        if "question" not in classes:
+            classes.append("question")
+        return super().run()
+
+
+def setup(app):
+    app.add_directive("pseudocode", PseudocodeDirective)
+    app.add_directive("question", QuestionDirective)

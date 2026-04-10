@@ -27,22 +27,21 @@ Throughout this site some text is enclosed in coloured boxes called callouts. Th
 These callouts appears at the top of each page and explains what you will learn on that page.
 ```
 
-```{admonition} Pseudocode
-:class: pseudocode
+```{pseudocode} Pseudocode
 These callouts provide the planning pseudocode for the tutorial
 ```
 
 ```{admonition} Code Explanation
+:class: note
 These callouts appear after a code block. In these callout each new line is explained in detail.
 ```
 
 ```{admonition} Concept Explanations
-:class: note
+:class: hint
 These callouts explain a new concept that had been referred to. They help you understand some of the technical words we will use.
 ```
 
-```{admonition} Warnings
-:class: warning
+```{warning} Warnings
 These callouts appear when you need to be very careful about something.
 ```
 

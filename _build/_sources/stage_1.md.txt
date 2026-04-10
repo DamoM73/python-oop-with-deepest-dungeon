@@ -34,8 +34,7 @@ To achieve this we will need to create two files:
 
 In those two files we will need to do the following:
 
-```{admonition} Stage 1 Pseudocode
-:class: pseudocode
+```{pseudocode} Stage 1 Pseudocode
 * Define the `Room` class
 * Create `Room` object
 * Describe `Room` objects
@@ -86,13 +85,14 @@ Then type the code below into the new file
 class Room():
 ```
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `# room.py` - is a simple comment containing the file name. Since this program involves multiple files, this is a simple way to keep track of which file you are currently working on.
 * `class Room():` - defined the `Room` class object
 ```
 
 ```{admonition} Naming conventions
-:class: note
+:class: hint
 Most Python names use `snake_case`, but class names are different. Class names must use `CamelCase`, like `Room`.
 
 Python won’t give you an error if you break this rule, but following it makes your code easier to read and maintain.
@@ -122,7 +122,8 @@ class Room():
         self.description = None
 ```
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `def __init__(self, room_name):` this line starts the dunder init method.
   * `self` is always the first argument in any class method. It means “this object”. If you make a `cavern` room, then inside the code `self` means “this specific cavern room”.
   * `room_name` is the text you give the room when you create it. It’s the name the object will use.
@@ -137,8 +138,7 @@ class Room():
 
 ### Save ***room.py***
 
-```{admonition} Saving files
-:class: warning
+```{warning} Saving files
 Since this program will be using multiple files, the location they are saved is important. 
 
 The ***main.py*** file will be importing classes from the your other files. The first place it will look is within the local directory (ie. the folder it is saved in).
@@ -176,7 +176,7 @@ print(cavern.name)
 We're going to run our program for the first time, but before let's introduce the **PRIMM** concept.
 
 ```{admonition} PRIMM
-:class: note
+:class: hint
 Throughout this course we will use the **PRIMM** process to reinforce our learning. **PRIMM** stands for **Predict**, **Run**, **Investigate**, **Modify**, and **Make**. It reflects effective programming practices and encourages curiosity in programming.
 
 **Predict**: Before you run the code you need to predict what you think will happen. Go ahead and have a guess at what you think will happen.
@@ -196,7 +196,8 @@ Lets run through the **PRIMM** process now
 
 Let's **investigate** the new code line-by-line.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `# main.py` &rarr; this is just a comment so you know which file you’re looking at.
 * `from room import Room` &rarr; this imports your own class.
   * `Room` is the class you created.
@@ -263,7 +264,8 @@ print(cavern.description)
 
 Let's **investigate** the *new* code line-by-line.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `cavern.description = "A room so big that the light of your torch doesn’t reach the walls."` &rarr; this sets the `description` of the `cavern` room. You’re giving the room a sentence that describes it.
 * `armoury.description = "The walls are lined with racks that once held weapons and armour."` &rarr; this gives the `armoury` room its description.
 * `lab.description = "A strange odour hangs in a room filled with unknownable contraptions."` &rarr; this gives the `lab` room its description.
@@ -329,7 +331,8 @@ lab.describe()
 
 Let's **investigate** the *new* code line-by-line. First the code in ***room.py***:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `def describe(self):` &rarr; this line starts the `describe` method.
   * `def` is how you define a function or method in Python.
   * `describe` is the method’s name.
@@ -344,7 +347,8 @@ Let's **investigate** the *new* code line-by-line. First the code in ***room.py*
 
 Now the code in ***main.py***
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `# describe rooms` &rarr; this is just a comment to organise the code.
 * `cavern.describe()` &rarr; this runs the `describe` method for the `cavern` room.
 * `armoury.describe()` &rarr; this runs the `describe` method for the `armoury` room.
@@ -383,7 +387,7 @@ For example, the Armoury’s `linked_rooms` dictionary might look like a list of
 ```
 
 ```{admonition} Dictionaries
-:class: note
+:class: hint
 A Python dictionary is like a real-life dictionary, but for your code.
 
 In a real dictionary, you look up a **word** to find its **meaning**. In a Python dictionary, you look up a **key** to get its **value**.
@@ -455,7 +459,8 @@ Did you predict that nothing would change? We'll fix that later. In the meanwhil
 
 First the code in ***room.py***:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `self.linked_rooms = {}` &rarr; this line creates the `linked_rooms` attribute.
 * `def link_rooms(self, room_to_link, direction):` &rarr; this defines the `link_rooms` method. It takes three arguments:
   * `self` &rarr; means “this room”.
@@ -472,7 +477,8 @@ First the code in ***room.py***:
 
 Then in ***main.py***:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `# link rooms` &rarr; code structuring comment
 * `cavern.link_rooms(armoury,"south")` &rarr; links the `cavern` and the `armoury` to the `"south"` of it.
 * `armoury.link_rooms(cavern,"north")` &rarr; links the `armoury` and the `cavern` to the `"north"` of it.
@@ -517,7 +523,8 @@ class Room():
 
 Let's **investigate** the new code line-by-line.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `for direction in self.linked_rooms:` &rarr; this loop goes through every entry in the `linked_rooms` dictionary.
   * Dictionaries can be used in a `for` loop, just like lists.
   * Here, `direction` will be each key in the dictionary, like `"north"`, `"south"`, `"east"`, or `"west"`.
@@ -532,8 +539,10 @@ Let's **investigate** the new code line-by-line.
 
 During this lesson we have only been focusing on the first four stages of the PRIMM model. Now it is time for your to implement the **Make** phase.
 
+
+```{question} Make
 Taking the knowledge your have gained through this lesson, you need to:
 
 * create one, or more additional rooms
 * link those additional rooms to one or more of your other rooms.
-
+```

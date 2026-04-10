@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=eff86c2a" />
     
     
 
@@ -278,9 +278,10 @@
 <li><p>Start Ollama and Then choose the <strong>Gemma3:4b</strong> model from the drop down in the chat box.</p></li>
 <li><p>Type “Hello” in the chat box to trigger the model download.</p></li>
 </ol>
-<div class="warning admonition">
-<p class="admonition-title">Choosing other models</p>
-<p>You can choose other models, and this process will be mostly the same, but be aware that the bigger the model, the more memory it will require and the slower it will be in generating responses.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Choosing other models
+You can choose other models, and this process will be mostly the same, but be aware that the bigger the model, the more memory it will require and the slower it will be in generating responses.</p>
 <p>Models are measured by the number of parameters they have, so a 4b model has 4 billion parameters, while a 7b model has 7 billion parameters. You can use the Ollama UI to experiment with different models and determine which one works best for your game.</p>
 <p>The list of available models can be found <a class="reference external" href="https://ollama.com/search">here</a>.</p>
 </div>
@@ -301,8 +302,8 @@
 <span class="linenos">6</span><span class="n">PARAMETER</span> <span class="n">num_ctx</span> <span class="mi">4096</span>
 </pre></div>
 </div>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><strong>FROM</strong> → this is the base model for our custom model. If you chose a different model, you will need to change this to match the model you chose.</p></li>
 <li><p><strong>SYSTEM</strong> → this is the system prompt that will be used to generate responses for this character. You can change this to create different personalities for your characters.</p></li>
@@ -315,7 +316,7 @@
 </ul>
 </div>
 <p>Save the file as <em><strong>nigel.txt</strong></em> in the Deepest Dungeon directory.</p>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">ModelFile Reference</p>
 <p>Additional parameters and options for the model can be found in the <a class="reference external" href="https://docs.ollama.com/modelfile">Ollama documentation</a>.</p>
 </div>
@@ -329,15 +330,16 @@
 <li><p>selecting <strong>Open system shell</strong>.</p></li>
 <li><p>Then type the following command to build your custom model:</p></li>
 </ol>
-<div class="warning admonition">
-<p class="admonition-title">Correct directory</p>
-<p>Make sure the directory in your terminal prompt is the <em><strong>deepest_dungeon</strong></em> directory.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Correct directory
+Make sure the directory in your terminal prompt is the <em><strong>deepest_dungeon</strong></em> directory.</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ollama<span class="w"> </span>create<span class="w"> </span>nigel<span class="w"> </span>-f<span class="w"> </span>nigel.txt
 </pre></div>
 </div>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><strong>ollama</strong> → calls the ollama server rnning on your laptop</p></li>
 <li><p><strong>create</strong> → this is the command to create a new model</p></li>

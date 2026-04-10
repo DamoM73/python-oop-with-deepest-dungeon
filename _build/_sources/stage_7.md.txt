@@ -19,8 +19,7 @@ In this stage, you’re going to set up how the player wins the game.
 
 You will do this by:
 
-```{admonition} Pseudocode
-:class: pseudocode
+```{pseudocode} Pseudocode
 * counting how many enemies exist
 * lowering that count each time an enemy is defeated
 * checking when the count reaches zero so the player wins the game
@@ -114,7 +113,8 @@ Save the code, and **run** it to ensure there are no errors.
 
 **Investigating** the code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `num_of_enemy = 0` &rarr; this creates the **class variable**.
   * Class variables must be written **before** the `__init__` method.
   * They are indented once, at the same level as the methods.
@@ -195,7 +195,8 @@ class Enemy(Character):
 
 Let's investigate that method:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `def get_num_of_enemy():` &rarr; this creates the method.
   * It doesn’t have `self` because it’s not linked to one object; it works for the whole class.
 * `return Enemy.num_of_enemy` &rarr; this gives back the current number of enemies.
@@ -279,7 +280,8 @@ class Enemy(Character):
 
 Save the code before we **Investigate** it:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * Line `53` already checks if the player wins the fight.
 * `Enemy.num_of_enemy -= 1` makes the class variable go down by one when an enemy is defeated.
 ```
@@ -419,7 +421,8 @@ while running:
 
 **Investigating** that code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * Line `89` makes sure this code only runs after the player defeats an enemy.
 * `if Enemy.get_num_of_enemy() == 0:` checks if the class variable has reached `0`.
 * `print("You have slain all the enemies. You are victorious!")` shows the win message.
@@ -432,3 +435,8 @@ Now time to test our code.
 
 **Predict** what you think will happen, then run your code. Make sure that you test that the player wins when they have defeated all the enemies.
 
+## Stage 7 Task
+
+```{question} Task
+Now that the code is working, time for you to reflect on what you have done. Read over your code and make sure you understand it. In your next lesson, your teaching will ask you to explain how the code works.
+```

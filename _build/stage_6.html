@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=eff86c2a" />
     
     
 
@@ -297,7 +297,7 @@
 <section id="creating-a-backpack">
 <h2>Creating a backpack<a class="headerlink" href="#creating-a-backpack" title="Link to this heading">¶</a></h2>
 <p>First, we need to make a backpack variable so we can keep the items we pick up. To do that, we need a type of variable that can store more than one thing at a time. In Python, these are called <strong>collections</strong>. This is the second type of collection you’ve used — the first was <strong>dictionaries</strong>. Now we’ll use a <strong>list</strong>, which is another collection type you already know.</p>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Collections in Python</p>
 <p>In Python, a <strong>collection</strong> is just a way to store a bunch of things together. You’ve already used some of these before. Different collection types work in different ways, and choosing the right one makes your code easier to understand and faster to run.</p>
 <p>Here are the main built-in collection types:</p>
@@ -418,8 +418,8 @@
 </pre></div>
 </div>
 <p><strong>Investigating</strong> this line of code.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">backpack</span> <span class="pre">=</span> <span class="pre">[]</span></code> → creates an empty list and assigns it the name <code class="docutils literal notranslate"><span class="pre">backpack</span></code></p></li>
 </ul>
@@ -533,8 +533,8 @@
 </div>
 <p>Save <em><strong>main.py</strong></em> <strong>predict</strong> what you think will happen and then <strong>run</strong> the code. What happens to the room description after you take an item?</p>
 <p>In <strong>investigating</strong> this code, most of it should be familiar from our previous command event handlers. The different code is:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">backpack.append(current_room.item)</span></code> → puts the item from the room into the backpack list.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;You</span> <span class="pre">put</span> <span class="pre">{current_room.item.name}</span> <span class="pre">into</span> <span class="pre">your</span> <span class="pre">backpack&quot;)</span></code> → tells the player what item they picked up.</p></li>
@@ -697,8 +697,8 @@
 </table>
 </div>
 <p>If your testing all works out, then it’s time to <strong>investigate</strong> the code.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">elif</span> <span class="pre">command</span> <span class="pre">==</span> <span class="pre">&quot;backpack&quot;:</span></code> → this runs when the player types <strong>backpack</strong>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">backpack</span> <span class="pre">==</span> <span class="pre">[]:</span></code> → checks whether the backpack has nothing in it.</p></li>
@@ -834,8 +834,8 @@
 </div>
 <p>Save <em><strong>main.py</strong></em>. <strong>Predict</strong> what you think will happen, and then <strong>run</strong> the code.</p>
 <p>Let’s <strong>investigate</strong> that code, but be aware that there are a number of different sections to that code.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <p>First, we need to make sure the player actually has the weapon they typed.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">available_weapons</span> <span class="pre">=</span> <span class="pre">[]</span></code> → makes a new list to hold the <strong>names</strong> of all items in the backpack.</p>
@@ -906,7 +906,10 @@
 </section>
 <section id="stage-6-task">
 <h2>Stage 6 task<a class="headerlink" href="#stage-6-task" title="Link to this heading">¶</a></h2>
+<div class="question admonition">
+<p class="admonition-title">Make</p>
 <p>You need to apply the changes we made to your other characters. Especially if you have another enemy. Make sure that the user can collect their weakness and use it against them.</p>
+</div>
 </section>
 </section>
 

@@ -461,7 +461,8 @@ class Player():
 
 This code is different, so lets **investigate** it:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `def check_item_in(self, item_name):` sets up the function and expects you to give it the item’s name as a string.
 * `for item in self.backpack:` goes through every item object in the backpack.
 * `if item.name == item_name:` checks if the current item’s name matches the name you typed.
@@ -498,7 +499,8 @@ In ***main.py***, change the fight command so it matches the code shown below. P
 
 Lets **investigate** those lines of code.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `choice = input("What will you fight with? > ").lower()` → we changed the variable name because `weapon` will now store the actual item object returned from `check_item_in`.
 * `weapon = player.check_item_in(choice)` → if the item is in the backpack, `weapon` will hold the item object. If not, `weapon` will be `None`.
 * `if weapon:` → this checks if `weapon` is a real item object. If it is, this is `True`. If it’s `None`, it’s `False`.

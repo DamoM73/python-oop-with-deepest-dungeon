@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=eff86c2a" />
     
     
 
@@ -298,7 +298,7 @@ errors</p></li>
 <p><img alt="lesson 4 class diagram" src="_images/lesson_4_class_diagram.png" /></p>
 <p>Both classes have arrows pointing to <code class="docutils literal notranslate"><span class="pre">Character</span></code> because they are child classes. This means they <strong>inherit</strong> everything the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class has. They can also add new features or replace methods they inherited.</p>
 <p>The diagram shows how these new classes build on top of the original <code class="docutils literal notranslate"><span class="pre">Character</span></code> class.</p>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Inheritance</p>
 <p>Inheritance in OOP means making a new class that is based on an existing one. It’s like a family tree: a child class gets traits from its parent class.</p>
 <p>This helps you avoid rewriting the same code and makes it easier to organise different types of things by what they share and what makes them different.</p>
@@ -326,7 +326,7 @@ errors</p></li>
 <p>But why not just make two completely separate classes? Because of the DRY rule: <strong>Don’t Repeat Yourself</strong>.</p>
 <p>If both classes use the same <code class="docutils literal notranslate"><span class="pre">describe</span></code> method, it’s better to write it once in the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class. Then <code class="docutils literal notranslate"><span class="pre">Friend</span></code> and <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> automatically get it. This makes the code easier to fix and update.</p>
 <p>If you ever change the <code class="docutils literal notranslate"><span class="pre">describe</span></code> or <code class="docutils literal notranslate"><span class="pre">talk</span></code> method, you only change it in one place — the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class — and both child classes get the updated version.</p>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">OOP Terminology</p>
 <p>In OOP, different books and websites sometimes use different words for the same idea. Here are the main ones you might see:</p>
 <ul class="simple">
@@ -380,8 +380,8 @@ errors</p></li>
 </span></pre></div>
 </div>
 <p>Investigating that code:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Friend(Character):</span></code> → creates a new class called <code class="docutils literal notranslate"><span class="pre">Friend</span></code>, and the <code class="docutils literal notranslate"><span class="pre">(Character)</span></code> shows that <code class="docutils literal notranslate"><span class="pre">Friend</span></code> comes from the <code class="docutils literal notranslate"><span class="pre">Character</span></code> parent class.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">name):</span></code> → is a special method that runs automatically whenever you make a new <code class="docutils literal notranslate"><span class="pre">Friend</span></code> object.</p></li>
@@ -437,8 +437,8 @@ errors</p></li>
 </span></pre></div>
 </div>
 <p>Now unpack the code that creates the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Enemy(Character):</span></code> → creates the <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> class and shows it is a child of the <code class="docutils literal notranslate"><span class="pre">Character</span></code> class.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">name):</span></code> → runs automatically when you make a new <code class="docutils literal notranslate"><span class="pre">Enemy</span></code> object.</p></li>
@@ -529,8 +529,8 @@ errors</p></li>
 </pre></div>
 </div>
 <p>Investigating that code:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">character</span> <span class="pre">import</span> <span class="pre">Friend,</span> <span class="pre">Enemy</span></code> → means we’re now creating characters as either <code class="docutils literal notranslate"><span class="pre">Friend</span></code> or <code class="docutils literal notranslate"><span class="pre">Enemy</span></code>, not as basic <code class="docutils literal notranslate"><span class="pre">Character</span></code> objects anymore.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ugine</span> <span class="pre">=</span> <span class="pre">Enemy(&quot;Ugine&quot;)</span></code> → creates Ugine as an <code class="docutils literal notranslate"><span class="pre">Enemy</span></code>.</p></li>
@@ -591,7 +591,7 @@ errors</p></li>
 <section id="adjusting-the-interactions">
 <h2>Adjusting the interactions<a class="headerlink" href="#adjusting-the-interactions" title="Link to this heading">¶</a></h2>
 <p>We want the game to react differently depending on the type of character. You shouldn’t hug an enemy, and you shouldn’t fight a friend. When different classes respond to the same action in different ways, this is called <strong>polymorphism</strong>.</p>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Polymorphism</p>
 <p>Polymorphism in OOP means different classes can use the same method but do different things with it. It’s like asking different people to “work” — they all do it, but the way they work depends on their job.</p>
 <p>This lets your code treat different objects in a similar way, even if they aren’t the same type. It makes your programs easier to write, easier to update, and more flexible when things change.</p>
@@ -648,8 +648,8 @@ errors</p></li>
 </pre></div>
 </div>
 <p>Investigating the code:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">hug(self):</span></code> → creates a new <code class="docutils literal notranslate"><span class="pre">hug</span></code> method for the <code class="docutils literal notranslate"><span class="pre">Friend</span></code> class. Because it has the same name as the one in <code class="docutils literal notranslate"><span class="pre">Character</span></code>, it replaces the old version for all friends.</p></li>
 <li><p>The comment explains what the method is meant to do.</p></li>
@@ -718,8 +718,8 @@ errors</p></li>
 </span></pre></div>
 </div>
 <p>Investing that code:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">fight(self,</span> <span class="pre">item):</span></code> → creates the <code class="docutils literal notranslate"><span class="pre">fight</span></code> method for enemies. The <code class="docutils literal notranslate"><span class="pre">item</span></code> is the weapon the player chooses.</p></li>
 <li><p>The comment explains that this method checks the weapon and returns whether the player survives.</p></li>
@@ -812,8 +812,8 @@ errors</p></li>
 </pre></div>
 </div>
 <p>Investigate the code:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">weapon</span> <span class="pre">=</span> <span class="pre">input(&quot;What</span> <span class="pre">will</span> <span class="pre">you</span> <span class="pre">fight</span> <span class="pre">with?</span> <span class="pre">&gt;</span> <span class="pre">&quot;).lower()</span></code> → asks the player to type the weapon they want to use.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character.fight(weapon):</span></code> → checks if the player wins the fight.</p>
@@ -828,7 +828,7 @@ errors</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">=</span> <span class="pre">False</span></code> → stops the main loop, which ends the game.</p></li>
 </ul>
 </div>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Truthy and Falsy Values</p>
 <p>In Python, some values act like <strong>True</strong> and some act like <strong>False</strong> when used in an <code class="docutils literal notranslate"><span class="pre">if</span></code> statement, even if they aren’t actually the words <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code>. These are called <strong>truthy</strong> and <strong>falsy</strong> values.</p>
 <p>Truthy values include things like non-empty strings, non-zero numbers, and lists with items in them, while falsy values include <code class="docutils literal notranslate"><span class="pre">None</span></code>, <code class="docutils literal notranslate"><span class="pre">0</span></code>, empty strings, empty lists, and <code class="docutils literal notranslate"><span class="pre">False</span></code> itself.</p>
@@ -1078,7 +1078,7 @@ errors</p></li>
 </table>
 </div>
 <p>There’s another problem when you try to fight Nigel, but this time it’s different. You don’t get an error message—the program just stops. This type of mistake is called a <strong>logic error</strong>.</p>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Types of programming errors</p>
 <p>There are three main types of programming errors:</p>
 <ul class="simple">
@@ -1208,8 +1208,8 @@ errors</p></li>
 <span class="linenos">55</span>            <span class="k">return</span> <span class="kc">False</span>
 </pre></div>
 </div>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><strong>line 29</strong> now returns <code class="docutils literal notranslate"><span class="pre">True</span></code> when you fight a friend, which means the <strong>line 71</strong> of the <em><strong>main.py</strong></em> <code class="docutils literal notranslate"><span class="pre">running</span> <span class="pre">==</span> <span class="pre">False</span></code> does not run.</p></li>
 </ul>
@@ -1276,8 +1276,8 @@ errors</p></li>
 <span class="linenos">74</span>            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There is no one here to fight&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">isinstance(current_room.character,</span> <span class="pre">Enemy):</span></code> → checks whether the character in the room is an <strong>Enemy</strong>.</p>
 <ul>
@@ -1295,7 +1295,11 @@ errors</p></li>
 <section id="stage-4-task">
 <h2>Stage 4 task<a class="headerlink" href="#stage-4-task" title="Link to this heading">¶</a></h2>
 <p>Now it is time for your to implement the <strong>Make</strong> phase.</p>
-<p>Consider the additional character or characters that you have added, and change them into either a Friend, or an Enemy. Don’t forget their weakness if they are an enemy.</p>
+<div class="question admonition">
+<p class="admonition-title">Make</p>
+<p>Consider the additional character or characters that you have added, and change them into either a Friend, or an Enemy.</p>
+<p>Don’t forget their weakness if they are an enemy.</p>
+</div>
 </section>
 </section>
 

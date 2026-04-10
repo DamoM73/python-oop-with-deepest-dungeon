@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=eff86c2a" />
     
     
 
@@ -319,8 +319,8 @@
 </span></pre></div>
 </div>
 <p>Let’s investigate this code:</p>
-<div class="info admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="hint admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">character.py</span></code> → a note to remind us which file this code belongs to</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Character():</span></code> → creates a new type of object called <code class="docutils literal notranslate"><span class="pre">Character</span></code></p></li>
@@ -374,8 +374,8 @@
 </pre></div>
 </div>
 <p>Investigating that code:</p>
-<div class="info admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="hint admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">character</span> <span class="pre">import</span> <span class="pre">Character</span></code> → brings the Character class into this file so we can use it</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">create</span> <span class="pre">characters</span></code> → a note showing this section is where we make characters</p></li>
@@ -428,8 +428,8 @@
 </pre></div>
 </div>
 <p>Investigating that code:</p>
-<div class="info admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="hint admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">self.character</span> <span class="pre">=</span> <span class="pre">None</span></code> → creates a new attribute called <code class="docutils literal notranslate"><span class="pre">character</span></code> and assigns <code class="docutils literal notranslate"><span class="pre">None</span></code> to it.</p></li>
 </ul>
@@ -498,8 +498,8 @@
 </pre></div>
 </div>
 <p>Investigating the code:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">armoury.character</span> <span class="pre">=</span> <span class="pre">ugine</span></code> → puts the character Ugine into the armoury room</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">lab.character</span> <span class="pre">=</span> <span class="pre">nigel</span></code> → puts the character Nigel into the lab room</p></li>
@@ -534,8 +534,8 @@
 </span></pre></div>
 </div>
 <p>Investigating the new code:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">describe(self):</span></code> → creates a describe method for characters</p>
 <ul>
@@ -548,7 +548,7 @@
 <li><p><code class="docutils literal notranslate"><span class="pre">print(f&quot;{self.name}</span> <span class="pre">is</span> <span class="pre">here,</span> <span class="pre">{self.description}&quot;)</span></code> → prints the character’s name and what they look like</p></li>
 </ul>
 </div>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Name spaces</p>
 <p>Imagine your wardrobe at home. You have different spots for different things — shelves for shirts, drawers for socks, hangers for jackets. When you need something, you go to the right spot and grab it.</p>
 <p>Namespaces in programming work the same way. They’re like labelled sections that keep code organised. Each namespace stores its own variables and functions, just like each part of your wardrobe stores its own type of clothes.</p>
@@ -595,8 +595,8 @@
 </pre></div>
 </div>
 <p>Let’s investigate that code:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">self.character</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code> → checks if this room actually has a character in it</p>
 <ul>
@@ -649,8 +649,8 @@
 </span></pre></div>
 </div>
 <p>Let’s investigate this code:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">talk(self):</span></code> → this creates the talk method for this character</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">send</span> <span class="pre">conversation</span> <span class="pre">to</span> <span class="pre">the</span> <span class="pre">terminal</span></code> → a note explaining what the method does</p></li>
@@ -783,8 +783,8 @@
 </pre></div>
 </div>
 <p>Since the event handler for all three interactions is virtually the same, we’ll just investigate the code for the <code class="docutils literal notranslate"><span class="pre">talk</span></code> method:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">elif</span> <span class="pre">command</span> <span class="pre">==</span> <span class="pre">&quot;talk&quot;:</span></code> → checks if the user’s command was <code class="docutils literal notranslate"><span class="pre">talk</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">current_room.character</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">None:</span></code> → checks if there is a character in the room</p>
@@ -801,11 +801,14 @@
 <section id="stage-3-task">
 <h2>Stage 3 task<a class="headerlink" href="#stage-3-task" title="Link to this heading">¶</a></h2>
 <p>Once again we have only been focusing on the first four stages of the PRIMM model. Now it is time for your to implement the <strong>Make</strong> phase.</p>
+<div class="question admonition">
+<p class="admonition-title">Make</p>
 <p>In Stage 1 you created an additional room. So now it is time to populate that room.</p>
 <ul class="simple">
 <li><p>Create an additional character for each extra room you’ve added</p></li>
 <li><p>Add those characters to your additional rooms</p></li>
 </ul>
+</div>
 </section>
 </section>
 

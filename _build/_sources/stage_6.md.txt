@@ -19,8 +19,7 @@ Now we want the player to pick up items and actually use them.
 
 To do this we will:
 
-```{admonition} Pseudocode
-:class: pseudocode
+```{pseudocode} Pseudocode
 * make a backpack variable to hold the items you collect
 * add a take command so you can pick up items
 * add a backpack command so you can see what you’re carrying
@@ -38,7 +37,7 @@ When you check the class diagram, nothing new has been added. Everything in this
 First, we need to make a backpack variable so we can keep the items we pick up. To do that, we need a type of variable that can store more than one thing at a time. In Python, these are called **collections**. This is the second type of collection you’ve used — the first was **dictionaries**. Now we’ll use a **list**, which is another collection type you already know.
 
 ```{admonition} Collections in Python
-:class: note
+:class: hint
 In Python, a **collection** is just a way to store a bunch of things together. You’ve already used some of these before. Different collection types work in different ways, and choosing the right one makes your code easier to understand and faster to run.
 
 Here are the main built-in collection types:
@@ -163,7 +162,8 @@ while running:
 
 **Investigating** this line of code.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `backpack = []` &rarr; creates an empty list and assigns it the name `backpack`
 ```
 
@@ -282,7 +282,8 @@ Save ***main.py*** **predict** what you think will happen and then **run** the c
 
 In **investigating** this code, most of it should be familiar from our previous command event handlers. The different code is:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `backpack.append(current_room.item)` &rarr; puts the item from the room into the backpack list.
 * `print(f"You put {current_room.item.name} into your backpack")` &rarr; tells the player what item they picked up.
 * `current_room.item = None` &rarr; clears the item from the room so it’s no longer there.
@@ -425,7 +426,8 @@ Here is an example for the Cavern testing table. Make sure you also make one for
 
 If your testing all works out, then it's time to **investigate** the code.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `elif command == "backpack":` &rarr; this runs when the player types **backpack**.
 * `if backpack == []:` &rarr; checks whether the backpack has nothing in it.
 * `print("It is empty")` &rarr; tells the player the backpack is empty.
@@ -566,7 +568,8 @@ Save ***main.py***. **Predict** what you think will happen, and then **run** the
 
 Let's **investigate** that code, but be aware that there are a number of different sections to that code.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 First, we need to make sure the player actually has the weapon they typed.
 
 * `available_weapons = []` &rarr; makes a new list to hold the **names** of all items in the backpack.
@@ -607,6 +610,6 @@ If your code passes all the tests, it's time to **make** some code in the stage 
 
 ## Stage 6 task
 
+```{question} Make
 You need to apply the changes we made to your other characters. Especially if you have another enemy. Make sure that the user can collect their weakness and use it against them.
-
-
+```

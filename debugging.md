@@ -120,8 +120,7 @@ Since this is a for loop, the next **Step into** reads the first element of the 
 
 Clicking **Step into** highlights `line 4`. `michelle` is now stored in the `name` variable as displayed in the **Variables panel**.
 
-```{admonition} Note
-:class: warning
+```{warning} Note
 
 Do not confuse `name` with `names`. They're very close, but Python is very precise.
 ```
@@ -191,6 +190,7 @@ Click the **Step over** button and you will see the results below. Notice the va
 Clicking **Step over** again executes `line 5`. The highlight then returns to the `line 3` for statement.
 
 ```{admonition} When to use Step over
+:class: hint
 
 Use **Step over** when you know that the highlighted code is bug free. Executing working code helps find the bug location quicker.
 ```
@@ -315,6 +315,7 @@ Click the **Debug** button to launch Thonny's debugger. Thonny will run the code
     * `line 3` of the add_underscores function section.
 
 ```{admonition} Stack timeline
+:class: hint
 
 1. `line 8` in the main module called the `add_underscores` function
 2. Python pauses the main section at `line 8` at wait for the `add_underscores` function to finish
@@ -403,5 +404,3 @@ Stop the debugging, make the change to the code below.
 Run the program normally. Is the output `_h_e_l_l_o_`?
 
 Problem solved. You have now successfully debugged faulty code.
-
-

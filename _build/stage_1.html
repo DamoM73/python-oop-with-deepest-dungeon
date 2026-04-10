@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=580074bf" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
-    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=fd6e75f7" />
+    <link rel="stylesheet" type="text/css" href="_static/custom.css?v=eff86c2a" />
     
     
 
@@ -346,14 +346,14 @@
 <span class="hll"><span class="linenos">3</span><span class="k">class</span><span class="w"> </span><span class="nc">Room</span><span class="p">():</span>
 </span></pre></div>
 </div>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">room.py</span></code> - is a simple comment containing the file name. Since this program involves multiple files, this is a simple way to keep track of which file you are currently working on.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">class</span> <span class="pre">Room():</span></code> - defined the <code class="docutils literal notranslate"><span class="pre">Room</span></code> class object</p></li>
 </ul>
 </div>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Naming conventions</p>
 <p>Most Python names use <code class="docutils literal notranslate"><span class="pre">snake_case</span></code>, but class names are different. Class names must use <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code>, like <code class="docutils literal notranslate"><span class="pre">Room</span></code>.</p>
 <p>Python won’t give you an error if you break this rule, but following it makes your code easier to read and maintain.</p>
@@ -375,8 +375,8 @@
 </span><span class="hll"><span class="linenos">9</span>        <span class="bp">self</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="kc">None</span>
 </span></pre></div>
 </div>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">__init__(self,</span> <span class="pre">room_name):</span></code> this line starts the dunder init method.</p>
 <ul>
@@ -402,9 +402,10 @@
 </section>
 <section id="save-room-py">
 <h3>Save <em><strong>room.py</strong></em><a class="headerlink" href="#save-room-py" title="Link to this heading">¶</a></h3>
-<div class="warning admonition">
-<p class="admonition-title">Saving files</p>
-<p>Since this program will be using multiple files, the location they are saved is important.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Saving files
+Since this program will be using multiple files, the location they are saved is important.</p>
 <p>The <em><strong>main.py</strong></em> file will be importing classes from the your other files. The first place it will look is within the local directory (ie. the folder it is saved in).</p>
 <p>To minimise potential problems, you need to create a new folder for these tutorials.</p>
 <p>It is also important to ensure you file names are correct, inlcuding the capilatisation and the <em><strong>.py</strong></em> extension.</p>
@@ -431,7 +432,7 @@
 </span></pre></div>
 </div>
 <p>We’re going to run our program for the first time, but before let’s introduce the <strong>PRIMM</strong> concept.</p>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">PRIMM</p>
 <p>Throughout this course we will use the <strong>PRIMM</strong> process to reinforce our learning. <strong>PRIMM</strong> stands for <strong>Predict</strong>, <strong>Run</strong>, <strong>Investigate</strong>, <strong>Modify</strong>, and <strong>Make</strong>. It reflects effective programming practices and encourages curiosity in programming.</p>
 <p><strong>Predict</strong>: Before you run the code you need to predict what you think will happen. Go ahead and have a guess at what you think will happen.</p>
@@ -443,8 +444,8 @@
 <p>Lets run through the <strong>PRIMM</strong> process now</p>
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
 <p>Let’s <strong>investigate</strong> the new code line-by-line.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">main.py</span></code> → this is just a comment so you know which file you’re looking at.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">room</span> <span class="pre">import</span> <span class="pre">Room</span></code> → this imports your own class.</p>
@@ -514,8 +515,8 @@
 </div>
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
 <p>Let’s <strong>investigate</strong> the <em>new</em> code line-by-line.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">cavern.description</span> <span class="pre">=</span> <span class="pre">&quot;A</span> <span class="pre">room</span> <span class="pre">so</span> <span class="pre">big</span> <span class="pre">that</span> <span class="pre">the</span> <span class="pre">light</span> <span class="pre">of</span> <span class="pre">your</span> <span class="pre">torch</span> <span class="pre">doesn’t</span> <span class="pre">reach</span> <span class="pre">the</span> <span class="pre">walls.&quot;</span></code> → this sets the <code class="docutils literal notranslate"><span class="pre">description</span></code> of the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> room. You’re giving the room a sentence that describes it.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">armoury.description</span> <span class="pre">=</span> <span class="pre">&quot;The</span> <span class="pre">walls</span> <span class="pre">are</span> <span class="pre">lined</span> <span class="pre">with</span> <span class="pre">racks</span> <span class="pre">that</span> <span class="pre">once</span> <span class="pre">held</span> <span class="pre">weapons</span> <span class="pre">and</span> <span class="pre">armour.&quot;</span></code> → this gives the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> room its description.</p></li>
@@ -568,8 +569,8 @@
 </div>
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
 <p>Let’s <strong>investigate</strong> the <em>new</em> code line-by-line. First the code in <em><strong>room.py</strong></em>:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">describe(self):</span></code> → this line starts the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method.</p>
 <ul>
@@ -590,8 +591,8 @@
 </ul>
 </div>
 <p>Now the code in <em><strong>main.py</strong></em></p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">describe</span> <span class="pre">rooms</span></code> → this is just a comment to organise the code.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cavern.describe()</span></code> → this runs the <code class="docutils literal notranslate"><span class="pre">describe</span></code> method for the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> room.</p></li>
@@ -625,7 +626,7 @@
 <span class="linenos">4</span><span class="p">}</span>
 </pre></div>
 </div>
-<div class="note admonition">
+<div class="hint admonition">
 <p class="admonition-title">Dictionaries</p>
 <p>A Python dictionary is like a real-life dictionary, but for your code.</p>
 <p>In a real dictionary, you look up a <strong>word</strong> to find its <strong>meaning</strong>. In a Python dictionary, you look up a <strong>key</strong> to get its <strong>value</strong>.</p>
@@ -683,8 +684,8 @@
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
 <p>Did you predict that nothing would change? We’ll fix that later. In the meanwhile, let’s <strong>investigate</strong> the <strong>new</strong> code line-by-line.</p>
 <p>First the code in <em><strong>room.py</strong></em>:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">self.linked_rooms</span> <span class="pre">=</span> <span class="pre">{}</span></code> → this line creates the <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> attribute.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">def</span> <span class="pre">link_rooms(self,</span> <span class="pre">room_to_link,</span> <span class="pre">direction):</span></code> → this defines the <code class="docutils literal notranslate"><span class="pre">link_rooms</span></code> method. It takes three arguments:</p>
@@ -710,8 +711,8 @@
 </ul>
 </div>
 <p>Then in <em><strong>main.py</strong></em>:</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">link</span> <span class="pre">rooms</span></code> → code structuring comment</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">cavern.link_rooms(armoury,&quot;south&quot;)</span></code> → links the <code class="docutils literal notranslate"><span class="pre">cavern</span></code> and the <code class="docutils literal notranslate"><span class="pre">armoury</span></code> to the <code class="docutils literal notranslate"><span class="pre">&quot;south&quot;</span></code> of it.</p></li>
@@ -750,8 +751,8 @@
 </div>
 <p><strong>Predict</strong> in detail what you think the program will do, then <strong>run</strong> the program.</p>
 <p>Let’s <strong>investigate</strong> the new code line-by-line.</p>
-<div class="admonition-code-explaination admonition">
-<p class="admonition-title">Code Explaination</p>
+<div class="note admonition">
+<p class="admonition-title">Code Explanation</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">direction</span> <span class="pre">in</span> <span class="pre">self.linked_rooms:</span></code> → this loop goes through every entry in the <code class="docutils literal notranslate"><span class="pre">linked_rooms</span></code> dictionary.</p>
 <ul>
@@ -772,11 +773,14 @@
 <section id="stage-1-task">
 <h2>Stage 1 task<a class="headerlink" href="#stage-1-task" title="Link to this heading">¶</a></h2>
 <p>During this lesson we have only been focusing on the first four stages of the PRIMM model. Now it is time for your to implement the <strong>Make</strong> phase.</p>
+<div class="question admonition">
+<p class="admonition-title">Make</p>
 <p>Taking the knowledge your have gained through this lesson, you need to:</p>
 <ul class="simple">
 <li><p>create one, or more additional rooms</p></li>
 <li><p>link those additional rooms to one or more of your other rooms.</p></li>
 </ul>
+</div>
 </section>
 </section>
 

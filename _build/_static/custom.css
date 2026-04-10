@@ -14,24 +14,104 @@
   font-weight: 700 !important;
 }
 
-/* Custom "pseudocode" admonition in navy */
+/* Custom "pseudocode" admonition in purple */
 :root {
-  --admonition-pseudocode: #0b3d91;
-  --admonition-pseudocode-bg: #ffffff;
+  --admonition-pseudocode: #8400FF;
+  --admonition-pseudocode-border: #5c00b3;
+  --admonition-pseudocode-bg: rgba(132, 0, 255, 0.2);
 }
 body[data-theme="dark"] {
-  --admonition-pseudocode-bg: rgba(11, 61, 145, 0.2);
+  --admonition-pseudocode-bg: rgba(132, 0, 255, 0.2);
 }
 .admonition.pseudocode {
-  border-color: var(--admonition-pseudocode);
-  background: var(--admonition-pseudocode-bg);
+  border-left-color: var(--admonition-pseudocode-border) !important;
 }
 .admonition.pseudocode > .admonition-title {
-  background: var(--admonition-pseudocode);
-  color: #ffffff !important;
+  background: var(--admonition-pseudocode-bg) !important;
 }
 .admonition.pseudocode > .admonition-title:before {
-  background-color: #ffffff !important;
+  background-color: var(--admonition-pseudocode) !important;
+}
+
+/* =====================
+   Admonition colours and icons
+   ===================== */
+:root {
+  /* Default (all unspecified custom admonitions) – Purple / abstract */
+  --color-admonition-title: #8400FF;
+  --color-admonition-title-background: rgba(132, 0, 255, 0.2);
+  --icon-admonition-default: var(--icon-abstract);
+
+  /* topic – Cyan / abstract */
+  --color-topic-title: #00FFF7;
+  --color-topic-title-background: rgba(0, 255, 247, 0.2);
+  --icon-topic-default: var(--icon-abstract);
+
+  /* hint – Orange / pencil */
+  --color-admonition-title--hint: #FF7300;
+  --color-admonition-title-background--hint: rgba(255, 115, 0, 0.2);
+
+  /* note – Blue / info */
+  --color-admonition-title--note: #0015FF;
+  --color-admonition-title-background--note: rgba(0, 21, 255, 0.2);
+
+  /* question – Green / question (custom directive) */
+  --color-admonition-title--question: #90FE00;
+  --color-admonition-title-background--question: rgba(144, 254, 0, 0.2);
+
+  /* warning – Pink / warning */
+  --color-admonition-title--warning: #FF00A1;
+  --color-admonition-title-background--warning: rgba(255, 0, 161, 0.2);
+}
+
+/* hint: override hardcoded icon (was question, now pencil) */
+.admonition.hint {
+  border-left-color: #FF7300 !important;
+}
+.admonition.hint > .admonition-title {
+  background-color: rgba(255, 115, 0, 0.2) !important;
+}
+.admonition.hint > .admonition-title:before {
+  background-color: #FF7300 !important;
+  -webkit-mask-image: var(--icon-pencil);
+  mask-image: var(--icon-pencil);
+}
+
+/* note: override hardcoded icon (was pencil, now info) */
+.admonition.note {
+  border-left-color: #0015FF !important;
+}
+.admonition.note > .admonition-title {
+  background-color: rgba(0, 21, 255, 0.2) !important;
+}
+.admonition.note > .admonition-title:before {
+  background-color: #0015FF !important;
+  -webkit-mask-image: var(--icon-info);
+  mask-image: var(--icon-info);
+}
+
+/* question: no built-in furo support, wire up manually */
+.admonition.question {
+  border-left-color: #90FE00 !important;
+}
+.admonition.question > .admonition-title {
+  background-color: rgba(144, 254, 0, 0.2) !important;
+}
+.admonition.question > .admonition-title:before {
+  background-color: #90FE00 !important;
+  -webkit-mask-image: var(--icon-question);
+  mask-image: var(--icon-question);
+}
+
+/* warning: force pink styling */
+.admonition.warning {
+  border-left-color: #FF00A1 !important;
+}
+.admonition.warning > .admonition-title {
+  background-color: rgba(255, 0, 161, 0.2) !important;
+}
+.admonition.warning > .admonition-title:before {
+  background-color: #FF00A1 !important;
 }
 
 /* Make topic directive text match body size */
@@ -44,6 +124,16 @@ body[data-theme="dark"] {
 .topic > .topic-title {
   font-size: inherit !important;
   font-weight: 700;
+  background-color: rgba(0, 255, 247, 0.2) !important;
+}
+.topic > .topic-title:before {
+  background-color: #00b3ad !important;
+  -webkit-mask-image: var(--icon-abstract);
+  mask-image: var(--icon-abstract);
+}
+.topic {
+  border: 1px solid #ccc !important;
+  border-left: 0.25rem solid #00b3ad !important;
 }
 
 /* Make code blocks match body font size */

@@ -15,8 +15,7 @@ We will be using Ollama to run our local LLM. To do this you will need to instal
 2. Start Ollama and Then choose the **Gemma3:4b** model from the drop down in the chat box.
 3. Type "Hello" in the chat box to trigger the model download.
 
-```{admonition} Choosing other models
-:class: warning
+```{warning} Choosing other models
 You can choose other models, and this process will be mostly the same, but be aware that the bigger the model, the more memory it will require and the slower it will be in generating responses. 
 
 Models are measured by the number of parameters they have, so a 4b model has 4 billion parameters, while a 7b model has 7 billion parameters. You can use the Ollama UI to experiment with different models and determine which one works best for your game.
@@ -46,7 +45,8 @@ PARAMETER temperature 0.2
 PARAMETER num_ctx 4096
 ```
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * **FROM** &rarr; this is the base model for our custom model. If you chose a different model, you will need to change this to match the model you chose.
 * **SYSTEM** &rarr; this is the system prompt that will be used to generate responses for this character. You can change this to create different personalities for your characters.
 * **PARAMETER** &rarr; these are parameters that control how the model generates responses. 
@@ -57,7 +57,7 @@ PARAMETER num_ctx 4096
 Save the file as ***nigel.txt*** in the Deepest Dungeon directory.
 
 ```{admonition} ModelFile Reference
-:class: note
+:class: hint
 Additional parameters and options for the model can be found in the [Ollama documentation](https://docs.ollama.com/modelfile).
 ```
 
@@ -70,8 +70,7 @@ You can do this by:
 2. selecting **Open system shell**. 
 3. Then type the following command to build your custom model:
 
-```{admonition} Correct directory
-:class: warning
+```{warning} Correct directory
 Make sure the directory in your terminal prompt is the ***deepest_dungeon*** directory.
 ```
 
@@ -79,7 +78,8 @@ Make sure the directory in your terminal prompt is the ***deepest_dungeon*** dir
 ollama create nigel -f nigel.txt
 ```
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * **ollama** &rarr; calls the ollama server rnning on your laptop
 * **create** &rarr; this is the command to create a new model
 * **nigel** &rarr; this is the name of the new model. You can change this to match the name of your character.

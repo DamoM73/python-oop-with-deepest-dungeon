@@ -19,8 +19,7 @@ Now that the user has a dungeon that they can move around, we need to make it in
 
 To achieve this we will:
 
-```{admonition} Pseudocode
-:class: pseudocode
+```{pseudocode} Pseudocode
 * Define a character class
 * Create characters
 * Add characters to the rooms
@@ -60,8 +59,8 @@ class Character():
 
 Let's investigate this code:
 
-```{admonition} Code Explaination
-:class: info
+```{admonition} Code Explanation
+:class: hint
 * `# character.py` &rarr; a note to remind us which file this code belongs to
 * `class Character():` &rarr; creates a new type of object called `Character`
 * `def __init__(self, name):` &rarr; this special method runs every time you make a new Character
@@ -119,8 +118,8 @@ lab.describe()
 
 Investigating that code:
 
-```{admonition} Code Explaination
-:class: info
+```{admonition} Code Explanation
+:class: hint
 * `from character import Character` &rarr; brings the Character class into this file so we can use it
 * `# create characters` &rarr; a note showing this section is where we make characters
 * `ugine = Character("Ugine")` &rarr; makes a new Character named Ugine and stores it in the variable `ugine`
@@ -179,8 +178,8 @@ class Room():
 
 Investigating that code:
 
-```{admonition} Code Explaination
-:class: info
+```{admonition} Code Explanation
+:class: hint
 * `self.character = None` &rarr; creates a new attribute called `character` and assigns `None` to it.
 ```
 
@@ -252,7 +251,8 @@ while running:
 
 Investigating the code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `armoury.character = ugine` &rarr; puts the character Ugine into the armoury room
 * `lab.character = nigel` &rarr; puts the character Nigel into the lab room
 ```
@@ -290,7 +290,8 @@ class Character():
 
 Investigating the new code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `def describe(self):` &rarr; creates a describe method for characters
   * even though we already have a describe method, it’s fine because that one belongs to the Room class
   * they’re in different “namespaces,” which just means they belong to different objects
@@ -300,7 +301,7 @@ Investigating the new code:
 ```
 
 ```{admonition} Name spaces
-:class: note
+:class: hint
 Imagine your wardrobe at home. You have different spots for different things — shelves for shirts, drawers for socks, hangers for jackets. When you need something, you go to the right spot and grab it.
 
 Namespaces in programming work the same way. They’re like labelled sections that keep code organised. Each namespace stores its own variables and functions, just like each part of your wardrobe stores its own type of clothes.
@@ -356,7 +357,8 @@ class Room():
 
 Let's investigate that code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `if self.character is not None:` &rarr; checks if this room actually has a character in it
   * the `is` keyword is used to check if something is equal to `None`
 * if there *is* a character, the code runs the character’s `describe` method to show their details
@@ -411,7 +413,8 @@ class Character():
 
 Let's investigate this code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `def talk(self):` &rarr; this creates the talk method for this character
 * `# send conversation to the terminal` &rarr; a note explaining what the method does
 * `if self.conversation is not None:` &rarr; checks if the character actually has something to say
@@ -548,7 +551,8 @@ while running:
 
 Since the event handler for all three interactions is virtually the same, we'll just investigate the code for the `talk` method:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `elif command == "talk":` &rarr; checks if the user's command was `talk`
 * `if current_room.character is not None:` &rarr; checks if there is a character in the room
   * remember that rooms can not have a character (eg. Cavern) so we need to allow for this.
@@ -561,8 +565,9 @@ Since the event handler for all three interactions is virtually the same, we'll 
 
 Once again we have only been focusing on the first four stages of the PRIMM model. Now it is time for your to implement the **Make** phase.
 
+```{question} Make
 In Stage 1 you created an additional room. So now it is time to populate that room.
 
 * Create an additional character for each extra room you've added
 * Add those characters to your additional rooms
-
+```

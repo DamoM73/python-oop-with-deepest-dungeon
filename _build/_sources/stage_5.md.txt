@@ -20,8 +20,7 @@ Next, we’re going to make the dungeon feel more alive by adding items. Most du
 
 In this stage you will:
 
-```{admonition} Pseudocode
-:class: pseudocode
+```{pseudocode} Pseudocode
 * Make an Item class
 * Create your own item objects
 * Put those items into different rooms
@@ -53,7 +52,8 @@ class Item():
 
 In investigating the code everything should be familiar:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * We made the Item class.
 * We wrote the `__init__` method that runs when you create a new item.
 * We took the item’s name and stored it in `self.name`.
@@ -160,7 +160,8 @@ while running:
 
 Again, in investigating the code this should all be familiar.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 For each item, we did the following:
 
 * Imported the Item class.
@@ -312,7 +313,8 @@ while running:
 
 Investigating these two code changes should look familiar to you.
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * We added an `item` attribute to the Room class.
 * We made three items:
   * each item was given a name
@@ -412,8 +414,10 @@ Go a step further and test the code by going to each room and checking that the 
 
 Now it is time for your to implement the **Make** phase.
 
+
+```{question} Make
 You should:
 
 * make an additional item for each of your additional rooms
 * add your additional items to their room.
-
+```

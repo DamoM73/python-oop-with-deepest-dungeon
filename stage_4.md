@@ -18,8 +18,7 @@ So far we have created a multiple-room dungeon that the user can move between. W
 
 During this stage we will refine our characters by:
 
-```{admonition} Pseudocode
-:class: pseudocode
+```{pseudocode} Pseudocode
 * define two character types:
   * friend
   * enemy
@@ -38,7 +37,7 @@ Both classes have arrows pointing to `Character` because they are child classes.
 The diagram shows how these new classes build on top of the original `Character` class.
 
 ```{admonition} Inheritance
-:class: note
+:class: hint
 Inheritance in OOP means making a new class that is based on an existing one. It’s like a family tree: a child class gets traits from its parent class.
 
 This helps you avoid rewriting the same code and makes it easier to organise different types of things by what they share and what makes them different.
@@ -70,7 +69,7 @@ If both classes use the same `describe` method, it’s better to write it once i
 If you ever change the `describe` or `talk` method, you only change it in one place — the `Character` class — and both child classes get the updated version.
 
 ```{admonition} OOP Terminology
-:class: note
+:class: hint
 In OOP, different books and websites sometimes use different words for the same idea. Here are the main ones you might see:
 
 * **parent class** can also be called a **superclass** or **base class**
@@ -126,7 +125,8 @@ class Friend(Character):
 
 Investigating that code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `class Friend(Character):` &rarr; creates a new class called `Friend`, and the `(Character)` shows that `Friend` comes from the `Character` parent class.
 * `def __init__(self, name):` &rarr; is a special method that runs automatically whenever you make a new `Friend` object.
 * The comment explains that this sets up the `Friend` object using the parent class.
@@ -186,7 +186,8 @@ class Enemy(Character):
 
 Now unpack the code that creates the `Enemy` class:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `class Enemy(Character):` &rarr; creates the `Enemy` class and shows it is a child of the `Character` class.
 * `def __init__(self, name):` &rarr; runs automatically when you make a new `Enemy` object.
 * The comment explains that this sets up the `Enemy` by using the parent class first.
@@ -280,7 +281,8 @@ while running:
 
 Investigating that code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `from character import Friend, Enemy` &rarr; means we’re now creating characters as either `Friend` or `Enemy`, not as basic `Character` objects anymore.
 * `ugine = Enemy("Ugine")` &rarr; creates Ugine as an `Enemy`.
 * `ugine.weakness = "cheese"` &rarr; sets Ugine’s weakness, because all enemies have a `weakness` attribute.
@@ -310,7 +312,7 @@ If all your expected results match your actual results then there is no problems
 We want the game to react differently depending on the type of character. You shouldn’t hug an enemy, and you shouldn’t fight a friend. When different classes respond to the same action in different ways, this is called **polymorphism**.
 
 ```{admonition} Polymorphism
-:class: note
+:class: hint
 Polymorphism in OOP means different classes can use the same method but do different things with it. It’s like asking different people to “work” — they all do it, but the way they work depends on their job.
 
 This lets your code treat different objects in a similar way, even if they aren’t the same type. It makes your programs easier to write, easier to update, and more flexible when things change.
@@ -374,7 +376,8 @@ class Enemy(Character):
 
 Investigating the code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `def hug(self):` &rarr; creates a new `hug` method for the `Friend` class. Because it has the same name as the one in `Character`, it replaces the old version for all friends.
 * The comment explains what the method is meant to do.
 * `print(f"{self.name} hugs you back.")` &rarr; shows a message using the friend’s name.
@@ -447,7 +450,8 @@ class Enemy(Character):
 
 Investing that code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `def fight(self, item):` &rarr; creates the `fight` method for enemies. The `item` is the weapon the player chooses.
 * The comment explains that this method checks the weapon and returns whether the player survives.
 * `if item == self.weakness:` &rarr; checks if the weapon matches the enemy’s weakness.
@@ -544,7 +548,8 @@ while running:
 
 Investigate the code:
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `weapon = input("What will you fight with? > ").lower()` &rarr; asks the player to type the weapon they want to use.
 * `if current_room.character.fight(weapon):` &rarr; checks if the player wins the fight.
   * `current_room.character.fight(weapon)` &rarr; calls the `fight` method, which also prints the fight message.
@@ -556,7 +561,7 @@ Investigate the code:
 ```
 
 ```{admonition} Truthy and Falsy Values
-:class: note
+:class: hint
 In Python, some values act like **True** and some act like **False** when used in an `if` statement, even if they aren’t actually the words `True` or `False`. These are called **truthy** and **falsy** values. 
 
 Truthy values include things like non-empty strings, non-zero numbers, and lists with items in them, while falsy values include `None`, `0`, empty strings, empty lists, and `False` itself. 
@@ -744,7 +749,7 @@ Now we changed both the `hug` and `fight` methods, time to do some testing. Agai
 There’s another problem when you try to fight Nigel, but this time it’s different. You don’t get an error message—the program just stops. This type of mistake is called a **logic error**.
 
 ```{admonition} Types of programming errors
-:class: note
+:class: hint
 There are three main types of programming errors:
 * **Syntax errors** happen when you break the rules of Python. The program won’t run at all and will instantly show an error.
 * **Runtime errors** happen while the program is running. Python tries to do something but can’t, so it crashes and shows an error. The earlier fight error was one of these.
@@ -897,7 +902,8 @@ class Enemy(Character):
             return False
 ```
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * **line 29** now returns `True` when you fight a friend, which means the **line 71** of the ***main.py*** `running == False` does not run.
 ```
 
@@ -933,7 +939,8 @@ In ***main.py*** adjust the highlighted code below.
             print("There is no one here to fight")
 ```
 
-```{admonition} Code Explaination
+```{admonition} Code Explanation
+:class: note
 * `if isinstance(current_room.character, Enemy):` &rarr; checks whether the character in the room is an **Enemy**.
   * This is `True` only when the character was created using the `Enemy` class.
 ```
@@ -946,5 +953,8 @@ Finally check that you can attempt to fight Nigel, and then still hug him afterw
 
 Now it is time for your to implement the **Make** phase.
 
-Consider the additional character or characters that you have added, and change them into either a Friend, or an Enemy. Don't forget their weakness if they are an enemy.
+```{question} Make
+Consider the additional character or characters that you have added, and change them into either a Friend, or an Enemy. 
 
+Don't forget their weakness if they are an enemy.
+```
