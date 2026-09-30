@@ -1,0 +1,93 @@
+[project]
+site_name = "Deepest Dungeon - Python OOP"
+site_description = "Learn object-oriented programming in Python by building a text-based adventure game, for Year 9/10 students using Thonny."
+site_author = "Damien Murtagh"
+site_url = "https://damom73.github.io/python-oop-with-deepest-dungeon/"
+repo_url = "https://github.com/DamoM73/python-oop-with-deepest-dungeon"
+repo_name = "DamoM73/python-oop-with-deepest-dungeon"
+copyright = "Content licensed under CC BY-NC-SA 4.0. Code licensed under GPLv3."
+docs_dir = "docs"
+extra_css = ["stylesheets/extra.css"]
+
+nav = [
+  { "Home" = "index.md" },
+  { "Start" = [
+    { "Introduction for Teachers" = "start/teachers.md" },
+    { "Introduction for Students" = "start/students.md" },
+    { "OOP Primer" = "start/oop_primer.md" },
+  ] },
+  { "Stages" = [
+    { "Stage 1: Create Rooms" = "stages/stage_1.md" },
+    { "Stage 2: Movement" = "stages/stage_2.md" },
+    { "Stage 3: Character Creation" = "stages/stage_3.md" },
+    { "Stage 4: Character Types" = "stages/stage_4.md" },
+    { "Stage 5: Item Creation" = "stages/stage_5.md" },
+    { "Stage 6: Use Items" = "stages/stage_6.md" },
+    { "Stage 7: Victory Conditions" = "stages/stage_7.md" },
+    { "Stage 8: Usability" = "stages/stage_8.md" },
+  ] },
+  { "Extensions" = [
+    { "Player Class" = "extensions/player.md" },
+    { "Character LLM" = "extensions/llm.md" },
+    { "Extension Ideas" = "extensions/extension_ideas.md" },
+  ] },
+  { "Guides" = [
+    { "Debugging with Thonny" = "guides/debugging.md" },
+    { "Licencing" = "guides/licencing.md" },
+  ] },
+]
+
+[project.theme]
+language = "en"
+logo = "assets/logo_header.png"
+favicon = "assets/favicon.ico"
+features = [
+  "content.code.copy",
+  "content.code.select",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.path",
+  "navigation.sections",
+  "navigation.tabs",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "custom"
+accent = "custom"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+[project.markdown_extensions]
+admonition = {}
+attr_list = {}
+md_in_html = {}
+tables = {}
+toc.permalink = true
+pymdownx.details = {}
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.snippets.base_path = ["docs"]
+pymdownx.snippets.check_paths = true
+pymdownx.superfences = {}
