@@ -1,0 +1,647 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="../genindex.html"><link rel="search" title="Search" href="../search.html">
+        <link rel="prefetch" href="../_static/opp_logo.png" as="image">
+        <link rel="prefetch" href="../_static/opp_logo.png" as="image">
+
+    <link rel="shortcut icon" href="../_static/logo.ico"><!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
+        <title>Deepest Dungeon (Python OOP): audit and rework plan - Deepest Dungeon</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=eff86c2a" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  --font-stack: Verdana, sans-serif;
+  --font-stack--monospace: 'Courier New', monospace;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --font-stack: Verdana, sans-serif;
+  --font-stack--monospace: 'Courier New', monospace;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  --font-stack: Verdana, sans-serif;
+  --font-stack--monospace: 'Courier New', monospace;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../index.html"><div class="brand">Deepest Dungeon</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo only-light" src="../_static/opp_logo.png" alt="Light Logo"/>
+    <img class="sidebar-logo only-dark" src="../_static/opp_logo.png" alt="Dark Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">Deepest Dungeon</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../introduction.html">Introduction for Teachers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../student_intro.html">Introduction for Students</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../oop_introduction.html">OOP Primer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stage_1.html">Stage 1 - Create Rooms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stage_2.html">Stage 2 - Movement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stage_3.html">Stage 3 - Character Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stage_4.html">Stage 4 - Character Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stage_5.html">Stage 5 - Item Creation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stage_6.html">Stage 6 - Use Items</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stage_7.html">Stage 7 - Victory Conditions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stage_8.html">Stage 8 - Useability</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ext_player.html">Extension - Player Class</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ext_llm.html">Extension - Character LLM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../extention.html">Extensions Ideas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../debugging.html">Debugging with Thonny</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../licencing.html">Licensing</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../_sources/Claude outputs/python-oop-with-deepest-dungeon_rework_plan.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="deepest-dungeon-python-oop-audit-and-rework-plan">
+<h1>Deepest Dungeon (Python OOP): audit and rework plan<a class="headerlink" href="#deepest-dungeon-python-oop-audit-and-rework-plan" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p>Live site: https://damom73.github.io/python-oop-with-deepest-dungeon/</p></li>
+<li><p>Repo: <code class="docutils literal notranslate"><span class="pre">D:\GIT\python-oop-with-deepest-dungeon</span></code> (GitHub: DamoM73/python-oop-with-deepest-dungeon)</p></li>
+<li><p>Current build: Sphinx + MyST + Furo, two custom directives (<code class="docutils literal notranslate"><span class="pre">pseudocode</span></code>, <code class="docutils literal notranslate"><span class="pre">question</span></code>) in <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>, orange theme in <code class="docutils literal notranslate"><span class="pre">_static/custom.css</span></code>, deployed to <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> by an old Actions workflow (<code class="docutils literal notranslate"><span class="pre">actions/checkout&#64;v2.3.4</span></code>, Python 3.9)</p></li>
+<li><p>Target: Zensical on a <code class="docutils literal notranslate"><span class="pre">zensical</span></code> branch; <code class="docutils literal notranslate"><span class="pre">main</span></code> stays live until go-live</p></li>
+</ul>
+<section id="decisions">
+<h2>Decisions<a class="headerlink" href="#decisions" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Area</p></th>
+<th class="head"><p>Decision</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Audience</p></td>
+<td><p>Year 9/10 students, plus the teacher page</p></td>
+</tr>
+<tr class="row-odd"><td><p>Editor</p></td>
+<td><p>Thonny</p></td>
+</tr>
+<tr class="row-even"><td><p>Site type</p></td>
+<td><p>Mixed: sequential project stages (template B) + extensions + guides (template D)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Nav</p></td>
+<td><p>Tabs: Start, Stages, Extensions, Guides</p></td>
+</tr>
+<tr class="row-even"><td><p>Videos</p></td>
+<td><p>Keep all eight stage videos (already <code class="docutils literal notranslate"><span class="pre">youtube-nocookie.com</span></code>)</p></td>
+</tr>
+<tr class="row-odd"><td><p>Pseudocode</p></td>
+<td><p>Keep, as a titled plain-text code block (the five-callout standard has no pseudocode type)</p></td>
+</tr>
+<tr class="row-even"><td><p>Class diagrams</p></td>
+<td><p>Keep all PNGs</p></td>
+</tr>
+<tr class="row-odd"><td><p>Debugging with Thonny</p></td>
+<td><p>Keep as a guide page with all 33 screenshots</p></td>
+</tr>
+<tr class="row-even"><td><p>Extensions</p></td>
+<td><p>Keep Player Class and Character LLM</p></td>
+</tr>
+<tr class="row-odd"><td><p>Code</p></td>
+<td><p>Every program shown on a page becomes a snippet file under <code class="docutils literal notranslate"><span class="pre">docs/examples/</span></code>, included with <code class="docutils literal notranslate"><span class="pre">hl_lines</span></code> for new/changed lines. The code itself is kept as is (no restructuring into minimal examples)</p></td>
+</tr>
+<tr class="row-even"><td><p>Make tasks</p></td>
+<td><p>Keep each stage’s open Make task, rephrased as a question under <code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Exercises</span></code>; no starter files or solutions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Licences</p></td>
+<td><p>Content CC BY-NC-SA 4.0, code GPLv3 (unchanged)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="page-inventory">
+<h2>Page inventory<a class="headerlink" href="#page-inventory" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>New page</p></th>
+<th class="head"><p>Source</p></th>
+<th class="head"><p>Video</p></th>
+<th class="head"><p>Change</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Home (<code class="docutils literal notranslate"><span class="pre">index.md</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">index.md</span></code></p></td>
+<td><p>–</p></td>
+<td><p>Rewrite: purpose, how to use the site, callouts, code blocks, error messages, tutorial files</p></td>
+</tr>
+<tr class="row-odd"><td><p>Start / Teachers (<code class="docutils literal notranslate"><span class="pre">start/teachers.md</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">introduction.md</span></code></p></td>
+<td><p>–</p></td>
+<td><p>Remove <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> portable note; keep AC v9 table (link-check in VS Code)</p></td>
+</tr>
+<tr class="row-even"><td><p>Start / Students (<code class="docutils literal notranslate"><span class="pre">start/students.md</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">student_intro.md</span></code></p></td>
+<td><p>–</p></td>
+<td><p>Keep Thonny + project folder setup; move “coloured boxes” explanation to Home</p></td>
+</tr>
+<tr class="row-odd"><td><p>Start / OOP Primer (<code class="docutils literal notranslate"><span class="pre">start/oop_primer.md</span></code>)</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">oop_introduction.md</span></code></p></td>
+<td><p>–</p></td>
+<td><p>Guide template</p></td>
+</tr>
+<tr class="row-even"><td><p>Stage 1: Create Rooms</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stage_1.md</span></code></p></td>
+<td><p>GeSTPYPPEfU</p></td>
+<td><p>Move “How we plan” pseudocode explanation here as a tip; PRIMM intro as page text</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stage 2: Movement</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stage_2.md</span></code></p></td>
+<td><p>hZd1FcDApCI</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Stage 3: Character Creation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stage_3.md</span></code></p></td>
+<td><p>ufsmJYdUg1Y</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Stage 4: Character Types</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stage_4.md</span></code></p></td>
+<td><p>J8U97_SRx7s</p></td>
+<td><p>Contains the site’s only error block</p></td>
+</tr>
+<tr class="row-even"><td><p>Stage 5: Item Creation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stage_5.md</span></code></p></td>
+<td><p>jYSs_-wY8ys</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Stage 6: Use Items</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stage_6.md</span></code></p></td>
+<td><p>JsUGdNxLlLM</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>Stage 7: Victory Conditions</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stage_7.md</span></code></p></td>
+<td><p>hTGv542obJo</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>Stage 8: Usability</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">stage_8.md</span></code></p></td>
+<td><p>lHSCfn0U45k</p></td>
+<td><p>Keep “Final code” section as four snippets; keep the deliberate logic mistakes</p></td>
+</tr>
+<tr class="row-even"><td><p>Extensions / Player Class</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ext_player.md</span></code></p></td>
+<td><p>–</p></td>
+<td><p>Add learn callout</p></td>
+</tr>
+<tr class="row-odd"><td><p>Extensions / Character LLM</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ext_llm.md</span></code></p></td>
+<td><p>–</p></td>
+<td><p>Unfinished (see open questions)</p></td>
+</tr>
+<tr class="row-even"><td><p>Extensions / Extension Ideas</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">extention.md</span></code></p></td>
+<td><p>–</p></td>
+<td><p>Rename file <code class="docutils literal notranslate"><span class="pre">extension_ideas.md</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Guides / Debugging with Thonny</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">debugging.md</span></code></p></td>
+<td><p>–</p></td>
+<td><p>Guide template; <code class="docutils literal notranslate"><span class="pre">buggy_code.py</span></code> as snippet + zip</p></td>
+</tr>
+<tr class="row-even"><td><p>Guides / Licencing</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">licencing.md</span></code></p></td>
+<td><p>–</p></td>
+<td><p>Unchanged content</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="proposed-nav">
+<h2>Proposed nav<a class="headerlink" href="#proposed-nav" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Home
+Start
+  Introduction for Teachers
+  Introduction for Students
+  OOP Primer
+Stages
+  Stage 1: Create Rooms … Stage 8: Usability
+Extensions
+  Player Class
+  Character LLM
+  Extension Ideas
+Guides
+  Debugging with Thonny
+  Licencing
+</pre></div>
+</div>
+</section>
+<section id="repo-layout">
+<h2>Repo layout<a class="headerlink" href="#repo-layout" title="Link to this heading">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>zensical.toml
+requirements.txt                         # zensical==&lt;pinned&gt;
+docs/
+  index.md
+  start/teachers.md, students.md, oop_primer.md
+  stages/stage_1.md … stage_8.md
+  extensions/player.md, llm.md, extension_ideas.md
+  guides/debugging.md, licencing.md
+  examples/stage_N/stepK/{main,room,character,item}.py   # each program version shown
+  examples/ext_player/stepK/…, examples/ext_llm/…
+  examples/guides/buggy_code/main.py
+  assets/                                # existing PNGs, logo, favicon
+  stylesheets/extra.css
+  downloads/deepest_dungeon_tutorials.zip   # stage checkpoints + buggy_code
+scripts/make_zip.py, check_explanations.py
+</pre></div>
+</div>
+</section>
+<section id="syntax-conversion-specific-to-this-site">
+<h2>Syntax conversion specific to this site<a class="headerlink" href="#syntax-conversion-specific-to-this-site" title="Link to this heading">¶</a></h2>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Sphinx</p></th>
+<th class="head"><p>Zensical</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{topic}</span> <span class="pre">Learning</span> <span class="pre">Intentions</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">!!!</span> <span class="pre">learn</span> <span class="pre">&quot;In</span> <span class="pre">this</span> <span class="pre">lesson</span> <span class="pre">we</span> <span class="pre">will</span> <span class="pre">learn&quot;</span></code> under the title, above the video</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{pseudocode}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">Pseudocode</span></code> + <code class="docutils literal notranslate"><span class="pre">```text</span> <span class="pre">title=&quot;Stage</span> <span class="pre">N</span> <span class="pre">pseudocode&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{admonition}</span></code> <code class="docutils literal notranslate"><span class="pre">:class:</span> <span class="pre">note</span></code> Code Explanation</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">???</span> <span class="pre">note</span> <span class="pre">&quot;Code</span> <span class="pre">explanation&quot;</span></code> after a <code class="docutils literal notranslate"><span class="pre">!!!</span> <span class="pre">primm</span></code> callout, rewritten to <code class="docutils literal notranslate"><span class="pre">**line</span> <span class="pre">N**</span> <span class="pre">→</span></code> format</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{admonition}</span></code> <code class="docutils literal notranslate"><span class="pre">:class:</span> <span class="pre">hint</span></code> and <code class="docutils literal notranslate"><span class="pre">{hint}</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">!!!</span> <span class="pre">tip</span> <span class="pre">&quot;Title&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{question}</span> <span class="pre">Make</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">##</span> <span class="pre">Exercises</span></code> → <code class="docutils literal notranslate"><span class="pre">###</span> <span class="pre">Exercise</span> <span class="pre">1</span></code>, “Can you …?”</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{code-block}</span> <span class="pre">python</span></code> + <code class="docutils literal notranslate"><span class="pre">:emphasize-lines:</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">--8&lt;--</span></code> snippet with <code class="docutils literal notranslate"><span class="pre">hl_lines</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">:lineno-start:</span></code> fragments (Stage 4, Player Class)</p></td>
+<td><p>full-file snippet with <code class="docutils literal notranslate"><span class="pre">hl_lines</span></code>, or <code class="docutils literal notranslate"><span class="pre">linenums=&quot;81&quot;</span></code> for fragments</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">{code-block}</span> <span class="pre">error</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">```</span> <span class="pre">{</span> <span class="pre">.text</span> <span class="pre">.error</span> <span class="pre">linenums=&quot;1&quot;</span> <span class="pre">}</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">{literalinclude}</span></code> / <code class="docutils literal notranslate"><span class="pre">{download}</span></code></p></td>
+<td><p>snippet + link to the zip</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="bugs-and-outdated-facts-found">
+<h2>Bugs and outdated facts found<a class="headerlink" href="#bugs-and-outdated-facts-found" title="Link to this heading">¶</a></h2>
+<p>Code (python_files)</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">python_files/stage_N/</span></code> is stale: it uses <code class="docutils literal notranslate"><span class="pre">room.inhabitant</span></code>, while every page uses <code class="docutils literal notranslate"><span class="pre">room.character</span></code>. The pages are treated as the source of truth; the new snippet files are built from the pages.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print(&quot;Thank</span> <span class="pre">you</span> <span class="pre">for</span> <span class="pre">playing</span> <span class="pre">Darkest</span> <span class="pre">Dungeon&quot;)</span></code> in Stage 8 and Player Class; should be Deepest Dungeon.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Enemy.get_num_of_enemy()</span></code> has no <code class="docutils literal notranslate"><span class="pre">self</span></code> and no decorator, so it fails if called on an object (<code class="docutils literal notranslate"><span class="pre">ugine.get_num_of_enemy()</span></code>). It is also never used; the main loop reads <code class="docutils literal notranslate"><span class="pre">Enemy.num_of_enemy</span></code> directly, which contradicts the encapsulation message.</p></li>
+</ul>
+<p>Stage 1</p>
+<ul class="simple">
+<li><p>Class diagram and text say <code class="docutils literal notranslate"><span class="pre">link_room(room,</span> <span class="pre">direction)</span></code>; the code uses <code class="docutils literal notranslate"><span class="pre">link_rooms(room_to_link,</span> <span class="pre">direction)</span></code>.</p></li>
+<li><p>“intialise” in code comments; “The case diagram”; “Calling your room.py save it”; “type to following code”.</p></li>
+<li><p>Says “Class names must use CamelCase”; it’s a convention (PEP 8), which the next sentence says.</p></li>
+</ul>
+<p>Stage 3</p>
+<ul class="simple">
+<li><p>Four Code Explanation boxes use the <code class="docutils literal notranslate"><span class="pre">hint</span></code> class, so they display as hints.</p></li>
+</ul>
+<p>Stage 7</p>
+<ul class="simple">
+<li><p>Class diagram adds <code class="docutils literal notranslate"><span class="pre">get_num_of_enemy</span></code>, see above.</p></li>
+</ul>
+<p>Stage 8</p>
+<ul class="simple">
+<li><p>Title “Useability” → “Usability”.</p></li>
+<li><p>Code comment “converstation”.</p></li>
+<li><p>Final Make says “There are a few logic mistakes in the code” — these are deliberate and will be kept.</p></li>
+</ul>
+<p>Character LLM</p>
+<ul class="simple">
+<li><p>“downoad”, “chartacters”, stray <code class="docutils literal notranslate"><span class="pre">:</span></code> option line in a code block, “we will add always call”.</p></li>
+<li><p>Page ends at “Up to you” without wiring <code class="docutils literal notranslate"><span class="pre">chat()</span></code> into the main loop.</p></li>
+</ul>
+<p>Flavour text to confirm (possibly deliberate): “unknownable contraptions”, “Well youngan”, “golden bead in woven through his beard”.</p>
+<p>Teacher page and repo</p>
+<ul class="simple">
+<li><p>Portable <code class="docutils literal notranslate"><span class="pre">_build/html</span></code> note is out of date after Zensical.</p></li>
+<li><p>“The intention is to add both flowchart and pseudocode” — pseudocode is now added.</p></li>
+<li><p>Leftovers to remove later (Confirm first): <code class="docutils literal notranslate"><span class="pre">%GIT%python-oop-with-deepest-dungeon/</span></code>, <code class="docutils literal notranslate"><span class="pre">_build/</span></code>, <code class="docutils literal notranslate"><span class="pre">_static/</span></code>, <code class="docutils literal notranslate"><span class="pre">_templates/</span></code>, <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>, <code class="docutils literal notranslate"><span class="pre">Makefile</span></code>, <code class="docutils literal notranslate"><span class="pre">make.bat</span></code>, <code class="docutils literal notranslate"><span class="pre">admonitions.md</span></code>, <code class="docutils literal notranslate"><span class="pre">notes.md</span></code>, <code class="docutils literal notranslate"><span class="pre">todo.md</span></code>, root <code class="docutils literal notranslate"><span class="pre">.md</span></code> pages, <code class="docutils literal notranslate"><span class="pre">python_files/</span></code>, <code class="docutils literal notranslate"><span class="pre">.claude/</span></code>, <code class="docutils literal notranslate"><span class="pre">cover.psd</span></code> (3.3 MB), <code class="docutils literal notranslate"><span class="pre">logo.psd</span></code> (6.1 MB), <code class="docutils literal notranslate"><span class="pre">youtube_cover.png</span></code>, <code class="docutils literal notranslate"><span class="pre">oop_logo.png</span></code>/<code class="docutils literal notranslate"><span class="pre">_static/opp_logo.png</span></code> duplicates. Keep <code class="docutils literal notranslate"><span class="pre">working_files/*.drawio</span></code>.</p></li>
+</ul>
+</section>
+<section id="pedagogical-observations">
+<h2>Pedagogical observations<a class="headerlink" href="#pedagogical-observations" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Each stage repeats the whole of <code class="docutils literal notranslate"><span class="pre">main.py</span></code> at every step (up to six times per page). Snippet files with <code class="docutils literal notranslate"><span class="pre">hl_lines</span></code> keep this but remove the copy-paste drift risk.</p></li>
+<li><p>Current Code Explanation boxes quote the code instead of line numbers. The house style needs <code class="docutils literal notranslate"><span class="pre">**line</span> <span class="pre">N**</span> <span class="pre">→</span></code>, explaining only the new/changed (highlighted) lines, since earlier lines were explained on earlier steps.</p></li>
+<li><p>PRIMM is introduced inside a hint in Stage 1; it moves to page text, then the standard <code class="docutils literal notranslate"><span class="pre">primm</span></code> callout after every example.</p></li>
+<li><p>Stage Make tasks are open design tasks, which suit Year 9/10.</p></li>
+</ul>
+</section>
+<section id="colour-theme">
+<h2>Colour theme<a class="headerlink" href="#colour-theme" title="Link to this heading">¶</a></h2>
+<p>Banner candidates (current theme is orange <code class="docutils literal notranslate"><span class="pre">#FF9100</span></code>, which only gives 2.3:1 with white text): A burnt orange <code class="docutils literal notranslate"><span class="pre">#A84300</span></code> (6.06), B torch rust <code class="docutils literal notranslate"><span class="pre">#8A3B12</span></code> (7.73), C dungeon stone brown <code class="docutils literal notranslate"><span class="pre">#5D4037</span></code> (9.32), D blood red <code class="docutils literal notranslate"><span class="pre">#9B1C1C</span></code> (8.15). Final mapping to be confirmed before building.</p>
+</section>
+<section id="open-questions">
+<h2>Open questions<a class="headerlink" href="#open-questions" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Fix <code class="docutils literal notranslate"><span class="pre">get_num_of_enemy</span></code> (as <code class="docutils literal notranslate"><span class="pre">&#64;staticmethod</span></code> and use it in the main loop) or leave it?</p></li>
+<li><p>Finish the Character LLM page (wire <code class="docutils literal notranslate"><span class="pre">chat()</span></code> into the talk command) or leave “Up to you” as the open task?</p></li>
+<li><p>Fix the flavour-text spellings?</p></li>
+</ul>
+</section>
+<section id="build-order">
+<h2>Build order<a class="headerlink" href="#build-order" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Branch <code class="docutils literal notranslate"><span class="pre">zensical</span></code> in GitHub Desktop (step by step).</p></li>
+<li><p>Scaffold: <code class="docutils literal notranslate"><span class="pre">zensical.toml</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, <code class="docutils literal notranslate"><span class="pre">extra.css</span></code>, assets, scripts, Home, Start pages.</p></li>
+<li><p>Stages 1–4, preview.</p></li>
+<li><p>Stages 5–8, preview.</p></li>
+<li><p>Extensions, Guides, zip; run checks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VSCODE_CLAUDE_TASKS.md</span></code>: link check, spell-check, cleanup, workflow, README, go-live.</p></li>
+</ol>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            <div class="icons">
+              <a class="muted-link " href="https://github.com/DamoM73/python-oop-with-deepest-dungeon" aria-label="GitHub">
+                <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path>
+                </svg>
+            </a>
+              
+            </div>
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Deepest Dungeon (Python OOP): audit and rework plan</a><ul>
+<li><a class="reference internal" href="#decisions">Decisions</a></li>
+<li><a class="reference internal" href="#page-inventory">Page inventory</a></li>
+<li><a class="reference internal" href="#proposed-nav">Proposed nav</a></li>
+<li><a class="reference internal" href="#repo-layout">Repo layout</a></li>
+<li><a class="reference internal" href="#syntax-conversion-specific-to-this-site">Syntax conversion specific to this site</a></li>
+<li><a class="reference internal" href="#bugs-and-outdated-facts-found">Bugs and outdated facts found</a></li>
+<li><a class="reference internal" href="#pedagogical-observations">Pedagogical observations</a></li>
+<li><a class="reference internal" href="#colour-theme">Colour theme</a></li>
+<li><a class="reference internal" href="#open-questions">Open questions</a></li>
+<li><a class="reference internal" href="#build-order">Build order</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
