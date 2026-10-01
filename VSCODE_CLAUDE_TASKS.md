@@ -2,7 +2,7 @@
 
 These tasks finish the Zensical rework of *Deepest Dungeon - Python OOP*. They couldn't be done from Cowork, which could only create and overwrite files in this folder. It couldn't delete files, run git, access GitHub or write inside `.github/`.
 
-Work on the `zensical` branch. Do the tasks in order and check with Damien before each one marked **Confirm first**. Report the output of the checks after each task.
+The Zensical rework has gone live. From now on, all work happens on `main`. Do the tasks in order and check with Damien before each one marked **Confirm first**. Report the output of the checks after each task.
 
 ## Context
 
