@@ -1,3 +1,0 @@
-# room.py
-
-class Room():
