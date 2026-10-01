@@ -9,9 +9,9 @@ Work on the `zensical` branch. Do the tasks in order and check with Damien befor
 - **Site generator:** Zensical 0.0.66 (pinned in `requirements.txt`). Config is `zensical.toml`. Pages are in `docs/`.
 - **Preview:** `zensical serve`. **Build:** `zensical build --clean` (must report "No issues found").
 - **Audience:** Year 9/10 students (and their teachers), using Thonny.
-- **Structure:** Home (`docs/index.md`); Start (`docs/start/teachers.md`, `students.md`, `oop_primer.md`); eight stages (`docs/stages/stage_1.md` to `stage_8.md`); Extensions (`docs/extensions/player.md`, `llm.md`, `extension_ideas.md`); Guides (`docs/guides/debugging.md`, `licencing.md`).
+- **Structure:** Home (`docs/index.md`); Start (`docs/start/teachers.md`, `students.md`, `oop_primer.md`); eight stages (`docs/stages/stage_1.md` to `stage_8.md`); Extensions (`docs/extensions/player.md`, `llm.md`, `extension_ideas.md`); Guides (`docs/guides/developing.md`, `debugging.md`, `licencing.md`). The Developing a New Program guide has its own stepped pet shelter example in `docs/examples/guides/pet_shelter/`.
 - **Examples:** each stage builds one program across several files. Every version of a file shown on a page is a snippet file at `docs/examples/<section>/stepNN/<file>.py`, where a step folder holds only the files that changed in that step. Pages include them with `--8<-- "examples/..."` (pymdownx.snippets, base path `docs`), with `hl_lines` marking new or changed lines. A few fragments use a line range, for example `--8<-- "examples/stage_4/step06/main.py:65:73"` with `linenums="65"`; `hl_lines` still counts from 1 in those blocks.
-- **Student zip:** `python scripts/make_zip.py` builds `docs/downloads/deepest_dungeon.zip`. Each `deepest_dungeon/stage_N/` folder is a complete, runnable checkpoint (the latest version of every file, carried forward from earlier stages). `ext_player/` and `ext_llm/` both start from the end of Stage 8, and `guides/` holds `buggy_code.py` and `debug_names.py` (37 files).
+- **Student zip:** `python scripts/make_zip.py` builds `docs/downloads/deepest_dungeon.zip`. Each `deepest_dungeon/stage_N/` folder is a complete, runnable checkpoint (the latest version of every file, carried forward from earlier stages). `ext_player/` and `ext_llm/` both start from the end of Stage 8, and `guides/` holds the finished `pet_shelter/` program plus `buggy_code.py` and `debug_names.py` (40 files).
 - **Checks:** `python scripts/check_explanations.py` confirms every Code explanation line number matches its snippet. When a code block has `hl_lines`, only the highlighted code lines need explaining; comment lines are never referenced. Expect `0 issue(s) found`.
 - **Colour scheme:** burnt orange `#A84300` (header, tabs, links and headings in light mode; 6.06:1 with white text), torch orange `#E07B2E` (primary light, decorative only), peach `#FFDFB4` (active and hovered tab, dark-mode headings and accent), light blue `#8AB4F8` (dark-mode links). Set in `docs/stylesheets/extra.css`. Burnt orange keeps the old site's orange identity and is clearly different from the micro:bit (navy), Lego Spike (magenta) and Turtle (teal) banners.
 - **Callouts:** five types, the same on all of Damien's tutorial sites:
@@ -115,7 +115,7 @@ If Ollama is installed, run `docs/examples/` checkpoint `ext_llm` from the zip w
 
 ## 5. Final checks
 
-1. Run `python scripts/make_zip.py`. Expected: `Wrote 37 file(s)`.
+1. Run `python scripts/make_zip.py`. Expected: `Wrote 40 file(s)`.
 2. Run `python scripts/check_explanations.py`. Expected: `0 issue(s) found`.
 3. Run `zensical build --clean`. Expected: `No issues found`.
 4. Check every external link in `docs/` returns a working page (YouTube embeds, the Australian Curriculum links on the teachers page, Thonny, Ollama, Rich and Textual). Report broken ones to Damien rather than guessing replacements.

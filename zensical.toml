@@ -32,6 +32,7 @@ nav = [
     { "Extension Ideas" = "extensions/extension_ideas.md" },
   ] },
   { "Guides" = [
+    { "Developing a New Program" = "guides/developing.md" },
     { "Debugging with Thonny" = "guides/debugging.md" },
     { "Licencing" = "guides/licencing.md" },
   ] },

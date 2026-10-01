@@ -140,7 +140,7 @@ Tidy your code so it looks the same as the code below.
 
 ## Final make
 
-The stages are finished. Now it's our turn to make the dungeon our own by adding new features. The [Extension Ideas](../extensions/extension_ideas.md) page has some inspiration, and the [Extensions](../extensions/player.md) walk through two bigger changes.
+The stages are finished. Now it's our turn to make the dungeon our own by adding new features. The [Extension Ideas](../extensions/extension_ideas.md) page has some inspiration, the [Extensions](../extensions/player.md) walk through two bigger changes, and [Developing a New Program](../guides/developing.md) shows how to plan and build an object-oriented program of our own.
 
 There's at least one logic mistake hidden in the final code. We'll need to test the game to find it, and work out how to fix it. Use the [debugger](../guides/debugging.md) to help.
 
