@@ -4,7 +4,11 @@
       "Bash(grep -n \"^\\\\`\\\\`\\\\`{\" c:/GitHub/python-oop-with-deepest-dungeon/*.md)",
       "Bash(python3)",
       "Bash(grep -E \"^\\\\s*\\(-|\\\\*\\) \" c:/GitHub/python-oop-with-deepest-dungeon/*.md)",
-      "Bash(grep -n \"inlcud\\\\|occured\\\\|thier\\\\|recieve\\\\|aquire\" *.md)"
+      "Bash(grep -n \"inlcud\\\\|occured\\\\|thier\\\\|recieve\\\\|aquire\" *.md)",
+      "Bash(git rm *)",
+      "Bash(echo \"=== exit: $? ===\")",
+      "Bash(rm -f 'working_files/.$deepest_dungeon_diagrams.drawio.bkp')",
+      "Bash(echo \"exit $?\")"
     ]
   }
 }

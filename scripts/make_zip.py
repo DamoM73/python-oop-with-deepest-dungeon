@@ -10,7 +10,9 @@ checkpoint:
 
 Stage checkpoints carry forward in order (stage_1 … stage_8, then
 ext_player and ext_llm, which both start from the end of Stage 8).
-Other sections (for example guides/buggy_code) are copied as they are.
+guides/pet_shelter is a stepped program too, written as one finished
+folder. Other guide examples (for example guides/buggy_code) are copied
+as single files.
 
 Run from the repo root: python scripts/make_zip.py
 """
@@ -50,8 +52,11 @@ def main():
             for name, source in sorted(latest_files(extension, files).items()):
                 archive.write(source, f"deepest_dungeon/{extension}/{name}")
                 count += 1
+        for name, source in sorted(latest_files("guides/pet_shelter", {}).items()):
+            archive.write(source, f"deepest_dungeon/guides/pet_shelter/{name}")
+            count += 1
         guides = EXAMPLES / "guides"
-        for source in sorted(guides.rglob("*.py")) if guides.exists() else []:
+        for source in sorted(guides.glob("*/main.py")) if guides.exists() else []:
             archive.write(source, f"deepest_dungeon/guides/{source.parent.name}.py")
             count += 1
     print(f"Wrote {count} file(s) to {ZIP_PATH.relative_to(ROOT)}")

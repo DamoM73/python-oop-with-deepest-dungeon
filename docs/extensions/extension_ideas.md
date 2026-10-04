@@ -4,7 +4,7 @@
     - ideas for new features that make the dungeon our own
     - which parts of our code each idea would change
 
-Now that we've finished Deepest Dungeon, it's time to make it ours by extending it. Below are some ideas for features we could add.
+Now that we've finished Deepest Dungeon, it's time to make it ours by extending it. Below are some ideas for features we could add. To build a completely new program instead, see [Developing a New Program](../guides/developing.md).
 
 ## The dungeon
 
