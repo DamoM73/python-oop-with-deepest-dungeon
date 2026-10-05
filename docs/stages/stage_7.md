@@ -6,6 +6,10 @@
     - how to create and change a class variable
     - where to put `if` statements so the game can check for a win
 
+!!! terms "Terminology"
+    - **class variable** – a variable that belongs to the whole class and is shared by every object made from it, so a change by one object is seen by all.
+    - **instance variable** – an attribute, such as `name`, where each object has its own separate copy.
+
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hTGv542obJo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction

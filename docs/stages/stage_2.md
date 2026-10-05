@@ -7,6 +7,19 @@
     - how to build a main loop that reads user input and runs event handlers
     - how to test branching code and handle invalid commands
 
+!!! terms "Terminology"
+    - **state** – the situation a program is in at a particular moment, such as which room the player is in.
+    - **main loop** – the loop that keeps a program running, waiting for the user's input and reacting to it each time around.
+    - **state machine** – a way of thinking about a program as always being in one state, with rules that decide the next state when an event happens.
+    - **event-driven programming** – a style of programming where the program waits for events, like the user typing a command, and runs the code that matches each one.
+    - **event** – something that happens that a program can react to, such as the user typing a command, clicking a button or a sensor sending data.
+    - **return value** – the value a method sends back to the code that called it, such as the `Room` object returned by `move`.
+    - **infinite loop** – a loop that never stops on its own, which we can end by pressing Ctrl+C in the Shell or clicking Stop in Thonny.
+    - **flag variable** – a variable that stores `True` or `False` to control part of a program, such as `running` keeping the main loop going.
+    - **event handler** – the code that responds to a particular event, such as moving the player when they type a direction.
+    - **branch** – one of the possible paths through code that uses `if`, `elif` and `else`, each of which needs to be tested.
+    - **testing table** – a table that lists each test with its expected result and actual result, so we can spot any differences.
+
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/hZd1FcDApCI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction

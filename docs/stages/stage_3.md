@@ -6,6 +6,9 @@
     - how to write methods that control a character's behaviour
     - how to update the main loop so it responds to new commands
 
+!!! terms "Terminology"
+    - **namespace** – a labelled section that keeps names organised, so each class can have its own attributes and methods without them getting mixed up.
+
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ufsmJYdUg1Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction

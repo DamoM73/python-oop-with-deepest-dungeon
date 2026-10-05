@@ -6,6 +6,10 @@
     - how to build a program in small stages, testing as we go
     - how to test and evaluate our program against its requirements
 
+!!! terms "Terminology"
+    - **requirement** – a short, testable statement of something our program must do, given an ID such as R1.
+    - **evaluation** – checking that a program does what it was meant to do by comparing each requirement against our test results.
+
 Throughout Deepest Dungeon, each stage came with a plan: pseudocode, a class diagram and the code to build. That got us a working game, but when we start our own program, nobody hands us the plan. We need to figure it out ourselves.
 
 So in this guide we'll go through the same process we used in the stages, but from the very start. We'll use a small example, a **pet shelter** program, so we can see each part of the process in action.

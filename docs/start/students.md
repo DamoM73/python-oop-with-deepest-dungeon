@@ -5,6 +5,11 @@
     - how to set up Thonny and our project folder
     - how the text on this site is formatted
 
+!!! terms "Terminology"
+    - **object-oriented programming** – a way of programming, also called OOP, where we organise our code around objects that hold data and actions together.
+    - **Thonny** – a simple program for writing, running and debugging Python code, with a built-in debugger.
+    - **Shell** – the panel at the bottom of Thonny where our program's output appears and where we type input.
+
 In this project, we'll build our own text-adventure game step by step. As we create rooms, characters and items, we'll start using a way of coding called **object-oriented programming** (OOP). We don't need to know what that means yet; we'll learn it by doing.
 
 Each stage of the game teaches a new idea, shows how it works in code, and lets us test it straight away. By the end, we'll understand how bigger programs are organised, and we'll be able to expand the dungeon with our own ideas.

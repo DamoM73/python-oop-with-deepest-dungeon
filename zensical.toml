@@ -36,6 +36,9 @@ nav = [
     { "Debugging with Thonny" = "guides/debugging.md" },
     { "Licencing" = "guides/licencing.md" },
   ] },
+  { "Reference" = [
+    { "Glossary" = "reference/glossary.md" },
+  ] },
 ]
 
 [project.theme]

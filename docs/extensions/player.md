@@ -6,6 +6,9 @@
     - how to refactor code out of ***main.py*** and into a class
     - how objects interact by calling each other's methods
 
+!!! terms "Terminology"
+    - **inventory** – the collection of items a player is carrying in a game, such as the backpack in Deepest Dungeon.
+
 In this extension, we'll reorganise our code by making a `Player` class. This gives us a player object that can hold all the player's features, like health, items, gear and weapons. The first thing we'll move into it is the player's inventory: the backpack.
 
 ## Planning

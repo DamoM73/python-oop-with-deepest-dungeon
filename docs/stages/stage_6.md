@@ -6,6 +6,16 @@
     - how player commands trigger different branches of code
     - how to add commands that use a list to decide which actions are allowed
 
+!!! terms "Terminology"
+    - **collection** – a data type that stores a group of values together, such as a list, tuple, set or dictionary.
+    - **list** – a collection that stores values in order, can be changed, and is made with square brackets `[]`.
+    - **tuple** – a collection like a list that can't be changed once it's made, written with brackets `()`.
+    - **set** – a collection that stores values with no duplicates and in no particular order.
+    - **array** – a collection that stores lots of values of the same type.
+    - **queue** – a collection where the first item put in is the first item taken out.
+    - **stack** – a collection where the last item put in is the first item taken out.
+    - **nested if statement** – an `if` statement placed inside another `if` statement, which creates more paths that each need testing.
+
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/JsUGdNxLlLM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Introduction

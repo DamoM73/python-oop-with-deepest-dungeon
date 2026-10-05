@@ -6,6 +6,18 @@
     - how to call the model from our `Character` class
     - how to handle errors when a character doesn't have a model
 
+!!! terms "Terminology"
+    - **large language model** – an AI model, also called an LLM, that has learnt from huge amounts of text and can write replies such as a character's dialogue.
+    - **Ollama** – a program that runs large language models on our own computer, without needing an account or internet connection once a model is downloaded.
+    - **model parameter** – one of the values a language model has learnt, used to measure its size, so a 4b model has 4 billion parameters.
+    - **server** – a program running on a computer that receives requests, such as our game's messages, and sends back replies.
+    - **system prompt** – the instructions that tell a language model who it is, which gives each character its own personality.
+    - **Modelfile** – a text file that tells Ollama how to build a custom model, including its base model, system prompt and settings.
+    - **temperature** – a model setting from 0.0 to 2.0 that controls how creative the replies are, with higher values giving more creative replies.
+    - **terminal** – a window where we type commands for the computer itself, such as `ollama`, rather than Python code.
+    - **library** – a collection of ready-made code that we install and import so our program can use it, such as `ollama`.
+    - **try block** – code inside `try` that Python runs while watching for errors, so a matching `except` can catch an error instead of the program crashing.
+
 So far, our characters say the same line every time we talk to them. We can make the game more dynamic by using a local **large language model** (LLM) to create our characters' dialogue.
 
 ## Set-up

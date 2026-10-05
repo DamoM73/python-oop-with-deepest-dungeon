@@ -7,6 +7,15 @@
     - how objects interact using methods
     - how encapsulation and abstraction appear in simple Python code
 
+!!! terms "Terminology"
+    - **object** – a digital version of a real thing in our program, made from a class and holding its own attributes and methods.
+    - **class** – a blueprint that describes a kind of thing, which we use to make objects that share the same attributes and methods.
+    - **attribute** – a quality that every object of a class has, such as a student's name, stored as data inside the object.
+    - **method** – an action that objects of a class can do, written as code inside the class.
+    - **instance** – another name for an object, describing it as one particular copy made from a class.
+    - **encapsulation** – the OOP principle of storing important data inside an object and getting to that data through the object's methods.
+    - **abstraction** – the OOP principle of hiding the complicated code inside an object so we only need to call its methods.
+
 This course teaches us to use **object-oriented programming** (OOP) in Python. Before we start building, we need to cover some of the basic ideas we'll meet along the way.
 
 ## What is OOP?
