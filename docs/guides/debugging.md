@@ -6,13 +6,6 @@
     - how to use breakpoints to pause a program where we think the bug is
     - how to use the debugger to find and fix a logic error
 
-!!! terms "Terminology"
-    - **debugger** – a tool that helps us track down bugs by showing what our program is doing, step by step.
-    - **bug** – an unexpected result in a program, caused by a mistake such as a logic error.
-    - **debugging** – the process of finding and fixing bugs.
-    - **breakpoint** – a place we mark in our code where the debugger pauses the program, so we can check the values stored at that point.
-    - **local variable** – a variable that only exists inside the function where it is created.
-
 Everyone makes mistakes, even experienced programmers. In this guide we will learn how to use Thonny's **debugger** to find and fix mistakes in our code.
 
 ## Programming mistakes

@@ -15,7 +15,6 @@
     - **Modelfile** – a text file that tells Ollama how to build a custom model, including its base model, system prompt and settings.
     - **temperature** – a model setting from 0.0 to 2.0 that controls how creative the replies are, with higher values giving more creative replies.
     - **terminal** – a window where we type commands for the computer itself, such as `ollama`, rather than Python code.
-    - **library** – a collection of ready-made code that we install and import so our program can use it, such as `ollama`.
     - **try block** – code inside `try` that Python runs while watching for errors, so a matching `except` can catch an error instead of the program crashing.
 
 So far, our characters say the same line every time we talk to them. We can make the game more dynamic by using a local **large language model** (LLM) to create our characters' dialogue.

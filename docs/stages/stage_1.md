@@ -9,16 +9,9 @@
 
 !!! terms "Terminology"
     - **computational thinking** – breaking a real-world problem into precise, ordered and unambiguous steps that a computer can follow exactly.
-    - **pseudocode** – the steps of a program written in plain English instead of real code, so we can plan the logic without worrying about exact syntax.
     - **class diagram** – a UML (Unified Modelling Language) drawing of a class as a table with three rows: the class name, its attributes and its methods.
-    - **string** – a data type that stores text, written inside quotation marks.
-    - **dictionary** – a Python collection that stores information in key:value pairs, so we can look up a key to get its value.
-    - **argument** – a piece of information we pass into a method when we call it, such as the direction for `link_rooms`.
-    - **comment** – a line starting with `#` that Python ignores, used to explain our code or label the file.
-    - **naming convention** – an agreed way of writing names, such as `snake_case` for most Python names and `CamelCase` for class names, that makes code easier to read.
     - **constructor** – the special `__init__` method, called the dunder init, that runs automatically each time we create an object and sets up its attributes.
     - **self** – the first argument of every method, which means "this object" so the method can use that object's own attributes.
-    - **None** – a special Python value that means "nothing", often used to create an attribute before it has a real value.
     - **key:value pair** – one entry in a dictionary, where the key is the label we look up and the value is the information stored with it.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GeSTPYPPEfU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>

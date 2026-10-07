@@ -7,7 +7,6 @@
     - how to test and evaluate our program against its requirements
 
 !!! terms "Terminology"
-    - **requirement** – a short, testable statement of something our program must do, given an ID such as R1.
     - **evaluation** – checking that a program does what it was meant to do by comparing each requirement against our test results.
 
 Throughout Deepest Dungeon, each stage came with a plan: pseudocode, a class diagram and the code to build. That got us a working game, but when we start our own program, nobody hands us the plan. We need to figure it out ourselves.

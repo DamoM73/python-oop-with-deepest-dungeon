@@ -8,11 +8,7 @@
 
 !!! terms "Terminology"
     - **collection** – a data type that stores a group of values together, such as a list, tuple, set or dictionary.
-    - **list** – a collection that stores values in order, can be changed, and is made with square brackets `[]`.
-    - **tuple** – a collection like a list that can't be changed once it's made, written with brackets `()`.
-    - **set** – a collection that stores values with no duplicates and in no particular order.
     - **array** – a collection that stores lots of values of the same type.
-    - **queue** – a collection where the first item put in is the first item taken out.
     - **stack** – a collection where the last item put in is the first item taken out.
     - **nested if statement** – an `if` statement placed inside another `if` statement, which creates more paths that each need testing.
 

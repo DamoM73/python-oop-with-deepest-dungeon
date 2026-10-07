@@ -12,14 +12,9 @@
     - **inheritance** – the OOP principle of making a new class based on an existing one, so the new class gets the existing class's attributes and methods.
     - **parent class** – the existing class that a child class is based on, also called a superclass or base class.
     - **override** – to replace an inherited method by writing a method with the same name in the child class.
-    - **DRY** – short for Don't Repeat Yourself, the rule that we should write code once in one place rather than copying it.
-    - **refactoring** – changing how code is written without changing what it does.
     - **polymorphism** – the OOP principle that different classes can have a method with the same name that does different things.
     - **truthy** – describes a value that acts like `True` in an `if` statement, such as a non-empty string, a non-zero number or a list with items in it.
     - **falsy** – describes a value that acts like `False` in an `if` statement, such as `None`, `0`, an empty string or an empty list.
-    - **logic error** – a mistake where the program runs without crashing but doesn't do what we meant, so Python gives no warning.
-    - **syntax error** – a mistake that breaks the rules of Python, so the program won't run at all.
-    - **runtime error** – a mistake that happens while the program is running, when Python tries to do something it can't and crashes with an error message.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/J8U97_SRx7s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 

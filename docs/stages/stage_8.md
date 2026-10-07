@@ -7,9 +7,7 @@
     - how to tidy a program by removing code we don't need
 
 !!! terms "Terminology"
-    - **UI** – short for user interface, what we see on the screen when we use a program, such as text, buttons, menus and colours.
     - **UX** – short for user experience, what it feels like to use a program, such as easy, confusing, fun or annoying.
-    - **code maintainability** – how easy our code is to understand, fix and update later, helped by neat organisation and clear comments.
     - **whitespace** – the blank lines and spaces in our code, which we use to break it into clear sections.
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/lHSCfn0U45k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
